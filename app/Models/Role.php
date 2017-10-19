@@ -1,15 +1,19 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Role
+ * @package App\Models
+ */
 class Role extends Model
 {
     public function users()
     {
         return $this
-            ->belongsToMany('App\User')
+            ->belongsToMany('App\Models\User')
             ->withTimestamps();
     }
 }

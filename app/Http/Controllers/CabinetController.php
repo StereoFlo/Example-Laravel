@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use Illuminate\Http\Request;
 
-class ModeratorController extends Controller
+/**
+ * Class CabinetController
+ * @package App\Http\Controllers
+ */
+class CabinetController extends Controller
 {
+    /**
+     * CabinetController constructor.
+     */
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('role:' . User::ROLE_MODERATOR);
     }
 
     public function index()
     {
-        return 1;
+
     }
 }

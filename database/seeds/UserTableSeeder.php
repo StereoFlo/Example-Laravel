@@ -1,7 +1,7 @@
 <?php
 
-use App\Role;
-use App\User;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class UserTableSeeder extends Seeder
@@ -13,9 +13,9 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        $role_admin = Role::where('name', 'admin')->first();
-        $role_moderator  = Role::where('name', 'moderator')->first();
-        $role_author  = Role::where('name', 'author')->first();
+        $role_admin = Role::where('name', User::ROLE_ADMIN)->first();
+        $role_moderator  = Role::where('name', User::ROLE_MODERATOR)->first();
+        $role_author  = Role::where('name', User::ROLE_AUTHOR)->first();
 
         $employee = new User();
         $employee->name = 'admin';
