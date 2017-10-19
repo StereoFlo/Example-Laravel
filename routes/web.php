@@ -17,5 +17,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', 'HomeController@index');
-Route::get('/test/admin', 'AdminController@index');
-Route::get('/test/moderator', 'ModeratorController@index');
+Route::middleware('auth')->group(function () {
+    Route::get('/cabinet/profile', 'CabinetController@profile');
+    Route::post('/cabinet/profile/update', 'CabinetController@profileUpdate')->name('updateProfile');
+});

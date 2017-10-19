@@ -17,24 +17,25 @@ class UserTableSeeder extends Seeder
         $role_moderator  = Role::where('name', User::ROLE_MODERATOR)->first();
         $role_author  = Role::where('name', User::ROLE_AUTHOR)->first();
 
-        $employee = new User();
-        $employee->name = 'admin';
-        $employee->email = 'admin@recycle.lan';
-        $employee->password = bcrypt('admin');
-        $employee->save();
-        $employee->roles()->attach($role_admin);
-        $manager = new User();
+        $admin = new User();
+        $admin->name = 'admin';
+        $admin->email = 'admin@recycle.lan';
+        $admin->password = \bcrypt('admin');
+        $admin->save();
+        $admin->roles()->attach($role_admin);
 
+        $manager = new User();
         $manager->name = 'moderator';
         $manager->email = 'moderator@recycle.lan';
-        $manager->password = bcrypt('moderator');
+        $manager->password = \bcrypt('moderator');
         $manager->save();
         $manager->roles()->attach($role_moderator);
 
-        $manager->name = 'author';
-        $manager->email = 'author@recycle.lan';
-        $manager->password = bcrypt('author');
-        $manager->save();
-        $manager->roles()->attach($role_author);
+        $author = new User();
+        $author->name = 'author';
+        $author->email = 'author@recycle.lan';
+        $author->password = \bcrypt('author');
+        $author->save();
+        $author->roles()->attach($role_author);
     }
 }
