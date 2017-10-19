@@ -9,6 +9,9 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    /**
+     * test
+     */
     const ROLE_ADMIN = 'admin';
     const ROLE_MODERATOR = 'moderator';
     const ROLE_AUTHOR = 'author';
