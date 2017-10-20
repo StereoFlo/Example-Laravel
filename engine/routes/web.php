@@ -16,9 +16,9 @@ Route::middleware('auth')->group(function () {
 
 // for author
 Route::middleware('auth')->group(function () {
-    Route::post('/cabinet/work', 'WorksController@workList')->name('workList');
-    Route::post('/cabinet/work/new', 'WorksController@workAdd')->name('workAdd');
-    Route::post('/cabinet/work/{id}/remove', 'WorksController@workRemove')->name('workRemove');
-    Route::post('/cabinet/work/{id}/edit', 'WorksController@workEdit')->name('workEdit');
-    Route::post('/cabinet/work/{id}', 'WorksController@workShow')->name('workShow');
+    Route::get('/cabinet/work', 'WorkController@workList')->name('workList');
+    Route::get('/cabinet/work/new', 'WorkController@workAdd')->name('workAdd');
+    Route::get('/cabinet/work/{id}/remove', 'WorkController@workRemove')->name('workRemove');
+    Route::get('/cabinet/work/{id}/edit', 'WorkController@workEdit')->name('workEdit');
+    Route::get('/cabinet/work/{id}', 'WorkController@workShow')->name('workShow');
 });
