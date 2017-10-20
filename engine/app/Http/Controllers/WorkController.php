@@ -84,10 +84,16 @@ class WorkController extends Controller
         return Redirect::to('/cabinet/work');
     }
 
+    /**
+     * @param $id
+     *
+     * @return bool
+     */
     public function workRemove($id)
     {
-
+        return (int)(Work::getInstance()->removeById($id) && WorkImages::getInstance()->removeByWorkId($id));
     }
+
 
     public function workEdit($id)
     {
@@ -99,7 +105,7 @@ class WorkController extends Controller
      *
      * @return array
      */
-    public function workShow($id)
+    public function workShow($id): array
     {
         $work = new Work();
         $work = $work->getById($id);

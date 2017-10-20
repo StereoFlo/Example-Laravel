@@ -12,7 +12,7 @@
                         <p>У вас пока нет работ</p>
                         <? } else { ?>
                         <? foreach ($works as $work) { ?>
-                        <p><a href="/cabinet/work/<?= $work['workId'] ?>"><?= $work['workName'] ?></a></p>
+                        <p><a href="/cabinet/work/<?= $work['id'] ?>"><?= $work['workName'] ?></a></p>
                         <? } ?>
                         <? } ?>
                     </div>

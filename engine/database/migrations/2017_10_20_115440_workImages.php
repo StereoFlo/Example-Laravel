@@ -14,8 +14,8 @@ class WorkImages extends Migration
      */
     public function up()
     {
-        Schema::create('workImages', function (Blueprint $table) {
-            $table->increments('imageId');
+        Schema::create('work_images', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('workId')->default(0);
             $table->boolean('isDefault')->default(false);
             $table->string('link')->nullable();
@@ -31,6 +31,6 @@ class WorkImages extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('workImages');
+        Schema::dropIfExists('work_images');
     }
 }

@@ -10,7 +10,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class WorkImages extends Model
 {
-    protected $table = 'workImages';
+    /**
+     * @var string
+     */
+    protected $table = 'work_images';
 
     /**
      * @return WorkImages
@@ -18,5 +21,15 @@ class WorkImages extends Model
     public static function getInstance()
     {
         return new self();
+    }
+
+    /**
+     * @param int $workId
+     *
+     * @return mixed
+     */
+    public function removeByWorkId(int $workId)
+    {
+        return $this->where('workId', $workId)->delete();
     }
 }

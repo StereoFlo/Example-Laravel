@@ -6,7 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Work extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'work';
+
+    /**
+     * @return Work
+     */
+    public static function getInstance()
+    {
+        return new self();
+    }
 
     /**
      * @param $userId
@@ -29,11 +40,29 @@ class Work extends Model
      */
     public function getById(int $workId): array
     {
-        $work = $this->where('workId', $workId)->get()->toArray();
+        $work = $this->where('id', $workId)
+            ->first()
+            ->toArray();
         if (empty($work)) {
             return [];
         }
+        $images = WorkImages::getInstance()->where('workId', $workId)->get()
+            ->toArray();
+        if (!empty($images)) {
+            $work['images'] = null;
+        }
+        $work['images'] = $images;
         return $work;
+    }
+
+    /**
+     * @param int $workId
+     *
+     * @return mixed
+     */
+    public function removeById(int $workId)
+    {
+        return $this->where('id', $workId)->delete();
     }
 
 }
