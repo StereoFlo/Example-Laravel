@@ -2,9 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
+/**
+ * Class WorksController
+ * @package App\Http\Controllers
+ */
 class WorksController extends Controller
 {
-    //
+
+    public function workList()
+    {
+
+    }
+
+    public function workAdd()
+    {
+
+    }
+
+    public function workRemove($id)
+    {
+
+    }
+
+    public function workEdit($id)
+    {
+
+    }
+
+    public function workShow()
+    {
+
+    }
 }
