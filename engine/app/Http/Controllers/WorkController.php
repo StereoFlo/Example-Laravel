@@ -2,9 +2,12 @@
 
 namespace RecycleArt\Http\Controllers;
 
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Redirect;
 use RecycleArt\Models\Work;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RecycleArt\Models\WorkImages;
 
 /**
  * Class WorkController
@@ -43,9 +46,42 @@ class WorkController extends Controller
         return view('work.add');
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return mixed
+     */
     public function workAddProcess(Request $request)
     {
-        var_dump($request);
+        $user = Auth::user();
+        $this->work->workName = $request->post('workName');
+        $this->work->description = $request->post('description');
+        $this->work->userId = $user->id;
+        $isSaved = $this->work->save();
+
+        if (!empty($request->file('images'))) {
+            $this->validate($request, [
+                'avatar' => 'mimes:jpeg,bmp,png',
+            ]);
+            /** @var UploadedFile[] $files */
+            $files = $request->file('images');
+            foreach ($files as $key => $file) {
+                $file->move(public_path('uploads/' . $user->id . '/work/' . $this->work->id), $file->getClientOriginalName());
+                $workImages = WorkImages::getInstance();
+                $workImages->workId = $this->work->id;
+                if (0 === $key) {
+                    $workImages->isDefault = true;
+                }
+                $workImages->link = '/uploads/' . $user->id . '/work/' . $this->work->id . '/' . $file->getClientOriginalName();
+                $isSaved = $workImages->save();
+            }
+        }
+        if (!$isSaved) {
+            $request->session()->flash('addWorkResult', 'Something is wrong.');
+            return Redirect::to('/cabinet/work/new');
+        }
+        $request->session()->flash('addWorkResult', 'Added successfully!');
+        return Redirect::to('/cabinet/work');
     }
 
     public function workRemove($id)

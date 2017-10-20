@@ -17,7 +17,7 @@ class Work extends Migration
         Schema::create('work', function (Blueprint $table) {
             $table->increments('workId');
             $table->string('workName');
-            $table->integer('likes');
+            $table->integer('likes')->default(0);
             $table->integer('userId');
             $table->text('description');
             $table->timestamps();

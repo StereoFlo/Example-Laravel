@@ -6,7 +6,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Мои работы</div>
-                {{ session('updateResult') }}
+                {{ session('addWorkResult') }}
                 <div class="panel-body">
                     <? if (empty($works)): ?>
                     <p>У вас пока нет работ</p>

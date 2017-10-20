@@ -8,10 +8,18 @@ class Work extends Model
 {
     protected $table = 'work';
 
-
-    public function getAllByUser($userId)
+    /**
+     * @param $userId
+     *
+     * @return array
+     */
+    public function getAllByUser(int $userId): array
     {
-        $this->where('userId', $userId)->get()->toArray();
+        $works = $this->where('userId', $userId)->get()->toArray();
+        if (empty($works)) {
+            return [];
+        }
+        return $works;
     }
 
 }

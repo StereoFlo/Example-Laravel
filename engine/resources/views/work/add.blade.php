@@ -6,7 +6,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Добавление новой работы</div>
-                {{ session('updateResult') }}
+                {{ session('addWorkResult') }}
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('workAddProcess') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
