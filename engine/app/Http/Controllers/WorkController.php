@@ -94,6 +94,11 @@ class WorkController extends Controller
 
     }
 
+    /**
+     * @param $id
+     *
+     * @return array
+     */
     public function workShow($id)
     {
         $work = new Work();
