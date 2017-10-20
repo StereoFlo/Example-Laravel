@@ -4,6 +4,7 @@ namespace RecycleArt\Http\Controllers;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\View\View;
 use RecycleArt\Models\Work;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,9 +40,9 @@ class WorkController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return View
      */
-    public function workAdd()
+    public function workAdd(): View
     {
         return view('work.add');
     }
@@ -58,6 +59,7 @@ class WorkController extends Controller
         $this->work->description = $request->post('description');
         $this->work->userId = $user->id;
         $isSaved = $this->work->save();
+        $workId = $this->work->id;
 
         if (!empty($request->file('images'))) {
             $this->validate($request, [
@@ -66,13 +68,14 @@ class WorkController extends Controller
             /** @var UploadedFile[] $files */
             $files = $request->file('images');
             foreach ($files as $key => $file) {
-                $file->move(public_path('uploads/' . $user->id . '/work/' . $this->work->id), $file->getClientOriginalName());
+                $path = public_path('uploads/' . $user->id . '/work/' . $workId);
+                $file->move($path, $file->getClientOriginalName());
                 $workImages = WorkImages::getInstance();
                 $workImages->workId = $this->work->id;
                 if (0 === $key) {
                     $workImages->isDefault = true;
                 }
-                $workImages->link = '/uploads/' . $user->id . '/work/' . $this->work->id . '/' . $file->getClientOriginalName();
+                $workImages->link = '/uploads/' . $user->id . '/work/' . $workId . '/' . $file->getClientOriginalName();
                 $isSaved = $workImages->save();
             }
         }
@@ -85,27 +88,33 @@ class WorkController extends Controller
     }
 
     /**
-     * @param $id
+     * @param Request $request
+     * @param int     $id
      *
-     * @return bool
+     * @return int
      */
-    public function workRemove($id)
+    public function workRemove(Request $request, int $id)
     {
-        return (int)(Work::getInstance()->removeById($id) && WorkImages::getInstance()->removeByWorkId($id));
+        if (Work::getInstance()->removeById($id) && WorkImages::getInstance()->removeByWorkId($id)) {
+            $request->session()->flash('addWorkResult', 'Removed successfully!');
+            return Redirect::to('/cabinet/work');
+        }
+        $request->session()->flash('addWorkResult', 'Something is wrong.');
+        return Redirect::to('/cabinet/work');
     }
 
 
-    public function workEdit($id)
+    public function workEdit(int $id)
     {
 
     }
 
     /**
-     * @param $id
+     * @param int $id
      *
-     * @return array
+     * @return array|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function workShow($id): array
+    public function workShow(int $id): View
     {
         $work = new Work();
         $work = $work->getById($id);
@@ -113,6 +122,6 @@ class WorkController extends Controller
             abort(404, 'Work not found');
             return []; //stub
         }
-        return $work;
+        return view('work.show', ['work' => $work]);
     }
 }

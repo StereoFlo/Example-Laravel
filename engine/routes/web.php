@@ -7,6 +7,10 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index');
 
+Route::group(['middleware' => 'isAdminRole'], function () {
+    Route::get('/manager', 'AdminController@index');
+});
+
 // profile change
 Route::middleware('auth')->group(function () {
     Route::get('/cabinet/profile', 'CabinetController@profile')->name('profileForm');
