@@ -34,6 +34,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public static function getInstance()
+    {
+        return new self();
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
@@ -91,6 +96,18 @@ class User extends Authenticatable
             return true;
         }
         return false;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAll()
+    {
+        return $this
+            ->join('role_user', 'role_user.user_id', '=', 'users.id')
+            ->join('roles', 'roles.id', '=', 'role_user.role_id')
+            ->select('users.*', 'roles.name as roleName', 'roles.id as roleId')
+            ->get()->toArray();
     }
 
 }

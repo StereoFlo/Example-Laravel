@@ -13,6 +13,12 @@ class AdminController extends Controller
 
     public function index()
     {
-        return 1;
+        return 'Hello world!';
+    }
+
+    public function userList()
+    {
+        $users = User::getInstance()->getAll();
+        return view('admin.userList', ['users' => $users]);
     }
 }
