@@ -22,4 +22,18 @@ class Work extends Model
         return $works;
     }
 
+    /**
+     * @param int $workId
+     *
+     * @return array
+     */
+    public function getById(int $workId): array
+    {
+        $work = $this->where('workId', $workId)->get()->toArray();
+        if (empty($work)) {
+            return [];
+        }
+        return $work;
+    }
+
 }

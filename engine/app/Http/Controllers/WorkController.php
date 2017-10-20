@@ -94,8 +94,14 @@ class WorkController extends Controller
 
     }
 
-    public function workShow()
+    public function workShow($id)
     {
-
+        $work = new Work();
+        $work = $work->getById($id);
+        if (empty($work)) {
+            abort(404, 'Work not found');
+            return []; //stub
+        }
+        return $work;
     }
 }
