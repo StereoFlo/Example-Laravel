@@ -18,6 +18,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/cabinet/work', 'WorkController@workList')->name('workList');
     Route::get('/cabinet/work/new', 'WorkController@workAdd')->name('workAdd');
+    Route::post('/cabinet/work/new/process', 'WorkController@workAddProcess')->name('workAddProcess');
     Route::get('/cabinet/work/{id}/remove', 'WorkController@workRemove')->name('workRemove');
     Route::get('/cabinet/work/{id}/edit', 'WorkController@workEdit')->name('workEdit');
     Route::get('/cabinet/work/{id}', 'WorkController@workShow')->name('workShow');

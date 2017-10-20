@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace RecycleArt\Http\Controllers;
 
-use App\Models\Work;
+use RecycleArt\Models\Work;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 /**
  * Class WorkController
- * @package App\Http\Controllers
+ * @package RecycleArt\Http\Controllers
  */
 class WorkController extends Controller
 {
@@ -16,11 +17,17 @@ class WorkController extends Controller
      */
     protected $work;
 
+    /**
+     * WorkController constructor.
+     */
     public function __construct()
     {
         $this->work = new Work();
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function workList()
     {
         $userId = Auth::user()->id;
@@ -28,9 +35,17 @@ class WorkController extends Controller
         return view('work.list', ['works' => $works]);
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function workAdd()
     {
+        return view('work.add');
+    }
 
+    public function workAddProcess(Request $request)
+    {
+        var_dump($request);
     }
 
     public function workRemove($id)

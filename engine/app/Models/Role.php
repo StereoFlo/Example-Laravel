@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Models;
+namespace RecycleArt\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Role
- * @package App\Models
+ * @package RecycleArt\Models
  */
 class Role extends Model
 {
     public function users()
     {
         return $this
-            ->belongsToMany('App\Models\User')
+            ->belongsToMany('RecycleArt\Models\User')
             ->withTimestamps();
     }
 }

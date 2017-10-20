@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace RecycleArt\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 
 /**
  * Class CabinetController
- * @package App\Http\Controllers
+ * @package RecycleArt\Http\Controllers
  */
 class CabinetController extends Controller
 {

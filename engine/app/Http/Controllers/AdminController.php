@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace RecycleArt\Http\Controllers;
 
-use App\Models\User;
+use RecycleArt\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller

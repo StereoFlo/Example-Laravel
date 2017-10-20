@@ -16,9 +16,10 @@ class Work extends Migration
     {
         Schema::create('work', function (Blueprint $table) {
             $table->increments('workId');
+            $table->string('workName');
             $table->integer('likes');
             $table->integer('userId');
-            $table->text('about');
+            $table->text('description');
             $table->timestamps();
             $table->index('userId');
         });

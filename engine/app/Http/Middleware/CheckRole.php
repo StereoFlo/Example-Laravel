@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace RecycleArt\Http\Middleware;
 
 use Closure;
 
