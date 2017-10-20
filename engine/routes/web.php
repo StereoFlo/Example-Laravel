@@ -18,6 +18,6 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index');
 Route::middleware('auth')->group(function () {
-    Route::get('/cabinet/profile', 'CabinetController@profile');
-    Route::post('/cabinet/profile/update', 'CabinetController@profileUpdate')->name('updateProfile');
+    Route::get('/cabinet/profile', 'CabinetController@profile')->name('profileForm');
+    Route::post('/cabinet/profile/update', 'CabinetController@profileUpdate')->name('profileUpdate');
 });

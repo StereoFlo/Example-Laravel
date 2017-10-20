@@ -8,7 +8,7 @@
                 <div class="panel-heading">Register</div>
                 {{ session('updateResult') }}
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('updateProfile') }}" enctype="multipart/form-data">
+                    <form class="form-horizontal" method="POST" action="{{ route('profileUpdate') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
