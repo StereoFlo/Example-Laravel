@@ -5,6 +5,7 @@ namespace RecycleArt\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use RecycleArt\Models\User;
 
 /**
  * Class CabinetController
@@ -63,5 +64,14 @@ class CabinetController extends Controller
         $user->save();
         $request->session()->flash('updateResult', 'Your account has been updated!');
         return Redirect::to('/cabinet/profile');
+    }
+
+    /**
+     * @return int
+     */
+    public function removeAvatar()
+    {
+        $isDeleted = User::getInstance()->removeAvatar();
+        return (int)$isDeleted;
     }
 }

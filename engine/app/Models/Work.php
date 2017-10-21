@@ -4,6 +4,10 @@ namespace RecycleArt\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Work
+ * @package RecycleArt\Models
+ */
 class Work extends Model
 {
     /**

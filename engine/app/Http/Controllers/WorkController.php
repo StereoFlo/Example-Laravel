@@ -9,6 +9,7 @@ use RecycleArt\Models\Work;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RecycleArt\Models\WorkImages;
+use Illuminate\Support\Facades\File;
 
 /**
  * Class WorkController
@@ -95,7 +96,11 @@ class WorkController extends Controller
      */
     public function workRemove(Request $request, int $id)
     {
+        $user = Auth::user();
+        $workPath = public_path('uploads/' . $user->id . '/work/' . $id);
         if (Work::getInstance()->removeById($id) && WorkImages::getInstance()->removeByWorkId($id)) {
+            File::cleanDirectory($workPath);
+            rmdir($workPath);
             $request->session()->flash('addWorkResult', 'Removed successfully!');
             return Redirect::to('/cabinet/work');
         }
