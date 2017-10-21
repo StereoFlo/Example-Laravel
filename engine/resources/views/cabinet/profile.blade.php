@@ -29,7 +29,7 @@
 
             <div class="inputGroup{{ $errors->has('phone') ? ' has-error' : '' }}">
                 <label for="phone">телефон:</label>
-                <input type="text" name="phone" value="{{ Auth::user()->phone }}">
+                <input id="phone" type="text" name="phone" value="{{ Auth::user()->phone }}">
                 @if ($errors->has('phone'))
                     <span class="errorText">
                         <strong>{{ $errors->first('phone') }}</strong>
@@ -45,9 +45,14 @@
                         <strong>{{ $errors->first('about') }}</strong>
                     </span>
                 @endif
+                <span class="errorText">
+                    @if ($errors->has('about'))
+                        <strong>{{ $errors->first('about') }}</strong>
+                    @endif
+                </span>
             </div>
 
-            <? if (empty(Auth::user()->avatar)) { ?>
+            @if (empty(Auth::user()->avatar))
             <div class="inputGroup{{ $errors->has('avatar') ? ' has-error' : '' }}">
                 <label for="avatar">фото:</label>
                 <input type="file" name="avatar" value="{{ Auth::user()->avatar }}">
@@ -57,10 +62,10 @@
                     </span>
                 @endif
             </div>
-            <? } else { ?>
+            @else
                 <img src="{{ Auth::user()->avatar }}">
                 <a href="">delete</a>
-            <? } ?>
+            @endif
 
             <div class="inputGroup{{ $errors->has('email') ? ' has-error' : '' }}">
                 <label for="email">email:</label>
