@@ -24,7 +24,7 @@ class Work extends Model
      *
      * @return array
      */
-    public function getAllByUser(int $userId): array
+    public function getListByUserId(int $userId): array
     {
         $works = $this->where('userId', $userId)->get()->toArray();
         if (empty($works)) {

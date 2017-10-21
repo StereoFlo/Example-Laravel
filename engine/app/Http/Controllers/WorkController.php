@@ -35,7 +35,7 @@ class WorkController extends Controller
     public function workList()
     {
         $userId = Auth::user()->id;
-        $works = $this->work->getAllByUser($userId);
+        $works = $this->work->getListByUserId($userId);
         return view('work.list', ['works' => $works]);
     }
 
