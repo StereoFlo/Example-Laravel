@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+
+<section class="workAdd">
+    <div class="container">
+
+    </div>
+</section>
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
