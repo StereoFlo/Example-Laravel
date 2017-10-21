@@ -1,0 +1,161 @@
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px 15px 0;
+  z-index: 999;
+  a {
+    color: $link;
+    &:hover {
+      color: $link_hover;
+    }
+  }
+  .flex {
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+.header_dark {
+  a {
+    color: $link_dark;
+    &:hover {
+      color: $link_dark_hover;
+    }
+  }
+}
+.logo {
+  order: 1;
+  @include max-screen($break_sm) {
+    order: 2;
+  }
+  &__pic {
+    max-width: 250px;
+    height: auto;
+    @include max-screen($break_sm) {
+      display: none;
+    }
+  }
+  &__picMin {
+    display: none;
+    max-width: 40px;
+    @include max-screen($break_sm) {
+      display: block;
+    }
+  }
+}
+.menu {
+  order: 2;
+  &__btn {
+    font-size: 1.8em;
+    text-decoration: none;
+    display: none;
+    @include max-screen($break_sm) {
+      display: block;
+      order: 1;
+    }
+  }
+}
+.nav {
+  order: 3;
+  @include max-screen($break_sm) {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 10%;
+    padding-top: 15px;
+  }
+  @include min-screen(785px) {
+    display: flex !important;
+  }
+  &__link {
+    font-family: "lato", sans-serif;
+    font-size: 1.2em;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 15px;
+    transition: 250ms;
+    @include max-screen($break_sm) {
+      display: block;
+      padding: 10px 0;
+      // background: #13193c;
+      // opacity: 0.7;
+    }
+  }
+}
+.nav_dark {
+  &__link {
+    color: $link_dark;
+    &__hover {
+      color: $link_dark_hover;
+    }
+  }
+}
+.user {
+  order: 4;
+  position: relative;
+  &__btn {
+    font-size: 1.2em;
+    text-decoration: none;
+    display: inline-block;
+    transition: 250ms;
+    i {
+      margin-right: 5px;
+      font-size: 1.3em;
+    }
+    span {
+      vertical-align: top;
+    }
+  }
+}
+
+
+.login {
+  width: 275px;
+  height: 200px;
+  position: absolute;
+  right: 0;
+  top: 45px;
+  background: #f3f1f1;
+  border: 2px solid $border;
+  &__login, &__pass {
+    display: block;
+    height: 30px;
+    margin-bottom: 25px;
+  }
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__enter {
+    background: #4a5281;
+    &:hover {
+      background: darken(#4a5281, 15%);
+    }
+  }
+  &__registration {
+    background: #e83b3a;
+    &:hover {
+      background: darken(#e83b3a, 15%);
+    }
+  }
+}
+.login:after,
+.login:before {
+  content: '';
+  border: solid transparent;
+  position: absolute;
+  right: 3px;
+  top: -22px;
+  width: 0;
+}
+.login:before {
+  border-bottom-color: $border;
+  border-width: 10px;
+}
+.login:after {
+  border-bottom-color: #f3f1f1;
+  border-width: 13px;
+  margin-right: -3px;
+}
+

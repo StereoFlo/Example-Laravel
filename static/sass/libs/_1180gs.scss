@@ -1,0 +1,295 @@
+/**********************************************
+* 1180 CSS Grid System - Fluid
+* by Chris Blackwell / chrisblackwell.me
+**********************************************/
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.wrap {
+  width: 1170px;
+  margin: 0 auto;
+}
+
+.flexbox {
+  display: -webkit-flex;
+  display: flex;
+}
+
+.helper-ibc {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.valign {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.rel {
+  position: relative;
+}
+
+.row {
+  margin: 20px 0;
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Sets default values on all columns */
+
+[class*="col-"] {
+  margin-right: 2%;
+  float: left;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.prototype [class*="col-"] {
+  background: #ececec;
+  border-radius: 4px;
+  padding: 15px;
+  text-align: center;
+}
+
+.col-1 {
+  width: 6.5%;
+}
+
+.col-2 {
+  width: 15%;
+}
+
+.col-3 {
+  width: 23.5%;
+}
+
+.col-4 {
+  width: 32%;
+}
+
+.col-5 {
+  width: 40.5%;
+}
+
+.col-6 {
+  width: 49%;
+}
+
+.col-7 {
+  width: 57.5%;
+}
+
+.col-8 {
+  width: 66%;
+}
+
+.col-9 {
+  width: 74.5%;
+}
+
+.col-10 {
+  width: 83%;
+}
+
+.col-11 {
+  width: 91.5%;
+}
+
+.col-12 {
+  width: 100%;
+  float: none;
+}
+
+.xs-flex {
+  display: block;
+}
+
+/**********************************
+* Smaller Screens
+**********************************/
+@media only screen and (max-width: 1170px) {
+  .wrap {
+    width: 768px;
+  }
+  .sm-col-1 {
+    width: 6.5%;
+  }
+  .sm-col-2 {
+    width: 15%;
+  }
+  .sm-col-3 {
+    width: 23.5%;
+  }
+  .sm-col-4 {
+    width: 32%;
+  }
+  .sm-col-5 {
+    width: 40.5%;
+  }
+  .sm-col-6 {
+    width: 49%;
+  }
+  .sm-col-7 {
+    width: 57.5%;
+  }
+  .sm-col-8 {
+    width: 66%;
+  }
+  .sm-col-9 {
+    width: 74.5%;
+  }
+  .sm-col-10 {
+    width: 83%;
+  }
+  .sm-col-11 {
+    width: 91.5%;
+  }
+  .sm-col-12 {
+    width: 100%;
+    float: none;
+  }
+  .sm-nopadding {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .sm-center {
+    text-align: center;
+  }
+  .flex-container {
+    justify-content: space-around !important;
+  }
+  .sm-nofloat {
+    float: none;
+  }
+  .sm-fs-12 {
+    font-size: 12px;
+  }
+  .sm-img-mar img {
+    margin-bottom: 20px;
+  }
+  .sm-mt {
+    margin-top: 20px;
+  }
+  .sm100px {
+    width: 100px !important;
+    height: 100px !important;
+    img {
+      width: 100%;
+      height: auto;
+      margin-top: 0 !important;
+    }
+  }
+  .xs-flex {
+    display: block;
+  }
+}
+
+/**********************************
+* Mobile Devices
+* - All columns are full width
+**********************************/
+@media only screen and (max-width: 767px) {
+  .wrap {
+    width: 96%;
+  }
+  .row {
+    margin: 0;
+  }
+  [class*="col-"], [class*="xs-col-"], [class*="sm-col-"] {
+    margin: 15px 0;
+    float: none;
+    width: 100%;
+  }
+  .xs-center {
+    text-align: center !important;
+  }
+  .xs-hide {
+    display: none !important;
+  }
+  .xs-block {
+    display: block;
+  }
+  .main-nav nav {
+    left: 0;
+    right: 0;
+    a {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
+  .xs-flex {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+  .xs-flex-wrap {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .xs-nofloat {
+    float: none !important;
+  }
+  .footer {
+    line-height: 40px !important;
+  }
+  .social {
+    line-height: normal !important;
+  }
+  .work {
+    .title h2 {
+      margin-bottom: 0 !important;
+    }
+    .circles {
+      .circle {
+        margin: 15px 15px 0 !important;
+      }
+      .arrow {
+        margin: 18px 15px !important;
+      }
+    }
+  }
+  .xs-row {
+    float: none;
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  a.logo_small, .bottom-btn {
+    visibility: hidden;
+  }
+}

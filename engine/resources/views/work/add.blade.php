@@ -4,7 +4,45 @@
 
 <section class="workAdd">
     <div class="container">
+        {{ session('addWorkResult') }}
+        <form action="{{ route('workAddProcess') }}" enctype="multipart/form-data" class="form registrationForm">
+            {{ csrf_field() }}
+            <div class="form__title">
+                <h1>Новая работа</h1>
+            </div>
 
+            <div class="inputGroup{{ $errors->has('workName') ? ' has-error' : '' }}">
+                <label for="workName">название:</label>
+                <input type="text" name="workName" value="" required autofocus>
+                @if ($errors->has('workName'))
+                    <span class="errorText">
+                        <strong>{{ $errors->first('workName') }}</strong>
+                    </span>
+                @endif
+            </div>
+
+            <div class="inputGroup{{ $errors->has('description') ? ' has-error' : '' }}">
+                <label for="location">описание</label>
+                <textarea name="description" cols="80" rows="8"></textarea>
+                @if ($errors->has('description'))
+                    <span class="errorText">
+                        <strong>{{ $errors->first('description') }}</strong>
+                    </span>
+                @endif
+            </div>
+
+            <div class="inputGroup{{ $errors->has('images') ? ' has-error' : '' }}">
+                <label for="images">фото:</label>
+                <input type="file" name="images" value="{{ old('images') }}" multiple>
+                @if ($errors->has('images'))
+                    <span class="errorText">
+                        <strong>{{ $errors->first('images') }}</strong>
+                    </span>
+                @endif
+            </div>
+
+            <button type="submit" name="button" class="button">добавить</button>
+        </form>
     </div>
 </section>
 

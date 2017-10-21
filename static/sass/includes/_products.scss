@@ -1,0 +1,76 @@
+.products {
+  padding: 60px 15px;
+  background: #f5f6f7;
+  overflow: hidden;
+  @include max-screen($break_xs) {
+    padding: 30px 15px;
+  }
+  .flex {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 auto;
+    @include max-screen($break_lg) {
+      max-width: 860px;
+    }
+    @include max-screen($break_sm) {
+      max-width: 572px;
+    }
+    @include max-screen($break_xs) {
+      justify-content: center;
+    }
+  }
+  h2 {
+    text-align: center;
+    color: #3c434d;
+    font-size: 32px;
+    margin: 50px 0 20px;
+    font-family: 'bandera';
+  }
+}
+.item {
+  border: 1px solid #ccc;
+  margin-bottom: 30px;
+  position: relative;
+  img {
+    vertical-align: middle;
+    max-width: 100%;
+    height: auto;
+  }
+  .content {
+    position: absolute;
+    background: rgba(19, 25, 60, 0.7);
+    opacity: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    .border {
+      border: 4px solid rgba(255, 255, 255, 0.4);
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      top: 0;
+      left: 0;
+      margin: 9px;
+    }
+  }
+  .valign {
+    padding: 0 40px;
+  }
+  h3 {
+    color: #fff;
+    font-size: 1.438em;
+    margin-bottom: 20px;
+    @include max-screen($break_xxs) {
+      margin: 15px 0;
+    }
+  }
+  p {
+    color: #a0bdd4;
+    font-size: 1.125em;
+    line-height: 20px;
+  }
+  &:hover .content {
+    opacity: 1;
+  }
+}

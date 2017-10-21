@@ -1,0 +1,50 @@
+.footer {
+  color: #80909c;
+  padding: 15px;
+  background: #3a3d3e;
+  .flex {
+    justify-content: space-between;
+    align-items: center;
+    @include max-screen($break_xs) {
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+  &__brand {
+    display: flex;
+    align-items: center;
+    @include max-screen($break_xs) {
+      flex-direction: column;
+      margin-bottom: 15px;
+    }
+    a {
+      margin-right: 15px;
+      @include max-screen($break_xs) {
+        margin: 0;
+      }
+    }
+    span {
+
+    }
+  }
+  &__social {
+    display: flex;
+    a {
+      font-size: 1.1em;
+      color: #80909c;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: #2f3132;
+      margin-left: 15px;
+      text-decoration: none;
+      &:hover {
+        color: $white;
+        background: darken(#2f3132, 5%);
+      }
+    }
+  }
+}
