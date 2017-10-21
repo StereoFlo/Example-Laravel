@@ -14,13 +14,14 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * LoginController constructor.
      */
     public function __construct()
     {
+        $this->redirectTo = config('user.redirectAuth');
         $this->middleware('guest')->except('logout');
     }
 }
