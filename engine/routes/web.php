@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'MainController@index');
 
 Route::group(['middleware' => 'isAdminRole'], function () {
     Route::get('/manager/user/list', 'AdminController@userList');
