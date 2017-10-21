@@ -26,10 +26,10 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('location') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Location</label>
+                            <label for="location" class="col-md-4 control-label">Location</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('location') }}">
+                                <input id="location" type="text" class="form-control" name="location" value="{{ old('location') }}">
 
                                 @if ($errors->has('location'))
                                     <span class="help-block">
@@ -40,10 +40,10 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Phone</label>
+                            <label for="phone" class="col-md-4 control-label">Phone</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('phone') }}">
+                                <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}">
 
                                 @if ($errors->has('phone'))
                                     <span class="help-block">
@@ -54,10 +54,10 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('about') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">about</label>
+                            <label for="about" class="col-md-4 control-label">about</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('about') }}">
+                                <input id="about" type="text" class="form-control" name="about" value="{{ old('about') }}">
 
                                 @if ($errors->has('about'))
                                     <span class="help-block">
