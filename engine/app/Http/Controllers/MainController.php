@@ -3,7 +3,6 @@
 namespace RecycleArt\Http\Controllers;
 
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\Request;
 
 /**
  * Class MainController

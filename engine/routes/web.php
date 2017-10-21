@@ -14,6 +14,7 @@ Route::group(['middleware' => 'isAdminRole'], function () {
 // profile change
 Route::middleware('auth')->group(function () {
     Route::get('/cabinet/profile', 'CabinetController@profile')->name('profileForm');
+    Route::get('/cabinet/profile/avatar/remove', 'CabinetController@removeAvatar')->name('removeAvatar');
     Route::post('/cabinet/profile/update', 'CabinetController@profileUpdate')->name('profileUpdate');
 });
 

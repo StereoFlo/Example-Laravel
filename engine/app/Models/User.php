@@ -4,6 +4,8 @@ namespace RecycleArt\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class User extends Authenticatable
 {
@@ -110,4 +112,20 @@ class User extends Authenticatable
             ->get()->toArray();
     }
 
+
+    /**
+     * @return bool
+     */
+    public function removeAvatar(): bool
+    {
+        $currentUser = Auth::user();
+        $avatar = $currentUser->avatar;
+        $currentUser->avatar = null;
+        $isSaved = $currentUser->save();
+        if (!empty($avatar) && $isSaved) {
+            $path = public_path($avatar);
+            $isSaved = File::delete($path);
+        }
+        return $isSaved;
+    }
 }
