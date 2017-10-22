@@ -52,7 +52,8 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'checkRole'   => \RecycleArt\Http\Middleware\CheckRole::class,
-        'isAdminRole' => \RecycleArt\Http\Middleware\IsAdminRole::class,
+        'isAdmin'     => \RecycleArt\Http\Middleware\IsAdmin::class,
+        'isModerator' => \RecycleArt\Http\Middleware\IsModerator::class,
         'auth'        => \Illuminate\Auth\Middleware\Authenticate::class,
         'auth.basic'  => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings'    => \Illuminate\Routing\Middleware\SubstituteBindings::class,

@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 use RecycleArt\Models\User;
 
 /**
- * Class IsAdminRole
+ * Class IsAdmin
  * @package RecycleArt\Http\Middleware
  */
-class IsAdminRole
+class IsModerator
 {
     /**
      * Handle an incoming request.
@@ -22,7 +22,7 @@ class IsAdminRole
      */
     public function handle($request, Closure $next)
     {
-        if (!$request->user()->authorizeRoles([User::ROLE_ADMIN])) {
+        if (!$request->user()->authorizeRoles([User::ROLE_MODERATOR])) {
             abort(401, 'This action is unauthorized.');
         }
         return $next($request);

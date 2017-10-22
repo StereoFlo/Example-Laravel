@@ -19,7 +19,7 @@ class Work extends Migration
             $table->string('workName');
             $table->integer('likes')->default(0);
             $table->integer('userId');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
             $table->index('userId');
         });

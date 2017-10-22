@@ -28,26 +28,22 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Зарегистрированные пользователи</div>
                     <div class="panel-body">
-                        <? if (empty($users)) { ?>
-                        <p>У вас пока нет работ</p>
-                        <? } else { ?>
-                        <table class="table table-hover table-responsive">
-                            <thead>
-                                <td>ID</td>
-                                <td>Имя</td>
-                                <td>email</td>
-                                <td>Роль</td>
-                            </thead>
-                            <? foreach ($users as $user) { ?>
-                            <tr>
-                                <td><?= $user['id'] ?></td>
-                                <td><?= $user['name'] ?></td>
-                                <td><?= $user['email'] ?></td>
-                                <td><?= $user['roleName'] ?></td>
-                            </tr>
-                            <? } ?>
-                        </table>
-                        <? } ?>
+                        <p>
+                            Включенеые роли:<br>
+                            <ul>
+                            @foreach($userRoles as $userRole)
+                                <li>{{$userRole['name']}}</li>
+                            @endforeach
+                            </ul>
+                        </p>
+                        <p>
+                            Выключенеые роли:<br>
+                        <ul>
+                            @foreach($roles as $role)
+                                <li>{{$role['name']}}</li>
+                            @endforeach
+                        </ul>
+                        </p>
                     </div>
                 </div>
             </div>
