@@ -5,10 +5,15 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', 'MainController@index');
+Route::get('/{index}', 'MainController@index')->where('index','^(index\.html$|index\.jsp$|index\.php$)?');
 
-Route::group(['middleware' => 'isAdminRole'], function () {
-    Route::get('/manager/user/list', 'AdminController@userList');
+Route::group(['middleware' => 'isAdmin'], function () {
+    Route::get('/manager/user/list', 'Manager\\User@list');
+    Route::get('/manager/user/show/{id}', 'Manager\\User@show')->where('id', '[0-9]+');
+});
+
+Route::group(['middleware' => 'isModerator', 'isModerator'], function () {
+    Route::get('/manager/icon/list', 'Manager\\Icon@list');
 });
 
 // profile change

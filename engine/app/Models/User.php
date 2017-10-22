@@ -105,11 +105,26 @@ class User extends Authenticatable
      */
     public function getAll()
     {
-        return $this
+        return $this->get()->toArray();
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return array
+     */
+    public function getById(int $id): array
+    {
+        $user = $this
             ->join('role_user', 'role_user.user_id', '=', 'users.id')
             ->join('roles', 'roles.id', '=', 'role_user.role_id')
             ->select('users.*', 'roles.name as roleName', 'roles.id as roleId')
+            ->where('users.id', $id)
             ->get()->toArray();
+        if (empty($user)) {
+            return [];
+        }
+        return $user;
     }
 
 
