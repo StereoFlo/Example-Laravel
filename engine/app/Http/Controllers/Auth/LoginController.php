@@ -28,6 +28,14 @@ class LoginController extends Controller
     }
 
     /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function ajaxLogin()
+    {
+        return view('auth.login-ajax');
+    }
+
+    /**
      * The user has been authenticated.
      *
      * @param \Illuminate\Http\Request|Request $request
