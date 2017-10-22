@@ -5,7 +5,7 @@
 <section class="workAdd">
     <div class="container">
         {{ session('addWorkResult') }}
-        <form action="{{ route('workAddProcess') }}" enctype="multipart/form-data" class="form registrationForm">
+        <form method="post" action="{{ route('workAddProcess') }}" enctype="multipart/form-data" class="form registrationForm">
             {{ csrf_field() }}
             <div class="form__title">
                 <h1>Новая работа</h1>
