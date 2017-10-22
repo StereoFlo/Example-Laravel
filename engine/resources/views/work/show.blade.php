@@ -4,29 +4,24 @@
     <section class="work">
         <div class="container">
             <div class="work__header flex">
-                <h2 class="work__title"><?= $work['workName'] ?></h2>
-                <a href="#" class="work__author"><?= $work['author'] ?></a>
+                <h2 class="work__title">{{ $work['workName']  }}</h2>
+                <a href="#" class="work__author">by {{$work['userId']}}</a>
             </div>
             <div class="work__item">
                 <div class="work__slider">
                     <ul class="bxslider">
-                        <? if (empty($work['images'])) { ?>
-                        <p>У этой работы нет изображений</p>
-                        <? } else { ?>
-                        <? foreach ($work['images'] as $image) { ?>
-                        <pre>
-                            <? if ($image['isDefault']) { ?>
-                            <p>это изображение по умолчению</p>
-                            <? } ?>
-                            <li><img src="<?= $image['link']?>" alt="" class="work__pic"></li>
-                        </pre>
-                        <? } ?>
-                        <? } ?>
+                        @if (empty($work['images']))
+                            <p>У этой работы нет изображений</p>
+                        @else
+                            @foreach ($work['images'] as $image)
+                            <li><img src="{{$image['link']}}" alt="" class="work__pic"></li>
+                            @endforeach
+                        @endif
                     </ul>
                 </div>
                 <div class="work__desc">
                     <p>
-                        <?= $work['description'] ?>
+                        {{$work['description']}}
                     </p>
                 </div>
             </div>
@@ -34,7 +29,7 @@
                 <div class="work__counts">
                     <div class="work__likes">
                         <a href="#"></a>
-                        <span><?= $work['likes'] ?></span>
+                        <span>{{$work['likes']}}</span>
                     </div>
                     <div class="work__commentsNum">
                         <a href="#"></a>

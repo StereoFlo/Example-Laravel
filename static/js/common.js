@@ -1,4 +1,12 @@
 $( document ).ready(function() {
+    $.get('/login/ajax')
+		.done(function (data) {
+        $('.logIn').append(data);
+		})
+		.fail(function(data) {
+        console.log(data);
+    	});
+
 	$(".side-title a").click(
 		function(e) {
 			$(e.target).closest('.side').toggleClass('expanded');
@@ -14,10 +22,6 @@ $( document ).ready(function() {
 	$('.user__btn, .logIn__close').on('click', function () {
 		$('.logIn').toggleClass('hidden');
   	});
-	// $('.logIn__close').on('click', function () {
-	// 	// $('.logIn').addClass('hidden');
-	// 	console.log('вавапва');
-	// });
 
 	$(".sloganShow").hover(
 	  function() {
@@ -47,5 +51,15 @@ $( document ).ready(function() {
 	$('.login__registration').on('click', function() {
 		window.location = 'registration.html';
 	})
+});
 
+$(document).on('click', '#ajaxLoginButton',function () {
+    var ajaxFromLogin = $('#ajaxLogin').serialize();
+    var url  = $('#ajaxLogin').attr('action');
+    $.post(url, ajaxFromLogin)
+        .done(function( data ) {
+            console.log(data)
+        }).fail(function (data) {
+        console.log(data)
+    });
 });

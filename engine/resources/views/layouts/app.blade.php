@@ -67,15 +67,8 @@
         </footer>
     </div>
 
-    <div class="logIn hidden">
-        <form action="#" class="form loginForm">
-            <input type="text" class="loginForm__login" placeholder="логин">
-            <input type="password" class="loginForm__pass" placeholder="пароль">
-            <div class="loginForm__buttons">
-                <button type="submit" formaction="Вход.php" class="loginForm__enter button">войти</button>
-                <button formaction="registration.html" class="loginForm__registration button">регистрация</button>
-            </div>
-        </form>
+    <div class="logIn">
+
         <div class="logIn__close">
             <i class="fa fa-times" aria-hidden="true"></i>
         </div>

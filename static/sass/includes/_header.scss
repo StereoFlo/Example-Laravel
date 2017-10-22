@@ -131,29 +131,64 @@
     }
   }
 }
-.loginForm {
-  width: 275px;
-  height: 200px;
+.signIn {
+  width: 300px;
+  height: 250px;
   margin: auto;
-  &__login, &__pass {
+  label {
+    color: $white;
+  }
+  label[for="remember"] {
+    margin-right: 10px;
+  }
+  &__email, &__pass {
+    color: $white;
+    font-size: 1.2em;
     display: block;
     height: 30px;
-    margin-bottom: 25px;
+    width: 100%;
+    background: transparent;
+    //background: rgba($white, 0.05);
+    outline: none;
+    border: none;
+    border-bottom: 1px dotted $border;
+  }
+  .errorText {
+    display: block;
+    color: $red;
+    font-weight: bold;
+    height: 25px;
+    line-height: 1;
+    opacity: 0;
   }
   &__buttons {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  &__forgot {
+    color: #0089ef;
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+    }
   }
   &__enter {
     background: #4a5281;
+    font-size: 1.2em;
     &:hover {
       background: darken(#4a5281, 15%);
     }
   }
-  &__registration {
-    background: #e83b3a;
+  &__toRegisterBtn {
+    color: $white;
+    font-size: 1.2em;
+    display: block;
+    margin: 30px auto;
+    text-align: center;
     &:hover {
-      background: darken(#e83b3a, 15%);
+      text-decoration: none;
     }
   }
 }
