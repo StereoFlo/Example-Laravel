@@ -15,6 +15,7 @@
     "bxslider-4": "^4.2.12",
     "font-awesome": "^4.7.0",
     "page-scroll-to-id": "^1.5.8",
-    "smoothscroll-for-websites": "^1.4.6"
+    "smoothscroll-for-websites": "^1.4.6",
+    "dropzone": "^5.1.1"
   }
 }

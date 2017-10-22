@@ -2636,6 +2636,8 @@ template {
     color: #FFFFFF; }
   .signIn label[for="remember"] {
     margin-right: 10px; }
+  .signIn .inputGroup {
+    position: relative; }
   .signIn__email, .signIn__pass {
     color: #FFFFFF;
     font-size: 1.2em;
@@ -2645,7 +2647,14 @@ template {
     background: transparent;
     outline: none;
     border: none;
-    border-bottom: 1px dotted #ccd3d7; }
+    border-bottom: 1px dotted #ccd3d7;
+    padding-right: 35px; }
+  .signIn .fa {
+    color: #FFFFFF;
+    position: absolute;
+    right: 10px;
+    top: 21px;
+    font-size: 20px; }
   .signIn .errorText {
     display: block;
     color: #FF4136;
@@ -2677,7 +2686,8 @@ template {
       text-decoration: none; }
   .signIn__enter {
     background: #4a5281;
-    font-size: 1.2em; }
+    font-size: 1.2em;
+    outline: none; }
     .signIn__enter:hover {
       background: #2e3350; }
   .signIn__toRegisterBtn {
@@ -3304,6 +3314,22 @@ figure {
     text-align: center; }
     .form__title h1 {
       margin-top: 0; }
+  .form .inputGroup {
+    position: relative; }
+  .form .filearea {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    height: 200px;
+    position: relative;
+    outline: none;
+    border: 3px dashed #ccd3d7; }
+    .form .filearea span {
+      color: #ccd3d7;
+      font-weight: bold;
+      margin: auto; }
   .form .errorText {
     display: block;
     color: #FF4136;
@@ -3325,9 +3351,14 @@ figure {
     max-width: 100%;
     max-height: 300px; }
   .form input[type="file"], .form input[type="checkbox"] {
-    width: auto;
-    height: auto;
-    padding: 0; }
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; }
+    .form input[type="file"]:hover, .form input[type="checkbox"]:hover {
+      cursor: pointer; }
 
 .button {
   font-family: 'Geometria', sans-serif;

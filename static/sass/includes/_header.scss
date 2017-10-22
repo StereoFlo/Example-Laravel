@@ -141,6 +141,9 @@
   label[for="remember"] {
     margin-right: 10px;
   }
+  .inputGroup {
+    position: relative;
+  }
   &__email, &__pass {
     color: $white;
     font-size: 1.2em;
@@ -148,10 +151,18 @@
     height: 30px;
     width: 100%;
     background: transparent;
-    //background: rgba($white, 0.05);
     outline: none;
     border: none;
     border-bottom: 1px dotted $border;
+    padding-right: 35px;
+  }
+
+  .fa {
+    color: #FFFFFF;
+    position: absolute;
+    right: 10px;
+    top: 21px;
+    font-size: 20px;
   }
   .errorText {
     display: block;
@@ -178,6 +189,7 @@
   &__enter {
     background: #4a5281;
     font-size: 1.2em;
+    outline: none;
     &:hover {
       background: darken(#4a5281, 15%);
     }

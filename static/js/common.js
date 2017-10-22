@@ -50,7 +50,8 @@ $( document ).ready(function() {
 	});
 	$('.login__registration').on('click', function() {
 		window.location = 'registration.html';
-	})
+	});
+    // $('#summernote').summernote();
 });
 
 $(document).on('click', '#ajaxLoginButton',function () {

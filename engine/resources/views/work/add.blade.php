@@ -23,7 +23,7 @@
 
             <div class="inputGroup{{ $errors->has('description') ? ' has-error' : '' }}">
                 <label for="location">описание:</label>
-                <textarea name="description" cols="80" rows="8" required></textarea>
+                <textarea id="summernote" name="description" cols="80" rows="8" required></textarea>
                 <span class="errorText">
                     @if ($errors->has('description'))
                         <strong>{{ $errors->first('description') }}</strong>
@@ -33,7 +33,10 @@
 
             <div class="inputGroup{{ $errors->has('images') ? ' has-error' : '' }}">
                 <label for="images">фото:</label>
-                <input type="file" name="images" value="{{ old('images') }}" multiple required>
+                <div class="filearea">
+                    <span>Перенесите файлы сюда или нажмите на эту зону!</span>
+                    <input type="file" name="file" value="{{ old('images') }}" multiple required>
+                </div>
                 <span class="errorText">
                     @if ($errors->has('images'))
                         <strong>{{ $errors->first('images') }}</strong>

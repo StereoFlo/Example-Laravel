@@ -34,7 +34,8 @@ gulp.task('scripts', function() {
     'static/libs/jQuery/dist/jquery.min.js', // Берем jQuery
     'static/libs/smoothscroll-for-websites/SmoothScroll.js',
     'static/libs/bxslider-4/dist/jquery.bxslider.min.js',
-    'static/libs/page-scroll-to-id/jquery.malihu.PageScroll2id.js'
+    'static/libs/page-scroll-to-id/jquery.malihu.PageScroll2id.js',
+    'static/libs/summernote/dist/summernote.min.js'
   ])
   .pipe(concat('libs.min.js')) // Собираем их в кучу в новом файле libs.min.js
   .pipe(uglify()) // Сжимаем JS файл
