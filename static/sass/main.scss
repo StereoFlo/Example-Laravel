@@ -2,6 +2,7 @@
 @import "libs/media-queries";
 @import "libs/smart-grid";
 @import "../libs/font-awesome/scss/font-awesome";
+@import "../libs/bxslider-4/dist/jquery.bxslider.css";
 
 @import "variables";
 
@@ -10,6 +11,7 @@
 @import "./includes/products";
 @import "./includes/userRegistration";
 @import "./includes/workAdd";
+@import "./includes/work";
 @import "./includes/footer";
 
 * {
@@ -41,6 +43,7 @@ figure {
   margin: 0 auto;
 }
 .main {
+  background: #f3f1f1;
   flex-grow: 1;
   position: relative;
 }
@@ -102,4 +105,20 @@ figure {
   border-radius: 2px;
   cursor: pointer;
   transition: 120ms;
+}
+/* slider */
+
+.bx-wrapper {
+  border: none;
+  .bx-controls-direction a {
+    background: url("../images/slider-prev.png");
+    width: 60px !important;
+    height: 60px !important;
+  }
+  a.bx-next {
+    background: url("../images/slider-next.png");
+    &:hover, &:focus {
+      background-position: 0 0;
+    }
+  }
 }

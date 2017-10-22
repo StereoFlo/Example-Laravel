@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   padding: 30px 15px 0;
-  z-index: 999;
+  z-index: 99;
   a {
     color: $link;
     &:hover {
@@ -93,7 +93,7 @@
 }
 .user {
   order: 4;
-  position: relative;
+  //position: relative;
   &__btn {
     font-size: 1.2em;
     text-decoration: none;
@@ -109,15 +109,32 @@
   }
 }
 
-
-.login {
-  width: 275px;
-  height: 200px;
+.logIn {
+  display: flex;
   position: absolute;
   right: 0;
-  top: 45px;
-  background: #f3f1f1;
-  border: 2px solid $border;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba($black, 0.95);
+  z-index: 100;
+  &__close {
+    font-size: 1.5em;
+    color: $white;
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    cursor: pointer;
+    transition: 220ms;
+    &:hover {
+      transform: scale(1.5);
+    }
+  }
+}
+.loginForm {
+  width: 275px;
+  height: 200px;
+  margin: auto;
   &__login, &__pass {
     display: block;
     height: 30px;
@@ -140,22 +157,5 @@
     }
   }
 }
-.login:after,
-.login:before {
-  content: '';
-  border: solid transparent;
-  position: absolute;
-  right: 3px;
-  top: -22px;
-  width: 0;
-}
-.login:before {
-  border-bottom-color: $border;
-  border-width: 10px;
-}
-.login:after {
-  border-bottom-color: #f3f1f1;
-  border-width: 13px;
-  margin-right: -3px;
-}
+
 

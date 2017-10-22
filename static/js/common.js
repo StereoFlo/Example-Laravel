@@ -11,25 +11,27 @@ $( document ).ready(function() {
 			$(e.target).closest('nav').toggleClass('opened');
 		}
 	);
-	$('.user__btn').on('click', function () {
-		$('.user .login').toggleClass('hidden');
-  });
+	$('.user__btn, .logIn__close').on('click', function () {
+		$('.logIn').toggleClass('hidden');
+  	});
+	// $('.logIn__close').on('click', function () {
+	// 	// $('.logIn').addClass('hidden');
+	// 	console.log('вавапва');
+	// });
 
-
-  $(".sloganShow").hover(
-      function() {
-          $(this).siblings('.news, .slogan').stop();
-          $(this).siblings('.news').slideUp(600);
-          $(this).siblings('.slogan').slideDown(600);
-      }
-      ,
-      function() {
-          $(this).siblings(".news, .slogan").stop();
-          $(this).siblings(".news").slideDown();
-          $(this).siblings(".slogan").slideUp();
-
-      }
-  );
+	$(".sloganShow").hover(
+	  function() {
+		  $(this).siblings('.news, .slogan').stop();
+		  $(this).siblings('.news').slideUp(600);
+		  $(this).siblings('.slogan').slideDown(600);
+	  }
+	  ,
+	  function() {
+		  $(this).siblings(".news, .slogan").stop();
+		  $(this).siblings(".news").slideDown();
+		  $(this).siblings(".slogan").slideUp();
+	  }
+	);
 	$("a[href*='#']").mPageScroll2id({
 		scrollSpeed: 900,
 		scrollEasing: "easeInOutSine"

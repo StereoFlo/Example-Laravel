@@ -41,14 +41,6 @@
                             <!-- <i class="fa fa-user-circle-o" aria-hidden="true"></i> -->
                             <!-- <span>вход</span> -->
                         </a>
-                        <form action="#" class="form login hidden">
-                            <input type="text" class="login__login" placeholder="логин">
-                            <input type="password" class="login__pass" placeholder="пароль">
-                            <div class="login__buttons">
-                                <button type="submit" formaction="Вход.php" class="login__enter button">войти</button>
-                                <button formaction="registration.html" class="login__registration button">регистрация</button>
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -73,6 +65,20 @@
                 </div>
             </div>
         </footer>
+    </div>
+
+    <div class="logIn hidden">
+        <form action="#" class="form loginForm">
+            <input type="text" class="loginForm__login" placeholder="логин">
+            <input type="password" class="loginForm__pass" placeholder="пароль">
+            <div class="loginForm__buttons">
+                <button type="submit" formaction="Вход.php" class="loginForm__enter button">войти</button>
+                <button formaction="registration.html" class="loginForm__registration button">регистрация</button>
+            </div>
+        </form>
+        <div class="logIn__close">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </div>
     </div>
 
 

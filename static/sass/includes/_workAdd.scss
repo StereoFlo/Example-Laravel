@@ -3,7 +3,6 @@
   width: 100%;
   height: 100%;
   padding: 150px 15px 0;
-  position: absolute;
   @include max-screen($break_xxs) {
     padding-top: 100px;
   }
