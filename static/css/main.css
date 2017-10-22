@@ -2669,7 +2669,10 @@ template {
     margin-top: 20px; }
   .signIn__forgot {
     color: #0089ef;
-    text-decoration: underline; }
+    text-decoration: underline;
+    -webkit-align-self: flex-end;
+        -ms-flex-item-align: end;
+            align-self: flex-end; }
     .signIn__forgot:hover {
       text-decoration: none; }
   .signIn__enter {

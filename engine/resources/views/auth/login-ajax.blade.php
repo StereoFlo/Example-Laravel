@@ -87,6 +87,6 @@
         <a href="#" class="signIn__forgot">забыл пароль :(</a>
         <button type="button" name="button" class="button signIn__enter">войти</button>
     </div>
-    <a href="" class="signIn__toRegisterBtn">Регистрация</a>
+    <a href="#" class="signIn__toRegisterBtn">Регистрация</a>
 
 </form>
