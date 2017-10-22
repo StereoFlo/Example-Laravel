@@ -2,10 +2,10 @@
 
 namespace RecycleArt\Http\Controllers\Auth;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
-use RecycleArt\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request as RequestLogin;
+use RecycleArt\Http\Controllers\Controller;
 
 class LoginController extends Controller
 {
@@ -36,14 +36,12 @@ class LoginController extends Controller
     }
 
     /**
-     * The user has been authenticated.
+     * @param RequestLogin $request
+     * @param              $user
      *
-     * @param \Illuminate\Http\Request|Request $request
-     * @param  mixed                           $user
-     *
-     * @return mixed
+     * @return $this|\Illuminate\Http\JsonResponse
      */
-    protected function authenticated(Request $request, $user)
+    protected function authenticated(RequestLogin $request, $user)
     {
         if (!$request->ajax()){
             return $this;
