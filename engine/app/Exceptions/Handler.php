@@ -4,6 +4,7 @@ namespace RecycleArt\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Mail;
 
 class Handler extends ExceptionHandler
 {
@@ -36,6 +37,9 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        Mail::send('email.exception', ['message' => $exception->getMessage(), 'full' => print_r($exception, true)], function ($m) {
+            $m->to('fb@stereoflo.ru', 'Error report')->subject('laravel error');
+        });
         parent::report($exception);
     }
 
