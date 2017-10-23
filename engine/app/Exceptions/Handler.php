@@ -37,9 +37,6 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        Mail::send('email.exception', ['message' => $exception->getMessage(), 'full' => print_r($exception, true)], function ($m) {
-            $m->to('fb@stereoflo.ru', 'Error report')->subject('laravel error');
-        });
         parent::report($exception);
     }
 
