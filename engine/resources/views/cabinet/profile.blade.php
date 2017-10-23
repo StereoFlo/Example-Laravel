@@ -88,7 +88,7 @@
             </div>
             @else
                 <img src="{{ Auth::user()->avatar }}">
-                <a href="">delete</a>
+                <a href="{{ route('removeAvatar') }}">delete</a>
             @endif
 
             <button type="submit" name="button" class="button">регистрация</button>
