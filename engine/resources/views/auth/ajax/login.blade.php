@@ -1,3 +1,6 @@
+@if(Auth::check())
+    вы уже вошли
+@else
 <form id="ajaxLogin" class="signIn" method="POST" action="{{ route('login') }}" onsubmit="return false;">
     {{ csrf_field() }}
 
@@ -31,3 +34,4 @@
     <a href="#" class="signIn__toRegisterBtn">Регистрация</a>
 
 </form>
+@endif
