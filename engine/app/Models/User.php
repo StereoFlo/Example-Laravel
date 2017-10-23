@@ -105,7 +105,7 @@ class User extends Authenticatable
      */
     public function getAll()
     {
-        return $this->get()->toArray();
+        return self::All();
     }
 
     /**
