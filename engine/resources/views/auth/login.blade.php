@@ -29,10 +29,10 @@
                 <label for="remember">Запомнить e-mail ?</label><input type="checkbox" id="remember" name="remember" {{old('remember') ? 'checked' : ''}}/>
             </div>
             <div class="signIn__buttons">
-                <a href="#" class="signIn__forgot">забыл пароль :(</a>
+                <a href="{{ route('password.request') }}" class="signIn__forgot">забыл пароль :(</a>
                 <button type="submit" name="button" class="button signIn__enter">войти</button>
             </div>
-            <a href="#" class="signIn__toRegisterBtn">Регистрация</a>
+            <a href="{{ route('register') }}" class="signIn__toRegisterBtn">Регистрация</a>
 
         </form>
     </div>
