@@ -2,7 +2,7 @@
 @section('content')
 <section class="auth">
     <div class="container">
-        <form id="ajaxLogin" class="signIn signIn_dark" method="POST" action="{{ route('login') }}" onsubmit="return false;">
+        <form class="signIn signIn_dark" method="POST" action="{{ route('login') }}">
             {{ csrf_field() }}
 
             <div class="inputGroup{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -30,7 +30,7 @@
             </div>
             <div class="signIn__buttons">
                 <a href="#" class="signIn__forgot">забыл пароль :(</a>
-                <button id="ajaxLoginButton" type="button" name="button" class="button signIn__enter">войти</button>
+                <button type="submit" name="button" class="button signIn__enter">войти</button>
             </div>
             <a href="#" class="signIn__toRegisterBtn">Регистрация</a>
 
