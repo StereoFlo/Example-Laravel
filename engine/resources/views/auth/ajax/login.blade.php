@@ -1,5 +1,10 @@
 @if(Auth::check())
-    вы уже вошли
+    <div class="entered">
+        <img src="{{ Auth::user()->avatar }}" class="entered__pic" alt="">
+        <p class="entered__name">{{ Auth::user()->email }}</p>
+        <a href="#" class="entered__link">Кабинет</a>
+        <button class="button logoutBtn">Выйти</button>
+    </div>
 @else
 <form id="ajaxLogin" class="signIn" method="POST" action="{{ route('login') }}" onsubmit="return false;">
     {{ csrf_field() }}

@@ -1,5 +1,6 @@
 @if(Auth::check())
     вы уже вошли
+    {{auth-}}
 @else
 <div class="container">
     <div class="row">

@@ -8,7 +8,7 @@
             {{ csrf_field() }}
 
             <div class="inputGroup{{ $errors->has('name') ? ' has-error' : '' }}">
-                <label for="name">логин:</label>
+                <label for="name">Имя:</label>
                 <input id="name" type="text" name="name" value="{{ Auth::user()->name }}" required autofocus>
                 <span class="errorText">
                     @if ($errors->has('name'))

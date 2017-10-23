@@ -1,95 +1,105 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.forWelcome')
 
-        <title>Hello</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ config('app.url') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
+@section('content')
+    <section id="welcome" class="welcome">
+        <div class="filter"></div>
+        <div class="container">
+            <div class="flex">
+                <img src="{{ url('static/images/logo.png') }}" alt="Logo" class="sloganShow">
+                <div class="slogan hidden">
+                    <p class="slogan__item">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aut consequuntur ea eveniet! Adipisci assumenda corporis cumque debitis dolor doloremque eos excepturi fuga ipsa laudantium neque nostrum numquam odit pariatur quidem, repellendus sunt suscipit tempora tenetur vitae voluptas voluptates voluptatum? Consectetur distinctio ea, itaque obcaecati provident vel voluptatibus! Excepturi odit quidem similique voluptatem! Ab, architecto at cum cupiditate deserunt dignissimos, dolor hic illo modi nam nesciunt omnis optio quaerat reprehenderit ut. Dolore, odit praesentium. Autem cupiditate, dolorem dolores enim est id modi nulla numquam possimus quam quas quasi, quisquam recusandae sint sit soluta, veritatis voluptatum? Beatae consequatur nesciunt quae repellat.
+                    </p>
                 </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Hello
+                <div class="news">
+                    <div class="news__item">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat incidunt labore modi nisi placeat praesentium similique. Accusamus aut blanditiis doloribus ea eum nulla, quam qui rem vero. Aliquid aut autem commodi, culpa ducimus ea earum eligendi fugiat illo ipsa iusto, minima necessitatibus nemo non omnis placeat quo ratione saepe, soluta?</p>
+                    </div>
+                    <div class="news__item">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat incidunt labore modi nisi placeat praesentium similique. Accusamus aut blanditiis doloribus ea eum nulla, quam qui rem vero. Aliquid aut autem commodi, culpa ducimus ea earum eligendi fugiat illo ipsa iusto, minima necessitatibus nemo non omnis placeat quo ratione sae
+                    </div>
                 </div>
 
-                {{--<div class="links">--}}
-                    {{--<a href="https://laravel.com/docs">Documentation</a>--}}
-                    {{--<a href="https://laracasts.com">Laracasts</a>--}}
-                    {{--<a href="https://laravel-news.com">News</a>--}}
-                    {{--<a href="https://forge.laravel.com">Forge</a>--}}
-                    {{--<a href="https://github.com/laravel/laravel">GitHub</a>--}}
-                {{--</div>--}}
             </div>
         </div>
-    </body>
-</html>
+        <a href="#products" class="scrollDown">
+            <img src="{{ url('static/images/scroll.png') }}" alt="scroll">
+            <img src="{{ url('static/images/scroll.png') }}" alt="scroll">
+            <img src="{{ url('static/images/scroll.png') }}" alt="scroll">
+        </a>
+    </section>
+
+    <section id="products" class="products">
+        <div class="container">
+            <div class="flex">
+                <a href="#" class="item">
+                    <div class="content">
+                        <div class="border">
+                            <div class="valign">
+                                <h3>Анна Каренина</h3>
+                                <p>«Мусор, как искусство<br> воплощать свои идеи»</p>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="{{ url('static/images/items/img1.jpg') }}" alt="">
+                </a>
+                <a href="#" class="item">
+                    <div class="content">
+                        <div class="border">
+                            <div class="valign">
+                                <h3>Анна Каренина</h3>
+                                <p>«Мусор, как искусство<br> воплощать свои идеи»</p>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="{{ url('static/images/items/img2.jpg') }}" alt="">
+                </a>
+                <a href="#" class="item">
+                    <div class="content">
+                        <div class="border">
+                            <div class="valign">
+                                <h3>Анна Каренина</h3>
+                                <p>«Мусор, как искусство<br> воплощать свои идеи»</p>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="{{ url('static/images/items/img3.jpg') }}" alt="">
+                </a>
+                <a href="#" class="item">
+                    <div class="content">
+                        <div class="border">
+                            <div class="valign">
+                                <h3>Анна Каренина</h3>
+                                <p>«Мусор, как искусство<br> воплощать свои идеи»</p>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="{{ url('static/images/items/img4.jpg') }}" alt="">
+                </a>
+                <a href="#" class="item">
+                    <div class="content">
+                        <div class="border">
+                            <div class="valign">
+                                <h3>Анна Каренина</h3>
+                                <p>«Мусор, как искусство<br> воплощать свои идеи»</p>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="{{ url('static/images/items/img5.jpg') }}" alt="">
+                </a>
+                <a href="#" class="item">
+                    <div class="content">
+                        <div class="border">
+                            <div class="valign">
+                                <h3>Анна Каренина</h3>
+                                <p>«Мусор, как искусство<br> воплощать свои идеи»</p>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="{{ url('static/images/items/img6.jpg') }}" alt="">
+                </a>
+            </div>
+
+        </div>
+    </section>
+@endsection
