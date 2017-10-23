@@ -5,6 +5,7 @@ namespace RecycleArt\Http\Controllers\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Validation\ValidationException;
 use RecycleArt\Http\Controllers\Controller;
 
@@ -21,8 +22,10 @@ class LoginController extends Controller
 
     /**
      * LoginController constructor.
+     *
+     * @param Request $request
      */
-    public function __construct()
+    public function __construct(Request $request)
     {
         $this->redirectTo = config('user.redirectAuth');
         $this->middleware('guest')->except(['logout', 'ajaxLogin']);
