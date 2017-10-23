@@ -3,10 +3,11 @@
 namespace RecycleArt\Http\Controllers\Auth;
 
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use RecycleArt\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Validation\ValidationException;
+use RecycleArt\Http\Controllers\Controller;
 
 class LoginController extends Controller
 {
@@ -21,8 +22,10 @@ class LoginController extends Controller
 
     /**
      * LoginController constructor.
+     *
+     * @param Request $request
      */
-    public function __construct()
+    public function __construct(Request $request)
     {
         $this->redirectTo = config('user.redirectAuth');
         $this->middleware('guest')->except(['logout', 'ajaxLogin']);
@@ -49,7 +52,8 @@ class LoginController extends Controller
     /**
      * Handle a login request to the application.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return mixed
      */
     public function login(Request $request)
@@ -72,34 +76,35 @@ class LoginController extends Controller
     /**
      * Validate the user login request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return void
      */
     protected function validateLogin(Request $request)
     {
         $this->validate($request, [
             $this->username() => 'required|string',
-            'password' => 'required|string',
+            'password'        => 'required|string',
         ]);
     }
 
     /**
      * Attempt to log the user into the application.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return bool
      */
     protected function attemptLogin(Request $request)
     {
-        return $this->guard()->attempt(
-            $this->credentials($request), $request->filled('remember')
-        );
+        return $this->guard()->attempt($this->credentials($request), $request->filled('remember'));
     }
 
     /**
      * Get the needed authorization credentials from the request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return array
      */
     protected function credentials(Request $request)
@@ -110,7 +115,8 @@ class LoginController extends Controller
     /**
      * Send the response after the user was authenticated.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     protected function sendLoginResponse(Request $request)
@@ -119,15 +125,15 @@ class LoginController extends Controller
 
         $this->clearLoginAttempts($request);
 
-        return $this->authenticated($request, $this->guard()->user())
-            ?: redirect()->intended($this->redirectPath());
+        return $this->authenticated($request, $this->guard()->user()) ?: redirect()->intended($this->redirectPath());
     }
 
     /**
      * The user has been authenticated.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  mixed  $user
+     * @param  \Illuminate\Http\Request $request
+     * @param  mixed                    $user
+     *
      * @return mixed
      */
     protected function authenticated(Request $request, $user)
@@ -135,7 +141,7 @@ class LoginController extends Controller
         if ($request->ajax()) {
             return response()->json([
                 'auth' => Auth::check(),
-                'user' => $user
+                'user' => $user,
             ]);
         }
     }
@@ -151,7 +157,7 @@ class LoginController extends Controller
         if ($request->ajax()) {
             return response()->json([
                 'auth' => Auth::check(),
-                'user' => null
+                'user' => null,
             ]);
         }
         throw ValidationException::withMessages([
@@ -172,7 +178,8 @@ class LoginController extends Controller
     /**
      * Log the user out of the application.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function logout(Request $request)
