@@ -11,7 +11,6 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-{{--    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('/static/css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('/static/libs/summernote/dist/summernote-bs3.css') }}" rel="stylesheet">
 </head>
@@ -71,6 +70,8 @@
         <div class="logIn__close">
             <i class="fa fa-times" aria-hidden="true"></i>
         </div>
+
+        <div class="forms"></div>
     </div>
 
 
