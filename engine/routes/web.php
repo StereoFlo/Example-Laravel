@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', 'MainController@index')->where('index','^(index\.html$|index\.jsp$|index\.php$)?');
+Route::get('/{index}', 'MainController@index')->where('index', '^(index\.html$|index\.jsp$|index\.php$)?');
 Route::get('/login/ajax', 'Auth\\LoginController@ajaxLogin');
 Route::get('/register/ajax', 'Auth\\RegisterController@ajaxRegister');
 
