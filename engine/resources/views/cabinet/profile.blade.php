@@ -79,7 +79,10 @@
             @if (empty(Auth::user()->avatar))
             <div class="inputGroup{{ $errors->has('avatar') ? ' has-error' : '' }}">
                 <label for="avatar">фото:</label>
-                <input type="file" name="avatar" value="{{ Auth::user()->avatar }}">
+                <div class="filearea">
+                    <span>Перенесите файл сюда или нажмите на эту зону!</span>
+                    <input type="file" name="avatar" value="{{ old('avatar') }}">
+                </div>
                 <span class="errorText">
                     @if ($errors->has('avatar'))
                         <strong>{{ $errors->first('avatar') }}</strong>
