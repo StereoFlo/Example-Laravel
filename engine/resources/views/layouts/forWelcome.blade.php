@@ -78,6 +78,5 @@
 {{--    <script src="{{ asset('js/app.js') }}"></script>--}}
     <script src="{{ url('static/js/libs.min.js') }}"></script>
     <script src="{{ url('static/js/common.min.js') }}"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 </body>
 </html>

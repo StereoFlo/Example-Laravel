@@ -34,9 +34,12 @@
     }
   }
 }
-.signIn {
-  max-width: 300px;
+.forms {
   margin: auto;
+}
+.signIn {
+  width: 300px;
+  //margin: auto;
   label {
     color: $white;
   }

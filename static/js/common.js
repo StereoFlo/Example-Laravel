@@ -2,6 +2,8 @@ $( document ).ready(function() {
     $.get('/login/ajax')
 		.done(function (data) {
         $('.logIn').append(data);
+		$('#ajaxReg').hide();
+		$('.signIn__toRegisterBtn').click(function(){ $('form').toggle(600); });
 		})
 		.fail(function(data) {
     	});
@@ -22,6 +24,8 @@ $( document ).ready(function() {
 		$('.logIn').toggleClass('hidden');
   	});
 
+
+    $('.slogan').hide();
     $(".sloganShow").hover(
         function() {
             $(this).siblings('.news, .slogan').stop();
@@ -51,6 +55,9 @@ $( document ).ready(function() {
 	$('.login__registration').on('click', function() {
 		window.location = 'registration.html';
 	});
+
+
+
 });
 
 $(document).on('click', '#ajaxLoginButton',function () {
