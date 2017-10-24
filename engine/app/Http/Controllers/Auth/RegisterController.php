@@ -2,10 +2,13 @@
 
 namespace RecycleArt\Http\Controllers\Auth;
 
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use RecycleArt\Http\Controllers\Controller;
 use RecycleArt\Models\User;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -19,11 +22,21 @@ class RegisterController extends Controller
     protected $redirectTo = '/';
 
     /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        return view('auth.register');
+    }
+
+    /**
      * RegisterController constructor.
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest')->except(['ajaxRegister']);
     }
 
     /**
@@ -69,5 +82,49 @@ class RegisterController extends Controller
             'email'    => $data['email'],
             'password' => \bcrypt($data['password']),
         ]);
+    }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user);
+    }
+
+    /**
+     * Get the guard to be used during registration.
+     *
+     * @return \Illuminate\Contracts\Auth\StatefulGuard
+     */
+    protected function guard()
+    {
+        return Auth::guard();
+    }
+
+    /**
+     * The user has been registered.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function registered(Request $request, $user)
+    {
+        if ($request->ajax()) {
+            return response()->json([
+                'auth' => Auth::check(),
+                'user' => $user,
+            ]);
+        }
     }
 }
