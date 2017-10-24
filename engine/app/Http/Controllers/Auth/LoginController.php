@@ -158,7 +158,7 @@ class LoginController extends Controller
             return response()->json([
                 'auth' => Auth::check(),
                 'user' => null,
-            ]);
+            ], 401);
         }
         throw ValidationException::withMessages([
             $this->username() => [trans('auth.failed')],

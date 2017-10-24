@@ -7,14 +7,14 @@ $( document ).ready(function() {
 		.fail(function(data) {
     	});
 
-	// $.get('/register/ajax')
-	// 	.done(function (data) {
-	// 		$('.logIn .forms').append(data);
-	// 		$('#ajaxReg').hide();
-	// 		$('.registration__toSignInBtn').click(function(){ $('.forms form').toggle(600); });
-	// 	})
-	// 	.fail(function(data) {
-	// 	});
+	$.get('/register/ajax')
+		.done(function (data) {
+			$('.logIn .forms').append(data);
+			$('#ajaxReg').hide();
+			$('.registration__toSignInBtn').click(function(){ $('.forms form').toggle(600); });
+		})
+		.fail(function(data) {
+		});
 
 	$(".side-title a").click(
 		function(e) {
