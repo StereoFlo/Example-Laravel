@@ -55,14 +55,14 @@ class CabinetController extends Controller
 
         if (!empty($request->post('password'))) {
             if ($request->post('password') !== $request->post('password_confirmation')) {
-                $request->session()->flash('updateResult', 'Password not match!');
+                $request->session()->flash('updateResult', __('cabinet.passwordMatchError'));
                 return Redirect::to('/cabinet/profile');
             }
             $user->password = bcrypt($request->input('password'));
         }
 
         $user->save();
-        $request->session()->flash('updateResult', 'Your account has been updated!');
+        $request->session()->flash('updateResult', __('cabinet.accountUpdated'));
         return Redirect::to('/cabinet/profile');
     }
 

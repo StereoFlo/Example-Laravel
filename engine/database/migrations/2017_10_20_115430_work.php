@@ -20,6 +20,7 @@ class Work extends Migration
             $table->integer('likes')->default(0);
             $table->integer('userId');
             $table->text('description')->nullable();
+            $table->boolean('approved')->default(false);
             $table->timestamps();
             $table->index('userId');
         });

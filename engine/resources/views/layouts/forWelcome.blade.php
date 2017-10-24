@@ -12,7 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('/static/css/main.css') }}" rel="stylesheet">
-    <link href="{{ asset('/static/libs/summernote/dist/summernote-bs3.css') }}" rel="stylesheet">
+    {{--<link href="{{ asset('/static/libs/summernote/dist/summernote-bs3.css') }}" rel="stylesheet">--}}
 </head>
 <body>
     <div class="wrapper">
