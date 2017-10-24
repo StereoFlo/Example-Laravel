@@ -43,7 +43,7 @@
                 </div>
             </div>
         </header>
-        <div class="main">
+        <div class="main main_home">
             @yield('content')
         </div>
 

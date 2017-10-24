@@ -2,7 +2,7 @@ $(document).ready(function () {
     $.get('/login/ajax')
         .done(function (data) {
             $('.logIn .forms').append(data);
-            $('.signIn__toRegisterBtn').click(function () {
+            $('#toReg').click(function () {
                 $('.forms form').toggle(600);
             });
         })
@@ -14,7 +14,7 @@ $(document).ready(function () {
         .done(function (data) {
             $('.logIn .forms').append(data);
             $('#ajaxRegistration').hide();
-            $('.registration__toSignInBtn').click(function () {
+            $('#toLog').click(function () {
                 $('.forms form').toggle(600);
             });
         })
@@ -36,7 +36,7 @@ $(document).ready(function () {
     );
     $('.user__btn, .logIn__close').on('click', function () {
         $('.logIn').toggleClass('hidden');
-        $('#ajaxReg').hide();
+        $('#ajaxRegistration').hide();
         $('#ajaxLogin').show();
     });
 

@@ -47,6 +47,13 @@ figure {
   background: #f3f1f1;
   flex-grow: 1;
   position: relative;
+  padding-top: 200px;
+  @include max-screen($break_xxs) {
+    padding-top: 100px;
+  }
+  &_home {
+    padding-top: 0;
+  }
 }
 
 .flex {
