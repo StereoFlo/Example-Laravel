@@ -120,4 +120,6 @@ return [
         ],
     ],
 
+    'webmaster' => env('master@mail.ru', 'fb@stereoflo.ru'),
+
 ];
