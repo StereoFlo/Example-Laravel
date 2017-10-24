@@ -78,6 +78,6 @@
     <!-- Scripts -->
 {{--    <script src="{{ asset('js/app.js') }}"></script>--}}
     <script src="{{ url('static/js/libs.min.js') }}"></script>
-    <script src="{{ url('static/js/common.min.js') }}"></script>
+    <script src="{{ url('static/js/common.js') }}"></script>
 </body>
 </html>

@@ -10,10 +10,12 @@ $( document ).ready(function() {
 	$.get('/register/ajax')
 		.done(function (data) {
 			$('.logIn .forms').append(data);
-			$('#ajaxReg').hide();
+			$('#ajaxRegistration').hide();
 			$('.registration__toSignInBtn').click(function(){ $('.forms form').toggle(600); });
+			console.log(data);
 		})
 		.fail(function(data) {
+            console.log(data);
 		});
 
 	$(".side-title a").click(
@@ -73,7 +75,6 @@ $(document).on('click', '#ajaxLoginButton',function () {
 			if(data.auth == true) {
 				location.reload();
 			}
-			// $('.logIn').addClass('hidden');
         }).fail(function (data) {
         console.log(data)
     });

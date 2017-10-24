@@ -5,7 +5,7 @@
         {{ csrf_field() }}
 
         <div class="inputGroup{{ $errors->has('name') ? ' has-error' : '' }}">
-            <label for="email">email:</label>
+            <label for="email">имя:</label>
             <input id="name" class="signIn__email" type="text" name="name" value="{{ old('name') }}" required autofocus>
             <i class="fa fa-user" aria-hidden="true"></i>
             <span class="errorText">
@@ -16,7 +16,7 @@
         </div>
 
         <div class="inputGroup{{ $errors->has('location') ? ' has-error' : '' }}">
-            <label for="email">email:</label>
+            <label for="email">город:</label>
             <input id="location" class="signIn__email" type="text" name="location" value="{{ old('location') }}" required autofocus>
             <i class="fa fa-user" aria-hidden="true"></i>
             <span class="errorText">
@@ -27,7 +27,7 @@
         </div>
 
         <div class="inputGroup{{ $errors->has('phone') ? ' has-error' : '' }}">
-            <label for="email">phone:</label>
+            <label for="email">телефон:</label>
             <input id="phone" class="signIn__email" type="text" name="phone" value="{{ old('phone') }}" required autofocus>
             <i class="fa fa-user" aria-hidden="true"></i>
             <span class="errorText">
@@ -38,7 +38,7 @@
         </div>
 
         <div class="inputGroup{{ $errors->has('about') ? ' has-error' : '' }}">
-            <label for="email">email:</label>
+            <label for="email">о себе:</label>
             <input id="about" class="signIn__email" type="text" name="about" value="{{ old('about') }}" required autofocus>
             <i class="fa fa-user" aria-hidden="true"></i>
             <span class="errorText">
