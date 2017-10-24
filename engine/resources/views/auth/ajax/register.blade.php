@@ -6,7 +6,7 @@
 
         <div class="inputGroup{{ $errors->has('name') ? ' has-error' : '' }}">
             <label for="email">имя:</label>
-            <input id="name" class="signIn__email" type="text" name="name" value="{{ old('name') }}" required autofocus>
+            <input id="name" class="registration__name" type="text" name="name" value="{{ old('name') }}" required autofocus>
             <i class="fa fa-user" aria-hidden="true"></i>
             <span class="errorText">
                 @if ($errors->has('name'))
@@ -17,7 +17,7 @@
 
         <div class="inputGroup{{ $errors->has('location') ? ' has-error' : '' }}">
             <label for="email">город:</label>
-            <input id="location" class="signIn__email" type="text" name="location" value="{{ old('location') }}" required autofocus>
+            <input id="location" class="registration__location" type="text" name="location" value="{{ old('location') }}" required autofocus>
             <i class="fa fa-user" aria-hidden="true"></i>
             <span class="errorText">
                 @if ($errors->has('location'))
@@ -28,7 +28,7 @@
 
         <div class="inputGroup{{ $errors->has('phone') ? ' has-error' : '' }}">
             <label for="email">телефон:</label>
-            <input id="phone" class="signIn__email" type="text" name="phone" value="{{ old('phone') }}" required autofocus>
+            <input id="phone" class="registration__phone" type="text" name="phone" value="{{ old('phone') }}" required autofocus>
             <i class="fa fa-user" aria-hidden="true"></i>
             <span class="errorText">
                 @if ($errors->has('phone'))
@@ -39,7 +39,7 @@
 
         <div class="inputGroup{{ $errors->has('about') ? ' has-error' : '' }}">
             <label for="email">о себе:</label>
-            <input id="about" class="signIn__email" type="text" name="about" value="{{ old('about') }}" required autofocus>
+            <input id="about" class="registration__about" type="text" name="about" value="{{ old('about') }}" required autofocus>
             <i class="fa fa-user" aria-hidden="true"></i>
             <span class="errorText">
                 @if ($errors->has('about'))
@@ -50,7 +50,7 @@
 
         <div class="inputGroup{{ $errors->has('email') ? ' has-error' : '' }}">
             <label for="email">email:</label>
-            <input id="email" class="signIn__email" type="email" name="email" value="{{ old('email') }}" required autofocus>
+            <input id="email" class="registration__email" type="email" name="email" value="{{ old('email') }}" required autofocus>
             <i class="fa fa-user" aria-hidden="true"></i>
             <span class="errorText">
                 @if ($errors->has('email'))
@@ -61,7 +61,7 @@
 
         <div class="inputGroup{{ $errors->has('password') ? ' has-error' : '' }}">
             <label for="password">пароль:</label>
-            <input id="password" class="signIn__pass" type="password" name="password" required>
+            <input id="password" class="registration__pass" type="password" name="password" required>
             <i class="fa fa-unlock-alt" aria-hidden="true"></i>
             <span class="errorText">
                 @if ($errors->has('password'))
@@ -72,20 +72,16 @@
 
         <div class="inputGroup{{ $errors->has('password') ? ' has-error' : '' }}">
             <label for="password_confirmation">пароль:</label>
-            <input id="password_confirmation" class="signIn__pass" type="password" name="password_confirmation" required>
+            <input id="password_confirmation" class="registration__pass" type="password" name="password_confirmation" required>
             <i class="fa fa-unlock-alt" aria-hidden="true"></i>
             <span class="errorText"></span>
         </div>
 
-        <div class="inputGroup">
-            <label for="remember">Запомнить e-mail ?</label><input type="checkbox" id="remember" name="remember" {{old('remember') ? 'checked' : ''}}/>
-        </div>
-
-        <div class="signIn__buttons">
+        <div class="registration__buttons">
             <button id="ajaxRegistrationButton" type="button" name="button" class="button registration__enter">регистрация</button>
         </div>
 
-        <a href="#" class="signIn__toRegisterBtn">Регистрация</a>
+        <a href="#" id="toLog" class="formToggle">Вход >></a>
 
     </form>
 @endif

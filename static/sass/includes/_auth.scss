@@ -1,11 +1,17 @@
 .auth {
   width: 100%;
   height: 100%;
-  padding: 250px 15px 0;
-  @include max-screen($break_xxs) {
-    padding-top: 100px;
-  }
   .signIn {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    padding: 30px;
+    width: 330px;
+    margin: 0 auto 60px;
+  }
+}
+.register {
+  width: 100%;
+  height: 100%;
+  .registration {
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     padding: 30px;
     width: 330px;
@@ -49,7 +55,6 @@
   .inputGroup {
     position: relative;
   }
-  //&__email, &__pass
   input:not([type="checkbox"]) {
     color: $white;
     font-size: 1.2em;
@@ -84,14 +89,6 @@
     align-items: center;
     margin-top: 20px;
   }
-  &__forgot {
-    color: #0089ef;
-    text-decoration: underline;
-    align-self: flex-end;
-    &:hover {
-      text-decoration: none;
-    }
-  }
   &__enter {
     background: #4a5281;
     font-size: 1.2em;
@@ -100,7 +97,7 @@
       background: darken(#4a5281, 15%);
     }
   }
-  &__toRegisterBtn {
+  .formToggle {
     color: $white;
     font-size: 1.2em;
     display: block;
@@ -110,19 +107,32 @@
       text-decoration: none;
     }
   }
+  &__forgot {
+    color: #0089ef;
+    text-decoration: underline;
+    align-self: flex-end;
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
-.signIn_dark {
+.registration {
+  &__buttons {
+    justify-content: center;
+  }
+}
+.signIn_dark, .registration_dark {
   label {
     color: $black;
   }
-  .signIn__email, .signIn__pass {
+  input:not([type="checkbox"]) {
     color: $black;
     border-color: $black;
   }
   .fa {
     color: $black;
   }
-  .signIn__toRegisterBtn {
+  .formToggle {
     color: $black;
   }
 }
