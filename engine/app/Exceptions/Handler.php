@@ -37,7 +37,7 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        Mail::raw(print_r($exception), function ($message) {
+        Mail::raw(print_r($exception, true), function ($message) {
             $message->from(config('mail.from.address'), config('mail.from.name'));
             $message->to(config('mail.from.webmaster'));
         });
