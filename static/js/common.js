@@ -1,12 +1,20 @@
 $( document ).ready(function() {
     $.get('/login/ajax')
 		.done(function (data) {
-        $('.logIn').append(data);
-		$('#ajaxReg').hide();
-		$('.signIn__toRegisterBtn').click(function(){ $('form').toggle(600); });
+        $('.logIn .forms').append(data);
+		$('.signIn__toRegisterBtn').click(function(){ $('.forms form').toggle(600); });
 		})
 		.fail(function(data) {
     	});
+
+	// $.get('/register/ajax')
+	// 	.done(function (data) {
+	// 		$('.logIn .forms').append(data);
+	// 		$('#ajaxReg').hide();
+	// 		$('.registration__toSignInBtn').click(function(){ $('.forms form').toggle(600); });
+	// 	})
+	// 	.fail(function(data) {
+	// 	});
 
 	$(".side-title a").click(
 		function(e) {
@@ -22,6 +30,8 @@ $( document ).ready(function() {
 	);
 	$('.user__btn, .logIn__close').on('click', function () {
 		$('.logIn').toggleClass('hidden');
+		$('#ajaxReg').hide();
+		$('#ajaxLogin').show();
   	});
 
 
@@ -52,12 +62,6 @@ $( document ).ready(function() {
 		$('.nav').slideToggle();
 		console.log(headerHeight);
 	});
-	$('.login__registration').on('click', function() {
-		window.location = 'registration.html';
-	});
-
-
-
 });
 
 $(document).on('click', '#ajaxLoginButton',function () {
@@ -66,7 +70,22 @@ $(document).on('click', '#ajaxLoginButton',function () {
     $.post(url, ajaxFromLogin)
         .done(function( data ) {
             console.log(data)
+			if(data.auth == true) {
+				location.reload();
+			}
+			// $('.logIn').addClass('hidden');
         }).fail(function (data) {
         console.log(data)
     });
+});
+
+$(document).on('click', '#ajaxRegistrationButton',function () {
+	var ajaxFromLogin = $('#ajaxReg').serialize();
+	var url  = $('#ajaxReg').attr('action');
+	$.post(url, ajaxFromLogin)
+		.done(function( data ) {
+			console.log(data)
+		}).fail(function (data) {
+		console.log(data)
+	});
 });

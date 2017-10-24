@@ -3092,7 +3092,8 @@ template {
     -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     padding: 30px;
-    max-width: 330px; }
+    width: 330px;
+    margin: 0 auto 60px; }
 
 .logIn {
   display: -webkit-box;
@@ -3100,10 +3101,10 @@ template {
   display: -ms-flexbox;
   display: flex;
   position: absolute;
-  right: 0;
   left: 0;
   top: 0;
-  bottom: 0;
+  width: 100%;
+  min-height: 100%;
   background: rgba(17, 17, 17, 0.95);
   z-index: 100; }
   .logIn__close {
@@ -3123,15 +3124,15 @@ template {
 .forms {
   margin: auto; }
 
-.signIn {
-  width: 300px; }
-  .signIn label {
+.signIn, .registration {
+  width: 330px; }
+  .signIn label, .registration label {
     color: #FFFFFF; }
-  .signIn label[for="remember"] {
+  .signIn label[for="remember"], .registration label[for="remember"] {
     margin-right: 10px; }
-  .signIn .inputGroup {
+  .signIn .inputGroup, .registration .inputGroup {
     position: relative; }
-  .signIn__email, .signIn__pass {
+  .signIn input:not([type="checkbox"]), .registration input:not([type="checkbox"]) {
     color: #FFFFFF;
     font-size: 1.2em;
     display: block;
@@ -3142,20 +3143,20 @@ template {
     border: none;
     border-bottom: 1px dotted #ccd3d7;
     padding-right: 35px; }
-  .signIn .fa {
+  .signIn .fa, .registration .fa {
     color: #FFFFFF;
     position: absolute;
     right: 10px;
     top: 21px;
     font-size: 20px; }
-  .signIn .errorText {
+  .signIn .errorText, .registration .errorText {
     display: block;
     color: #FF4136;
     font-weight: bold;
     height: 25px;
     line-height: 1;
     opacity: 0; }
-  .signIn__buttons {
+  .signIn__buttons, .registration__buttons {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -3169,27 +3170,27 @@ template {
         -ms-flex-align: center;
             align-items: center;
     margin-top: 20px; }
-  .signIn__forgot {
+  .signIn__forgot, .registration__forgot {
     color: #0089ef;
     text-decoration: underline;
     -webkit-align-self: flex-end;
         -ms-flex-item-align: end;
             align-self: flex-end; }
-    .signIn__forgot:hover {
+    .signIn__forgot:hover, .registration__forgot:hover {
       text-decoration: none; }
-  .signIn__enter {
+  .signIn__enter, .registration__enter {
     background: #4a5281;
     font-size: 1.2em;
     outline: none; }
-    .signIn__enter:hover {
+    .signIn__enter:hover, .registration__enter:hover {
       background: #2e3350; }
-  .signIn__toRegisterBtn {
+  .signIn__toRegisterBtn, .registration__toRegisterBtn {
     color: #FFFFFF;
     font-size: 1.2em;
     display: block;
     margin: 30px auto;
     text-align: center; }
-    .signIn__toRegisterBtn:hover {
+    .signIn__toRegisterBtn:hover, .registration__toRegisterBtn:hover {
       text-decoration: none; }
 
 .signIn_dark label {

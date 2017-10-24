@@ -73,6 +73,8 @@
         <div class="logIn__close">
             <i class="fa fa-times" aria-hidden="true"></i>
         </div>
+
+        <div class="forms"></div>
     </div>
 
 
