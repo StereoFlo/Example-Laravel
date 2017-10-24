@@ -37,9 +37,10 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        Mail::raw(print_r($exception, true), function ($message) {
-            $message->from(config('mail.from.address'), config('mail.from.name'));
-            $message->to(config('mail.from.webmaster'));
+        $mess = $this->buildMessage($exception);
+        Mail::raw($mess, function ($message) {
+            $message->to(config('mail.webmaster'));
+            $message->subject(config('app.name') . ' Was an error');
         });
         parent::report($exception);
     }
@@ -54,5 +55,18 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         return parent::render($request, $exception);
+    }
+
+    /**
+     * @param Exception $exception
+     *
+     * @return string
+     */
+    private function buildMessage(Exception $exception): string
+    {
+        $mess = 'Was an error: ' . $exception->getMessage() . PHP_EOL;
+        $mess .= 'File: ' . $exception->getFile() . ' Line: ' . $exception->getLine() . ' Code: ' . $exception->getCode() . PHP_EOL . PHP_EOL;
+        $mess .= 'Full trace: ' . PHP_EOL . $exception->getTraceAsString();
+        return $mess;
     }
 }

@@ -124,8 +124,7 @@ class WorkController extends Controller
         $work = new Work();
         $work = $work->getById($id);
         if (empty($work)) {
-            abort(404, __('workNotFound'));
-            return []; //stub
+            abort(404, __('work.workNotFound'));
         }
         return view('work.show', ['work' => $work]);
     }

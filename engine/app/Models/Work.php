@@ -46,17 +46,17 @@ class Work extends Model
     {
         $work = $this->join('users', 'users.id', '=', 'work.userId')
             ->where('work.id', $workId)
-            ->first()
-            ->toArray();
+            ->first();
         if (empty($work)) {
             return [];
         }
-        $images = WorkImages::getInstance()->where('workId', $workId)->get()
-            ->toArray();
+        $images = WorkImages::getInstance()->where('workId', $workId)->get();
         if (!empty($images)) {
-            $work['images'] = null;
+            $images = $images->toArray();
         }
-        $work['images'] = $images;
+        $work = $work->toArray();
+        $work['images'] = empty($images) ? null : $images;
+
         return $work;
     }
 
