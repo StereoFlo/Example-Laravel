@@ -1,26 +1,4 @@
 $(document).ready(function () {
-    $.get('/login/ajax')
-        .done(function (data) {
-            $('.logIn .forms').append(data);
-            $('#toReg').click(function () {
-                $('.forms form').toggle(600);
-            });
-        })
-        .fail(function (data) {
-            //todo
-        });
-
-    $.get('/register/ajax')
-        .done(function (data) {
-            $('.logIn .forms').append(data);
-            $('#ajaxRegistration').hide();
-            $('#toLog').click(function () {
-                $('.forms form').toggle(600);
-            });
-        })
-        .fail(function (data) {
-            //todo
-        });
 
     $(".side-title a").click(
         function (e) {
@@ -34,7 +12,34 @@ $(document).ready(function () {
             $(e.target).closest('nav').toggleClass('opened');
         }
     );
+
     $('.user__btn, .logIn__close').on('click', function () {
+
+        $('.logIn .forms').empty();
+
+        $.get('/login/ajax')
+            .done(function (data) {
+                $('.logIn .forms').append(data);
+                $('#toReg').click(function () {
+                    $('.forms form').toggle(600);
+                });
+            })
+            .fail(function (data) {
+                //todo
+            });
+
+        $.get('/register/ajax')
+            .done(function (data) {
+                $('.logIn .forms').append(data);
+                $('#ajaxRegistration').hide();
+                $('#toLog').click(function () {
+                    $('.forms form').toggle(600);
+                });
+            })
+            .fail(function (data) {
+                //todo
+            });
+
         $('.logIn').toggleClass('hidden');
         $('#ajaxRegistration').hide();
         $('#ajaxLogin').show();

@@ -11,10 +11,10 @@
                     <input id="name" class="registration__name" type="text" name="name" value="{{ old('name') }}" required autofocus>
                     <i class="fa fa-user" aria-hidden="true"></i>
                     <span class="errorText">
-                @if ($errors->has('name'))
-                            <strong>{{ $errors->first('name') }}</strong>
-                        @endif
-            </span>
+                    @if ($errors->has('name'))
+                                <strong>{{ $errors->first('name') }}</strong>
+                            @endif
+                </span>
                 </div>
 
                 <div class="inputGroup{{ $errors->has('location') ? ' has-error' : '' }}">
@@ -22,10 +22,10 @@
                     <input id="location" class="registration__location" type="text" name="location" value="{{ old('location') }}" required autofocus>
                     <i class="fa fa-user" aria-hidden="true"></i>
                     <span class="errorText">
-                @if ($errors->has('location'))
-                            <strong>{{ $errors->first('location') }}</strong>
-                        @endif
-            </span>
+                        @if ($errors->has('location'))
+                                    <strong>{{ $errors->first('location') }}</strong>
+                                @endif
+                    </span>
                 </div>
 
                 <div class="inputGroup{{ $errors->has('phone') ? ' has-error' : '' }}">
@@ -33,10 +33,10 @@
                     <input id="phone" class="registration__phone" type="text" name="phone" value="{{ old('phone') }}" required autofocus>
                     <i class="fa fa-user" aria-hidden="true"></i>
                     <span class="errorText">
-                @if ($errors->has('phone'))
-                            <strong>{{ $errors->first('phone') }}</strong>
-                        @endif
-            </span>
+                        @if ($errors->has('phone'))
+                                    <strong>{{ $errors->first('phone') }}</strong>
+                                @endif
+                    </span>
                 </div>
 
                 <div class="inputGroup{{ $errors->has('about') ? ' has-error' : '' }}">
@@ -44,10 +44,10 @@
                     <input id="about" class="registration__about" type="text" name="about" value="{{ old('about') }}" required autofocus>
                     <i class="fa fa-user" aria-hidden="true"></i>
                     <span class="errorText">
-                @if ($errors->has('about'))
-                            <strong>{{ $errors->first('about') }}</strong>
-                        @endif
-            </span>
+                        @if ($errors->has('about'))
+                                    <strong>{{ $errors->first('about') }}</strong>
+                                @endif
+                    </span>
                 </div>
 
                 <div class="inputGroup{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -55,10 +55,10 @@
                     <input id="email" class="registration__email" type="email" name="email" value="{{ old('email') }}" required autofocus>
                     <i class="fa fa-user" aria-hidden="true"></i>
                     <span class="errorText">
-                @if ($errors->has('email'))
-                            <strong>{{ $errors->first('email') }}</strong>
-                        @endif
-            </span>
+                        @if ($errors->has('email'))
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                @endif
+                    </span>
                 </div>
 
                 <div class="inputGroup{{ $errors->has('password') ? ' has-error' : '' }}">
@@ -66,10 +66,10 @@
                     <input id="password" class="registration__pass" type="password" name="password" required>
                     <i class="fa fa-unlock-alt" aria-hidden="true"></i>
                     <span class="errorText">
-                @if ($errors->has('password'))
-                            <strong>{{ $errors->first('password') }}</strong>
-                        @endif
-            </span>
+                        @if ($errors->has('password'))
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                @endif
+                    </span>
                 </div>
 
                 <div class="inputGroup{{ $errors->has('password') ? ' has-error' : '' }}">
