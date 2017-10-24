@@ -10,8 +10,10 @@ Route::get('/login/ajax', 'Auth\\LoginController@ajaxLogin');
 Route::get('/register/ajax', 'Auth\\RegisterController@ajaxRegister');
 
 Route::group(['middleware' => 'isAdmin'], function () {
-    Route::get('/manager/user/list', 'Manager\\User@list');
-    Route::get('/manager/user/show/{id}', 'Manager\\User@show')->where('id', '[0-9]+');
+    Route::get('/manager/user/list', 'Manager\\User@list')->name('managerUserList');
+    Route::get('/manager/user/show/{userId}', 'Manager\\User@show')->where('userId', '[0-9]+')->name('managerUserShow');
+    Route::get('/manager/user/role/add/{userId}/{roleId}', 'Manager\\User@addRole')->where('userId', '[0-9]+')->where('roleId', '[0-9]+');
+    Route::get('/manager/user/role/remove/{userId}/{roleId}', 'Manager\\User@removeRole')->where('userId', '[0-9]+')->where('roleId', '[0-9]+');
     Route::get('/manager/page/list', 'Manager\\StaticPage@getList');
     Route::get('/manager/page/{id}', 'Manager\\StaticPage@getById')->where('id', '[0-9]+');
     Route::get('/manager/page/{id}/remove', 'Manager\\StaticPage@deleteById')->where('id', '[0-9]+');
