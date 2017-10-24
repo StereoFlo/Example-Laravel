@@ -81,10 +81,10 @@ class WorkController extends Controller
             }
         }
         if (!$isSaved) {
-            $request->session()->flash('addWorkResult', 'Something is wrong.');
+            $request->session()->flash('addWorkResult', __('work.addProcessError'));
             return Redirect::to('/cabinet/work/new');
         }
-        $request->session()->flash('addWorkResult', 'Added successfully!');
+        $request->session()->flash('addWorkResult', __('work.addProcessSuccess'));
         return Redirect::to('/cabinet/work');
     }
 
@@ -101,10 +101,10 @@ class WorkController extends Controller
         if (Work::getInstance()->removeById($id) && WorkImages::getInstance()->removeByWorkId($id)) {
             File::cleanDirectory($workPath);
             rmdir($workPath);
-            $request->session()->flash('addWorkResult', 'Removed successfully!');
+            $request->session()->flash('addWorkResult', __('work.addWorkRemovedSuccess'));
             return Redirect::to('/cabinet/work');
         }
-        $request->session()->flash('addWorkResult', 'Something is wrong.');
+        $request->session()->flash('addWorkResult', __('work.addWorkRemovedError'));
         return Redirect::to('/cabinet/work');
     }
 
@@ -124,7 +124,7 @@ class WorkController extends Controller
         $work = new Work();
         $work = $work->getById($id);
         if (empty($work)) {
-            abort(404, 'Work not found');
+            abort(404, __('workNotFound'));
             return []; //stub
         }
         return view('work.show', ['work' => $work]);
