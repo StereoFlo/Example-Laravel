@@ -17,7 +17,6 @@ class Work extends Migration
         Schema::create('work', function (Blueprint $table) {
             $table->increments('id');
             $table->string('workName');
-            $table->integer('likes')->default(0);
             $table->integer('userId');
             $table->text('description')->nullable();
             $table->boolean('approved')->default(false);

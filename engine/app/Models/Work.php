@@ -44,7 +44,8 @@ class Work extends Model
      */
     public function getById(int $workId): array
     {
-        $work = $this->where('id', $workId)
+        $work = $this->join('users', 'users.id', '=', 'work.userId')
+            ->where('work.id', $workId)
             ->first()
             ->toArray();
         if (empty($work)) {
