@@ -2,14 +2,14 @@
 
 namespace RecycleArt\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use RecycleArt\Models\Work;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use RecycleArt\Models\WorkImages;
-use Illuminate\Support\Facades\File;
 
 /**
  * Class WorkController

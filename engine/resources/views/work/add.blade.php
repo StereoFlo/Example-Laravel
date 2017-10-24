@@ -35,7 +35,7 @@
                 <label for="images">@lang('work.photoOfNewWork'):</label>
                 <div class="filearea">
                     <span>@lang('work.photoDescrOfNewWork')</span>
-                    <input type="file" name="file" value="{{ old('images') }}" multiple required>
+                    <input type="file" name="images[]" value="{{ old('images') }}" multiple required>
                 </div>
                 <span class="errorText">
                     @if ($errors->has('images'))
