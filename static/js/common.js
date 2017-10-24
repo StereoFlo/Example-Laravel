@@ -7,6 +7,7 @@ $(document).ready(function () {
             });
         })
         .fail(function (data) {
+            //todo
         });
 
     $.get('/register/ajax')
@@ -18,7 +19,7 @@ $(document).ready(function () {
             });
         })
         .fail(function (data) {
-            console.log(data);
+            //todo
         });
 
     $(".side-title a").click(
@@ -60,27 +61,30 @@ $(document).ready(function () {
         scrollEasing: "easeInOutSine"
     });
     $('.menu__btn').on('click', function () {
+        var navSelector = $('.nav');
         if ($(window).width() < 1000) {
             var headerHeight = $('.header').innerHeight();
-            $('.nav').css('top', headerHeight);
+            navSelector.css('top', headerHeight);
         }
-        $('.nav').slideToggle();
+        navSelector.slideToggle();
         console.log(headerHeight);
     });
 });
 
 $(document).on('click', '#ajaxLoginButton', function () {
-    var ajaxFromLogin = $('#ajaxLogin').serialize();
-    var url = $('#ajaxLogin').attr('action');
-    $.post(url, ajaxFromLogin)
+    var ajaxLoginSel = $('#ajaxLogin');
+    var loginFormsSel = $('.logIn .forms');
+    var formData = ajaxLoginSel.serialize();
+    var url = ajaxLoginSel.attr('action');
+    $.post(url, formData)
         .done(function (data) {
-            console.log(data)
+            console.log(data);
             if (data.auth === true) {
                 $.get('/login/ajax')
                     .done(function (data) {
                         $('.logIn').addClass('hidden');
-                        $('.logIn .forms').empty();
-                        $('.logIn .forms').append(data);
+                        loginFormsSel.empty();
+                        loginFormsSel.append(data);
                         $('.signIn__toRegisterBtn').click(function () {
                             $('.forms form').toggle(600);
                         });
@@ -95,12 +99,14 @@ $(document).on('click', '#ajaxLoginButton', function () {
 });
 
 $(document).on('click', '#ajaxRegistrationButton', function () {
-    var ajaxFromLogin = $('#ajaxReg').serialize();
-    var url = $('#ajaxReg').attr('action');
-    $.post(url, ajaxFromLogin)
+    var ajaxLoginSel = $('#ajaxReg');
+    var formData = ajaxLoginSel.serialize();
+    var url = ajaxLoginSel.attr('action');
+    $.post(url, formData)
         .done(function (data) {
             console.log(data)
         }).fail(function (data) {
-        console.log(data)
+            //todo
+            console.log(data)
     });
 });
