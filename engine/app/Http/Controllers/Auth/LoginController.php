@@ -5,7 +5,6 @@ namespace RecycleArt\Http\Controllers\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Validation\ValidationException;
 use RecycleArt\Http\Controllers\Controller;
 
@@ -125,7 +124,7 @@ class LoginController extends Controller
 
         $this->clearLoginAttempts($request);
 
-        return $this->authenticated($request, $this->guard()->user()) ?: redirect()->intended($this->redirectPath());
+        return $this->authenticated($request, $this->guard()->user());
     }
 
     /**
@@ -144,6 +143,7 @@ class LoginController extends Controller
                 'user' => $user,
             ]);
         }
+        return redirect()->intended($this->redirectPath());
     }
 
     /**
