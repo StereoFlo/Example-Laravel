@@ -39,10 +39,10 @@
         </div>
 
         <div class="signIn__buttons">
-            <a href="#" class="signIn__forgot">забыл пароль :(</a>
+            <a href="{{route('password.request')}}" class="signIn__forgot">забыл пароль :(</a>
             <button id="ajaxLoginButton" type="button" name="button" class="button signIn__enter">войти</button>
         </div>
-        <a href="#" id="toReg" class="formToggle">Регистрация >></a>
+        <a href="#" id="toReg" class="formToggle">Регистрация</a>
 
     </form>
 @endif

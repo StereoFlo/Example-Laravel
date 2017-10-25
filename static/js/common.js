@@ -104,7 +104,7 @@ $(document).on('click', '#ajaxLoginButton', function () {
 });
 
 $(document).on('click', '#ajaxRegistrationButton', function () {
-    var ajaxLoginSel = $('#ajaxReg');
+    var ajaxLoginSel = $('#ajaxRegistration');
     var formData = ajaxLoginSel.serialize();
     var url = ajaxLoginSel.attr('action');
     $.post(url, formData)

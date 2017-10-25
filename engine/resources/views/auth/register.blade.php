@@ -83,7 +83,7 @@
                     <button id="ajaxRegistrationButton" type="button" name="button" class="button registration__enter">регистрация</button>
                 </div>
 
-                <a href="{{ route('login') }}" class="formToggle">Вход >></a>
+                <a href="{{ route('login') }}" class="formToggle">Вход</a>
 
             </form>
         </div>

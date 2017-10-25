@@ -61,8 +61,8 @@ gulp.task('css-libs', ['sass'], function() {
 
 gulp.task('watch', ['css-libs', 'scripts'], function() {
   gulp.watch('static/sass/**/*.scss', ['sass']); // Наблюдение за sass файлами в папке sass
-  gulp.watch('static/js/**/*.js', ['myScripts']);   // Наблюдение за JS файлами в папке js
-  gulp.watch('static/*.html', browserSync.reload);
+  // gulp.watch('static/js/**/*.js', ['myScripts']);   // Наблюдение за JS файлами в папке js
+  // gulp.watch('static/*.html', browserSync.reload);
 });
 
 gulp.task('clean', function() {

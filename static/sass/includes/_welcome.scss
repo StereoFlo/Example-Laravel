@@ -3,7 +3,7 @@
   background: url("../images/main.jpg") no-repeat center top;
   background-size: cover;
   position: relative;
-  padding: 150px 15px 0;
+  padding: 250px 15px 0;
   @include max-screen($break_xs) {
     padding-top: 120px;
   }

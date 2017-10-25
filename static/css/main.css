@@ -2607,7 +2607,7 @@ template {
   background: url("../images/main.jpg") no-repeat center top;
   background-size: cover;
   position: relative;
-  padding: 150px 15px 0; }
+  padding: 250px 15px 0; }
   @media only screen and (max-width: 480px) {
     .welcome {
       padding-top: 120px; } }
@@ -2852,25 +2852,45 @@ template {
   .item:hover .content {
     opacity: 1; }
 
-.userRegistration {
+.profile {
   background: #f3f1f1;
   width: 100%;
   height: 100%; }
 
-.registrationForm {
+.profileForm {
   max-width: 800px;
   margin: 0 auto;
   margin-bottom: 30px;
   -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
           box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
-  .registrationForm .inputGroup input {
+  .profileForm .inputGroup input {
     height: 35px; }
-  .registrationForm button {
+  .profileForm button {
     font-size: 1.2em;
     display: block;
     margin: 30px auto;
     background: #e83b3a; }
-    .registrationForm button:hover {
+    .profileForm button:hover {
+      background: #bf1716; }
+
+.resetLink {
+  width: 100%;
+  height: 100%; }
+
+.resetLinkForm {
+  max-width: 330px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
+  .resetLinkForm .inputGroup input {
+    height: 35px; }
+  .resetLinkForm button {
+    font-size: 1.2em;
+    display: block;
+    margin: 0 auto 30px;
+    background: #e83b3a; }
+    .resetLinkForm button:hover {
       background: #bf1716; }
 
 .workAdd {
@@ -3382,7 +3402,8 @@ figure {
 
 .form {
   font-family: 'Geometria', sans-serif;
-  padding: 30px 30px; }
+  padding: 30px 30px;
+  margin-bottom: 100px; }
   .form__title {
     text-align: center; }
     .form__title h1 {
@@ -3406,17 +3427,20 @@ figure {
   .form .errorText {
     display: block;
     color: #FF4136;
-    font-weight: bold;
     height: 25px;
     line-height: 1;
-    opacity: 0; }
+    opacity: 0;
+    font-size: 0.7em;
+    padding-top: 2px; }
   .form label {
-    display: block; }
+    display: block;
+    color: #6b6b6b;
+    font-size: 0.9em; }
   .form input, .form textarea {
     width: 100%;
     background: #FFFFFF;
     border: 1px solid #ccd3d7;
-    padding-left: 10px;
+    padding: 0 10px;
     -webkit-border-radius: 2px;
             border-radius: 2px;
     vertical-align: middle; }
@@ -3432,6 +3456,9 @@ figure {
     opacity: 0; }
     .form input[type="file"]:hover, .form input[type="checkbox"]:hover {
       cursor: pointer; }
+
+.has-error .errorText {
+  opacity: 1; }
 
 .button {
   font-family: 'Geometria', sans-serif;

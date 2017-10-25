@@ -32,7 +32,7 @@
                 <a href="{{ route('password.request') }}" class="signIn__forgot">забыл пароль :(</a>
                 <button type="submit" name="button" class="button signIn__enter">войти</button>
             </div>
-            <a href="{{ route('register') }}" class="formToggle">Регистрация >></a>
+            <a href="{{ route('register') }}" class="formToggle">Регистрация</a>
 
         </form>
     </div>

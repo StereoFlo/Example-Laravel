@@ -9,7 +9,8 @@
 @import "./includes/header";
 @import "./includes/welcome";
 @import "./includes/products";
-@import "./includes/userRegistration";
+@import "includes/profile";
+@import "includes/resetLink";
 @import "./includes/workAdd";
 @import "./includes/work";
 @import "./includes/auth";
@@ -67,6 +68,7 @@ figure {
 .form {
   font-family: 'Geometria', sans-serif;
   padding: 30px 30px;
+  margin-bottom: 100px;
   &__title {
     text-align: center;
     h1 {
@@ -92,19 +94,22 @@ figure {
   .errorText {
     display: block;
     color: $red;
-    font-weight: bold;
     height: 25px;
     line-height: 1;
     opacity: 0;
+    font-size: 0.7em;
+    padding-top: 2px;
   }
   label {
     display: block;
+    color: #6b6b6b;
+    font-size: 0.9em;
   }
   input, textarea {
     width: 100%;
     background: $white;
     border: 1px solid $border;
-    padding-left: 10px;
+    padding: 0 10px;
     border-radius: 2px;
     vertical-align: middle;
   }
@@ -122,6 +127,11 @@ figure {
     &:hover {
       cursor: pointer;
     }
+  }
+}
+.has-error {
+  .errorText{
+    opacity: 1;
   }
 }
 

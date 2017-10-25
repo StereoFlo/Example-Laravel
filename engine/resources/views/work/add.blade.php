@@ -5,7 +5,7 @@
 <section class="workAdd">
     <div class="container">
         {{ session('addWorkResult') }}
-        <form method="post" action="{{ route('workAddProcess') }}" enctype="multipart/form-data" class="form registrationForm">
+        <form method="post" action="{{ route('workAddProcess') }}" enctype="multipart/form-data" class="form">
             {{ csrf_field() }}
             <div class="form__title">
                 <h1>@lang('work.new')</h1>

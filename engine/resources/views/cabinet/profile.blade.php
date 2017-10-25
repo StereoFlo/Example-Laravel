@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="userRegistration">
+<section class="profile">
     <div class="container">
         {{ session('updateResult') }}
-        <form method="POST" action="{{ route('profileUpdate') }}" enctype="multipart/form-data" class="form registrationForm">
+        <form method="POST" action="{{ route('profileUpdate') }}" enctype="multipart/form-data" class="form profileForm">
             {{ csrf_field() }}
 
             <div class="inputGroup{{ $errors->has('name') ? ' has-error' : '' }}">
