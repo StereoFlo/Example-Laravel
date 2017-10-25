@@ -33,10 +33,14 @@ Route::middleware('auth')->group(function () {
 
 // for author
 Route::middleware('auth')->group(function () {
-    Route::get('/cabinet/work', 'WorkController@workList')->name('workList');
-    Route::get('/cabinet/work/new', 'WorkController@workAdd')->name('workAdd');
-    Route::post('/cabinet/work/new/process', 'WorkController@workAddProcess')->name('workAddProcess');
-    Route::get('/cabinet/work/{id}/remove', 'WorkController@workRemove')->name('workRemove');
-    Route::get('/cabinet/work/{id}/edit', 'WorkController@workEdit')->name('workEdit');
-    Route::get('/cabinet/work/{id}', 'WorkController@workShow')->name('workShow');
+    Route::get('/cabinet/work', 'WorkController@getList')->name('workList');
+    Route::get('/cabinet/work/new', 'WorkController@add')->name('workAdd');
+    Route::post('/cabinet/work/new/process', 'WorkController@addProcess')->name('workAddProcess');
+    Route::get('/cabinet/work/{id}/remove', 'WorkController@remove')->name('workRemove');
+    Route::get('/cabinet/work/{id}/edit', 'WorkController@edit')->name('workEdit');
+    Route::get('/cabinet/work/{workId}/edit/removeImage/{imageId}', 'WorkController@removeImageFromWork')
+        ->where('workId', '[0-9]+')
+        ->where('imageId', '[0-9]+')
+        ->name('imageDeleteFromWork');
+    Route::get('/cabinet/work/{id}', 'WorkController@show')->name('workShow');
 });
