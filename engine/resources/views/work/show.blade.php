@@ -5,7 +5,7 @@
         <div class="container">
             <div class="work__header flex">
                 <h2 class="work__title">{{ $work['workName']  }}</h2>
-                <a href="#" class="work__author">by {{$work['userId']}}</a>
+                <a href="#" class="work__author">by {{$work['name']}}</a>
             </div>
             <div class="work__item">
                 <div class="work__slider">
@@ -29,7 +29,7 @@
                 <div class="work__counts">
                     <div class="work__likes">
                         <a href="#"></a>
-                        <span>{{$work['likes']}}</span>
+                        <span>0</span>
                     </div>
                     <div class="work__commentsNum">
                         <a href="#"></a>

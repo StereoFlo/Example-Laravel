@@ -67,11 +67,17 @@ class CabinetController extends Controller
     }
 
     /**
+     * @param Request $request
+     *
      * @return int
      */
-    public function removeAvatar()
+    public function removeAvatar(Request $request)
     {
-        $isDeleted = User::getInstance()->removeAvatar();
-        return (int)$isDeleted;
+        if (User::getInstance()->removeAvatar()) {
+            $request->session()->flash('updateResult', __('cabinet.AvatarSuccessRemoved'));
+            return Redirect::to('/cabinet/profile');
+        }
+        $request->session()->flash('updateResult', __('cabinet.AvatarErrorRemoved'));
+        return Redirect::to('/cabinet/profile');
     }
 }

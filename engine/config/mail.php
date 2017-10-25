@@ -120,4 +120,6 @@ return [
         ],
     ],
 
+    'webmaster' => env('WEBMASTER_ADDRESS', 'mail@mail.host'),
+
 ];
