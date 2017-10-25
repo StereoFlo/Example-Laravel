@@ -39,8 +39,9 @@ class Handler extends ExceptionHandler
     {
         $mess = $this->buildMessage($exception);
         Mail::raw($mess, function ($message) {
+            $server = isset($_SERVER['SERVER_NAME']) ?: '';
             $message->to(config('mail.webmaster'));
-            $message->subject(config('app.name') . ' Was an error');
+            $message->subject(config('app.name') . ' Was an error ' . $server);
         });
         parent::report($exception);
     }
@@ -66,7 +67,8 @@ class Handler extends ExceptionHandler
     {
         $mess = 'Was an error: ' . $exception->getMessage() . PHP_EOL;
         $mess .= 'File: ' . $exception->getFile() . ' Line: ' . $exception->getLine() . ' Code: ' . $exception->getCode() . PHP_EOL . PHP_EOL;
-        $mess .= 'Full trace: ' . PHP_EOL . $exception->getTraceAsString();
+        $mess .= 'Full trace: ' . PHP_EOL . $exception->getTraceAsString() . PHP_EOL . PHP_EOL;
+        $mess .= 'Server: ' . print_r($_SERVER, true) . PHP_EOL;
         return $mess;
     }
 }
