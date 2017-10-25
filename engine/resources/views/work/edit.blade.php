@@ -56,6 +56,7 @@
             </div>
 
             <button type="submit" name="button" class="button">@lang('work.buttonOfNewWork')</button>
+            <input type="hidden" name="workId" value="{{ $work['id'] }}">
         </form>
     </div>
 </section>

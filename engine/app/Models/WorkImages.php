@@ -3,6 +3,8 @@
 namespace RecycleArt\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 /**
@@ -62,9 +64,37 @@ class WorkImages extends Model
             $path = public_path($image->link);
             $isSaved = File::delete($path) && $this->where('id', $imageId)->where('workId', $workId)->delete();
             if ($image->isDefault) {
-                $minId = $this->select('id')->where('workId', $workId)->min('id')->get();
-                $isSaved = $this->where('id', $minId->id)->update(['isDefault' => true]);
+                $minId = $this->select('id')->where('workId', $workId)->min('id');
+                $isSaved = $this->where('id', $minId)->update(['isDefault' => true]);
             }
+        }
+        return $isSaved;
+    }
+
+    /**
+     * @param UploadedFile[] $files
+     * @param int $workId
+     *
+     * @return bool
+     */
+    public function addImamges(array $files, $workId): bool
+    {
+        $isSaved = false;
+        $user = Auth::user();
+        if (empty($files)) {
+            return false;
+        }
+        foreach ($files as $key => $file) {
+            $work = new self();
+            $path = \public_path('uploads/' . $user->id . '/work/' . $workId);
+            $newImageName = \md5(\time() . $key) . '.' . \strtolower($file->getClientOriginalExtension());
+            $file->move($path, $newImageName);
+            $work->workId = $workId;
+            if (0 === $key) {
+                $work->isDefault = true;
+            }
+            $work->link = '/uploads/' . $user->id . '/work/' . $workId . '/' . $newImageName;
+            $isSaved = $work->save();
         }
         return $isSaved;
     }

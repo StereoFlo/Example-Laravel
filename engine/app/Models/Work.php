@@ -70,4 +70,26 @@ class Work extends Model
         return $this->where('id', $workId)->delete();
     }
 
+    /**
+     * @param int   $workId
+     * @param array $data
+     *
+     * @return int
+     */
+    public function updateOrSave(int $workId = 0, array $data): int
+    {
+        $work = null;
+        if (!empty($workId)) {
+            $work = self::find($workId);
+        }
+        if (empty($work)) {
+            $work = new self();
+        }
+        $work->workName = $data['workName'];
+        $work->description = $data['description'];
+        $work->userId = $data['userId'];
+        $work->save();
+        return $work->id ?: 0;
+    }
+
 }
