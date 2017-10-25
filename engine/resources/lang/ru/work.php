@@ -7,6 +7,7 @@ return [
     'addWorkRemovedError'   => 'Что-то пошло не так. Попробуйте позже.',
     'workNotFound'          => 'Работа не найдена',
     'new'                   => 'Добавление новой работы',
+    'edit'                  => 'Изменение работы',
     'nameOfNewWork'         => 'Название',
     'descriptionOfNewWork'  => 'Описание',
     'photoOfNewWork'        => 'Фото',

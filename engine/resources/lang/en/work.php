@@ -1,9 +1,16 @@
 <?php
 
 return [
-    'addProcessError'       => 'Something is wrong. Please try again later',
-    'addProcessSuccess'     => 'The work added successfully! Pleas wait for approval it by administrator',
-    'addWorkRemovedSuccess' => 'The work has bee deleted!',
-    'addWorkRemovedError'   => 'Something is wrong. Please try again later',
-    'workNotFound'          => 'The work is not found',
+    'addProcessError'       => 'Что-то пошло не так. Попробуйте позже.',
+    'addProcessSuccess'     => 'Работа добавлена успешно! Как только ее проверит администратор, она станет доступна на сайте.',
+    'addWorkRemovedSuccess' => 'Работа удалена успешно!',
+    'addWorkRemovedError'   => 'Что-то пошло не так. Попробуйте позже.',
+    'workNotFound'          => 'Работа не найдена',
+    'new'                   => 'Добавление новой работы',
+    'edit'                  => 'Изменение работы',
+    'nameOfNewWork'         => 'Название',
+    'descriptionOfNewWork'  => 'Описание',
+    'photoOfNewWork'        => 'Фото',
+    'buttonOfNewWork'       => 'Добавить',
+    'photoDescrOfNewWork'   => 'Перенесите файлы сюда или нажмите на эту зону!',
 ];

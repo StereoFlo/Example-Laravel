@@ -1,6 +1,8 @@
 <?php
 
 return [
-    'accountUpdated'     => 'You profile has bee updated',
-    'passwordMatchError' => 'Passwords did not match',
+    'accountUpdated'       => 'Ваш профиль успешно обновлен',
+    'passwordMatchError'   => 'Пароли не совпадают',
+    'AvatarSuccessRemoved' => 'Ваш аватар успешно обновлен!',
+    'AvatarErrorRemoved'   => 'Во время удаления аватара произошла ошибка',
 ];
