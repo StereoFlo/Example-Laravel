@@ -26,31 +26,25 @@
             </div>
             <div class="col-md-8 col-md-offset-0">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Зарегистрированные пользователи</div>
+                    <div class="panel-heading">Новости (<a href="{{ route('newsNew') }}">Добавить</a>)</div>
                     <div class="panel-body">
-                        @if (empty($users))
-                        <p>Статических страниц пока нет.</p>
+                        <p>{{ session('newsFlash') }}</p>
+                        @if (empty($news))
+                        <p>Новостей пока нет</p>
                         @else
                         <table class="table table-hover table-responsive">
                             <tr>
-                                <td>ID1</td>
-                                <td>Имя</td>
-                                <td>email</td>
-                                <td>Ативен</td>
+                                <td>ID</td>
+                                <td>Название</td>
+                                <td>Котент</td>
+                                <td>Действия</td>
                             </tr>
-                            @foreach ($pages as $page)
+                            @foreach ($news as $item)
                                 <tr>
-                                    <td>{{ $user['id'] }}</td>
-                                    <td>{{ $user['name'] }}</td>
-                                    <td>{{ $user['email'] }}</td>
-                                    <td>
-                                        @if(empty($user['isActive']))
-                                            не активен
-                                        @else
-                                            активен
-                                        @endif
-                                    </td>
-                                    <td><a href="{{ url('manager/user/show/' . $user['id']) }}">show</a> </td>
+                                    <td>{{ $item['id'] }}</td>
+                                    <td>{{ $item['name'] }}</td>
+                                    <td>{{ $item['content'] }}</td>
+                                    <td><a href="{{ route('newsUpdate', ['id' => $item['id']]) }}">Изменить</a> | <a href="{{ route('newsDelete', ['id' => $item['id']]) }}">Удалить</a></td>
                                 </tr>
                             @endforeach
                         </table>
