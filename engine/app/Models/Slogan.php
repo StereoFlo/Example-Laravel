@@ -19,15 +19,18 @@ class Slogan extends Model
     protected $fillable = ['content'];
 
     /**
-     * @return array
+     * @return string
      */
-    public function getSlogan(): array
+    public function getSlogan(): string
     {
         $getSlogan = $this->where('id', self::DEFAULT_SLOGAN_ID)->first();
         if (empty($getSlogan)) {
-            return [];
+            return '';
         }
-        return $getSlogan->toArray();
+        if (!isset($getSlogan['content'])) {
+            return '';
+        }
+        return $getSlogan['content'];
     }
 
     /**

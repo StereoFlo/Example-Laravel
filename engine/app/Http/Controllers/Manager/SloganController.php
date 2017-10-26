@@ -19,7 +19,7 @@ class SloganController extends Controller
     public function index()
     {
         $slogan = (new SloganModel())->getSlogan();
-        return view('manager.slogan.form', ['content' => $slogan['content']]);
+        return view('manager.slogan.form', ['content' => $slogan]);
     }
 
     public function update(Request $request)

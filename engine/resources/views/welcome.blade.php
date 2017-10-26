@@ -8,7 +8,7 @@
                 <img src="{{ url('static/images/logo.png') }}" alt="Logo" class="sloganShow">
                 <div class="slogan">
                     <p class="slogan__item">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aut consequuntur ea eveniet! Adipisci assumenda corporis cumque debitis dolor doloremque eos excepturi fuga ipsa laudantium neque nostrum numquam odit pariatur quidem, repellendus sunt suscipit tempora tenetur vitae voluptas voluptates voluptatum? Consectetur distinctio ea, itaque obcaecati provident vel voluptatibus! Excepturi odit quidem similique voluptatem! Ab, architecto at cum cupiditate deserunt dignissimos, dolor hic illo modi nam nesciunt omnis optio quaerat reprehenderit ut. Dolore, odit praesentium. Autem cupiditate, dolorem dolores enim est id modi nulla numquam possimus quam quas quasi, quisquam recusandae sint sit soluta, veritatis voluptatum? Beatae consequatur nesciunt quae repellat.
+                        {{ $slogan }}
                     </p>
                 </div>
                 <div class="news">
