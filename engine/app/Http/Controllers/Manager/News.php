@@ -82,6 +82,7 @@ class News extends Controller
     public function delete(Request $request, int $id)
     {
         $request->session()->flash('newsFlash', 'Успешно удалено!');
+        $this->newsModel->deleteById($id);
         return Redirect::to(route('newsList'));
     }
 }
