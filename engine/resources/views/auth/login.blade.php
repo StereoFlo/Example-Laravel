@@ -2,6 +2,11 @@
 @section('content')
 <section class="auth">
     <div class="container">
+
+        <div class="sectionTitle">
+            <h2>Авторизация</h2>
+        </div>
+
         <form class="signIn signIn_dark" method="POST" action="{{ route('login') }}">
             {{ csrf_field() }}
 

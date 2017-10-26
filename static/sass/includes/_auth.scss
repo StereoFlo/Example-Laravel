@@ -4,17 +4,17 @@
   .signIn {
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     padding: 30px;
-    width: 330px;
+    width: 430px;
     margin: 0 auto 60px;
   }
 }
 .register {
   width: 100%;
   height: 100%;
-  .registration {
+  .registrationForm {
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     padding: 30px;
-    width: 330px;
+    width: 430px;
     margin: 0 auto 60px;
   }
 }
@@ -44,7 +44,7 @@
 .forms {
   margin: auto;
 }
-.signIn, .registration {
+.signIn, .registrationForm {
   width: 330px;
   label {
     color: $white;
@@ -116,12 +116,12 @@
     }
   }
 }
-.registration {
+.registrationForm {
   &__buttons {
     justify-content: center;
   }
 }
-.signIn_dark, .registration_dark {
+.signIn_dark, .registrationForm_dark {
   label {
     color: $black;
   }

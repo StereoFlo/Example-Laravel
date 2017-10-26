@@ -4,6 +4,10 @@
     <section class="resetLink">
         <div class="container">
 
+            <div class="sectionTitle">
+                <h2>Восстановление пароля</h2>
+            </div>
+
             @if (session('status'))
                 <div class="alert alert-success">
                     {{ session('status') }}

@@ -3,6 +3,11 @@
 @section('content')
 <section class="profile">
     <div class="container">
+
+        <div class="sectionTitle">
+            <h2>Обновление профиля</h2>
+        </div>
+
         {{ session('updateResult') }}
         <form method="POST" action="{{ route('profileUpdate') }}" enctype="multipart/form-data" class="form profileForm">
             {{ csrf_field() }}
@@ -83,6 +88,7 @@
                     <span>Перенесите файл сюда или нажмите на эту зону!</span>
                     <input type="file" name="avatar" value="{{ old('avatar') }}">
                 </div>
+                <div class="fileareaPreview"></div>
                 <span class="errorText">
                     @if ($errors->has('avatar'))
                         <strong>{{ $errors->first('avatar') }}</strong>
@@ -90,11 +96,14 @@
                 </span>
             </div>
             @else
-                <img src="{{ Auth::user()->avatar }}">
-                <a href="{{ route('removeAvatar') }}">delete</a>
+                <label for="">аватар:</label>
+                <div id="avatar" class="avatar">
+                    <img src="{{ Auth::user()->avatar }}">
+                    <a href="{{ route('removeAvatar') }} " class="button">удалить</a>
+                </div>
             @endif
 
-            <button type="submit" name="button" class="button">регистрация</button>
+            <button type="submit" name="button" class="button">обновить</button>
         </form>
     </div>
 </section>

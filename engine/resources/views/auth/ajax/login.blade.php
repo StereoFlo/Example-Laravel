@@ -1,6 +1,10 @@
 @if(Auth::check())
     <div class="entered">
-        <img src="{{ Auth::user()->avatar }}" class="entered__pic" alt="">
+        @if (empty(Auth::user()->avatar))
+            <img src="{{url('static/images/user.jpg')}}" class="entered__pic" alt="">
+        @else
+            <img src="{{ Auth::user()->avatar }}" class="entered__pic" alt="">
+        @endif
         <p class="entered__name">{{ Auth::user()->email }}</p>
         <a href="{{ route('profileForm') }}" class="entered__link">Кабинет</a>
         <button class="button logoutBtn" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Выйти</button>

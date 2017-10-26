@@ -2482,6 +2482,38 @@ template {
   overflow: visible;
   clip: auto; }
 
+@font-face {
+  font-family: 'Geometria';
+  src: url("../fonts/geometria-bold.eot");
+  src: url("../fonts/geometria-bold.eot?#iefix") format("embedded-opentype"), url("../fonts/geometria-bold.woff2") format("woff2"), url("../fonts/geometria-bold.woff") format("woff"), url("../fonts/geometria-bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Geometria';
+  src: url("../fonts/geometria.eot");
+  src: url("../fonts/geometria.eot?#iefix") format("embedded-opentype"), url("../fonts/geometria.woff2") format("woff2"), url("../fonts/geometria.woff") format("woff"), url("../fonts/geometria.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'lato';
+  src: url("../fonts/lato-bold-webfont.woff2") format("woff2"), url("../fonts/lato-bold-webfont.woff") format("woff");
+  font-weight: bold;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'lato';
+  src: url("../fonts/lato-regular-webfont.woff2") format("woff2"), url("../fonts/lato-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'bandera';
+  src: url("../fonts/9087-webfont.woff2") format("woff2"), url("../fonts/9087-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal; }
+
 .header {
   position: absolute;
   top: 0;
@@ -2591,7 +2623,7 @@ template {
       -ms-flex-order: 4;
           order: 4; }
   .user__btn {
-    font-size: 1.2em;
+    font-size: 1.6em;
     text-decoration: none;
     display: inline-block;
     -webkit-transition: 250ms;
@@ -2865,6 +2897,23 @@ template {
           box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
   .profileForm .inputGroup input {
     height: 35px; }
+  .profileForm .avatar {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center; }
+    .profileForm .avatar img {
+      max-width: 200px; }
+    .profileForm .avatar a {
+      background: #0074D9;
+      text-decoration: none;
+      margin: 0 15px; }
+      .profileForm .avatar a:hover {
+        background: #004b8d; }
   .profileForm button {
     font-size: 1.2em;
     display: block;
@@ -2897,6 +2946,22 @@ template {
   background: #f3f1f1;
   width: 100%;
   height: 100%; }
+
+.workAddForm {
+  max-width: 800px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
+  .workAddForm .inputGroup input {
+    height: 35px; }
+  .workAddForm button {
+    font-size: 1.2em;
+    display: block;
+    margin: 30px auto;
+    background: #e83b3a; }
+    .workAddForm button:hover {
+      background: #bf1716; }
 
 .work {
   width: 100%;
@@ -3096,17 +3161,17 @@ template {
     -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     padding: 30px;
-    width: 330px;
+    width: 430px;
     margin: 0 auto 60px; }
 
 .register {
   width: 100%;
   height: 100%; }
-  .register .registration {
+  .register .registrationForm {
     -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     padding: 30px;
-    width: 330px;
+    width: 430px;
     margin: 0 auto 60px; }
 
 .logIn {
@@ -3138,15 +3203,15 @@ template {
 .forms {
   margin: auto; }
 
-.signIn, .registration {
+.signIn, .registrationForm {
   width: 330px; }
-  .signIn label, .registration label {
+  .signIn label, .registrationForm label {
     color: #FFFFFF; }
-  .signIn label[for="remember"], .registration label[for="remember"] {
+  .signIn label[for="remember"], .registrationForm label[for="remember"] {
     margin-right: 10px; }
-  .signIn .inputGroup, .registration .inputGroup {
+  .signIn .inputGroup, .registrationForm .inputGroup {
     position: relative; }
-  .signIn input:not([type="checkbox"]), .registration input:not([type="checkbox"]) {
+  .signIn input:not([type="checkbox"]), .registrationForm input:not([type="checkbox"]) {
     color: #FFFFFF;
     font-size: 1.2em;
     display: block;
@@ -3157,20 +3222,20 @@ template {
     border: none;
     border-bottom: 1px dotted #ccd3d7;
     padding-right: 35px; }
-  .signIn .fa, .registration .fa {
+  .signIn .fa, .registrationForm .fa {
     color: #FFFFFF;
     position: absolute;
     right: 10px;
     top: 21px;
     font-size: 20px; }
-  .signIn .errorText, .registration .errorText {
+  .signIn .errorText, .registrationForm .errorText {
     display: block;
     color: #FF4136;
     font-weight: bold;
     height: 25px;
     line-height: 1;
     opacity: 0; }
-  .signIn__buttons, .registration__buttons {
+  .signIn__buttons, .registrationForm__buttons {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -3184,46 +3249,46 @@ template {
         -ms-flex-align: center;
             align-items: center;
     margin-top: 20px; }
-  .signIn__enter, .registration__enter {
+  .signIn__enter, .registrationForm__enter {
     background: #4a5281;
     font-size: 1.2em;
     outline: none; }
-    .signIn__enter:hover, .registration__enter:hover {
+    .signIn__enter:hover, .registrationForm__enter:hover {
       background: #2e3350; }
-  .signIn .formToggle, .registration .formToggle {
+  .signIn .formToggle, .registrationForm .formToggle {
     color: #FFFFFF;
     font-size: 1.2em;
     display: block;
     margin: 30px auto;
     text-align: center; }
-    .signIn .formToggle:hover, .registration .formToggle:hover {
+    .signIn .formToggle:hover, .registrationForm .formToggle:hover {
       text-decoration: none; }
-  .signIn__forgot, .registration__forgot {
+  .signIn__forgot, .registrationForm__forgot {
     color: #0089ef;
     text-decoration: underline;
     -webkit-align-self: flex-end;
         -ms-flex-item-align: end;
             align-self: flex-end; }
-    .signIn__forgot:hover, .registration__forgot:hover {
+    .signIn__forgot:hover, .registrationForm__forgot:hover {
       text-decoration: none; }
 
-.registration__buttons {
+.registrationForm__buttons {
   -webkit-box-pack: center;
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center; }
 
-.signIn_dark label, .registration_dark label {
+.signIn_dark label, .registrationForm_dark label {
   color: #111111; }
 
-.signIn_dark input:not([type="checkbox"]), .registration_dark input:not([type="checkbox"]) {
+.signIn_dark input:not([type="checkbox"]), .registrationForm_dark input:not([type="checkbox"]) {
   color: #111111;
   border-color: #111111; }
 
-.signIn_dark .fa, .registration_dark .fa {
+.signIn_dark .fa, .registrationForm_dark .fa {
   color: #111111; }
 
-.signIn_dark .formToggle, .registration_dark .formToggle {
+.signIn_dark .formToggle, .registrationForm_dark .formToggle {
   color: #111111; }
 
 .entered {
@@ -3350,6 +3415,7 @@ body, html {
   font-family: 'Geometria', sans-serif;
   position: relative;
   font-size: 16px;
+  color: #111111;
   width: 100%;
   height: 100%; }
   @media only screen and (max-width: 480px) {
@@ -3384,7 +3450,7 @@ figure {
       -ms-flex-positive: 1;
           flex-grow: 1;
   position: relative;
-  padding-top: 200px; }
+  padding-top: 150px; }
   @media only screen and (max-width: 320px) {
     .main {
       padding-top: 100px; } }
@@ -3399,6 +3465,19 @@ figure {
 
 .hidden {
   display: none; }
+
+.sectionTitle {
+  margin-bottom: 60px; }
+  .sectionTitle h2 {
+    text-align: center;
+    margin: 0; }
+    .sectionTitle h2:after {
+      width: 50px;
+      height: 3px;
+      background: #f9c100;
+      content: " ";
+      display: block;
+      margin: 11px auto; }
 
 .form {
   font-family: 'Geometria', sans-serif;
@@ -3420,10 +3499,37 @@ figure {
     position: relative;
     outline: none;
     border: 3px dashed #ccd3d7; }
+    .form .filearea:hover {
+      cursor: pointer;
+      border-color: #111111;
+      background: rgba(255, 255, 255, 0.9); }
+    .form .filearea:hover span {
+      color: #111111; }
     .form .filearea span {
       color: #ccd3d7;
       font-weight: bold;
       margin: auto; }
+  .form .haveFile {
+    border-color: #111111; }
+    .form .haveFile span {
+      color: #111111; }
+  .form .fileareaPreview {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin: 0 -15px; }
+    .form .fileareaPreview img {
+      max-width: 150px;
+      height: auto;
+      margin: 15px; }
   .form .errorText {
     display: block;
     color: #FF4136;

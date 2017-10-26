@@ -4,12 +4,14 @@
 
 <section class="workAdd">
     <div class="container">
+
+        <div class="sectionTitle">
+            <h2>@lang('work.edit')</h2>
+        </div>
+
         {{ session('results') }}
         <form method="post" action="{{ route('workAddProcess') }}" enctype="multipart/form-data" class="form registrationForm">
             {{ csrf_field() }}
-            <div class="form__title">
-                <h1>@lang('work.edit')</h1>
-            </div>
 
             <div class="inputGroup{{ $errors->has('workName') ? ' has-error' : '' }}">
                 <label for="workName">@lang('work.nameOfNewWork'):</label>

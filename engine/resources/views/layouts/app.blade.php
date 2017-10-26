@@ -38,8 +38,8 @@
                     </nav>
                     <div class="user">
                         <a href="#" class="user__btn">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                            <!-- <i class="fa fa-user-circle-o" aria-hidden="true"></i> -->
+                            {{--<i class="fa fa-user" aria-hidden="true"></i>--}}
+                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                             <!-- <span>вход</span> -->
                         </a>
                     </div>

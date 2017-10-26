@@ -74,6 +74,37 @@ $(document).ready(function () {
         navSelector.slideToggle();
         console.log(headerHeight);
     });
+
+    //ImagesUploadPreview
+
+    var imagesPreview = function(input, placeToInsertImagePreview) {
+
+        if (input.files) {
+            var filesAmount = input.files.length;
+
+
+            for (i = 0; i < filesAmount; i++) {
+                var reader = new FileReader();
+
+                reader.onload = function(event) {
+                    $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                }
+
+                reader.readAsDataURL(input.files[i]);
+            }
+        }
+
+    };
+
+    $('.filearea input[type="file"]').on('change', function() {
+
+        imagesPreview(this, 'div.fileareaPreview');
+
+        var filesCount = $(this).length;
+        $(this).parent('.filearea').addClass('haveFile');
+        $(this).siblings('span').html("Добавлен " + filesCount + " файл(ов)")
+        console.log($(this).files);
+    });
 });
 
 $(document).on('click', '#ajaxLoginButton', function () {
