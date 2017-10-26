@@ -17,6 +17,8 @@ Route::group(['middleware' => 'isAdmin'], function () {
     Route::get('/manager/page/list', 'Manager\\StaticPage@getList');
     Route::get('/manager/page/{id}', 'Manager\\StaticPage@getById')->where('id', '[0-9]+');
     Route::get('/manager/page/{id}/remove', 'Manager\\StaticPage@deleteById')->where('id', '[0-9]+');
+    Route::get('/manager/slogan', 'Manager\\SloganController@index')->name('sloganIndex');
+    Route::post('/manager/slogan/update', 'Manager\\SloganController@update')->name('sloganUpdate');
 });
 
 Route::group(['middleware' => 'isModerator', 'isModerator'], function () {
