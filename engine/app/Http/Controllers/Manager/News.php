@@ -32,7 +32,7 @@ class News extends Controller
      */
     public function getList()
     {
-        $news = $this->newsModel->getNews();
+        $news = $this->newsModel->getList();
         return view('manager.news.list', ['news' => $news]);
     }
 
@@ -64,20 +64,24 @@ class News extends Controller
         $name    = $request->input('name');
         $content = $request->input('content');
         if (empty($id)) {
-            $res = $this->newsModel->make($name, $content);
+            $this->newsModel->make($name, $content);
+            $request->session()->flash('newsFlash', 'Успешно добавлено!');
             return Redirect::to(route('newsList'));
         }
-        $res = $this->newsModel->updateById($id, $name, $content);
+        $this->newsModel->updateById($id, $name, $content);
+        $request->session()->flash('newsFlash', 'Успешно обновлено!');
         return Redirect::to(route('newsList'));
     }
 
     /**
-     * @param int $id
+     * @param Request $request
+     * @param int     $id
      *
      * @return mixed
      */
-    public function delete(int $id)
+    public function delete(Request $request, int $id)
     {
-        return $this->newsModel->deleteById($id);
+        $request->session()->flash('newsFlash', 'Успешно удалено!');
+        return Redirect::to(route('newsList'));
     }
 }

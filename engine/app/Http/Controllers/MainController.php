@@ -3,6 +3,7 @@
 namespace RecycleArt\Http\Controllers;
 
 use Illuminate\Contracts\View\Factory;
+use RecycleArt\Models\News;
 use RecycleArt\Models\Slogan;
 
 /**
@@ -17,6 +18,7 @@ class MainController extends Controller
     public function index()
     {
         $slogan = (new Slogan())->getSlogan();
-        return view('welcome', ['slogan' => $slogan]);
+        $news = (new News())->getList();
+        return view('welcome', ['slogan' => $slogan, 'news' => $news]);
     }
 }

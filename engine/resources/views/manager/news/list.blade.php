@@ -28,6 +28,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Новости (<a href="{{ route('newsNew') }}">Добавить</a>)</div>
                     <div class="panel-body">
+                        <p>{{ session('newsFlash') }}</p>
                         @if (empty($news))
                         <p>Новостей пока нет</p>
                         @else

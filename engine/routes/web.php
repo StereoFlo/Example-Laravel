@@ -22,7 +22,7 @@ Route::group(['middleware' => 'isModerator', 'isModerator'], function () {
     Route::get('/manager/icon/list', 'Manager\\Icon@list');
     Route::get('/manager/news', 'Manager\\News@getList')->name('newsList');
     Route::get('/manager/news/new', 'Manager\\News@makeNew')->name('newsNew');
-    Route::get('/manager/news/{id}/delete', 'Manager\\News@getList')->where('id', '[0-9]+')->name('newsDelete');
+    Route::get('/manager/news/{id}/delete', 'Manager\\News@delete')->where('id', '[0-9]+')->name('newsDelete');
     Route::get('/manager/news/{id}/update', 'Manager\\News@update')->where('id', '[0-9]+')->name('newsUpdate');
     Route::post('/manager/news/process', 'Manager\\News@process')->name('newsProcess');
 });

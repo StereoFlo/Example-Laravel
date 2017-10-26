@@ -30,6 +30,7 @@
                     <div class="panel-body">
                         <form class="form-horizontal" method="POST" action="{{ route('newsProcess') }}">
                             {{ csrf_field() }}
+                            <p>{{ session('newsFlash') }}</p>
                             <div class="form-group">
                                 <label for="name" class="col-md-4 control-label">Название</label>
                                 <div class="col-md-6">
@@ -45,9 +46,7 @@
                             <div class="form-group">
                                 <label for="content" class="col-md-4 control-label">Содержание</label>
                                 <div class="col-md-6">
-                                    <textarea id="content" name="content">
-                                        <?= isset($news['content']) ? $news['content'] : ''?>"
-                                    </textarea>
+                                    <textarea id="content" name="content"><?= isset($news['content']) ?: null; ?></textarea>
 
                                     @if ($errors->has('content'))
                                         <span class="help-block">

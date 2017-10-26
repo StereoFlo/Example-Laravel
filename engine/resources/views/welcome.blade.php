@@ -11,14 +11,16 @@
                         {{ $slogan }}
                     </p>
                 </div>
+
+                @if(!empty($news))
                 <div class="news">
+                    @foreach($news as $item)
                     <div class="news__item">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat incidunt labore modi nisi placeat praesentium similique. Accusamus aut blanditiis doloribus ea eum nulla, quam qui rem vero. Aliquid aut autem commodi, culpa ducimus ea earum eligendi fugiat illo ipsa iusto, minima necessitatibus nemo non omnis placeat quo ratione saepe, soluta?</p>
+                        <p>{{ $item['content'] }}</p>
                     </div>
-                    <div class="news__item">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat incidunt labore modi nisi placeat praesentium similique. Accusamus aut blanditiis doloribus ea eum nulla, quam qui rem vero. Aliquid aut autem commodi, culpa ducimus ea earum eligendi fugiat illo ipsa iusto, minima necessitatibus nemo non omnis placeat quo ratione sae
-                    </div>
+                    @endforeach
                 </div>
+                @endif
 
             </div>
         </div>
