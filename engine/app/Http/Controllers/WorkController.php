@@ -34,7 +34,7 @@ class WorkController extends Controller
      */
     public function getList()
     {
-        $userId = Auth::user()->id;
+        $userId = Auth::id();
         $works = $this->work->getListByUserId($userId);
         return view('work.list', ['works' => $works]);
     }
@@ -44,7 +44,7 @@ class WorkController extends Controller
      */
     public function add(): View
     {
-        return view('work.add');
+        return view('work.form');
     }
 
     /**
@@ -54,12 +54,11 @@ class WorkController extends Controller
      */
     public function addProcess(Request $request)
     {
-        $user = Auth::user();
         $workId = $request->post('workId') ?: 0;
         $workId = Work::getInstance()->updateOrSave($workId, [
-            'workName' => $request->post('workName'),
+            'workName'    => $request->post('workName'),
             'description' => $request->post('description'),
-            'userId' => $user->id
+            'userId'      => Auth::id(),
         ]);
         $isSaved = false;
         if (!empty($request->file('images'))) {
@@ -128,7 +127,7 @@ class WorkController extends Controller
         } else {
             $images = $images->toArray();
         }
-        return \view('work.add', ['work' => $work->toArray(), 'images' => $images]);
+        return \view('work.form', ['work' => $work->toArray(), 'images' => $images]);
     }
 
     /**
