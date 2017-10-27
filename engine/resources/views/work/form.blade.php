@@ -53,8 +53,10 @@
             </div>
 
             <button type="submit" name="button" class="button">@lang('work.buttonOfNewWork')</button>
+            @if(isset($work['id']))
+                <input type="hidden" name="workId" value="{{ $work['id'] }}">
+            @endif
         </form>
-
     </div>
 </section>
 @endsection
