@@ -128,7 +128,7 @@ class WorkController extends Controller
         } else {
             $images = $images->toArray();
         }
-        return \view('work.edit', ['work' => $work->toArray(), 'images' => $images]);
+        return \view('work.add', ['work' => $work->toArray(), 'images' => $images]);
     }
 
     /**

@@ -15,7 +15,7 @@
 
             <div class="inputGroup{{ $errors->has('workName') ? ' has-error' : '' }}">
                 <label for="workName">@lang('work.nameOfNewWork'):</label>
-                <input type="text" name="workName" value="" required autofocus>
+                <input type="text" name="workName" value="{{ !empty($work['workName']) ? $work['workName'] : null }}" required autofocus>
                 <span class="errorText">
                 @if ($errors->has('workName'))
                         <strong>{{ $errors->first('workName') }}</strong>
@@ -25,7 +25,7 @@
 
             <div class="inputGroup{{ $errors->has('description') ? ' has-error' : '' }}">
                 <label for="location">@lang('work.descriptionOfNewWork'):</label>
-                <textarea id="summernote" name="description" cols="80" rows="8" required></textarea>
+                <textarea id="summernote" name="description" cols="80" rows="8" required>{{ !empty($work['description']) ? $work['description'] : null }}</textarea>
                 <span class="errorText">
                 @if ($errors->has('description'))
                         <strong>{{ $errors->first('description') }}</strong>
@@ -43,8 +43,13 @@
                 <span class="errorText">
                 @if ($errors->has('images'))
                         <strong>{{ $errors->first('images') }}</strong>
-                    @endif
+                @endif
             </span>
+                @if(!empty($images))
+                    @foreach($images as $image)
+                        {{ $image['link'] }}
+                    @endforeach
+                @endif
             </div>
 
             <button type="submit" name="button" class="button">@lang('work.buttonOfNewWork')</button>
