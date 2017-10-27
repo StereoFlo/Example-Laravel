@@ -37,7 +37,6 @@ class CabinetController extends Controller
     public function profileUpdate(Request $request)
     {
         $user = Auth::user();
-
         $user->name = $request->post('name');
         $user->email = $request->post('email');
         $user->location = $request->post('location');
@@ -49,8 +48,8 @@ class CabinetController extends Controller
                 'avatar' => 'mimes:jpeg,bmp,png',
             ]);
             $file = $request->file('avatar');
-            $file->move(public_path('uploads/' . $user->id), 'avatar.' . $file->clientExtension());
-            $user->avatar = '/uploads/' . $user->id . '/avatar.' . $file->clientExtension();
+            $file->move(public_path('uploads/' . Auth::id()), 'avatar.' . $file->clientExtension());
+            $user->avatar = '/uploads/' . Auth::id() . '/avatar.' . $file->clientExtension();
         }
 
         if (!empty($request->post('password'))) {
