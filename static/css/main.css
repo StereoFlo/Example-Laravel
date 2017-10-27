@@ -2519,7 +2519,7 @@ template {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 30px 15px 0;
+  padding: 20px 15px;
   z-index: 99; }
   .header a {
     color: #c9c9c9; }
@@ -2535,10 +2535,14 @@ template {
         -ms-flex-align: center;
             align-items: center; }
 
-.header_dark a {
-  color: #252940; }
-  .header_dark a:hover {
-    color: #862625; }
+.header_dark {
+  background: #FFFFFF;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
+  .header_dark a {
+    color: #252940; }
+    .header_dark a:hover {
+      color: #862625; }
 
 .logo {
   -webkit-box-ordinal-group: 2;
@@ -2884,20 +2888,73 @@ template {
   .item:hover .content {
     opacity: 1; }
 
-.profile {
+.account {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  margin-left: -15px;
+  margin-right: -15px;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  margin-bottom: 200px; }
+  .account__card {
+    text-align: center;
+    padding: 20px 15px;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    margin-left: 15px;
+    margin-right: 15px;
+    word-wrap: break-word;
+    width: -webkit-calc(25% - 30px);
+    width: calc(25% - 30px); }
+  .account__pic {
+    width: 150px;
+    height: 150px;
+    -webkit-border-radius: 50%;
+            border-radius: 50%; }
+  .account__login {
+    font-family: 'lato', sans-serif;
+    font-size: 1.3em;
+    font-weight: bold; }
+  .account__info {
+    padding: 20px;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    margin-left: 15px;
+    margin-right: 15px;
+    word-wrap: break-word;
+    width: -webkit-calc(75% - 30px);
+    width: calc(75% - 30px); }
+  .account dt, .account dd {
+    display: inline-block;
+    margin-bottom: 10px; }
+  .account dt {
+    font-weight: bold;
+    min-width: 80px; }
+
+.profileUpdate {
   background: #f3f1f1;
   width: 100%;
   height: 100%; }
 
-.profileForm {
+.profileUpdateForm {
   max-width: 800px;
   margin: 0 auto;
   margin-bottom: 30px;
   -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
           box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
-  .profileForm .inputGroup input {
+  .profileUpdateForm .inputGroup input {
     height: 35px; }
-  .profileForm .avatar {
+  .profileUpdateForm .avatar {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -2906,20 +2963,20 @@ template {
     -webkit-align-items: center;
         -ms-flex-align: center;
             align-items: center; }
-    .profileForm .avatar img {
+    .profileUpdateForm .avatar img {
       max-width: 200px; }
-    .profileForm .avatar a {
+    .profileUpdateForm .avatar a {
       background: #0074D9;
       text-decoration: none;
       margin: 0 15px; }
-      .profileForm .avatar a:hover {
+      .profileUpdateForm .avatar a:hover {
         background: #004b8d; }
-  .profileForm button {
+  .profileUpdateForm button {
     font-size: 1.2em;
     display: block;
     margin: 30px auto;
     background: #e83b3a; }
-    .profileForm button:hover {
+    .profileUpdateForm button:hover {
       background: #bf1716; }
 
 .resetLink {
@@ -3311,7 +3368,7 @@ template {
     height: 150px;
     -webkit-border-radius: 50%;
             border-radius: 50%; }
-  .entered__name {
+  .entered__login {
     color: #FFFFFF;
     font-size: 1.2em;
     margin-bottom: 0; }
@@ -3412,14 +3469,17 @@ template {
           box-sizing: border-box; }
 
 body, html {
-  font-family: 'Geometria', sans-serif;
   position: relative;
-  font-size: 16px;
-  color: #111111;
   width: 100%;
   height: 100%; }
+
+body {
+  font-family: 'Geometria', sans-serif;
+  font-size: 16px;
+  color: #111111;
+  background: #f3f1f1; }
   @media only screen and (max-width: 480px) {
-    body, html {
+    body {
       font-size: 14px; } }
 
 figure {
@@ -3472,7 +3532,7 @@ figure {
     text-align: center;
     margin: 0; }
     .sectionTitle h2:after {
-      width: 50px;
+      width: 100px;
       height: 3px;
       background: #f9c100;
       content: " ";
@@ -3498,17 +3558,21 @@ figure {
     height: 200px;
     position: relative;
     outline: none;
-    border: 3px dashed #ccd3d7; }
+    margin-top: 1px;
+    border: 2px dashed #ccd3d7;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out; }
     .form .filearea:hover {
       cursor: pointer;
-      border-color: #111111;
-      background: rgba(255, 255, 255, 0.9); }
+      border-color: #f9c100; }
     .form .filearea:hover span {
-      color: #111111; }
+      color: #a1aeb5; }
     .form .filearea span {
       color: #ccd3d7;
       font-weight: bold;
-      margin: auto; }
+      margin: auto;
+      -webkit-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out; }
   .form .haveFile {
     border-color: #111111; }
     .form .haveFile span {
@@ -3575,8 +3639,13 @@ figure {
   -webkit-border-radius: 2px;
           border-radius: 2px;
   cursor: pointer;
-  -webkit-transition: 120ms;
-  transition: 120ms; }
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
+  .button:hover {
+    -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
 
 /* slider */
 .bx-wrapper {

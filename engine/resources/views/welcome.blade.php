@@ -16,12 +16,14 @@
                 <div class="news">
                     @foreach($news as $item)
                     <div class="news__item">
+                        <p>{{ $item['name'] }}</p>
+                        <p>{{ date('d.m.Y', strtotime($item['created_at'])) }}</p>
                         <p>{{ $item['content'] }}</p>
                     </div>
                     @endforeach
                 </div>
                 @endif
-
+                {{--<a href="{{ route('workEdit', ['id' => $workId]) }}"></a>--}}
             </div>
         </div>
         <a href="#products" class="scrollDown">

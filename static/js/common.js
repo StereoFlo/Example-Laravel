@@ -96,11 +96,11 @@ $(document).ready(function () {
 
     };
 
-    $('.filearea input[type="file"]').on('change', function() {
+    $('.filearea input').on('change', function() {
 
         imagesPreview(this, 'div.fileareaPreview');
 
-        var filesCount = $(this).length;
+        var filesCount = $(this)[0].files.length;
         $(this).parent('.filearea').addClass('haveFile');
         $(this).siblings('span').html("Добавлен " + filesCount + " файл(ов)")
         console.log($(this).files);
