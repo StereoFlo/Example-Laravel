@@ -37,16 +37,18 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        if (method_exists($exception, 'getStatusCode') && $exception->getStatusCode() === 404) {
-            parent::report($exception);
-            return $this;
+        if (config('mail.maillog')) {
+            if (method_exists($exception, 'getStatusCode') && $exception->getStatusCode() === 404) {
+                parent::report($exception);
+                return $this;
+            }
+            $mess = $this->buildMessage($exception);
+            Mail::raw($mess, function ($message) {
+                $server = isset($_SERVER['SERVER_NAME']) ?: '';
+                $message->to(config('mail.webmaster'));
+                $message->subject(config('app.name') . ' Was an error ' . $server);
+            });
         }
-        $mess = $this->buildMessage($exception);
-        Mail::raw($mess, function ($message) {
-            $server = isset($_SERVER['SERVER_NAME']) ?: '';
-            $message->to(config('mail.webmaster'));
-            $message->subject(config('app.name') . ' Was an error ' . $server);
-        });
         parent::report($exception);
     }
 
