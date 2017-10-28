@@ -47,7 +47,12 @@
             </span>
                 @if(!empty($images))
                     @foreach($images as $image)
-                        {{ $image['link'] }}
+                        @if($image['isDefault'])
+                            <p>изображение по умолчанию - {{ $image['link'] }} (<a href="{{ route('imageDeleteFromWork', ['workId' => $work['id'], 'imageId' => $image['id']]) }}">X</a>)</p>
+                        @else
+                            <p>{{ $image['link'] }} (<a href="{{ route('imageDeleteFromWork', ['workId' => $work['id'], 'imageId' => $image['id']]) }}">X</a>)</p>
+                        @endif
+
                     @endforeach
                 @endif
             </div>
