@@ -78,10 +78,11 @@
   .errorText {
     display: block;
     color: $red;
-    font-weight: bold;
     height: 25px;
     line-height: 1;
     opacity: 0;
+    font-size: 0.7em;
+    padding-top: 2px;
   }
   &__buttons {
     display: flex;

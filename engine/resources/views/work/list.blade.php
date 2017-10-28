@@ -45,7 +45,6 @@
                 @else
                     @foreach($works as $work)
                         <div class="works__item">
-{{--                            <p class="works__name">{{ $work['workName']}}</p>--}}
                             <a href="{{ route('workShow', ['id' => $work['id']]) }}" class="works__name">{{ $work['workName']}}</a>
 
                             <div class="works__control">

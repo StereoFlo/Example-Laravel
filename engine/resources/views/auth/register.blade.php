@@ -8,7 +8,7 @@
                 <h2>Регистрация</h2>
             </div>
 
-            <form class="registrationForm registrationForm_dark" method="POST" action="{{ route('register') }}" onsubmit="return false;">
+            <form class="registrationForm registrationForm_dark form" method="POST" action="{{ route('register') }}">
                 {{ csrf_field() }}
 
                 <div class="inputGroup{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="registrationForm__buttons">
-                    <button id="ajaxRegistrationFormButton" type="button" name="button" class="button registrationForm__enter">регистрация</button>
+                    <button type="submit" name="button" class="button registrationForm__enter">регистрация</button>
                 </div>
 
                 <a href="{{ route('login') }}" class="formToggle">Вход</a>

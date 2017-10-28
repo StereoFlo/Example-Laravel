@@ -2640,6 +2640,7 @@ template {
 
 .welcome {
   height: 100vh;
+  min-height: auto;
   background: url("../images/main.jpg") no-repeat center top;
   background-size: cover;
   position: relative;
@@ -2964,7 +2965,8 @@ template {
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
-          flex-direction: column; }
+          flex-direction: column;
+  margin-bottom: 60px; }
   .works__new {
     color: #0089ef;
     display: -webkit-box;
@@ -3373,10 +3375,11 @@ template {
   .signIn .errorText, .registrationForm .errorText {
     display: block;
     color: #FF4136;
-    font-weight: bold;
     height: 25px;
     line-height: 1;
-    opacity: 0; }
+    opacity: 0;
+    font-size: 0.7em;
+    padding-top: 2px; }
   .signIn__buttons, .registrationForm__buttons {
     display: -webkit-box;
     display: -webkit-flex;

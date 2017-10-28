@@ -51,6 +51,7 @@
 .works {
   @include row-flex();
   flex-direction: column;
+  margin-bottom: 60px;
   &__new {
     color: #0089ef;
     display: flex;
