@@ -10,7 +10,7 @@
         </div>
 
         {{ session('addWorkResult') }}
-        <form method="post" action="{{ route('workAddProcess') }}" enctype="multipart/form-data" class="form workAddForm">
+        <form method="post" action="{{ route('workProcess') }}" enctype="multipart/form-data" class="form workAddForm">
             {{ csrf_field() }}
 
             <div class="inputGroup{{ $errors->has('workName') ? ' has-error' : '' }}">

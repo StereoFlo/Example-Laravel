@@ -48,11 +48,13 @@ class WorkController extends Controller
     }
 
     /**
+     * Process for add/edit work
+     *
      * @param Request $request
      *
      * @return mixed
      */
-    public function addProcess(Request $request)
+    public function process(Request $request)
     {
         $workId = $request->post('workId') ?: 0;
         $workId = Work::getInstance()->updateOrSave($workId, [

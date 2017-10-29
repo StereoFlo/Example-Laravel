@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/cabinet/work', 'WorkController@getList')->name('workList');
     Route::get('/cabinet/work/new', 'WorkController@add')->name('workAdd');
-    Route::post('/cabinet/work/new/process', 'WorkController@addProcess')->name('workAddProcess');
+    Route::post('/cabinet/work/new/process', 'WorkController@process')->name('workProcess');
     Route::get('/cabinet/work/{id}/remove', 'WorkController@remove')->name('workRemove');
     Route::get('/cabinet/work/{id}/edit', 'WorkController@edit')->name('workEdit');
     Route::get('/cabinet/work/{workId}/edit/removeImage/{imageId}', 'WorkController@removeImageFromWork')
