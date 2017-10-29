@@ -35,19 +35,24 @@
 
             <div class="inputGroup{{ $errors->has('tags') ? ' has-error' : '' }}">
                 <label for="location">Теги:</label>
-                <input type="text" name="tags" value="{{ !empty($work['tags']) ? $work['tags'] : null }}" required autofocus>
+                <input type="text" name="tags">
                 <span class="errorText">
                 @if ($errors->has('tags'))
                         <strong>{{ $errors->first('tags') }}</strong>
-                    @endif
+                @endif
             </span>
+                @if(!empty($work['tags']))
+                    @foreach($work['tags'] as $tag)
+                        <a id="tag_{{ $tag['id'] }}" href="{{ route('deleteFromWork', ['tagId' => $tag['id'], 'workId' => $work['id']]) }}">{{ $tag['tag'] }}</a>
+                    @endforeach
+                @endif
             </div>
 
             <div class="inputGroup{{ $errors->has('images') ? ' has-error' : '' }}">
                 <label for="images">@lang('work.photoOfNewWork'):</label>
                 <div class="filearea">
                     <span>@lang('work.photoDescrOfNewWork')</span>
-                    <input type="file" name="images[]" value="{{ old('images') }}" multiple required>
+                    <input type="file" name="images[]" value="{{ old('images') }}" multiple {{ !empty($errors->has('images')) ? 'required' : null }}>
                 </div>
                 <div class="fileareaPreview"></div>
                 <span class="errorText">
@@ -55,8 +60,8 @@
                         <strong>{{ $errors->first('images') }}</strong>
                 @endif
             </span>
-                @if(!empty($images))
-                    @foreach($images as $image)
+                @if(!empty($work['images']))
+                    @foreach($work['images'] as $image)
                         @if($image['isDefault'])
                             <p>изображение по умолчанию - {{ $image['link'] }} (<a href="{{ route('imageDeleteFromWork', ['workId' => $work['id'], 'imageId' => $image['id']]) }}">X</a>)</p>
                         @else

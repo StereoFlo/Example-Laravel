@@ -64,7 +64,7 @@ class WorkController extends Controller
             'description' => $request->post('description'),
             'userId'      => Auth::id(),
         ]);
-        $isSaved = false;
+        $isSaved = (bool)$workId;
         if (!empty($request->file('images'))) {
             $isSaved = WorkImages::getInstance()->addImamges($request->file('images'), $workId);
         }
@@ -82,10 +82,6 @@ class WorkController extends Controller
                 (new TagsRel())->addToWork($existingTag['id'], $workId);
             }
         }
-        if (!$isSaved) {
-            $request->session()->flash('addWorkResult', __('work.addProcessError'));
-            return Redirect::to('/cabinet/work/new');
-        }
         $request->session()->flash('addWorkResult', __('work.addProcessSuccess'));
         return Redirect::to('/cabinet/work');
     }
@@ -98,8 +94,7 @@ class WorkController extends Controller
      */
     public function remove(Request $request, int $id)
     {
-        $user = Auth::user();
-        $workPath = public_path('uploads/' . $user->id . '/work/' . $id);
+        $workPath = public_path('uploads/' . Auth::id() . '/work/' . $id);
         if (Work::getInstance()->removeById($id) && WorkImages::getInstance()->removeByWorkId($id) && (new TagsRel())->deleteByWork($id)) {
             File::cleanDirectory($workPath);
             rmdir($workPath);
@@ -135,17 +130,11 @@ class WorkController extends Controller
      */
     public function edit(int $id)
     {
-        $work = Work::find($id);
+        $work = (new Work)->getById($id);
         if (empty($work)) {
             abort(404, __('workNotFound'));
         }
-        $images = WorkImages::getbyWorkId($id);
-        if (empty($images)) {
-            $images = [];
-        } else {
-            $images = $images->toArray();
-        }
-        return \view('work.form', ['work' => $work->toArray(), 'images' => $images]);
+        return \view('work.form', ['work' => $work]);
     }
 
     /**

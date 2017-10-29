@@ -5,7 +5,7 @@
         <div class="container">
             <div class="work__header flex">
                 <h2 class="work__title">{{ $work['workName']  }}</h2>
-                <a href="#" class="work__author">by {{$work['name']}}</a>
+                <a href="/author/{{$work['userId']}}" class="work__author">by {{$work['userName']}}</a>
             </div>
             <div class="work__item">
                 <div class="work__slider">

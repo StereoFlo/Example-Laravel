@@ -105,6 +105,26 @@ $(document).ready(function () {
         $(this).siblings('span').html("Добавлен " + filesCount + " файл(ов)")
         console.log($(this).files);
     });
+
+    $('[id^=tag_]').click(function () {
+        var url = $(this).attr('href');
+        var element = $(this);
+        $.get(url)
+            .done(function (data) {
+                if (data.isDeleted === 1) {
+                    element.remove();
+                }
+                event.preventDefault();
+                event.stopPropagation();
+            })
+            .fail(function (data) {
+                console.log(data);
+                event.preventDefault();
+                event.stopPropagation();
+            });
+        event.preventDefault();
+        event.stopPropagation();
+    });
 });
 
 $(document).on('click', '#ajaxLoginButton', function () {

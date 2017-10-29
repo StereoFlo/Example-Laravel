@@ -41,6 +41,17 @@ class TagsRel extends Model
     }
 
     /**
+     * @param int $workId
+     * @param int $tagId
+     *
+     * @return mixed
+     */
+    public function deleteFromWork(int $workId, int $tagId)
+    {
+        return $this->where('workId', $workId)->where('tagId', $tagId)->delete();
+    }
+
+    /**
      * @param int $tagId
      *
      * @return mixed
