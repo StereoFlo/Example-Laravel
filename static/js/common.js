@@ -124,6 +124,27 @@ $(document).ready(function () {
         console.log($(this).files);
     });
 
+    //Tag delete
+    $('[id^=tag_]').click(function () {
+        var url = $(this).attr('href');
+        var element = $(this);
+        $.get(url)
+            .done(function (data) {
+                if (data.isDeleted === true) {
+                    element.remove();
+                }
+                event.preventDefault();
+                event.stopPropagation();
+            })
+            .fail(function (data) {
+                console.log(data);
+                event.preventDefault();
+                event.stopPropagation();
+            });
+        event.preventDefault();
+        event.stopPropagation();
+    });
+
     //textEditor
 
     $('textarea').richText({
@@ -194,6 +215,9 @@ $(document).ready(function () {
         class: "",
         useParagraph: false
     });
+
+
+
 });
 
 $(document).on('click', '#ajaxLoginButton', function () {
