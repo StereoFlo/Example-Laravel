@@ -33,6 +33,16 @@
             </span>
             </div>
 
+            <div class="inputGroup{{ $errors->has('tags') ? ' has-error' : '' }}">
+                <label for="location">Теги:</label>
+                <input type="text" name="tags" value="{{ !empty($work['tags']) ? $work['tags'] : null }}" required autofocus>
+                <span class="errorText">
+                @if ($errors->has('tags'))
+                        <strong>{{ $errors->first('tags') }}</strong>
+                    @endif
+            </span>
+            </div>
+
             <div class="inputGroup{{ $errors->has('images') ? ' has-error' : '' }}">
                 <label for="images">@lang('work.photoOfNewWork'):</label>
                 <div class="filearea">

@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use RecycleArt\Models\Tags;
+use RecycleArt\Models\TagsRel;
 use RecycleArt\Models\Work;
 use RecycleArt\Models\WorkImages;
 
@@ -66,6 +68,20 @@ class WorkController extends Controller
         if (!empty($request->file('images'))) {
             $isSaved = WorkImages::getInstance()->addImamges($request->file('images'), $workId);
         }
+        if (!empty($request->post('tags'))) {
+            $tagsArray = \explode(',', $request->post('tags'));
+            foreach ($tagsArray as $tag) {
+                $tag = \trim($tag, ' ');
+                if (empty($tag)) {
+                    continue;
+                }
+                $existingTag = (new Tags())->getByName($tag);
+                if (empty($existingTag)) {
+                    $existingTag['id'] = (new Tags())->add($tag);
+                }
+                (new TagsRel())->addToWork($existingTag['id'], $workId);
+            }
+        }
         if (!$isSaved) {
             $request->session()->flash('addWorkResult', __('work.addProcessError'));
             return Redirect::to('/cabinet/work/new');
@@ -84,7 +100,7 @@ class WorkController extends Controller
     {
         $user = Auth::user();
         $workPath = public_path('uploads/' . $user->id . '/work/' . $id);
-        if (Work::getInstance()->removeById($id) && WorkImages::getInstance()->removeByWorkId($id)) {
+        if (Work::getInstance()->removeById($id) && WorkImages::getInstance()->removeByWorkId($id) && (new TagsRel())->deleteByWork($id)) {
             File::cleanDirectory($workPath);
             rmdir($workPath);
             $request->session()->flash('addWorkResult', __('work.addWorkRemovedSuccess'));

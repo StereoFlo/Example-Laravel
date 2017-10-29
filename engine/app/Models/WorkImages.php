@@ -43,7 +43,11 @@ class WorkImages extends Model
      */
     public static function getbyWorkId(int $workId)
     {
-        return self::where('workId', $workId)->get();
+        $imgs = self::where('workId', $workId)->get();
+        if (empty($imgs) || empty($imgs->toArray())) {
+            return [];
+        }
+        return $imgs->toArray();
     }
 
     /**

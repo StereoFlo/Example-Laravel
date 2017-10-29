@@ -70,23 +70,14 @@
                 <button class="work__buyBtn button">Заказать</button>
             </div>
             <div class="work__meta">
-                <span>мета теги:</span>
-
-                <a href="#">светильник,</a>
-                <a href="#">статуэтка,</a>
-                <a href="#">настенное,</a>
-                <a href="#">небольшое,</a>
-                <a href="#">животные,</a>
-                <a href="#">металл,</a>
-                <a href="#">интерьер,</a>
-                <a href="#">мужское,</a>
-                <a href="#">детям,</a>
-                <a href="#">220v,</a>
-                <a href="#">светодиод,</a>
-                <a href="#">дрель клепки,</a>
-                <a href="#">паяльник,</a>
-                <a href="#">винтики-и-болтики,</a>
-                <a href="#">немного-фантазии</a>
+                @if (empty($work['tags']))
+                    <p>У этой работы нет тегов</p>
+                @else
+                    <span>мета теги:</span>
+                    @foreach ($work['tags'] as $tag)
+                        <a href="#">{{$tag['tag']}},</a>
+                    @endforeach
+                @endif
             </div>
         </div>
     </section>
