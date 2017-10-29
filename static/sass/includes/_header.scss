@@ -5,11 +5,10 @@
   width: 100%;
   padding: 20px 15px;
   z-index: 99;
-  a {
-    color: $link;
-    &:hover {
-      color: $link_hover;
-    }
+  transition: top 500ms ease;
+  transform: translateZ(0);
+  @include max-screen($break_sm) {
+    padding: 10px 15px;
   }
   .flex {
     justify-content: space-between;
@@ -17,7 +16,7 @@
   }
 }
 //todo
-.header_dark {
+.header_white {
   background: $white;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   a {
@@ -27,6 +26,26 @@
     }
   }
 }
+.header_black {
+  background: $black;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  a {
+    color: $white;
+    &:hover {
+      color: darken($white, 25%);
+    }
+  }
+}
+.header_clear {
+  background: transparent;
+  a {
+    color: $white;
+    &:hover {
+      color: darken($white, 35%);
+    }
+  }
+}
+
 .logo {
   order: 1;
   @include max-screen($break_sm) {
@@ -103,11 +122,11 @@
     display: inline-block;
     transition: 250ms;
     i {
-      margin-right: 5px;
+      //margin-right: 5px;
       font-size: 1.3em;
     }
     span {
-      vertical-align: top;
+      //vertical-align: top;
     }
   }
 }

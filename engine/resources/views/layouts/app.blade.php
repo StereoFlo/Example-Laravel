@@ -17,7 +17,7 @@
 </head>
 <body>
     <div class="wrapper">
-        <header class="header header_dark">
+        <header class="header header_white">
             <div class="container">
                 <div class="flex">
                     <div class="logo">
@@ -76,7 +76,6 @@
 
         <div class="forms"></div>
     </div>
-
 
     <!-- Scripts -->
 {{--    <script src="{{ asset('js/app.js') }}"></script>--}}

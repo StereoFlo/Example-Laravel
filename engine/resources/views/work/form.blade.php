@@ -24,8 +24,8 @@
             </div>
 
             <div class="inputGroup{{ $errors->has('description') ? ' has-error' : '' }}">
-                <label for="location">@lang('work.descriptionOfNewWork'):</label>
-                <textarea id="summernote" name="description" cols="80" rows="8" required>{{ !empty($work['description']) ? $work['description'] : null }}</textarea>
+                <label for="qqq">@lang('work.descriptionOfNewWork'):</label>
+                <textarea id="qqq" name="description" cols="80" rows="8" required>{{ !empty($work['description']) ? $work['description'] : null }}</textarea>
                 <span class="errorText">
                 @if ($errors->has('description'))
                         <strong>{{ $errors->first('description') }}</strong>

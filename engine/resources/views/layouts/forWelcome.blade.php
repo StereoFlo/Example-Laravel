@@ -16,7 +16,7 @@
 </head>
 <body>
     <div class="wrapper">
-        <header class="header">
+        <header class=" header header_black">
             <div class="container">
                 <div class="flex">
                     <div class="logo">

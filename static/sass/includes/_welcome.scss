@@ -1,10 +1,10 @@
 .welcome {
-  height: 100vh;
-  min-height: auto;
+  height: auto;
+  min-height: 100vh;
   background: url("../images/main.jpg") no-repeat center top;
   background-size: cover;
   position: relative;
-  padding: 250px 15px 0;
+  padding: 15% 15px 0;
   @include max-screen($break_xs) {
     padding-top: 120px;
   }
@@ -18,8 +18,8 @@
   }
 }
 .filter {
-  background: #13193c;
-  opacity: 0.7;
+  background: linear-gradient(#0d1423, rgba(61, 95, 191, 0.42));
+  opacity: 0.5;
   position: absolute;
   top: 0;
   left: 0;
@@ -53,7 +53,17 @@
     @include col-12();
   }
   &__item {
+
+  }
+  &__name {
+    margin-bottom: 0;
+  }
+  &__date {
+    font-size: 13px;
+  }
+  &__text {
     text-align: justify;
+    margin: 5px 0 0;
   }
 }
 .slogan {

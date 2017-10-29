@@ -1,11 +1,29 @@
 $(document).ready(function () {
 
+    /* ---------------------------------------------- /*
+     * Header
+    /* ---------------------------------------------- */
+
+    var $header = $('header');
+    var $window = $(window);
+
+    $window.scroll(function(){
+        if ( $window.scrollTop() > 200) {
+            $header.addClass("fixed");
+        } else {
+            $header.removeClass('fixed');
+        }
+    });
+
+
+
     $(".side-title a").click(
         function (e) {
             $(e.target).closest('.side').toggleClass('expanded');
         }
     );
     $('.bxslider').bxSlider();
+
     $('a.menu-btn').click(
         function (e) {
             e.preventDefault();
@@ -104,6 +122,77 @@ $(document).ready(function () {
         $(this).parent('.filearea').addClass('haveFile');
         $(this).siblings('span').html("Добавлен " + filesCount + " файл(ов)")
         console.log($(this).files);
+    });
+
+    //textEditor
+
+    $('textarea').richText({
+
+        // text formatting
+        bold: true,
+        italic: true,
+        underline: true,
+
+        // text alignment
+        leftAlign: true,
+        centerAlign: true,
+        rightAlign: true,
+
+        // lists
+        ol: true,
+        ul: true,
+
+        // title
+        heading: true,
+
+        // fonts
+        fonts: false,
+        fontList: [ "Arial",
+            "Arial Black",
+            "Comic Sans MS",
+            "Courier New",
+            "Geneva",
+            "Georgia",
+            "Helvetica",
+            "Impact",
+            "Lucida Console",
+            "Tahoma",
+            "Times New Roman",
+            "Verdana"
+        ],
+        fontColor: true,
+
+        // uploads
+        imageUpload: true,
+        fileUpload: false,
+
+        // media
+        videoEmbed: true,
+
+        // link
+        urls: false,
+
+        // tables
+        table: true,
+
+        // code
+        removeStyles: true,
+        code: true,
+
+        // colors
+        colors: [],
+
+        // dropdowns
+        fileHTML: '',
+        imageHTML: '',
+
+        // developer settings
+        useSingleQuotes: false,
+        height: 0,
+        heightPercentage: 0,
+        id: "",
+        class: "",
+        useParagraph: false
     });
 });
 
