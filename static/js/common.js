@@ -111,7 +111,7 @@ $(document).ready(function () {
         var element = $(this);
         $.get(url)
             .done(function (data) {
-                if (data.isDeleted === 1) {
+                if (data.isDeleted === true) {
                     element.remove();
                 }
                 event.preventDefault();

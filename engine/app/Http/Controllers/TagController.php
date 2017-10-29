@@ -20,7 +20,7 @@ class TagController extends Controller
     {
         $isDeleted = (new TagsRel())->deleteFromWork($workId, $tagId);
         return response()->json([
-            'isDeleted' => $isDeleted,
+            'isDeleted' => (bool)$isDeleted,
         ]);
     }
 }
