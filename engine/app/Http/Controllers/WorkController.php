@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use RecycleArt\Models\Tags;
 use RecycleArt\Models\TagsRel;
+use RecycleArt\Models\User;
 use RecycleArt\Models\Work;
 use RecycleArt\Models\WorkImages;
 
@@ -64,9 +65,8 @@ class WorkController extends Controller
             'description' => $request->post('description'),
             'userId'      => Auth::id(),
         ]);
-        $isSaved = (bool)$workId;
         if (!empty($request->file('images'))) {
-            $isSaved = WorkImages::getInstance()->addImamges($request->file('images'), $workId);
+            WorkImages::getInstance()->addImamges($request->file('images'), $workId);
         }
         if (!empty($request->post('tags'))) {
             $tagsArray = \explode(',', $request->post('tags'));
@@ -131,6 +131,9 @@ class WorkController extends Controller
     public function edit(int $id)
     {
         $work = (new Work)->getById($id);
+        if ($work['userId'] !== Auth::id()) {
+            abort(404, __('workNotFound'));
+        }
         if (empty($work)) {
             abort(404, __('workNotFound'));
         }
@@ -138,13 +141,17 @@ class WorkController extends Controller
     }
 
     /**
-     * @param int $id
+     * @param Request $request
+     * @param int     $id
      *
-     * @return array|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return View
      */
-    public function show(int $id): View
+    public function show(Request $request, int $id): View
     {
         $work = new Work();
+        if (!$request->user()->authorizeRoles([User::ROLE_MODERATOR, User::ROLE_ADMIN]) || $work['userId'] !== Auth::id()) {
+            abort(404, __('workNotFound'));
+        }
         $work = $work->getById($id);
         if (empty($work)) {
             abort(404, __('work.workNotFound'));
