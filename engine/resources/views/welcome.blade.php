@@ -23,7 +23,6 @@
                     @endforeach
                 </div>
                 @endif
-                {{--<a href="{{ route('workEdit', ['id' => $workId]) }}"></a>--}}
             </div>
         </div>
         <a href="#products" class="scrollDown">

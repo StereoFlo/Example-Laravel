@@ -95,12 +95,20 @@
     .fa {
       transition: all 0.2s ease-in-out;
       &:hover {
-        transform: scale(1.3);
+        transform: scale(1.1);
       }
     }
 
   }
+  &__edit {
+    &:hover {
+      color: $olive;
+    }
+  }
   &__remove {
     margin-left: 20px;
+    &:hover {
+      color: $red;
+    }
   }
 }

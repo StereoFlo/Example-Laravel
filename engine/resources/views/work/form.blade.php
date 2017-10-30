@@ -42,9 +42,16 @@
                 @endif
             </span>
                 @if(!empty($work['tags']))
-                    @foreach($work['tags'] as $tag)
-                        <a id="tag_{{ $tag['id'] }}" href="{{ route('deleteFromWork', ['tagId' => $tag['id'], 'workId' => $work['id']]) }}">{{ $tag['tag'] }}</a>
-                    @endforeach
+                    <div class="tags">
+                        @foreach($work['tags'] as $tag)
+
+                            <a id="tag_{{ $tag['id'] }}" href="{{ route('deleteFromWork', ['tagId' => $tag['id'], 'workId' => $work['id']]) }}" class="tag">
+                                <span class="name">{{ $tag['tag'] }}</span>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+{{--                            <a id="tag_{{ $tag['id'] }}" href="{{ route('deleteFromWork', ['tagId' => $tag['id'], 'workId' => $work['id']]) }}">{{ $tag['tag'] }}</a>--}}
+                        @endforeach
+                    </div>
                 @endif
             </div>
 
@@ -61,14 +68,31 @@
                 @endif
             </span>
                 @if(!empty($work['images']))
-                    @foreach($work['images'] as $image)
-                        @if($image['isDefault'])
-                            <p>изображение по умолчанию - {{ $image['link'] }} (<a href="{{ route('imageDeleteFromWork', ['workId' => $work['id'], 'imageId' => $image['id']]) }}">X</a>)</p>
-                        @else
-                            <p>{{ $image['link'] }} (<a href="{{ route('imageDeleteFromWork', ['workId' => $work['id'], 'imageId' => $image['id']]) }}">X</a>)</p>
-                        @endif
+                    <div class="imageGroup">
+                        @foreach($work['images'] as $image)
 
-                    @endforeach
+                            @if($image['isDefault'])
+                                <div class="image">
+                                    <div class="default">
+                                        <i class="fa fa-check-square" aria-hidden="true"></i>
+                                    </div>
+                                    <img src="{{ $image['link'] }}" alt="">
+                                    <a href="{{ route('imageDeleteFromWork', ['workId' => $work['id'], 'imageId' => $image['id']]) }}" class="del">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            @else
+                                <div class="image">
+                                    <img src="{{ $image['link'] }}" alt="">
+                                    <a href="{{ route('imageDeleteFromWork', ['workId' => $work['id'], 'imageId' => $image['id']]) }}" class="del">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                                {{--<p>{{ $image['link'] }} (<a href="{{ route('imageDeleteFromWork', ['workId' => $work['id'], 'imageId' => $image['id']]) }}">X</a>)</p>--}}
+                            @endif
+
+                        @endforeach
+                    </div>
                 @endif
             </div>
 

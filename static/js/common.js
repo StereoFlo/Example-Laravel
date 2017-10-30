@@ -15,6 +15,23 @@ $(document).ready(function () {
         }
     });
 
+    $('.menu__btn').on('click', function (e) {
+        e.preventDefault();
+        var navSelector = $('.nav');
+
+        if ($(window).width() < 768) {
+            var headerHeight = $('.header').innerHeight();
+            navSelector.css('top', headerHeight);
+            navSelector.slideToggle();
+            navSelector.toggleClass('opacity');
+        }
+        else {
+            navSelector.toggleClass('opacity');
+        }
+
+    });
+
+
 
 
     $(".side-title a").click(
@@ -83,15 +100,7 @@ $(document).ready(function () {
         scrollSpeed: 900,
         scrollEasing: "easeInOutSine"
     });
-    $('.menu__btn').on('click', function () {
-        var navSelector = $('.nav');
-        if ($(window).width() < 1000) {
-            var headerHeight = $('.header').innerHeight();
-            navSelector.css('top', headerHeight);
-        }
-        navSelector.slideToggle();
-        console.log(headerHeight);
-    });
+
 
     //ImagesUploadPreview
 
@@ -147,74 +156,74 @@ $(document).ready(function () {
 
     //textEditor
 
-    $('textarea').richText({
-
-        // text formatting
-        bold: true,
-        italic: true,
-        underline: true,
-
-        // text alignment
-        leftAlign: true,
-        centerAlign: true,
-        rightAlign: true,
-
-        // lists
-        ol: true,
-        ul: true,
-
-        // title
-        heading: true,
-
-        // fonts
-        fonts: false,
-        fontList: [ "Arial",
-            "Arial Black",
-            "Comic Sans MS",
-            "Courier New",
-            "Geneva",
-            "Georgia",
-            "Helvetica",
-            "Impact",
-            "Lucida Console",
-            "Tahoma",
-            "Times New Roman",
-            "Verdana"
-        ],
-        fontColor: true,
-
-        // uploads
-        imageUpload: true,
-        fileUpload: false,
-
-        // media
-        videoEmbed: true,
-
-        // link
-        urls: false,
-
-        // tables
-        table: true,
-
-        // code
-        removeStyles: true,
-        code: true,
-
-        // colors
-        colors: [],
-
-        // dropdowns
-        fileHTML: '',
-        imageHTML: '',
-
-        // developer settings
-        useSingleQuotes: false,
-        height: 0,
-        heightPercentage: 0,
-        id: "",
-        class: "",
-        useParagraph: false
-    });
+    // $('textarea').richText({
+    //
+    //     // text formatting
+    //     bold: true,
+    //     italic: true,
+    //     underline: true,
+    //
+    //     // text alignment
+    //     leftAlign: true,
+    //     centerAlign: true,
+    //     rightAlign: true,
+    //
+    //     // lists
+    //     ol: true,
+    //     ul: true,
+    //
+    //     // title
+    //     heading: true,
+    //
+    //     // fonts
+    //     fonts: false,
+    //     fontList: [ "Arial",
+    //         "Arial Black",
+    //         "Comic Sans MS",
+    //         "Courier New",
+    //         "Geneva",
+    //         "Georgia",
+    //         "Helvetica",
+    //         "Impact",
+    //         "Lucida Console",
+    //         "Tahoma",
+    //         "Times New Roman",
+    //         "Verdana"
+    //     ],
+    //     fontColor: true,
+    //
+    //     // uploads
+    //     imageUpload: true,
+    //     fileUpload: false,
+    //
+    //     // media
+    //     videoEmbed: true,
+    //
+    //     // link
+    //     urls: false,
+    //
+    //     // tables
+    //     table: true,
+    //
+    //     // code
+    //     removeStyles: true,
+    //     code: true,
+    //
+    //     // colors
+    //     colors: [],
+    //
+    //     // dropdowns
+    //     fileHTML: '',
+    //     imageHTML: '',
+    //
+    //     // developer settings
+    //     useSingleQuotes: false,
+    //     height: 0,
+    //     heightPercentage: 0,
+    //     id: "",
+    //     class: "",
+    //     useParagraph: false
+    // });
 
 
 
