@@ -149,12 +149,12 @@ class WorkController extends Controller
     public function show(Request $request, int $id): View
     {
         $work = new Work();
-        if (!$request->user()->authorizeRoles([User::ROLE_MODERATOR, User::ROLE_ADMIN]) || $work['userId'] !== Auth::id()) {
-            abort(404, __('workNotFound'));
-        }
         $work = $work->getById($id);
         if (empty($work)) {
             abort(404, __('work.workNotFound'));
+        }
+        if (!$request->user()->authorizeRoles([User::ROLE_MODERATOR, User::ROLE_ADMIN]) || $work['userId'] !== Auth::id()) {
+            abort(404, __('workNotFound'));
         }
         return view('work.show', ['work' => $work]);
     }
