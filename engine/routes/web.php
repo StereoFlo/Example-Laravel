@@ -8,6 +8,9 @@ Auth::routes();
 Route::get('/{index}', 'MainController@index')->where('index', '^(index\.html$|index\.jsp$|index\.php$)?');
 Route::get('/login/ajax', 'Auth\\LoginController@ajaxLogin');
 Route::get('/register/ajax', 'Auth\\RegisterController@ajaxRegister');
+Route::get('/news', 'NewsController@getList');
+Route::get('/news/page/{id}', 'NewsController@getList')->where('id', '[0-9]+');
+Route::get('/news/{id}', 'NewsController@show')->where('id', '[0-9]+');
 
 Route::group(['middleware' => 'isAdmin'], function () {
     Route::get('/manager/user/list', 'Manager\\User@list')->name('managerUserList');
