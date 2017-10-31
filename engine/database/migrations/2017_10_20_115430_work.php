@@ -22,6 +22,7 @@ class Work extends Migration
             $table->boolean('approved')->default(false);
             $table->timestamps();
             $table->index('userId');
+            $table->index('approved');
         });
     }
 

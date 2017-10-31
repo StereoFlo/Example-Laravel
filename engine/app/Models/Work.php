@@ -92,4 +92,15 @@ class Work extends Model
         return $work->id ?: 0;
     }
 
+    /**
+     * @return array
+     */
+    public function getUnapproved()
+    {
+        $result = $this->select('work.*', 'users.id as userId', 'users.name as userName')->join('users', 'users.id', '=', 'work.userId')->where('approved', false)->get();
+        if (empty($result) || empty($result->toArray())) {
+            return [];
+        }
+        return $result->toArray();
+    }
 }

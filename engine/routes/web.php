@@ -16,7 +16,7 @@ Route::group(['middleware' => 'isAdmin'], function () {
     Route::get('/manager/user/role/remove/{userId}/{roleId}', 'Manager\\User@removeRole')->where('userId', '[0-9]+')->where('roleId', '[0-9]+');
 });
 
-Route::group(['middleware' => 'isModerator', 'isModerator'], function () {
+Route::group(['middleware' => 'isModerator'], function () {
     Route::get('/manager/slogan', 'Manager\\SloganController@index')->name('sloganIndex');
     Route::post('/manager/slogan/update', 'Manager\\SloganController@update')->name('sloganUpdate');
     Route::get('/manager/icon/list', 'Manager\\Icon@list');
@@ -25,6 +25,7 @@ Route::group(['middleware' => 'isModerator', 'isModerator'], function () {
     Route::get('/manager/news/{id}/delete', 'Manager\\News@delete')->where('id', '[0-9]+')->name('newsDelete');
     Route::get('/manager/news/{id}/update', 'Manager\\News@update')->where('id', '[0-9]+')->name('newsUpdate');
     Route::post('/manager/news/process', 'Manager\\News@process')->name('newsProcess');
+    Route::get('/manager/work/list', 'Manager\\Work@getUnapprovedList');
 });
 
 // profile change
