@@ -13,15 +13,21 @@
                 </div>
 
                 @if(!empty($news))
-                <div class="news">
-                    @foreach($news as $item)
-                    <div class="news__item">
-                        <h4 class="news__name">{{ $item['name'] }}</h4>
-                        <span class="news__date">{{ date('d.m.Y', strtotime($item['created_at'])) }}</span>
-                        <p class="news__text">{{ $item['content'] }}</p>
+
+                    <div class="news">
+
+                            @foreach($news as $item)
+                            <a href="{{ route('news') }}">
+                                <div class="news__item">
+                                    <h4 class="news__name">{{ $item['name'] }}</h4>
+                                    <span class="news__date">{{ date('d.m.Y', strtotime($item['created_at'])) }}</span>
+                                    <p class="news__text">{{ $item['content'] }}</p>
+                                </div>
+                            </a>
+                            @endforeach
+
                     </div>
-                    @endforeach
-                </div>
+
                 @endif
             </div>
         </div>

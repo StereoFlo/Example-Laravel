@@ -17,6 +17,7 @@
 @import "includes/workAdd";
 @import "includes/work";
 @import "includes/auth";
+@import "includes/allNews";
 @import "includes/footer";
 
 * {
@@ -55,10 +56,7 @@ figure {
   background: #f3f1f1;
   flex-grow: 1;
   position: relative;
-  padding-top: 150px;
-  @include max-screen($break_xxs) {
-    padding-top: 100px;
-  }
+  padding-top: 100px;
   &_home {
     padding-top: 0;
   }
@@ -116,6 +114,9 @@ figure {
 
 .sectionTitle {
   margin-bottom: 60px;
+  @include max-screen($break_xs) {
+    margin-bottom: 40px;
+  }
   h2 {
     text-align: center;
     margin: 0;

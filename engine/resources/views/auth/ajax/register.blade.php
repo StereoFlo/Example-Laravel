@@ -5,45 +5,12 @@
         {{ csrf_field() }}
 
         <div class="inputGroup{{ $errors->has('name') ? ' has-error' : '' }}">
-            <label for="email">имя:</label>
+            <label for="name">имя:</label>
             <input id="name" class="registrationForm__name" type="text" name="name" value="{{ old('name') }}" required autofocus>
             <i class="fa fa-id-card-o" aria-hidden="true"></i>
             <span class="errorText">
                 @if ($errors->has('name'))
                     <strong>{{ $errors->first('name') }}</strong>
-                @endif
-            </span>
-        </div>
-
-        <div class="inputGroup{{ $errors->has('location') ? ' has-error' : '' }}">
-            <label for="email">город:</label>
-            <input id="location" class="registrationForm__location" type="text" name="location" value="{{ old('location') }}">
-            <i class="fa fa-map-marker" aria-hidden="true"></i>
-            <span class="errorText">
-                @if ($errors->has('location'))
-                    <strong>{{ $errors->first('location') }}</strong>
-                @endif
-            </span>
-        </div>
-
-        <div class="inputGroup{{ $errors->has('phone') ? ' has-error' : '' }}">
-            <label for="email">телефон:</label>
-            <input id="phone" class="registrationForm__phone" type="text" name="phone" value="{{ old('phone') }}">
-            <i class="fa fa-phone-square" aria-hidden="true"></i>
-            <span class="errorText">
-                @if ($errors->has('phone'))
-                    <strong>{{ $errors->first('phone') }}</strong>
-                @endif
-            </span>
-        </div>
-
-        <div class="inputGroup{{ $errors->has('about') ? ' has-error' : '' }}">
-            <label for="email">о себе:</label>
-            <input id="about" class="registrationForm__about" type="text" name="about" value="{{ old('about') }}">
-            <i class="fa fa-file-text-o" aria-hidden="true"></i>
-            <span class="errorText">
-                @if ($errors->has('about'))
-                    <strong>{{ $errors->first('about') }}</strong>
                 @endif
             </span>
         </div>

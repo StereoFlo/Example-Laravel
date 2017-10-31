@@ -9,9 +9,6 @@
     padding-top: 15%;
   }
   @include max-screen($break_xs) {
-    padding-top: 20%;
-  }
-  @include max-screen($break_xxs) {
     padding-top: 25%;
   }
   .flex {
@@ -57,12 +54,16 @@
   @include max-screen($break_xs) {
     @include col-12();
   }
+  a {
+    text-decoration: none;
+  }
   &:hover {
     cursor: pointer;
   }
   &__item {
   }
   &__name {
+    color: $white;
     margin-bottom: 0;
   }
   &__date {
@@ -72,7 +73,7 @@
   &__text {
     text-align: justify;
     color: $link;
-    margin: 5px 0 0;
+    margin: 8px 0 0;
   }
 }
 .slogan {

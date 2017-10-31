@@ -225,6 +225,8 @@ $(document).ready(function () {
     //     useParagraph: false
     // });
 
+    $('input[name="phone"]').inputmask({"mask": "+7(999) 999-9999"});
+
 
 
 });
@@ -234,9 +236,11 @@ $(document).on('click', '#ajaxLoginButton', function () {
     var loginFormsSel = $('.logIn .forms');
     var formData = ajaxLoginSel.serialize();
     var url = ajaxLoginSel.attr('action');
+
     $.post(url, formData)
         .done(function (data) {
             console.log(data);
+
             if (data.auth === true) {
                 $.get('/login/ajax')
                     .done(function (data) {
