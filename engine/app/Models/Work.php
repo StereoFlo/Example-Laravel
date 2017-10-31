@@ -23,6 +23,11 @@ class Work extends Model
         return new self();
     }
 
+    public static function getAll()
+    {
+        self::All();
+    }
+
     /**
      * @param $userId
      *

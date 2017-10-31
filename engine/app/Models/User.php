@@ -240,7 +240,7 @@ class User extends Authenticatable
     /**
      * @return array
      */
-    public function getAll()
+    public static function getAll()
     {
         return self::All();
     }

@@ -22,13 +22,12 @@ Route::group(['middleware' => 'isAdmin'], function () {
 Route::group(['middleware' => 'isModerator'], function () {
     Route::get('/manager/slogan', 'Manager\\SloganController@index')->name('sloganIndex');
     Route::post('/manager/slogan/update', 'Manager\\SloganController@update')->name('sloganUpdate');
-    Route::get('/manager/icon/list', 'Manager\\Icon@list');
     Route::get('/manager/news', 'Manager\\News@getList')->name('newsList');
     Route::get('/manager/news/new', 'Manager\\News@makeNew')->name('newsNew');
     Route::get('/manager/news/{id}/delete', 'Manager\\News@delete')->where('id', '[0-9]+')->name('newsDelete');
     Route::get('/manager/news/{id}/update', 'Manager\\News@update')->where('id', '[0-9]+')->name('newsUpdate');
     Route::post('/manager/news/process', 'Manager\\News@process')->name('newsProcess');
-    Route::get('/manager/work/list', 'Manager\\Work@getUnapprovedList');
+    Route::get('/manager/work/list', 'Manager\\Work@getUnapprovedList')->name('workListManager');
 });
 
 // profile change

@@ -13,14 +13,22 @@ use RecycleArt\Models\Work;
  * Class User
  * @package RecycleArt\Http\Controllers\Manager
  */
-class User extends Controller
+class User extends ManagerController
 {
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function list()
     {
-        $users = UserModel::getInstance()->getAll();
+        $users = UserModel::getAll();
         return view('manager.user.list', ['users' => $users]);
     }
 

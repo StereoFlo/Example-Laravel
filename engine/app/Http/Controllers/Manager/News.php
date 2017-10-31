@@ -12,7 +12,7 @@ use RecycleArt\Models\News as NewsModel;
  * Class News
  * @package RecycleArt\Http\Controllers\Manager
  */
-class News extends Controller
+class News extends ManagerController
 {
     /**
      * @var NewsModel
@@ -25,6 +25,7 @@ class News extends Controller
     public function __construct()
     {
         $this->newsModel = new NewsModel();
+        parent::__construct();
     }
 
     /**

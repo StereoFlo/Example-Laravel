@@ -24,6 +24,14 @@ class News extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public static function getAll()
+    {
+        return self::All();
+    }
+
+    /**
      * @param int    $limit
      * @param int    $offset
      * @param string $orderBy

@@ -2,15 +2,20 @@
 
 namespace RecycleArt\Http\Controllers\Manager;
 
-use Illuminate\Http\Request;
-use RecycleArt\Http\Controllers\Controller;
-
 /**
  * Class Icon
  * @package RecycleArt\Http\Controllers\Manager
  */
-class Icon extends Controller
+class Icon extends ManagerController
 {
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * @return int
      */

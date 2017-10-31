@@ -11,8 +11,16 @@ use RecycleArt\Models\Slogan as SloganModel;
  * Class Slogan
  * @package RecycleArt\Http\Controllers\Manager
  */
-class SloganController extends Controller
+class SloganController extends ManagerController
 {
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
