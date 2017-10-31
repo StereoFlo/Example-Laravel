@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="profile">
+<section class="profileUpdate">
     <div class="container">
 
         <div class="sectionTitle">
@@ -9,7 +9,7 @@
         </div>
 
         {{ session('updateResult') }}
-        <form method="POST" action="{{ route('profileUpdate') }}" enctype="multipart/form-data" class="form profileForm">
+        <form method="POST" action="{{ route('profileUpdate') }}" enctype="multipart/form-data" class="form profileUpdateForm">
             {{ csrf_field() }}
 
             <div class="inputGroup{{ $errors->has('name') ? ' has-error' : '' }}">

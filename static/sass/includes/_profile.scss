@@ -1,41 +1,114 @@
-.profile {
-  background: #f3f1f1;
-  width: 100%;
-  height: 100%;
+.account {
+  @include row-flex();
+  flex-wrap: wrap;
+  justify-content: space-between;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  margin-bottom: 50px;
+  &__card {
+    text-align: center;
+    padding: 20px 15px;
+    //box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    @include col();
+    @include col-3();
+  }
+  &__pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+  }
+  &__login {
+    font-family: 'lato', sans-serif;
+    font-size: 1.3em;
+    font-weight: bold;
+  }
+  &__btn {
+    display: inline-block;
+    text-decoration: none;
+    background: #4a5281;
+    outline: none;
+    margin-bottom: 30px;
+    &:hover {
+      background: darken(#4a5281, 15%);
+    }
+  }
+  &__info {
+    padding: 20px;
+    //box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    @include col();
+    @include col-9();
+  }
+  dt, dd {
+    font-size: 1.2em;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  dt {
+    font-weight: bold;
+    min-width: 80px;
+  }
 }
 
-.profileForm {
-  max-width: 800px;
-  margin: 0 auto;
-  margin-bottom: 30px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  .inputGroup {
-    input {
-      height: 35px;
-    }
-  }
-  .avatar {
+.works {
+  @include row-flex();
+  flex-direction: column;
+  margin-bottom: 60px;
+  &__new {
+    color: #0089ef;
     display: flex;
     align-items: center;
-    img {
-      max-width: 200px;
+    text-decoration: none;
+    max-width: 120px;
+    margin-bottom: 10px;
+    &:hover .fa{
+      color: $olive;
     }
-    a {
-      background: $blue;
+    .fa {
+      font-size: 1.2em;
+      margin: 0 10px;
       text-decoration: none;
-      margin: 0 15px;
-      &:hover {
-        background: darken($blue, 15%);
-      }
+      transition: all 0.2s ease-in-out;
     }
   }
-  button {
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba($black, 0.1);
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  }
+  &__name {
+    color: $black;
+    font-weight: bold;
     font-size: 1.2em;
-    display: block;
-    margin: 30px auto ;
-    background: #e83b3a;
+    margin: 0;
     &:hover {
-      background: darken(#e83b3a, 15%);
+      text-decoration: none;
+    }
+  }
+  &__edit, &__remove {
+    display: inline-block;
+    color: $black;
+    text-decoration: none;
+    font-size: 1.3em;
+    .fa {
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+
+  }
+  &__edit {
+    &:hover {
+      color: $olive;
+    }
+  }
+  &__remove {
+    margin-left: 20px;
+    &:hover {
+      color: $red;
     }
   }
 }

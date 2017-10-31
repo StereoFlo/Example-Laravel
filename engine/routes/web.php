@@ -8,6 +8,9 @@ Auth::routes();
 Route::get('/{index}', 'MainController@index')->where('index', '^(index\.html$|index\.jsp$|index\.php$)?');
 Route::get('/login/ajax', 'Auth\\LoginController@ajaxLogin');
 Route::get('/register/ajax', 'Auth\\RegisterController@ajaxRegister');
+Route::get('/news', 'NewsController@getList');
+Route::get('/news/page/{id}', 'NewsController@getList')->where('id', '[0-9]+');
+Route::get('/news/{id}', 'NewsController@show')->where('id', '[0-9]+');
 
 Route::group(['middleware' => 'isAdmin'], function () {
     Route::get('/manager/user/list', 'Manager\\User@list')->name('managerUserList');
@@ -40,9 +43,14 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/cabinet/work', 'WorkController@getList')->name('workList');
     Route::get('/cabinet/work/new', 'WorkController@add')->name('workAdd');
-    Route::post('/cabinet/work/new/process', 'WorkController@addProcess')->name('workAddProcess');
+    Route::post('/cabinet/work/new/process', 'WorkController@process')->name('workProcess');
     Route::get('/cabinet/work/{id}/remove', 'WorkController@remove')->name('workRemove');
     Route::get('/cabinet/work/{id}/edit', 'WorkController@edit')->name('workEdit');
+    Route::get('/cabinet/work/{id}/edit', 'WorkController@edit')->name('workEdit');
+    Route::get('/cabinet/work/tag/remove/{workId}/{tagId}', 'TagController@deleteFromWork')
+        ->where('workId', '[0-9]+')
+        ->where('tagId', '[0-9]+')
+        ->name('deleteFromWork');
     Route::get('/cabinet/work/{workId}/edit/removeImage/{imageId}', 'WorkController@removeImageFromWork')
         ->where('workId', '[0-9]+')
         ->where('imageId', '[0-9]+')

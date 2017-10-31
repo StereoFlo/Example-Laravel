@@ -5,8 +5,8 @@
         @else
             <img src="{{ Auth::user()->avatar }}" class="entered__pic" alt="">
         @endif
-        <p class="entered__name">{{ Auth::user()->email }}</p>
-        <a href="{{ route('profileForm') }}" class="entered__link">Кабинет</a>
+        <p class="entered__login">{{ Auth::user()->email }}</p>
+        <a href="{{ route('workList') }}" class="entered__link">Кабинет</a>
         <button class="button logoutBtn" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Выйти</button>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             {{ csrf_field() }}

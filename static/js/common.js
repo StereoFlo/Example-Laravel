@@ -1,11 +1,46 @@
 $(document).ready(function () {
 
+    /* ---------------------------------------------- /*
+     * Header
+    /* ---------------------------------------------- */
+
+    var $header = $('header');
+    var $window = $(window);
+
+    $window.scroll(function(){
+        if ( $window.scrollTop() > 200) {
+            $header.addClass("fixed");
+        } else {
+            $header.removeClass('fixed');
+        }
+    });
+
+    $('.menu__btn').on('click', function (e) {
+        e.preventDefault();
+        var navSelector = $('.nav');
+
+        if ($(window).width() < 768) {
+            var headerHeight = $('.header').innerHeight();
+            navSelector.css('top', headerHeight);
+            navSelector.slideToggle();
+            navSelector.toggleClass('opacity');
+        }
+        else {
+            navSelector.toggleClass('opacity');
+        }
+
+    });
+
+
+
+
     $(".side-title a").click(
         function (e) {
             $(e.target).closest('.side').toggleClass('expanded');
         }
     );
     $('.bxslider').bxSlider();
+
     $('a.menu-btn').click(
         function (e) {
             e.preventDefault();
@@ -65,15 +100,7 @@ $(document).ready(function () {
         scrollSpeed: 900,
         scrollEasing: "easeInOutSine"
     });
-    $('.menu__btn').on('click', function () {
-        var navSelector = $('.nav');
-        if ($(window).width() < 1000) {
-            var headerHeight = $('.header').innerHeight();
-            navSelector.css('top', headerHeight);
-        }
-        navSelector.slideToggle();
-        console.log(headerHeight);
-    });
+
 
     //ImagesUploadPreview
 
@@ -96,15 +123,110 @@ $(document).ready(function () {
 
     };
 
-    $('.filearea input[type="file"]').on('change', function() {
+    $('.filearea input').on('change', function() {
 
         imagesPreview(this, 'div.fileareaPreview');
 
-        var filesCount = $(this).length;
+        var filesCount = $(this)[0].files.length;
         $(this).parent('.filearea').addClass('haveFile');
         $(this).siblings('span').html("Добавлен " + filesCount + " файл(ов)")
         console.log($(this).files);
     });
+
+    //Tag delete
+    $('[id^=tag_]').click(function () {
+        var url = $(this).attr('href');
+        var element = $(this);
+        $.get(url)
+            .done(function (data) {
+                if (data.isDeleted === true) {
+                    element.remove();
+                }
+                event.preventDefault();
+                event.stopPropagation();
+            })
+            .fail(function (data) {
+                console.log(data);
+                event.preventDefault();
+                event.stopPropagation();
+            });
+        event.preventDefault();
+        event.stopPropagation();
+    });
+
+    //textEditor
+
+    // $('textarea').richText({
+    //
+    //     // text formatting
+    //     bold: true,
+    //     italic: true,
+    //     underline: true,
+    //
+    //     // text alignment
+    //     leftAlign: true,
+    //     centerAlign: true,
+    //     rightAlign: true,
+    //
+    //     // lists
+    //     ol: true,
+    //     ul: true,
+    //
+    //     // title
+    //     heading: true,
+    //
+    //     // fonts
+    //     fonts: false,
+    //     fontList: [ "Arial",
+    //         "Arial Black",
+    //         "Comic Sans MS",
+    //         "Courier New",
+    //         "Geneva",
+    //         "Georgia",
+    //         "Helvetica",
+    //         "Impact",
+    //         "Lucida Console",
+    //         "Tahoma",
+    //         "Times New Roman",
+    //         "Verdana"
+    //     ],
+    //     fontColor: true,
+    //
+    //     // uploads
+    //     imageUpload: true,
+    //     fileUpload: false,
+    //
+    //     // media
+    //     videoEmbed: true,
+    //
+    //     // link
+    //     urls: false,
+    //
+    //     // tables
+    //     table: true,
+    //
+    //     // code
+    //     removeStyles: true,
+    //     code: true,
+    //
+    //     // colors
+    //     colors: [],
+    //
+    //     // dropdowns
+    //     fileHTML: '',
+    //     imageHTML: '',
+    //
+    //     // developer settings
+    //     useSingleQuotes: false,
+    //     height: 0,
+    //     heightPercentage: 0,
+    //     id: "",
+    //     class: "",
+    //     useParagraph: false
+    // });
+
+
+
 });
 
 $(document).on('click', '#ajaxLoginButton', function () {

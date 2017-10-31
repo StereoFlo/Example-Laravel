@@ -3,31 +3,36 @@
 @import "libs/smart-grid";
 @import "../libs/font-awesome/scss/font-awesome";
 @import "../libs/bxslider-4/dist/jquery.bxslider.css";
+@import "../libs/RichText/richtext.min.css";
 
 @import "fonts";
 @import "variables";
 
-@import "./includes/header";
-@import "./includes/welcome";
-@import "./includes/products";
-@import "./includes/profile";
-@import "./includes/resetLink";
-@import "./includes/workAdd";
-@import "./includes/work";
-@import "./includes/auth";
-@import "./includes/footer";
+@import "includes/header";
+@import "includes/welcome";
+@import "includes/products";
+@import "includes/profile";
+@import "includes/profileUpdate";
+@import "includes/resetLink";
+@import "includes/workAdd";
+@import "includes/work";
+@import "includes/auth";
+@import "includes/footer";
 
 * {
   box-sizing: border-box;
 }
 
 body, html {
-  font-family: 'Geometria', sans-serif;
   position: relative;
-  font-size: 16px;
-  color: $black;
   width: 100%;
   height: 100%;
+}
+body {
+  font-family: 'Geometria', sans-serif;
+  font-size: 16px;
+  color: $black;
+  background: #f3f1f1;
   @include max-screen($break_xs) {
     font-size: 14px;
   }
@@ -59,8 +64,50 @@ figure {
   }
 }
 
+.button {
+  font-family: 'Geometria', sans-serif;
+  color: $white;
+  padding: 0.5em 1.5em;
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  &:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  }
+}
+
+.richText {
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+  .richText-form {
+    button {
+      @extend .button;
+      font-size: 1em;
+      background: #4a5281;
+    }
+  }
+  .richText-editor {
+    overflow: auto;
+  }
+  .richText-help {
+    display: none
+  }
+}
+
 .flex {
   display: flex;
+}
+
+.fixed {
+  position: fixed;
+}
+.opacity {
+  opacity: 1;
 }
 
 .hidden {
@@ -73,9 +120,9 @@ figure {
     text-align: center;
     margin: 0;
     &:after {
-      width: 50px;
+      width: 100px;
       height: 3px;
-      background: #f9c100;
+      background: $gold;
       content: " ";
       display: block;
       margin: 11px auto;
@@ -96,25 +143,78 @@ figure {
   .inputGroup {
     position: relative;
   }
+  .imageGroup {
+    @include row-flex();
+    flex-wrap: wrap;
+    align-items: center;
+    .image {
+      margin: 15px;
+      position: relative;
+      img {
+        width: 150px;
+        height: auto;
+      }
+      .default {
+        display: block;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        .fa {
+          color: $olive;
+        }
+      }
+      .del {
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        .fa {
+          color: $red;
+        }
+        &:hover .fa{
+          transform: scale(1.2);
+        }
+      }
+    }
+  }
+  .tags {
+    @include row-flex();
+    .tag {
+      background: $gray;
+      padding: 3px 6px;
+      margin: 0 15px 15px;
+      color: $black;
+      text-decoration: none;
+      .fa {
+        margin-left: 3px;
+        color: $red;
+        &:hover .fa{
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
   .filearea {
     display: flex;
     width: 100%;
     height: 200px;
     position: relative;
     outline: none;
-    border: 3px dashed $border;
+    margin-top: 1px;
+    border: 2px dashed $border;
+    transition: all 0.2s ease-in-out;
     &:hover {
       cursor: pointer;
-      border-color: $black;
-      background: rgba($white, 0.9);
+      border-color: $gold;
     }
     &:hover span{
-      color: $black;
+      color: darken($border, 15%);
     }
     span {
       color: $border;
       font-weight: bold;
       margin: auto;
+      transition: all 0.2s ease-in-out;
     }
   }
   .haveFile {
@@ -178,16 +278,7 @@ figure {
   }
 }
 
-.button {
-  font-family: 'Geometria', sans-serif;
-  color: $white;
-  padding: 0.5em 1.5em;
-  border: none;
-  outline: none;
-  border-radius: 2px;
-  cursor: pointer;
-  transition: 120ms;
-}
+
 /* slider */
 
 .bx-wrapper {
@@ -196,6 +287,7 @@ figure {
     background: url("../images/slider-prev.png");
     width: 60px !important;
     height: 60px !important;
+    z-index: 99;
   }
   a.bx-next {
     background: url("../images/slider-next.png");

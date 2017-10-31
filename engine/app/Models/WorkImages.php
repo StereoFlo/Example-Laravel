@@ -43,7 +43,11 @@ class WorkImages extends Model
      */
     public static function getbyWorkId(int $workId)
     {
-        return self::where('workId', $workId)->get();
+        $imgs = self::where('workId', $workId)->get();
+        if (empty($imgs) || empty($imgs->toArray())) {
+            return [];
+        }
+        return $imgs->toArray();
     }
 
     /**
@@ -58,14 +62,15 @@ class WorkImages extends Model
         if (empty($images) || empty($images->toArray())) {
             return false;
         }
-
         $isSaved = false;
         foreach ($images as $image) {
             $path = public_path($image->link);
             $isSaved = File::delete($path) && $this->where('id', $imageId)->where('workId', $workId)->delete();
             if ($image->isDefault) {
                 $minId = $this->select('id')->where('workId', $workId)->min('id');
-                $isSaved = $this->where('id', $minId)->update(['isDefault' => true]);
+                if ($minId) {
+                    $isSaved = $this->where('id', $minId)->update(['isDefault' => true]);
+                }
             }
         }
         return $isSaved;
@@ -90,12 +95,43 @@ class WorkImages extends Model
             $newImageName = \md5(\time() . $key) . '.' . \strtolower($file->getClientOriginalExtension());
             $file->move($path, $newImageName);
             $work->workId = $workId;
-            if (0 === $key) {
+            if (0 === $key && !$this->hasDefault($workId)) {
                 $work->isDefault = true;
             }
             $work->link = '/uploads/' . $user->id . '/work/' . $workId . '/' . $newImageName;
             $isSaved = $work->save();
         }
         return $isSaved;
+    }
+
+    /**
+     * @param int $workId
+     *
+     * @return array
+     */
+    public function getDefault(int $workId)
+    {
+        $defaultImage =  $this->where('workId', $workId)->where('isDefault', true)->first();
+        if (empty($defaultImage)) {
+            return [];
+        }
+        return $defaultImage->toArray();
+    }
+
+    /**
+     * @param int $workId
+     *
+     * @return bool
+     */
+    public function hasDefault(int $workId = 0)
+    {
+        if (empty($workId)) {
+            return false;
+        }
+        $hasDefault = $this->where('workId', $workId)->where('isDefault', true)->get();
+        if (empty($hasDefault) || empty($hasDefault->toArray())) {
+            return false;
+        }
+        return true;
     }
 }

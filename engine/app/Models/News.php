@@ -16,6 +16,14 @@ class News extends Model
     protected $fillable = ['name', 'content'];
 
     /**
+     * @return News
+     */
+    public static function getInstance(): self
+    {
+        return new self();
+    }
+
+    /**
      * @param int    $limit
      * @param int    $offset
      * @param string $orderBy

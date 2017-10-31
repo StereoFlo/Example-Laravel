@@ -13,11 +13,10 @@
     <!-- Styles -->
 {{--    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('/static/css/main.css') }}" rel="stylesheet">
-    {{--<link href="{{ asset('/static/libs/summernote/dist/summernote-bs3.css') }}" rel="stylesheet">--}}
 </head>
 <body>
     <div class="wrapper">
-        <header class="header header_dark">
+        <header class="header header_white">
             <div class="container">
                 <div class="flex">
                     <div class="logo">
@@ -76,7 +75,6 @@
 
         <div class="forms"></div>
     </div>
-
 
     <!-- Scripts -->
 {{--    <script src="{{ asset('js/app.js') }}"></script>--}}

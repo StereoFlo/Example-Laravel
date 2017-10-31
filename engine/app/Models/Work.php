@@ -44,19 +44,15 @@ class Work extends Model
      */
     public function getById(int $workId): array
     {
-        $work = $this->join('users', 'users.id', '=', 'work.userId')
+        $work = $this->select('users.name as userName', 'users.id as userId', 'work.*')->join('users', 'users.id', '=', 'work.userId')
             ->where('work.id', $workId)
             ->first();
-        if (empty($work)) {
+        if (empty($work) || empty($work->toArray())) {
             return [];
         }
-        $images = WorkImages::getInstance()->where('workId', $workId)->get();
-        if (!empty($images)) {
-            $images = $images->toArray();
-        }
         $work = $work->toArray();
-        $work['images'] = empty($images) ? null : $images;
-
+        $work['images'] = WorkImages::getbyWorkId($workId);
+        $work['tags'] = (new TagsRel())->getByWork($workId);
         return $work;
     }
 

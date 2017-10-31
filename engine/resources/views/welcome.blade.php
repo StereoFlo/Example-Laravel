@@ -16,12 +16,13 @@
                 <div class="news">
                     @foreach($news as $item)
                     <div class="news__item">
-                        <p>{{ $item['content'] }}</p>
+                        <h4 class="news__name">{{ $item['name'] }}</h4>
+                        <span class="news__date">{{ date('d.m.Y', strtotime($item['created_at'])) }}</span>
+                        <p class="news__text">{{ $item['content'] }}</p>
                     </div>
                     @endforeach
                 </div>
                 @endif
-
             </div>
         </div>
         <a href="#products" class="scrollDown">

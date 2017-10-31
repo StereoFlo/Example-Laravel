@@ -5,9 +5,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Class CreateNewsTable
+ * Class CreateTagsTable
  */
-class CreateNewsTable extends Migration
+class CreateTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,12 +16,11 @@ class CreateNewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('news', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->text('content');
+        Schema::create('tags', function (Blueprint $table) {
+            $table->unsignedInteger('id', true);
+            $table->string('tag');
             $table->timestamps();
-            $table->index(['created_at']);
+            $table->unique('tag');
         });
     }
 
@@ -32,6 +31,6 @@ class CreateNewsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('news');
+        Schema::dropIfExists('tags');
     }
 }
