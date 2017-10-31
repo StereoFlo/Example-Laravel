@@ -13,7 +13,7 @@
                             <ul>
                             @foreach($userRoles as $userRole)
                                 @if(count($userRoles) > 1)
-                                    <li>{{$userRole['name']}} (<a href="{{ url('/manager/user/role/remove/' . $user['id'] . '/' . $userRole['id']) }}">Выключить</a>)</li>
+                                    <li>{{$userRole['name']}} (<a href="{{ route('userRoleRemoveManager',  ['userId' => $user['id'], 'roleId' => $userRole['id']]) }}">Выключить</a>)</li>
                                 @else
                                     <li>{{$userRole['name']}}</li>
                                 @endif
@@ -24,7 +24,7 @@
                             Выключенеые роли:<br>
                         <ul>
                             @foreach($roles as $role)
-                                <li>{{$role['name']}} (<a href="{{ url('/manager/user/role/add/' . $user['id'] . '/' . $role['id']) }}">Включить</a>)</li>
+                                <li>{{$role['name']}} (<a href="{{ route('userRoleAddManager',  ['userId' => $user['id'], 'roleId' => $userRole['id']]) }}">Включить</a>)</li>
                             @endforeach
                         </ul>
                         </p>
@@ -32,7 +32,7 @@
                         @if(empty($works))
                             У пользователя нет пока работ
                         @else
-                            <? var_dump($works); ?>
+                            <p>Все {{ count($works) }} || <a href="{{ route('workListManager') }}">Не проверенные</a> {{ $workCount }}</p>
                         @endif
                     </div>
                 </div>

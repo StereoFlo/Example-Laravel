@@ -13,10 +13,16 @@ Route::get('/news/page/{id}', 'NewsController@getList')->where('id', '[0-9]+');
 Route::get('/news/{id}', 'NewsController@show')->where('id', '[0-9]+');
 
 Route::group(['middleware' => 'isAdmin'], function () {
-    Route::get('/manager/user/list', 'Manager\\User@list')->name('managerUserList');
+    Route::get('/manager/user/list', 'Manager\\User@getList')->name('managerUserList');
     Route::get('/manager/user/show/{userId}', 'Manager\\User@show')->where('userId', '[0-9]+')->name('managerUserShow');
-    Route::get('/manager/user/role/add/{userId}/{roleId}', 'Manager\\User@addRole')->where('userId', '[0-9]+')->where('roleId', '[0-9]+');
-    Route::get('/manager/user/role/remove/{userId}/{roleId}', 'Manager\\User@removeRole')->where('userId', '[0-9]+')->where('roleId', '[0-9]+');
+    Route::get('/manager/user/role/add/{userId}/{roleId}', 'Manager\\User@addRole')
+        ->where('userId', '[0-9]+')
+        ->where('roleId', '[0-9]+')
+        ->name('userRoleAddManager');
+    Route::get('/manager/user/role/remove/{userId}/{roleId}', 'Manager\\User@removeRole')
+        ->where('userId', '[0-9]+')
+        ->where('roleId', '[0-9]+')
+        ->name('userRoleRemoveManager');
 });
 
 Route::group(['middleware' => 'isModerator'], function () {

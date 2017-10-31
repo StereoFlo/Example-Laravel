@@ -26,7 +26,7 @@ class User extends ManagerController
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function list()
+    public function getList()
     {
         $users = UserModel::getAll();
         return view('manager.user.list', ['users' => $users]);
