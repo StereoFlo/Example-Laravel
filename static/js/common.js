@@ -101,6 +101,8 @@ $(document).ready(function () {
         scrollEasing: "easeInOutSine"
     });
 
+    VK.Widgets.Comments("work__comments", {limit: 20, attach: "*"});
+
 
     //ImagesUploadPreview
 

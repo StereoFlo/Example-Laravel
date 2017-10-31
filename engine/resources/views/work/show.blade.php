@@ -79,6 +79,9 @@
                     @endforeach
                 @endif
             </div>
+            <div  id="work__comments" class="work__comments">
+
+            </div>
         </div>
     </section>
 @endsection
