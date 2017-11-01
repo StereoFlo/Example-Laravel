@@ -1,6 +1,7 @@
 .work {
   width: 100%;
   height: 100%;
+  padding: 0 30px;
   &__header {
     justify-content: space-between;
     align-items: center;
@@ -14,6 +15,7 @@
   }
   &__item {
     @include row-flex();
+    margin-bottom: 30px;
   }
   &__slider {
     @include col();
@@ -31,6 +33,9 @@
     @include col-5();
     @include col-md-6();
     @include col-sm-12();
+    @include max-screen($break_sm) {
+      margin-top: 30px;
+    }
     p {
       color: #80909c;
       line-height: 25px;
@@ -94,6 +99,7 @@
   }
   &__circles {
     display: flex;
+    flex-wrap: wrap;
   }
   &__circle {
     display: flex;
@@ -163,6 +169,12 @@
       &:hover {
         color: #161f26;
       }
+    }
+  }
+  &__comments {
+    @include max-screen($break_xxs) {
+      width: calc(100% + 30px) !important;
+      margin: 0 -15px;
     }
   }
 }

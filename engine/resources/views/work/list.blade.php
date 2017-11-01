@@ -22,11 +22,11 @@
                     <dl>
                         <dt>Имя:</dt><dd>{{ Auth::user()->name }}</dd>
                         <br>
-                        <dt>E-mail:</dt><dd>{{ Auth::user()->email }}</dd>
-                        <br>
                         <dt>Город:</dt><dd>{{ Auth::user()->location }}</dd>
                         <br>
                         <dt>Телефон:</dt><dd>{{ Auth::user()->phone }}</dd>
+                        <br>
+                        <dt>О себе:</dt><dd>{{ Auth::user()->about }}</dd>
                     </dl>
                 </div>
             </div>

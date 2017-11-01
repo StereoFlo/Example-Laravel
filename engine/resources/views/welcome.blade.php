@@ -16,7 +16,7 @@
 
                     <div class="news">
 
-                            @foreach($news as $item)
+                        @foreach($news as $item)
                             <a href="{{ route('news') }}">
                                 <div class="news__item">
                                     <h4 class="news__name">{{ $item['name'] }}</h4>
@@ -24,7 +24,7 @@
                                     <p class="news__text">{{ $item['content'] }}</p>
                                 </div>
                             </a>
-                            @endforeach
+                        @endforeach
 
                     </div>
 

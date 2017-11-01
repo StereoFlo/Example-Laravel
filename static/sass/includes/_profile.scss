@@ -1,3 +1,6 @@
+.profile {
+  padding: 0 30px;
+}
 .account {
   @include row-flex();
   flex-wrap: wrap;
@@ -10,6 +13,8 @@
     //box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     @include col();
     @include col-3();
+    @include col-sm-5();
+    @include col-xs-12();
   }
   &__pic {
     width: 150px;
@@ -36,22 +41,42 @@
     //box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     @include col();
     @include col-9();
+    @include col-sm-7();
+    @include col-xs-12();
+  }
+  dl {
+    @include max-screen($break_xs) {
+      margin-top: 0;
+    }
   }
   dt, dd {
     font-size: 1.2em;
     display: inline-block;
     margin-bottom: 10px;
+    @include max-screen($break_xs) {
+      display: block;
+      margin-bottom: 0;
+    }
   }
   dt {
     font-weight: bold;
-    min-width: 80px;
+    text-align: right;
+    width: 100px;
+    @include max-screen($break_xs) {
+      text-align: left;
+    }
+  }
+  dd {
+    @include max-screen($break_xs) {
+      margin: 0;
+    }
   }
 }
 
 .works {
-  @include row-flex();
+  display: flex;
   flex-direction: column;
-  margin-bottom: 60px;
+  margin: 0 -15px 60px -15px;
   &__new {
     color: #0089ef;
     display: flex;
@@ -83,6 +108,14 @@
     font-weight: bold;
     font-size: 1.2em;
     margin: 0;
+    @include max-screen($break_xs) {
+      max-width: 250px;
+      overflow: hidden;
+    }
+    @include max-screen($break_xs) {
+      max-width: 190px;
+      overflow: hidden;
+    }
     &:hover {
       text-decoration: none;
     }

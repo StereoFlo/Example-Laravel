@@ -18,8 +18,18 @@
                             @endforeach
                         @endif
                     </ul>
+                    <div id="bx-pager">
+                        @if (empty($work['images']))
+                            <p>У этой работы нет изображений</p>
+                        @else
+                            @foreach ($work['images'] as $image)
+                                <a data-slide-index="{{$image['id']}}" href=""><img src="{{$image['link']}}" /></a>
+                            @endforeach
+                        @endif
+                    </div>
                 </div>
                 <div class="work__desc">
+{{--                    {{ var_dump($work) }}--}}
                     <p>
                         {{$work['description']}}
                     </p>
@@ -30,10 +40,6 @@
                     <div class="work__likes">
                         <a href="#"></a>
                         <span>0</span>
-                    </div>
-                    <div class="work__commentsNum">
-                        <a href="#"></a>
-                        <span>15</span>
                     </div>
                 </div>
                 <div class="work__circles">
@@ -67,7 +73,7 @@
                     </div>
                 </div>
 
-                <button class="work__buyBtn button">Заказать</button>
+                {{--<button class="work__buyBtn button">Заказать</button>--}}
             </div>
             <div class="work__meta">
                 @if (empty($work['tags']))
