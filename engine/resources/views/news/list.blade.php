@@ -1,7 +1,5 @@
 @extends('layouts.app')
 @section('content')
-{{--{{ var_dump($news) }}--}}
-
     <section class="allNews">
         <div class="container">
             <div class="sectionTitle">
@@ -22,12 +20,16 @@
             @endif
 
             <div class="allNews__controls">
-                <a href="#" class="allNews__prew">
-                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                </a>
-                <a href="#" class="allNews__next">
-                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                </a>
+                @if($currentPage > 0)
+                    <a href="{{ url('news/page/' . $page - 1) }}" class="allNews__prew">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                    </a>
+                @endif
+                @if(($newsCount / $parPage) > 1)
+                    <a href="#" class="allNews__next">
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                @endif
             </div>
         </div>
     </section>

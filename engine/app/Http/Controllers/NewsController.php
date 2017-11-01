@@ -21,7 +21,12 @@ class NewsController extends Controller
     public function getList(int $page = 0)
     {
         $news = News::getInstance()->getList(self::NEWS_PER_PAGE, $page);
-        return view('news.list', ['news' => $news, 'currentPage' => $page]);
+        return view('news.list', [
+            'news'        => $news,
+            'currentPage' => $page,
+            'parPage'     => self::NEWS_PER_PAGE,
+            'newsCount'   => \count($news),
+        ]);
     }
 
     /**
