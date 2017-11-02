@@ -14,6 +14,8 @@ use RecycleArt\Models\News as NewsModel;
  */
 class News extends ManagerController
 {
+    const NEWS_PER_PAGE = 15;
+
     /**
      * @var NewsModel
      */
@@ -29,12 +31,19 @@ class News extends ManagerController
     }
 
     /**
+     * @param int $page
+     *
      * @return Factory|\Illuminate\View\View
      */
-    public function getList()
+    public function getList(int $page = 0)
     {
-        $news = $this->newsModel->getList();
-        return view('manager.news.list', ['news' => $news]);
+        $news = $this->newsModel->getList(self::NEWS_PER_PAGE, $page);
+        return view('manager.news.list', [
+            'news'        => $news,
+            'currentPage' => $page,
+            'parPage'     => self::NEWS_PER_PAGE,
+            'newsCount'   => \count($news),
+        ]);
     }
 
     /**

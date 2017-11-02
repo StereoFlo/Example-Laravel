@@ -29,6 +29,14 @@
                             @endforeach
                         </table>
                         @endif
+                        <ul class="pagination">
+                            @if($currentPage > 0)
+                                <li><a href="{{ route('newsListPage', ['id' => $currentPage - 1]) }}">«</a></li>
+                            @endif
+                            @if(($newsCount / $parPage) > 0 && ($newsCount / $parPage) > $currentPage )
+                                    <li><a href="{{ route('newsListPage', ['id' => $currentPage + 1]) }}">»</a></li>
+                            @endif
+                        </ul>
                     </div>
                 </div>
             </div>

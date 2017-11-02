@@ -30,6 +30,7 @@ Route::group(['middleware' => 'isModerator'], function () {
     Route::get('/manager/slogan', 'Manager\\SloganController@index')->name('sloganIndex');
     Route::post('/manager/slogan/update', 'Manager\\SloganController@update')->name('sloganUpdate');
     Route::get('/manager/news', 'Manager\\News@getList')->name('newsList');
+    Route::get('/manager/news/page/{id}', 'Manager\\News@getList')->where('id', '[0-9]+')->name('newsListPage');
     Route::get('/manager/news/new', 'Manager\\News@makeNew')->name('newsNew');
     Route::get('/manager/news/{id}/delete', 'Manager\\News@delete')->where('id', '[0-9]+')->name('newsDelete');
     Route::get('/manager/news/{id}/update', 'Manager\\News@update')->where('id', '[0-9]+')->name('newsUpdate');

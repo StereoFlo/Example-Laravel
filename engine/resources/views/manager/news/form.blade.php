@@ -14,7 +14,7 @@
                             <div class="form-group">
                                 <label for="name" class="col-md-4 control-label">Название</label>
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="name" value="<?= isset($news['name']) ? $news['name'] : ''?>" required autofocus>
+                                    <input id="name" type="text" class="form-control" name="name" value="{{ isset($news['name']) ? $news['name'] : ''}}" required autofocus>
                                     @if ($errors->has('name'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -26,7 +26,7 @@
                             <div class="form-group">
                                 <label for="content" class="col-md-4 control-label">Содержание</label>
                                 <div class="col-md-6">
-                                    <textarea id="content" name="content"><?= isset($news['content']) ?: null; ?></textarea>
+                                    <textarea id="content" name="content">{{ isset($news['content']) ? $news['content'] : null }}</textarea>
 
                                     @if ($errors->has('content'))
                                         <span class="help-block">

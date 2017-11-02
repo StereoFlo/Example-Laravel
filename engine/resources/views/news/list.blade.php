@@ -21,12 +21,12 @@
 
             <div class="allNews__controls">
                 @if($currentPage > 0)
-                    <a href="{{ url('news/page/' . $page - 1) }}" class="allNews__prew">
+                    <a href="{{ url('news/page', ['id' => $currentPage - 1]) }}" class="allNews__prew">
                         <i class="fa fa-arrow-left" aria-hidden="true"></i>
                     </a>
                 @endif
-                @if(($newsCount / $parPage) > 1)
-                    <a href="#" class="allNews__next">
+                @if(($newsCount / $parPage) > 0 && ($newsCount / $parPage) > $currentPage )
+                    <a href="{{ url('news/page', ['id' => $currentPage + 1]) }}" class="allNews__next">
                         <i class="fa fa-arrow-right" aria-hidden="true"></i>
                     </a>
                 @endif
