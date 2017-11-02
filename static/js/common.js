@@ -42,10 +42,7 @@ $(document).ready(function () {
     $('.bxslider').bxSlider({
         mode: 'fade',
         pagerCustom: '#bx-pager',
-        pagerType: 'full',
-        buildPager: function(slideIndex){
-            return slideIndex - 1;
-        }
+        pagerType: 'full'
     });
 
     $('a.menu-btn').click(
@@ -108,7 +105,16 @@ $(document).ready(function () {
         scrollEasing: "easeInOutSine"
     });
 
-    VK.Widgets.Comments("work__comments", {limit: 20, attach: "*"});
+    if($('div').is('#work__comments')) {
+        VK.Widgets.Comments("work__comments", {limit: 20, attach: "*"});
+    }
+
+    if( $('.modal__message').is(':empty')) {
+        return false;
+    }
+    else {
+        $('#sessionUpdateResult').pignosePopup();
+    }
 
 
     //ImagesUploadPreview
@@ -163,81 +169,21 @@ $(document).ready(function () {
         event.stopPropagation();
     });
 
-    //textEditor
-
-    // $('textarea').richText({
-    //
-    //     // text formatting
-    //     bold: true,
-    //     italic: true,
-    //     underline: true,
-    //
-    //     // text alignment
-    //     leftAlign: true,
-    //     centerAlign: true,
-    //     rightAlign: true,
-    //
-    //     // lists
-    //     ol: true,
-    //     ul: true,
-    //
-    //     // title
-    //     heading: true,
-    //
-    //     // fonts
-    //     fonts: false,
-    //     fontList: [ "Arial",
-    //         "Arial Black",
-    //         "Comic Sans MS",
-    //         "Courier New",
-    //         "Geneva",
-    //         "Georgia",
-    //         "Helvetica",
-    //         "Impact",
-    //         "Lucida Console",
-    //         "Tahoma",
-    //         "Times New Roman",
-    //         "Verdana"
-    //     ],
-    //     fontColor: true,
-    //
-    //     // uploads
-    //     imageUpload: true,
-    //     fileUpload: false,
-    //
-    //     // media
-    //     videoEmbed: true,
-    //
-    //     // link
-    //     urls: false,
-    //
-    //     // tables
-    //     table: true,
-    //
-    //     // code
-    //     removeStyles: true,
-    //     code: true,
-    //
-    //     // colors
-    //     colors: [],
-    //
-    //     // dropdowns
-    //     fileHTML: '',
-    //     imageHTML: '',
-    //
-    //     // developer settings
-    //     useSingleQuotes: false,
-    //     height: 0,
-    //     heightPercentage: 0,
-    //     id: "",
-    //     class: "",
-    //     useParagraph: false
-    // });
-
     $('input[name="phone"]').inputmask({"mask": "+7(999) 999-9999"});
 
-
-
+    $('#profileUpdateForm').submit(function () {
+        var formID = $(this).attr('id');
+        var formNm = $('#' + formID);
+        var formData = formNm.serialize();
+        var url = formNm.attr('action');
+        $.post(url, formData)
+            .done(function (data) {
+                console.log(data)
+            }).fail(function (data) {
+            //todo
+            console.log(data)
+        });
+    });
 });
 
 $(document).on('click', '#ajaxLoginButton', function () {

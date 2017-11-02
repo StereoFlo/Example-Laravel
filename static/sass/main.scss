@@ -115,7 +115,7 @@ figure {
 
 section {
   margin-bottom: 60px;
-  padding: 0 15px;
+  padding: 0 30px;
 }
 
 .sectionTitle {
@@ -123,7 +123,7 @@ section {
   @include max-screen($break_xs) {
     margin-bottom: 40px;
   }
-  h2 {
+  h2, h1 {
     text-align: center;
     margin: 0;
     &:after {
@@ -143,10 +143,26 @@ section {
   height: 100%;
 }
 
+.modal {
+  text-align: center;
+  background: $white;
+  padding: 30px;
+  &__link {
+    color: #0089ef;
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  &__button {
+    display: inline-block;
+    background: #e83b3a;
+  }
+}
+
 .form {
   font-family: 'Geometria', sans-serif;
   padding: 30px 30px;
-  //margin-bottom: 100px;
   &__title {
     text-align: center;
     h1 {

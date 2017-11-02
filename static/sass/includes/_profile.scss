@@ -55,20 +55,25 @@
     margin-bottom: 10px;
     @include max-screen($break_xs) {
       display: block;
-      margin-bottom: 0;
+      margin-bottom: 3px;
     }
   }
   dt {
     font-weight: bold;
     text-align: right;
+    vertical-align: top;
     width: 100px;
+    margin-right: 30px;
     @include max-screen($break_xs) {
       text-align: left;
     }
   }
   dd {
+    text-align: justify;
+    margin: 0;
+    max-width: calc(100% - 130px);
     @include max-screen($break_xs) {
-      margin: 0;
+      max-width: 100%;
     }
   }
 }

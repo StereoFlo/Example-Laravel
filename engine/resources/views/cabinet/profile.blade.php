@@ -8,8 +8,8 @@
             <h2>Обновление профиля</h2>
         </div>
 
-        {{ session('updateResult') }}
-        <form method="POST" action="{{ route('profileUpdate') }}" enctype="multipart/form-data" class="form profileUpdateForm">
+
+        <form method="POST" action="{{ route('profileUpdate') }}" enctype="multipart/form-data" id="profileUpdateForm" class="form profileUpdateForm">
             {{ csrf_field() }}
 
             <div class="inputGroup{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -107,4 +107,11 @@
         </form>
     </div>
 </section>
+
+<div id="sessionUpdateResult" class="modal hidden">
+    <h2 class="modal__message">{{ session('updateResult') }}</h2>
+    <p>Вернуться в <a href="" class="modal__link">Кабинет</a></p>
+    <button class="modal__button button btn_close">Закрыть</button>
+</div>
+
 @endsection

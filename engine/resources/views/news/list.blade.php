@@ -3,7 +3,7 @@
     <section class="allNews">
         <div class="container">
             <div class="sectionTitle">
-                <h2>Новости</h2>
+                <h1>Новости</h1>
             </div>
 
             @if(!empty($news))
@@ -16,6 +16,10 @@
                             <p class="allNews__text">{{ $item['content'] }}</p>
                         </div>
                     @endforeach
+                </div>
+            @else
+                <div class="news__item">
+                    <p>Новостей пока нет</p>
                 </div>
             @endif
 

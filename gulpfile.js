@@ -36,7 +36,7 @@ gulp.task('scripts', function() {
     'static/libs/bxslider-4/dist/jquery.bxslider.min.js',
     'static/libs/page-scroll-to-id/jquery.malihu.PageScroll2id.js',
     'static/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js',
-    'static/libs/inputmask/dist/min/inputmask/inputmask.extensions.min.js'
+    'static/libs/pg-popup/dist/pignose.popup.min.js'
   ])
   .pipe(concat('libs.min.js')) // Собираем их в кучу в новом файле libs.min.js
   .pipe(uglify()) // Сжимаем JS файл
