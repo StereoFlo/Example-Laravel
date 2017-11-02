@@ -16,7 +16,7 @@
         </form>
     </div>
 @else
-    <form id="ajaxLogin" class="signIn" method="POST" action="{{ route('login') }}" onsubmit="return false;">
+    <form id="ajaxLogin" class="signIn" method="POST" action="{{ route('login') }}">
         {{ csrf_field() }}
 
         <div class="inputGroup{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -25,8 +25,8 @@
             <i class="fa fa-user" aria-hidden="true"></i>
             <span class="errorText">
                 @if ($errors->has('email'))
-                            <strong>{{ $errors->first('email') }}</strong>
-                        @endif
+                    <strong>{{ $errors->first('email') }}</strong>
+                @endif
             </span>
         </div>
 
@@ -36,8 +36,8 @@
             <i class="fa fa-unlock-alt" aria-hidden="true"></i>
             <span class="errorText">
                 @if ($errors->has('password'))
-                            <strong>{{ $errors->first('password') }}</strong>
-                        @endif
+                    <strong>{{ $errors->first('password') }}</strong>
+                @endif
             </span>
         </div>
 
@@ -47,7 +47,7 @@
 
         <div class="signIn__buttons">
             <a href="{{route('password.request')}}" class="signIn__forgot">забыл пароль :(</a>
-            <button id="ajaxLoginButton" type="button" name="button" class="button signIn__enter">войти</button>
+            <button type="submit" name="button" class="button signIn__enter">войти</button>
         </div>
         <a href="#" id="toReg" class="formToggle">Регистрация</a>
 
