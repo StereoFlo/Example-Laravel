@@ -7,6 +7,9 @@
         @endif
         <p class="entered__login">{{ Auth::user()->email }}</p>
         <a href="{{ route('workList') }}" class="entered__link">Кабинет</a>
+        @if (Auth::user()->isModerator())
+            <a href="{{ route('managerIndex') }}" class="entered__link">Админка</a>
+        @endif
         <button class="button logoutBtn" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Выйти</button>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             {{ csrf_field() }}
