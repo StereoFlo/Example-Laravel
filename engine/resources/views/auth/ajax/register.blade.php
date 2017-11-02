@@ -45,7 +45,7 @@
         </div>
 
         <div class="registrationForm__buttons">
-            <button id="ajaxRegistrationButton" type="button" name="button" class="button registrationForm__enter">регистрация</button>
+            <button type="submit" name="button" class="button registrationForm__enter">регистрация</button>
         </div>
 
         <a href="#" id="toLog" class="formToggle">Вход</a>

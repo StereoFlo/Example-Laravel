@@ -22,4 +22,12 @@ class ManagerController extends Controller
         View::share('workCount', \count((new Work())->getUnapproved()));
         View::share('newsCount', \RecycleArt\Models\News::getAll()->count());
     }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index()
+    {
+        return \view('manager.shared.index');
+    }
 }

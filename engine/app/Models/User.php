@@ -204,7 +204,7 @@ class User extends Authenticatable
 
 
     /**
-     * @param $roles
+     * @param array|string $roles
      *
      * @return bool
      */
@@ -216,12 +216,20 @@ class User extends Authenticatable
                     return true;
                 }
             }
-        } else {
-            if ($this->hasRole($roles)) {
-                return true;
-            }
+            return false;
+        }
+        if ($this->hasRole($roles)) {
+            return true;
         }
         return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isModerator()
+    {
+        return $this->hasAnyRole([self::ROLE_ADMIN, self::ROLE_MODERATOR]);
     }
 
     /**

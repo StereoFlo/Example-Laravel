@@ -4,18 +4,18 @@ $(document).ready(function () {
      * Header
     /* ---------------------------------------------- */
 
-    var $header = $('header');
-    var $window = $(window);
+    var header = $('header');
+    var window = $(window);
 
-    $window.scroll(function(){
-        if ( $window.scrollTop() > 200) {
-            $header.addClass("fixed");
+    window.scroll(function(){
+        if ( window.scrollTop() > 200) {
+            header.addClass("fixed");
         } else {
-            $header.removeClass('fixed');
+            header.removeClass('fixed');
         }
     });
 
-    $('.menu__btn').on('click', function (e) {
+    $('.menu__btn').click(function (e) {
         e.preventDefault();
         var navSelector = $('.nav');
 
@@ -52,7 +52,7 @@ $(document).ready(function () {
         }
     );
 
-    $('.user__btn, .logIn__close').on('click', function () {
+    $('.user__btn, .logIn__close').click(function () {
 
         $('.logIn .forms').empty();
 
@@ -105,7 +105,7 @@ $(document).ready(function () {
         scrollEasing: "easeInOutSine"
     });
 
-    if($('div').is('#work__comments')) {
+    if ($("#work__comments").length) {
         VK.Widgets.Comments("work__comments", {limit: 20, attach: "*"});
     }
 
@@ -117,21 +117,18 @@ $(document).ready(function () {
     }
 
 
+
     //ImagesUploadPreview
 
     var imagesPreview = function(input, placeToInsertImagePreview) {
 
         if (input.files) {
             var filesAmount = input.files.length;
-
-
             for (i = 0; i < filesAmount; i++) {
                 var reader = new FileReader();
-
                 reader.onload = function(event) {
                     $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
-                }
-
+                };
                 reader.readAsDataURL(input.files[i]);
             }
         }
@@ -144,7 +141,7 @@ $(document).ready(function () {
 
         var filesCount = $(this)[0].files.length;
         $(this).parent('.filearea').addClass('haveFile');
-        $(this).siblings('span').html("Добавлен " + filesCount + " файл(ов)")
+        $(this).siblings('span').html("Добавлен " + filesCount + " файл(ов)");
         console.log($(this).files);
     });
 
@@ -186,44 +183,50 @@ $(document).ready(function () {
     });
 });
 
-$(document).on('click', '#ajaxLoginButton', function () {
-    var ajaxLoginSel = $('#ajaxLogin');
-    var loginFormsSel = $('.logIn .forms');
-    var formData = ajaxLoginSel.serialize();
-    var url = ajaxLoginSel.attr('action');
+$(document).on('submit', '#ajaxLogin', function (e) {
+    e.preventDefault();
+    var formData = $(this).serialize();
+    var url = $(this).attr('action');
 
     $.post(url, formData)
         .done(function (data) {
-            console.log(data);
-
             if (data.auth === true) {
                 $.get('/login/ajax')
                     .done(function (data) {
                         $('.logIn').addClass('hidden');
-                        loginFormsSel.empty();
-                        loginFormsSel.append(data);
-                        $('.signIn__toRegisterBtn').click(function () {
-                            $('.forms form').toggle(600);
-                        });
+                        $(this).empty();
+                        $(this).append(data);
                     })
                     .fail(function (data) {
                         //todo
                     });
             }
-        }).fail(function (data) {
-        console.log(data)
-    });
+        })
+        .fail(function (data) {
+            //todo
+        });
+
 });
 
-$(document).on('click', '#ajaxRegistrationButton', function () {
-    var ajaxLoginSel = $('#ajaxRegistration');
-    var formData = ajaxLoginSel.serialize();
-    var url = ajaxLoginSel.attr('action');
+$(document).on('submit', '#ajaxRegistration', function (e) {
+    e.preventDefault();
+    var formData = $(this).serialize();
+    var url = $(this).attr('action');
     $.post(url, formData)
         .done(function (data) {
-            console.log(data)
-        }).fail(function (data) {
+            if (data.auth === true) {
+                $.get('/login/ajax')
+                    .done(function (data) {
+                        $('.logIn').addClass('hidden');
+                        $(this).empty();
+                        $(this).append(data);
+                    })
+                    .fail(function (data) {
+                        //todo
+                    });
+            }
+        })
+        .fail(function (data) {
             //todo
-            console.log(data)
-    });
+        });
 });

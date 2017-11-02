@@ -10,7 +10,7 @@ use RecycleArt\Models\User;
  * Class IsAdmin
  * @package RecycleArt\Http\Middleware
  */
-class IsModerator
+class IsAuthor
 {
     /**
      * Handle an incoming request.

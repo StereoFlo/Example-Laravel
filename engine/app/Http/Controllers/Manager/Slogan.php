@@ -11,7 +11,7 @@ use RecycleArt\Models\Slogan as SloganModel;
  * Class Slogan
  * @package RecycleArt\Http\Controllers\Manager
  */
-class SloganController extends ManagerController
+class Slogan extends ManagerController
 {
     /**
      * User constructor.
@@ -30,6 +30,11 @@ class SloganController extends ManagerController
         return view('manager.slogan.form', ['content' => $slogan]);
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return mixed
+     */
     public function update(Request $request)
     {
         $content = $request->input('content');
