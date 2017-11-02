@@ -108,7 +108,9 @@ $(document).ready(function () {
         scrollEasing: "easeInOutSine"
     });
 
-    VK.Widgets.Comments("work__comments", {limit: 20, attach: "*"});
+    if ($("#work__comments").length) {
+        VK.Widgets.Comments("work__comments", {limit: 20, attach: "*"});
+    }
 
 
     //ImagesUploadPreview
@@ -124,7 +126,7 @@ $(document).ready(function () {
 
                 reader.onload = function(event) {
                     $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
-                }
+                };
 
                 reader.readAsDataURL(input.files[i]);
             }
@@ -138,7 +140,7 @@ $(document).ready(function () {
 
         var filesCount = $(this)[0].files.length;
         $(this).parent('.filearea').addClass('haveFile');
-        $(this).siblings('span').html("Добавлен " + filesCount + " файл(ов)")
+        $(this).siblings('span').html("Добавлен " + filesCount + " файл(ов)");
         console.log($(this).files);
     });
 
