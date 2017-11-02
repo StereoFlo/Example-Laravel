@@ -15,7 +15,7 @@ $(document).ready(function () {
         }
     });
 
-    $('.menu__btn').on('click', function (e) {
+    $('.menu__btn').click(function (e) {
         e.preventDefault();
         var navSelector = $('.nav');
 
@@ -55,7 +55,7 @@ $(document).ready(function () {
         }
     );
 
-    $('.user__btn, .logIn__close').on('click', function () {
+    $('.user__btn, .logIn__close').click(function () {
 
         $('.logIn .forms').empty();
 
@@ -119,15 +119,11 @@ $(document).ready(function () {
 
         if (input.files) {
             var filesAmount = input.files.length;
-
-
             for (i = 0; i < filesAmount; i++) {
                 var reader = new FileReader();
-
                 reader.onload = function(event) {
                     $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
                 };
-
                 reader.readAsDataURL(input.files[i]);
             }
         }
