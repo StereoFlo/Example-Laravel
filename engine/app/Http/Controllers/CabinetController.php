@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use RecycleArt\Models\User;
+use RecycleArt\Models\Work;
 
 /**
  * Class CabinetController
@@ -19,6 +20,16 @@ class CabinetController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index()
+    {
+        $userId = Auth::id();
+        $works = Work::getInstance()->getListByUserId($userId);
+        return view('cabinet.index', ['works' => $works]);
     }
 
     /**

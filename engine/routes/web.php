@@ -49,7 +49,7 @@ Route::middleware('auth')->group(function () {
 
 // for author
 Route::middleware('auth')->group(function () {
-    Route::get('/cabinet/work', 'WorkController@getList')->name('workList');
+    Route::get('/cabinet', 'CabinetController@index')->name('cabinetIndex');
     Route::get('/cabinet/work/new', 'WorkController@add')->name('workAdd');
     Route::post('/cabinet/work/new/process', 'WorkController@process')->name('workProcess');
     Route::get('/cabinet/work/{id}/remove', 'WorkController@remove')->name('workRemove');
