@@ -52,8 +52,8 @@ $(document).ready(function () {
      * LogIn
     /* ---------------------------------------------- */
 
-    $('.user__btn, .logIn__close').click(function () {
-
+    $('.user__btn, .logIn__close').click(function (e) {
+        e.preventDefault();
         $('.logIn .forms').empty();
 
         $.get('/login/ajax')

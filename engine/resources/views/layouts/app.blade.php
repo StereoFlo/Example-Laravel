@@ -35,7 +35,7 @@
                     <a href="#" class="nav__link">Контакты</a>
                 </nav>
                 <div class="user">
-                    <a href="#" class="user__btn">
+                    <a class="user__btn">
                         <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                     </a>
                 </div>
