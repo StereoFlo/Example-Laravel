@@ -16,7 +16,7 @@
                         <img src="{{ Auth::user()->avatar }}" class="account__pic" alt="">
                     @endif
                     <p class="account__login">{{ Auth::user()->email }}</p>
-                    <a href="{{ route('profileForm') }}" class="account__btn button">редактировать</a>
+                    <a href="{{ route('profileForm') }}" class="account__btn button">Редактировать</a>
                 </div>
                 <div class="account__info">
                     <dl>

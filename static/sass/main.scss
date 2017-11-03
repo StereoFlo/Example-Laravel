@@ -3,7 +3,6 @@
 @import "libs/smart-grid";
 @import "../libs/font-awesome/scss/font-awesome";
 @import "../libs/bxslider-4/dist/jquery.bxslider.css";
-@import "../libs/RichText/richtext.min.css";
 
 @import "fonts";
 @import "variables";
@@ -17,6 +16,7 @@
 @import "includes/workAdd";
 @import "includes/work";
 @import "includes/auth";
+@import "includes/author";
 @import "includes/error";
 @import "includes/allNews";
 @import "includes/footer";
@@ -61,12 +61,16 @@ figure {
   &_home {
     padding-top: 0;
   }
+  &_author {
+    padding-top: 0;
+  }
 }
 
 .button {
   font-family: 'Geometria', sans-serif;
+  font-size: 1.2em;
   color: $white;
-  padding: 0.5em 1.5em;
+  padding: 0.4em 1.5em;
   border: none;
   outline: none;
   border-radius: 2px;
@@ -75,26 +79,6 @@ figure {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   &:hover {
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  }
-}
-
-.richText {
-  ul {
-    margin: 0;
-    padding: 0;
-  }
-  .richText-form {
-    button {
-      @extend .button;
-      font-size: 1em;
-      background: #4a5281;
-    }
-  }
-  .richText-editor {
-    overflow: auto;
-  }
-  .richText-help {
-    display: none
   }
 }
 

@@ -110,7 +110,7 @@
 
 <div id="sessionUpdateResult" class="modal hidden">
     <h2 class="modal__message">{{ session('updateResult') }}</h2>
-    <p>Вернуться в <a href="" class="modal__link">Кабинет</a></p>
+    <p>Вернуться в <a href="{{ route('cabinetIndex') }}" class="modal__link">Кабинет</a></p>
     <button class="modal__button button btn_close">Закрыть</button>
 </div>
 

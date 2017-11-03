@@ -29,7 +29,6 @@
                     </div>
                 </div>
                 <div class="work__desc">
-{{--                    {{ var_dump($work) }}--}}
                     <p>
                         {{$work['description']}}
                     </p>

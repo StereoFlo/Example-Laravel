@@ -83,7 +83,7 @@ class WorkController extends Controller
             }
         }
         $request->session()->flash('addWorkResult', __('work.addProcessSuccess'));
-        return Redirect::to('/cabinet/work');
+        return Redirect::to('/cabinet/work/'. $workId . '');
     }
 
     /**
@@ -99,10 +99,10 @@ class WorkController extends Controller
             File::cleanDirectory($workPath);
             rmdir($workPath);
             $request->session()->flash('addWorkResult', __('work.addWorkRemovedSuccess'));
-            return Redirect::to('/cabinet/work');
+            return Redirect::to('/cabinet/');
         }
         $request->session()->flash('addWorkResult', __('work.addWorkRemovedError'));
-        return Redirect::to('/cabinet/work');
+        return Redirect::to('/cabinet/');
     }
 
     /**]

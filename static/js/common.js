@@ -5,52 +5,52 @@ $(document).ready(function () {
     /* ---------------------------------------------- */
 
     var header = $('header');
-    var window = $(window);
+    var $window = $(window);
 
-    window.scroll(function(){
-        if ( window.scrollTop() > 200) {
+    $window.scroll(function(){
+        if ( $window.scrollTop() > 200) {
             header.addClass("fixed");
         } else {
             header.removeClass('fixed');
         }
     });
 
+    /* ---------------------------------------------- /*
+     * Menu button
+    /* ---------------------------------------------- */
+
     $('.menu__btn').click(function (e) {
         e.preventDefault();
         var navSelector = $('.nav');
+        var windowWidth = $window.width();
 
-        if ($(window).width() < 769) {
-            var headerHeight = $('.header').innerHeight();
+        if (windowWidth < 769) {
+            var headerHeight = $('header').innerHeight();
             navSelector.css('top', headerHeight);
+            // navSelector.toggleClass('opacity');
             navSelector.slideToggle();
-            navSelector.toggleClass('opacity');
+            console.log(windowWidth);
         }
         else {
             navSelector.toggleClass('opacity');
+            console.log(windowWidth);
         }
 
     });
 
+    /* ---------------------------------------------- /*
+     * Slider
+    /* ---------------------------------------------- */
 
-
-
-    $(".side-title a").click(
-        function (e) {
-            $(e.target).closest('.side').toggleClass('expanded');
-        }
-    );
     $('.bxslider').bxSlider({
         mode: 'fade',
         pagerCustom: '#bx-pager',
         pagerType: 'full'
     });
 
-    $('a.menu-btn').click(
-        function (e) {
-            e.preventDefault();
-            $(e.target).closest('nav').toggleClass('opened');
-        }
-    );
+    /* ---------------------------------------------- /*
+     * LogIn
+    /* ---------------------------------------------- */
 
     $('.user__btn, .logIn__close').click(function () {
 
@@ -84,6 +84,9 @@ $(document).ready(function () {
         $('#ajaxLogin').show();
     });
 
+    /* ---------------------------------------------- /*
+     * Slogan and News on Welcome section
+    /* ---------------------------------------------- */
 
     $('.slogan').hide();
     $(".sloganShow").hover(
@@ -100,25 +103,39 @@ $(document).ready(function () {
         }
     );
 
+    /* ---------------------------------------------- /*
+     * Scroll to id
+    /* ---------------------------------------------- */
+
     $("a[href*='#']").mPageScroll2id({
         scrollSpeed: 900,
         scrollEasing: "easeInOutSine"
     });
 
+    /* ---------------------------------------------- /*
+     * VK Comments
+    /* ---------------------------------------------- */
+
     if ($("#work__comments").length) {
         VK.Widgets.Comments("work__comments", {limit: 20, attach: "*"});
     }
 
-    if( $('.modal__message').is(':empty')) {
-        return false;
+    /* ---------------------------------------------- /*
+     * SessionUpdateResult popUp
+    /* ---------------------------------------------- */
+
+    if ($('#sessionUpdateResult').length) {
+        if( $('.modal__message').is(':empty')) {
+            // return false;
+        }
+        else {
+            $('#sessionUpdateResult').pignosePopup();
+        }
     }
-    else {
-        $('#sessionUpdateResult').pignosePopup();
-    }
 
-
-
-    //ImagesUploadPreview
+    /* ---------------------------------------------- /*
+     * ImagesUploadPreview
+    /* ---------------------------------------------- */
 
     var imagesPreview = function(input, placeToInsertImagePreview) {
 
@@ -142,10 +159,12 @@ $(document).ready(function () {
         var filesCount = $(this)[0].files.length;
         $(this).parent('.filearea').addClass('haveFile');
         $(this).siblings('span').html("Добавлен " + filesCount + " файл(ов)");
-        console.log($(this).files);
     });
 
-    //Tag delete
+    /* ---------------------------------------------- /*
+     * Tag delete
+    /* ---------------------------------------------- */
+
     $('[id^=tag_]').click(function () {
         var url = $(this).attr('href');
         var element = $(this);
@@ -166,22 +185,16 @@ $(document).ready(function () {
         event.stopPropagation();
     });
 
-    $('input[name="phone"]').inputmask({"mask": "+7(999) 999-9999"});
+    /* ---------------------------------------------- /*
+     * Phone mask
+    /* ---------------------------------------------- */
 
-    $('#profileUpdateForm').submit(function () {
-        var formID = $(this).attr('id');
-        var formNm = $('#' + formID);
-        var formData = formNm.serialize();
-        var url = formNm.attr('action');
-        $.post(url, formData)
-            .done(function (data) {
-                console.log(data)
-            }).fail(function (data) {
-            //todo
-            console.log(data)
-        });
-    });
+    $('input[name="phone"]').inputmask({"mask": "+7(999) 999-9999"});
 });
+
+/* ---------------------------------------------- /*
+ * Ajax forms
+/* ---------------------------------------------- */
 
 $(document).on('submit', '#ajaxLogin', function (e) {
     e.preventDefault();
@@ -204,6 +217,7 @@ $(document).on('submit', '#ajaxLogin', function (e) {
         })
         .fail(function (data) {
             //todo
+            console.log(data.responseText);
         });
 
 });

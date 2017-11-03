@@ -5,6 +5,7 @@
   background-size: cover;
   position: relative;
   padding: 10% 15px 0;
+  margin-bottom: 0;
   @include max-screen($break_sm) {
     padding-top: 15%;
   }

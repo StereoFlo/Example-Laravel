@@ -9,7 +9,6 @@
             <h2>@lang('work.new')</h2>
         </div>
 
-        {{ session('addWorkResult') }}
         <form method="post" action="{{ route('workProcess') }}" enctype="multipart/form-data" class="form workAddForm">
             {{ csrf_field() }}
 
@@ -49,7 +48,6 @@
                                 <span class="name">{{ $tag['tag'] }}</span>
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
-{{--                            <a id="tag_{{ $tag['id'] }}" href="{{ route('deleteFromWork', ['tagId' => $tag['id'], 'workId' => $work['id']]) }}">{{ $tag['tag'] }}</a>--}}
                         @endforeach
                     </div>
                 @endif
@@ -88,9 +86,7 @@
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </a>
                                 </div>
-                                {{--<p>{{ $image['link'] }} (<a href="{{ route('imageDeleteFromWork', ['workId' => $work['id'], 'imageId' => $image['id']]) }}">X</a>)</p>--}}
                             @endif
-
                         @endforeach
                     </div>
                 @endif
