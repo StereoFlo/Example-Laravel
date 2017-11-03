@@ -42,6 +42,20 @@ class Work extends Model
         return $works;
     }
 
+    public function getListByUserWithImages(int $userId)
+    {
+        $works = $this->join('work_images', 'work.id', '=', 'work_images.workId')
+            ->join('users', 'work.userId', '=', 'users.id')
+            ->where('userId', $userId)
+            ->where('isDefault', true)
+            ->get()
+            ->toArray();
+        if (empty($works)) {
+            return [];
+        }
+        return $works;
+    }
+
     /**
      * @param int $workId
      *

@@ -267,7 +267,7 @@ class User extends Authenticatable
             ->join('roles', 'roles.id', '=', 'role_user.role_id')
             ->select('users.*', 'roles.name as roleName', 'roles.id as roleId')
             ->where('users.id', $id)
-            ->get()->toArray();
+            ->first()->toArray();
         if (empty($user)) {
             return [];
         }
