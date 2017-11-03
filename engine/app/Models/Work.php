@@ -48,6 +48,7 @@ class Work extends Model
             ->join('users', 'work.userId', '=', 'users.id')
             ->where('userId', $userId)
             ->where('isDefault', true)
+            ->where('approved', true)
             ->get()
             ->toArray();
         if (empty($works)) {
