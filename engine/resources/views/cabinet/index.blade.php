@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="profile">
+    <section class="cabinet">
         <div class="container">
 
             <div class="sectionTitle">
@@ -55,6 +55,11 @@
                                 <a href="{{ route('workRemove', ['id' => $work['id']]) }}" class="works__remove">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </a>
+                                @if (empty($work['approved']))
+                                    <span class="works__status"><i class="fa fa-ban" aria-hidden="true"></i></span>
+                                @else
+                                    <span class="works__status approved"><i class="fa fa-check-square-o" aria-hidden="true"></i></span>
+                                @endif
                             </div>
                         </div>
                     @endforeach

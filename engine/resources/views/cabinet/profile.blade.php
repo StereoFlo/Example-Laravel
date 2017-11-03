@@ -18,7 +18,7 @@
 
             <div class="inputGroup{{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="name">Имя:</label>
-                <input id="name" type="text" name="name" value="{{ Auth::user()->name }}" required autofocus>
+                <input id="name" type="text" name="name" value="{{ Auth::user()->name }}" required>
                 <span class="errorText">
                     @if ($errors->has('name'))
                     <strong>{{ $errors->first('name') }}</strong>
@@ -32,25 +32,6 @@
                 <span class="errorText">
                     @if ($errors->has('email'))
                         <strong>{{ $errors->first('email') }}</strong>
-                    @endif
-                </span>
-            </div>
-
-            <div class="inputGroup{{ $errors->has('password') ? ' has-error' : '' }}">
-                <label for="password">пароль:</label>
-                <input type="text" name="password" value="">
-                <span class="errorText">
-                    @if ($errors->has('password'))
-                        <strong>{{ $errors->first('password') }}</strong>
-                    @endif
-                </span>
-            </div>
-            <div class="inputGroup{{ $errors->has('password') ? ' has-error' : '' }}">
-                <label for="password">подтверждение:</label>
-                <input type="text" name="password_confirmation" value="">
-                <span class="errorText">
-                    @if ($errors->has('name'))
-                        <strong>{{ $errors->first('name') }}</strong>
                     @endif
                 </span>
             </div>
@@ -85,6 +66,25 @@
                 </span>
             </div>
 
+            <div class="inputGroup{{ $errors->has('password') ? ' has-error' : '' }}">
+                <label for="password">пароль:</label>
+                <input type="text" name="password" value="" placeholder="Новый пароль">
+                <span class="errorText">
+                    @if ($errors->has('password'))
+                        <strong>{{ $errors->first('password') }}</strong>
+                    @endif
+                </span>
+            </div>
+            <div class="inputGroup{{ $errors->has('password') ? ' has-error' : '' }}">
+                <label for="password">подтверждение:</label>
+                <input type="text" name="password_confirmation" value="" placeholder="Новый пароль">
+                <span class="errorText">
+                    @if ($errors->has('name'))
+                        <strong>{{ $errors->first('name') }}</strong>
+                    @endif
+                </span>
+            </div>
+
             @if (empty(Auth::user()->avatar))
             <div class="inputGroup{{ $errors->has('avatar') ? ' has-error' : '' }}">
                 <label for="avatar">фото:</label>
@@ -109,7 +109,7 @@
                 </div>
             @endif
 
-            <button type="submit" name="button" class="button">обновить</button>
+            <button type="submit" name="button" class="button">Обновить</button>
         </form>
     </div>
 </section>

@@ -8,9 +8,9 @@
 
                 <div class="authorProfile__card">
                     @if(empty($author['avatar']))
-                        <img src="{{ url('static/images/user.jpg') }}" class="author__pic" alt="">
+                        <img src="{{ url('static/images/user.jpg') }}" class="authorProfile__pic" alt="">
                     @else
-                        <img src="{{ url($author['avatar']) }}" class="author__pic" alt="">
+                        <img src="{{ url($author['avatar']) }}" class="authorProfile__pic" alt="">
                     @endif
                 </div>
 

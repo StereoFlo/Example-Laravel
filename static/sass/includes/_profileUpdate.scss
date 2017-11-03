@@ -15,23 +15,33 @@
     }
   }
   .avatar {
-    display: inline-block;
-    align-items: center;
+    display: flex;
+    justify-content: center;
     position: relative;
-    padding-top: 15px;
+    border: 1px solid $border;
+    border-radius: 50%;
+    max-width: 230px;
+    background: $white;
+    padding: 15px;
+    margin: 15px auto 60px;
     img {
-      max-width: 200px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      margin: auto;
     }
     .del {
       display: block;
       position: absolute;
-      top: 30px;
-      right: 15px;
-      .fa {
+      top: 10px;
+      right: 10px;
+      &:hover .fa {
         color: $red;
       }
-      &:hover .fa{
-        transform: scale(1.2);
+      .fa {
+        color: $gray;
+        transition: all 0.2s ease-in-out;
+        font-size: 1.3em;
       }
     }
   }
@@ -39,9 +49,9 @@
     font-size: 1.2em;
     display: block;
     margin: 30px auto ;
-    background: #e83b3a;
+    background: #4a5281;
     &:hover {
-      background: darken(#e83b3a, 15%);
+      background: darken(#4a5281, 15%);
     }
   }
 }

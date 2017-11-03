@@ -1,10 +1,11 @@
-.profile {
+.cabinet {
   padding: 0 30px;
 }
 .account {
   @include row-flex();
   flex-wrap: wrap;
   justify-content: space-between;
+  background: $white;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   margin-bottom: 50px;
   &__card {
@@ -103,7 +104,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgba($black, 0.1);
+    background: $white;
     padding: 15px;
     margin-bottom: 10px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -127,26 +128,35 @@
   }
   &__edit, &__remove {
     display: inline-block;
-    color: $black;
+    color: $gray;
     text-decoration: none;
     font-size: 1.3em;
+    margin: 0 10px;
     .fa {
-      transition: all 0.2s ease-in-out;
-      &:hover {
-        transform: scale(1.1);
-      }
+      transition: all 0.1s ease-in-out;
     }
-
   }
   &__edit {
     &:hover {
-      color: $olive;
+      color: $blue;
     }
   }
   &__remove {
-    margin-left: 20px;
     &:hover {
       color: $red;
     }
+  }
+  &__status {
+    font-size: 1.3em;
+    color: $red;
+    display: inline-block;
+    &::before {
+      content: '';
+      border-left: 2px solid $gray;
+      margin: 0 10px;
+    }
+  }
+  .approved {
+    color: $olive;
   }
 }

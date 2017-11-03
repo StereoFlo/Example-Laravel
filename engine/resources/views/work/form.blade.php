@@ -14,7 +14,7 @@
 
             <div class="inputGroup{{ $errors->has('workName') ? ' has-error' : '' }}">
                 <label for="workName">@lang('work.nameOfNewWork'):</label>
-                <input type="text" name="workName" value="{{ !empty($work['workName']) ? $work['workName'] : null }}" required autofocus>
+                <input type="text" name="workName" value="{{ !empty($work['workName']) ? $work['workName'] : null }}" required>
                 <span class="errorText">
                 @if ($errors->has('workName'))
                         <strong>{{ $errors->first('workName') }}</strong>
