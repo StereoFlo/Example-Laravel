@@ -7,21 +7,17 @@
             <div class="authorProfile">
 
                 <div class="authorProfile__card">
-                    @if (empty(Auth::user()->avatar))
                         <img src="{{url('static/images/user.jpg')}}" class="author__pic" alt="">
-                    @else
-                        <img src="{{ Auth::user()->avatar }}" class="author__pic" alt="">
-                    @endif
                 </div>
 
                 <div class="authorProfile__info">
-                    <h1 class="authorProfile__name">{{ Auth::user()->name }}</h1>
+                    <h1 class="authorProfile__name">Имя автора</h1>
                     <dl>
-                        <dt>Город:</dt><dd>{{ Auth::user()->location }}</dd>
+                        <dt>Город:</dt><dd>город автора</dd>
                         <br>
-                        <dt>Телефон:</dt><dd>{{ Auth::user()->phone }}</dd>
+                        <dt>Телефон:</dt><dd>телефон автора</dd>
                         <br>
-                        <dt>О себе:</dt><dd>{{ Auth::user()->about }}</dd>
+                        <dt>О себе:</dt><dd>тут автор расскажет о себе</dd>
                     </dl>
                 </div>
             </div>
