@@ -7,6 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class TagsRel extends Model
 {
     /**
+     * @return TagsRel
+     */
+    public static function getInstance(): self
+    {
+        return new self();
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function roles()
@@ -69,10 +77,9 @@ class TagsRel extends Model
      */
     public function addToWork($tagId, $workId)
     {
-        $rel = new self();
-        $rel->tagId = $tagId;
-        $rel->workId = $workId;
-        $rel->save();
-        return $rel->id;
+        $this->tagId = $tagId;
+        $this->workId = $workId;
+        $this->save();
+        return $this->id;
     }
 }

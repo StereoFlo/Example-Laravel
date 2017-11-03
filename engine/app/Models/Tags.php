@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tags extends Model
 {
+    const DELIMITER = ',';
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
@@ -55,7 +57,7 @@ class Tags extends Model
             return false;
         }
 
-        $tagsArray = \explode(',', $tagsString);
+        $tagsArray = \explode(self::DELIMITER, $tagsString);
         if (empty($tagsArray)) {
             return false;
         }
@@ -69,7 +71,7 @@ class Tags extends Model
             if (empty($existingTag)) {
                 $existingTag['id'] = $this->add($tag);
             }
-            (new TagsRel())->addToWork($existingTag['id'], $workId);
+            TagsRel::getInstance()->addToWork($existingTag['id'], $workId);
         }
         return true;
     }
