@@ -2,6 +2,8 @@
 
 namespace RecycleArt\Models;
 
+use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
@@ -287,5 +289,59 @@ class User extends Authenticatable
             $isSaved = File::delete($path);
         }
         return $isSaved;
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return bool
+     */
+    public function updateProfile(Request $request)
+    {
+        $user           = Auth::user();
+        $user->name     = $request->post('name');
+        $user->email    = $request->post('email');
+        $user->location = $request->post('location');
+        $user->phone    = $request->post('phone');
+        $user->about    = $request->post('about');
+
+        $this->uploadAvatar($request->file('avatar'), $user);
+        $this->setPassword($request, $user);
+
+        return $user->save();
+    }
+
+    /**
+     * @param UploadedFile|null $avatar
+     * @param                   $user
+     *
+     * @return $this
+     */
+    private function uploadAvatar(UploadedFile $avatar = null, $user)
+    {
+        if (empty($avatar)) {
+            return $this;
+        }
+
+        $avatar->move(\public_path('uploads/' . Auth::id()), 'avatar.' . $avatar->clientExtension());
+        $user->avatar = '/uploads/' . Auth::id() . '/avatar.' . $avatar->clientExtension();
+        return $this;
+    }
+
+    /**
+     * @param Request $request
+     * @param         $user
+     *
+     * @return $this
+     */
+    private function setPassword(Request $request, $user)
+    {
+        if (empty($request->post('password'))) {
+            return $this;
+        }
+        if ($request->post('password') === $request->post('password_confirmation')) {
+            $user->password = bcrypt($request->input('password'));
+        }
+        return $this;
     }
 }

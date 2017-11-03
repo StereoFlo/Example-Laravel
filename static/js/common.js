@@ -152,7 +152,8 @@ $(document).ready(function () {
      * Tag delete
     /* ---------------------------------------------- */
 
-    $('[id^=tag_]').click(function () {
+    $('[id^=tag_]').click(function (event) {
+        event.preventDefault();
         var url = $(this).attr('href');
         var element = $(this);
         $.get(url)
@@ -160,16 +161,10 @@ $(document).ready(function () {
                 if (data.isDeleted === true) {
                     element.remove();
                 }
-                event.preventDefault();
-                event.stopPropagation();
             })
             .fail(function (data) {
                 console.log(data);
-                event.preventDefault();
-                event.stopPropagation();
             });
-        event.preventDefault();
-        event.stopPropagation();
     });
 
     /* ---------------------------------------------- /*

@@ -47,31 +47,12 @@ class CabinetController extends Controller
      */
     public function profileUpdate(Request $request)
     {
-        $user = Auth::user();
-        $user->name = $request->post('name');
-        $user->email = $request->post('email');
-        $user->location = $request->post('location');
-        $user->phone = $request->post('phone');
-        $user->about = $request->post('about');
-
         if (!empty($request->file('avatar'))) {
             $this->validate($request, [
                 'avatar' => 'mimes:jpeg,bmp,png',
             ]);
-            $file = $request->file('avatar');
-            $file->move(public_path('uploads/' . Auth::id()), 'avatar.' . $file->clientExtension());
-            $user->avatar = '/uploads/' . Auth::id() . '/avatar.' . $file->clientExtension();
         }
-
-        if (!empty($request->post('password'))) {
-            if ($request->post('password') !== $request->post('password_confirmation')) {
-                $request->session()->flash('updateResult', __('cabinet.passwordMatchError'));
-                return Redirect::to('/cabinet/profile');
-            }
-            $user->password = bcrypt($request->input('password'));
-        }
-
-        $user->save();
+        User::getInstance()->updateProfile($request);
         $request->session()->flash('updateResult', __('cabinet.accountUpdated'));
         return Redirect::to('/cabinet/profile');
     }
