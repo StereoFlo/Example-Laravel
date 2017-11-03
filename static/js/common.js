@@ -121,19 +121,6 @@ $(document).ready(function () {
     }
 
     /* ---------------------------------------------- /*
-     * SessionUpdateResult popUp
-    /* ---------------------------------------------- */
-
-    if ($('#sessionUpdateResult').length) {
-        if( $('.modal__message').is(':empty')) {
-            // return false;
-        }
-        else {
-            $('#sessionUpdateResult').pignosePopup();
-        }
-    }
-
-    /* ---------------------------------------------- /*
      * ImagesUploadPreview
     /* ---------------------------------------------- */
 

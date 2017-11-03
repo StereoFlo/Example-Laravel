@@ -15,17 +15,23 @@
     }
   }
   .avatar {
-    display: flex;
+    display: inline-block;
     align-items: center;
+    position: relative;
+    padding-top: 15px;
     img {
       max-width: 200px;
     }
-    a {
-      background: $blue;
-      text-decoration: none;
-      margin: 0 15px;
-      &:hover {
-        background: darken($blue, 15%);
+    .del {
+      display: block;
+      position: absolute;
+      top: 30px;
+      right: 15px;
+      .fa {
+        color: $red;
+      }
+      &:hover .fa{
+        transform: scale(1.2);
       }
     }
   }

@@ -8,6 +8,10 @@
             <h2>Обновление профиля</h2>
         </div>
 
+        <div class="sessionUpdateResult">
+            <h3 class="message">{{ session('updateResult') }}</h3>
+        </div>
+
 
         <form method="POST" action="{{ route('profileUpdate') }}" enctype="multipart/form-data" id="profileUpdateForm" class="form profileUpdateForm">
             {{ csrf_field() }}
@@ -99,7 +103,9 @@
                 <label for="">аватар:</label>
                 <div id="avatar" class="avatar">
                     <img src="{{ Auth::user()->avatar }}">
-                    <a href="{{ route('removeAvatar') }} " class="button">удалить</a>
+                    <a href="{{ route('removeAvatar') }} " class="del">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
                 </div>
             @endif
 
@@ -107,11 +113,4 @@
         </form>
     </div>
 </section>
-
-<div id="sessionUpdateResult" class="modal hidden">
-    <h2 class="modal__message">{{ session('updateResult') }}</h2>
-    <p>Вернуться в <a href="{{ route('cabinetIndex') }}" class="modal__link">Кабинет</a></p>
-    <button class="modal__button button btn_close">Закрыть</button>
-</div>
-
 @endsection

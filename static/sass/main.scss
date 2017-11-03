@@ -127,20 +127,10 @@ section {
   height: 100%;
 }
 
-.modal {
+.sessionUpdateResult {
   text-align: center;
-  background: $white;
-  padding: 30px;
-  &__link {
-    color: #0089ef;
-    text-decoration: underline;
-    &:hover {
-      text-decoration: none;
-    }
-  }
-  &__button {
-    display: inline-block;
-    background: #e83b3a;
+  .message {
+
   }
 }
 
