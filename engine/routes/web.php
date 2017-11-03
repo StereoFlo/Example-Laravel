@@ -38,6 +38,7 @@ Route::group(['middleware' => 'isModerator'], function () {
     Route::get('/manager/news/{id}/update', 'Manager\\News@update')->where('id', '[0-9]+')->name('newsUpdate');
     Route::post('/manager/news/process', 'Manager\\News@process')->name('newsProcess');
     Route::get('/manager/work/list', 'Manager\\Work@getUnapprovedList')->name('workListManager');
+    Route::get('/manager/work/approve/{workId}', 'Manager\\Work@approve')->where('workId', '[0-9]+')->name('managerWorkApprove');
 });
 
 // profile change

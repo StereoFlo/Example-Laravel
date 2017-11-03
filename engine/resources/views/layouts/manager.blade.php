@@ -75,11 +75,15 @@
             </div>
         </div>
     </nav>
-
     @yield('content')
 </div>
 
 <!-- Scripts -->
 <script src="{{ asset('static/js/app.js') }}"></script>
+<script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+<script src="{{ asset('static/js/manager.js') }}"></script>
 </body>
 </html>

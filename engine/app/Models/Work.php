@@ -108,6 +108,16 @@ class Work extends Model
         return $work->id ?: 0;
     }
 
+    public function getList()
+    {
+        $result = $this->select('work.*', 'users.id as userId', 'users.name as userName')->join('users', 'users.id', '=', 'work.userId')->get();
+        if (empty($result) || empty($result->toArray())) {
+            return [];
+        }
+        return $result->toArray();
+    }
+
+
     /**
      * @return array
      */
@@ -118,5 +128,20 @@ class Work extends Model
             return [];
         }
         return $result->toArray();
+    }
+
+    /**
+     * @param int $workId
+     *
+     * @return bool
+     */
+    public function toggleApprove(int $workId)
+    {
+        $work = self::find($workId);
+        if (empty($work)) {
+            return false;
+        }
+        $work->approved = $work->approved ? false : true;
+        return $work->save();
     }
 }

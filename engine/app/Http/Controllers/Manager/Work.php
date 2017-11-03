@@ -25,6 +25,18 @@ class Work extends ManagerController
      */
     public function getUnapprovedList()
     {
-        return view('manager.work.unapprovedList', ['works' => \RecycleArt\Models\Work::getInstance()->getUnapproved()]);
+        return view('manager.work.list', ['works' => \RecycleArt\Models\Work::getInstance()->getList()]);
+    }
+
+    /**
+     * @param int $workId
+     *
+     * @return array
+     */
+    public function approve(int $workId): array
+    {
+        return [
+            'isApproved' => \RecycleArt\Models\Work::getInstance()->toggleApprove($workId)
+        ];
     }
 }
