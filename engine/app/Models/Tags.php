@@ -43,6 +43,37 @@ class Tags extends Model
         return $tag->id ?: 0;
     }
 
+    /**
+     * @param string $tagsString
+     * @param int    $workId
+     *
+     * @return bool
+     */
+    public function addTagsToWork(string $tagsString = '', int $workId = 0)
+    {
+        if (empty($tagsString) || empty($workId)) {
+            return false;
+        }
+
+        $tagsArray = \explode(',', $tagsString);
+        if (empty($tagsArray)) {
+            return false;
+        }
+
+        foreach ($tagsArray as $tag) {
+            $tag = \trim($tag, ' ');
+            if (empty($tag)) {
+                continue;
+            }
+            $existingTag = $this->getByName($tag);
+            if (empty($existingTag)) {
+                $existingTag['id'] = $this->add($tag);
+            }
+            (new TagsRel())->addToWork($existingTag['id'], $workId);
+        }
+        return true;
+    }
+
 }
 
 

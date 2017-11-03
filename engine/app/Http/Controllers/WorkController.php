@@ -69,18 +69,7 @@ class WorkController extends Controller
             WorkImages::getInstance()->addImamges($request->file('images'), $workId);
         }
         if (!empty($request->post('tags'))) {
-            $tagsArray = \explode(',', $request->post('tags'));
-            foreach ($tagsArray as $tag) {
-                $tag = \trim($tag, ' ');
-                if (empty($tag)) {
-                    continue;
-                }
-                $existingTag = (new Tags())->getByName($tag);
-                if (empty($existingTag)) {
-                    $existingTag['id'] = (new Tags())->add($tag);
-                }
-                (new TagsRel())->addToWork($existingTag['id'], $workId);
-            }
+            (new Tags())->addTagsToWork($request->post('tags'), $workId);
         }
         $request->session()->flash('addWorkResult', __('work.addProcessSuccess'));
         return Redirect::to('/cabinet/work/'. $workId . '');
