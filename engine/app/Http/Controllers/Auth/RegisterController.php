@@ -4,11 +4,11 @@ namespace RecycleArt\Http\Controllers\Auth;
 
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use RecycleArt\Http\Controllers\Controller;
 use RecycleArt\Models\User;
-use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -50,19 +50,23 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @param Request $request
+     *
+     * @return void
      */
-    protected function validator(array $data)
+    protected function validator(Request $request)
     {
-        return Validator::make($data, [
+        $rules = [
             'name'     => 'required|string|max:255',
-            //'location' => 'string|max:255',
-            //'phone'    => 'string|max:255',
-            //'about'    => 'string|max:1024',
             'email'    => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-        ]);
+        ];
+        $niceNames = [
+            'name'     => 'Имя',
+            'email'    => 'Email',
+            'password' => 'Пароль',
+        ];
+        $this->validate($request, $rules, [], $niceNames);
     }
 
     /**
@@ -92,7 +96,7 @@ class RegisterController extends Controller
      */
     public function register(Request $request)
     {
-        $this->validator($request->all())->validate();
+        $this->validator($request)->validate();
 
         event(new Registered($user = $this->create($request->all())));
 
