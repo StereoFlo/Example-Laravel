@@ -36,7 +36,6 @@
     </section>
 
     <section id="authorWorks" class="products">
-        <div class="container">
 
             <div class="sectionTitle">
                 <h2>Работы автора</h2>
@@ -46,7 +45,7 @@
                     <p>У этого пользователя работ нет</p>
                 @else
                      @foreach($works as $work)
-                        <a href="#" class="item">
+                        <a href="{{ route('workShow', ['id' => $work['workId']]) }}" class="item">
                             <div class="content">
                                 <div class="border">
                                     <div class="valign">
@@ -61,6 +60,5 @@
                 @endif
             </div>
 
-        </div>
     </section>
 @endsection

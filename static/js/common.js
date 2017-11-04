@@ -27,13 +27,10 @@ $(function () {
         if (windowWidth < 769) {
             var headerHeight = $('header').innerHeight();
             navSelector.css('top', headerHeight);
-            // navSelector.toggleClass('opacity');
             navSelector.slideToggle();
-            console.log(windowWidth);
         }
         else {
             navSelector.toggleClass('opacity');
-            console.log(windowWidth);
         }
 
     });
@@ -193,13 +190,11 @@ $(document).on('submit', '#ajaxLogin', function (e) {
                         $(this).append(data);
                     })
                     .fail(function (data) {
-                        //todo
                     });
             }
         })
         .fail(function (data) {
-            //todo
-            console.log(data.responseText);
+
         });
 
 });
@@ -228,8 +223,8 @@ $(document).on('submit', '#ajaxRegistration', function (e) {
                 for (var fieldName in json.errors) {
                     if (json.errors.hasOwnProperty(fieldName)) {
                         if (json.errors[fieldName] instanceof Array) {
-                            json.errors[fieldName].forEach(function (errors) {
-                                $('#' + fieldName + 'Error').append(errors);
+                            json.errors[fieldName].forEach(function (error) {
+                                $('#' + fieldName + 'Error').empty().append(error);
                             });
                         }
                     }
@@ -237,5 +232,6 @@ $(document).on('submit', '#ajaxRegistration', function (e) {
             } else {
                 console.log(json.message)
             }
+            console.log(json.errors);
         });
 });

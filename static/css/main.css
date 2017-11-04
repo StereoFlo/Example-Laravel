@@ -2871,26 +2871,23 @@ template {
     opacity: 0; } }
 
 .products {
-  padding: 60px 15px;
+  padding: 30px;
+  background: #FFFFFF;
   overflow: hidden; }
   @media only screen and (max-width: 480px) {
     .products {
       padding: 30px 15px; } }
   .products .flex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
     -webkit-flex-wrap: wrap;
         -ms-flex-wrap: wrap;
             flex-wrap: wrap;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
-    margin: 0 auto; }
-    @media only screen and (max-width: 1170px) {
-      .products .flex {
-        max-width: 860px; } }
-    @media only screen and (max-width: 768px) {
-      .products .flex {
-        max-width: 572px; } }
+    margin-left: -15px;
+    margin-right: -15px;
+    flex-wrap: wrap; }
     @media only screen and (max-width: 480px) {
       .products .flex {
         -webkit-box-pack: center;
@@ -2905,13 +2902,45 @@ template {
     font-family: 'bandera'; }
 
 .item {
-  border: 1px solid #ccc;
   margin-bottom: 30px;
-  position: relative; }
+  position: relative;
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin-left: 15px;
+  margin-right: 15px;
+  word-wrap: break-word;
+  width: -webkit-calc(33.333333333333336% - 30px);
+  width: calc(33.333333333333336% - 30px);
+  overflow: hidden;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
+  @media screen and (max-width: 1024px) {
+    .item {
+      width: -webkit-calc(50% - 30px);
+      width: calc(50% - 30px); } }
+  @media screen and (max-width: 480px) {
+    .item {
+      width: -webkit-calc(100% - 30px);
+      width: calc(100% - 30px); } }
+  .item:hover {
+    -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
+    .item:hover .content {
+      opacity: 1; }
+    .item:hover img {
+      -webkit-transform: scale(1.2);
+          -ms-transform: scale(1.2);
+              transform: scale(1.2); }
   .item img {
-    vertical-align: middle;
-    max-width: 100%;
-    height: auto; }
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out; }
   .item .content {
     position: absolute;
     background: rgba(19, 25, 60, 0.7);
@@ -2919,7 +2948,10 @@ template {
     top: 0;
     right: 0;
     bottom: 0;
-    left: 0; }
+    left: 0;
+    z-index: 1;
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out; }
     .item .content .border {
       border: 4px solid rgba(255, 255, 255, 0.4);
       position: absolute;
@@ -2941,8 +2973,6 @@ template {
     color: #a0bdd4;
     font-size: 1.125em;
     line-height: 20px; }
-  .item:hover .content {
-    opacity: 1; }
 
 .cabinet {
   padding: 0 30px; }
@@ -3133,6 +3163,9 @@ template {
       content: '';
       border-left: 2px solid #8d8d8d;
       margin: 0 10px; }
+    .works__status .fa {
+      min-width: 20px;
+      text-align: center; }
   .works .approved {
     color: #3D9970; }
 
@@ -3162,9 +3195,8 @@ template {
     border: 1px solid #ccd3d7;
     -webkit-border-radius: 50%;
             border-radius: 50%;
-    max-width: 230px;
+    max-width: 200px;
     background: #FFFFFF;
-    padding: 15px;
     margin: 15px auto 60px; }
     .profileUpdateForm .avatar img {
       width: 200px;
@@ -3546,7 +3578,6 @@ template {
     color: #FF4136;
     height: 25px;
     line-height: 1;
-    opacity: 0;
     font-size: 0.7em;
     padding-top: 2px; }
   .signIn__buttons, .registrationForm__buttons {
@@ -3646,7 +3677,7 @@ template {
 
 .author {
   height: auto;
-  min-height: 100vh;
+  min-height: 65vh;
   background: url("../images/profile-bg.jpg") no-repeat center top;
   background-size: cover;
   position: relative;
@@ -3926,8 +3957,7 @@ body, html {
 body {
   font-family: 'Geometria', sans-serif;
   font-size: 16px;
-  color: #111111;
-  background: #f3f1f1; }
+  color: #111111; }
   @media only screen and (max-width: 480px) {
     body {
       font-size: 14px; } }
@@ -4170,13 +4200,14 @@ section {
     color: #FF4136;
     height: 25px;
     line-height: 1;
-    opacity: 0;
+    opacity: 1;
     font-size: 0.7em;
     padding-top: 2px; }
   .form label {
     display: block;
     color: #6b6b6b;
-    font-size: 0.9em; }
+    font-size: 0.9em;
+    margin-bottom: 3px; }
   .form input, .form textarea {
     font-family: 'bandera', sans-serif;
     width: 100%;

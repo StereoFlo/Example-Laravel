@@ -24,22 +24,14 @@
             <label for="email">email:</label>
             <input id="email" class="signIn__email" type="email" name="email" value="{{ old('email') }}" required autofocus>
             <i class="fa fa-user" aria-hidden="true"></i>
-            <span class="errorText">
-                @if ($errors->has('email'))
-                    <strong>{{ $errors->first('email') }}</strong>
-                @endif
-            </span>
+            <span id="userError" class="errorText"></span>
         </div>
 
         <div class="inputGroup{{ $errors->has('password') ? ' has-error' : '' }}">
             <label for="password">пароль:</label>
             <input id="password" class="signIn__pass" type="password" name="password" required>
             <i class="fa fa-unlock-alt" aria-hidden="true"></i>
-            <span class="errorText">
-                @if ($errors->has('password'))
-                    <strong>{{ $errors->first('password') }}</strong>
-                @endif
-            </span>
+            <span id="passwordError" class="errorText"></span>
         </div>
 
         <div class="inputGroup">

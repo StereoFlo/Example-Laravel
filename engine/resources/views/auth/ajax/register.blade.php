@@ -4,48 +4,32 @@
     <form id="ajaxRegistration" class="registrationForm" method="POST" action="{{ route('register') }}" onsubmit="return false;">
         {{ csrf_field() }}
 
-        <div class="inputGroup{{ $errors->has('name') ? ' has-error' : '' }}">
-            <div id="nameError"></div>
+        <div class="inputGroup">
             <label for="name">имя:</label>
             <input id="name" class="registrationForm__name" type="text" name="name" value="{{ old('name') }}" required autofocus>
             <i class="fa fa-id-card-o" aria-hidden="true"></i>
-            <span class="errorText">
-                @if ($errors->has('name'))
-                    <strong>{{ $errors->first('name') }}</strong>
-                @endif
-            </span>
+            <span class="errorText " id="nameError"></span>
         </div>
 
-        <div class="inputGroup{{ $errors->has('email') ? ' has-error' : '' }}">
-            <div id="emailError"></div>
+        <div class="inputGroup">
             <label for="email">email:</label>
             <input id="email" class="registrationForm__email" type="email" name="email" value="{{ old('email') }}" required>
             <i class="fa fa-envelope" aria-hidden="true"></i>
-            <span class="errorText">
-                @if ($errors->has('email'))
-                    <strong>{{ $errors->first('email') }}</strong>
-                @endif
-            </span>
+            <span class="errorText" id="emailError"></span>
         </div>
 
-        <div class="inputGroup{{ $errors->has('password') ? ' has-error' : '' }}">
-            <div id="passwordError"></div>
+        <div class="inputGroup">
             <label for="password">пароль:</label>
             <input id="password" class="registrationForm__pass" type="password" name="password" required>
             <i class="fa fa-unlock-alt" aria-hidden="true"></i>
-            <span class="errorText">
-                @if ($errors->has('password'))
-                    <strong>{{ $errors->first('password') }}</strong>
-                @endif
-            </span>
+            <span class="errorText" id="passwordError"></span>
         </div>
 
-        <div class="inputGroup{{ $errors->has('password') ? ' has-error' : '' }}">
-            <div id="password_confirmationError"></div>
+        <div class="inputGroup">
             <label for="password_confirmation">пароль:</label>
             <input id="password_confirmation" class="registrationForm__pass" type="password" name="password_confirmation" required>
             <i class="fa fa-unlock-alt" aria-hidden="true"></i>
-            <span class="errorText"></span>
+            <span class="errorText" id="password_confirmationError"></span>
         </div>
 
         <div class="registrationForm__buttons">

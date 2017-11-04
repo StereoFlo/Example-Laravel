@@ -39,7 +39,6 @@
     </section>
 
     <section id="products" class="products">
-        <div class="container">
             <div class="flex">
                 <a href="#" class="item">
                     <div class="content">
@@ -61,7 +60,7 @@
                             </div>
                         </div>
                     </div>
-                    <img src="{{ url('static/images/items/img2.jpg') }}" alt="">
+                    <img src="{{ url('static/images/items/img6.jpg') }}" alt="">
                 </a>
                 <a href="#" class="item">
                     <div class="content">
@@ -72,7 +71,7 @@
                             </div>
                         </div>
                     </div>
-                    <img src="{{ url('static/images/items/img3.jpg') }}" alt="">
+                    <img src="{{ url('static/images/items/img10.jpg') }}" alt="">
                 </a>
                 <a href="#" class="item">
                     <div class="content">
@@ -83,7 +82,7 @@
                             </div>
                         </div>
                     </div>
-                    <img src="{{ url('static/images/items/img4.jpg') }}" alt="">
+                    <img src="{{ url('static/images/items/img7.jpg') }}" alt="">
                 </a>
                 <a href="#" class="item">
                     <div class="content">
@@ -94,7 +93,7 @@
                             </div>
                         </div>
                     </div>
-                    <img src="{{ url('static/images/items/img5.jpg') }}" alt="">
+                    <img src="{{ url('static/images/items/img10.jpg') }}" alt="">
                 </a>
                 <a href="#" class="item">
                     <div class="content">
@@ -108,7 +107,5 @@
                     <img src="{{ url('static/images/items/img6.jpg') }}" alt="">
                 </a>
             </div>
-
-        </div>
     </section>
 @endsection
