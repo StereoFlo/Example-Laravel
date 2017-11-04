@@ -226,10 +226,12 @@ $(document).on('submit', '#ajaxRegistration', function (e) {
             var json = data.responseJSON;
             if (json.errors) {
                 for (var fieldName in json.errors) {
-                    if (json.errors[fieldName] instanceof Array) {
-                        json.errors[fieldName].forEach(function(item) {
-                            $('#' + fieldName + 'Error').append(item);
-                        });
+                    if (json.errors.hasOwnProperty(fieldName)) {
+                        if (json.errors[fieldName] instanceof Array) {
+                            json.errors[fieldName].forEach(function (item) {
+                                $('#' + fieldName + 'Error').append(item);
+                            });
+                        }
                     }
                 }
             } else {
