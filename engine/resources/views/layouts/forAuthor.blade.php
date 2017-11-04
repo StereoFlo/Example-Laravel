@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="wrapper">
-    <header class=" header header_author">
+    <header class=" header header_white">
         <div class="container">
             <div class="flex">
                 <div class="logo">

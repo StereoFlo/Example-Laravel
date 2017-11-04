@@ -28,14 +28,14 @@
 
         </div>
 
-        <a href="#authorWorks" class="scrollDown">
-            <img src="{{ url('static/images/scroll.png') }}" alt="scroll">
-            <img src="{{ url('static/images/scroll.png') }}" alt="scroll">
-            <img src="{{ url('static/images/scroll.png') }}" alt="scroll">
-        </a>
+        {{--<a href="#authorWorks" class="scrollDown">--}}
+            {{--<img src="{{ url('static/images/scroll.png') }}" alt="scroll">--}}
+            {{--<img src="{{ url('static/images/scroll.png') }}" alt="scroll">--}}
+            {{--<img src="{{ url('static/images/scroll.png') }}" alt="scroll">--}}
+        {{--</a>--}}
     </section>
 
-    <section id="authorWorks" class="products">
+    <section id="authorWorks" class="products authorWorks">
 
             <div class="sectionTitle">
                 <h2>Работы автора</h2>

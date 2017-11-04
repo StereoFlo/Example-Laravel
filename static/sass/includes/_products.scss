@@ -8,6 +8,7 @@
   .flex {
     @include row-flex();
     flex-wrap: wrap;
+    max-width: 1900px;
     @include max-screen($break_xs) {
       justify-content: center;
     }
@@ -46,7 +47,7 @@
 
   img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
     margin: 0 auto;
     transition: all 0.5s ease-in-out;
