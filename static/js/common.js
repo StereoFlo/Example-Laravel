@@ -228,8 +228,8 @@ $(document).on('submit', '#ajaxRegistration', function (e) {
                 for (var fieldName in json.errors) {
                     if (json.errors.hasOwnProperty(fieldName)) {
                         if (json.errors[fieldName] instanceof Array) {
-                            json.errors[fieldName].forEach(function (item) {
-                                $('#' + fieldName + 'Error').append(item);
+                            json.errors[fieldName].forEach(function (errors) {
+                                $('#' + fieldName + 'Error').append(errors);
                             });
                         }
                     }
