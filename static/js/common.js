@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(function () {
 
     /* ---------------------------------------------- /*
      * Header
@@ -223,6 +223,17 @@ $(document).on('submit', '#ajaxRegistration', function (e) {
             }
         })
         .fail(function (data) {
-            //todo
+            var json = data.responseJSON;
+            if (json.errors) {
+                for (var fieldName in json.errors) {
+                    if (json.errors[fieldName] instanceof Array) {
+                        json.errors[fieldName].forEach(function(item) {
+                            $('#' + fieldName + 'Error').append(item);
+                        });
+                    }
+                }
+            } else {
+                console.log(json.message)
+            }
         });
 });

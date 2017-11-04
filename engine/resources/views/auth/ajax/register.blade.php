@@ -5,6 +5,7 @@
         {{ csrf_field() }}
 
         <div class="inputGroup{{ $errors->has('name') ? ' has-error' : '' }}">
+            <div id="nameError"></div>
             <label for="name">имя:</label>
             <input id="name" class="registrationForm__name" type="text" name="name" value="{{ old('name') }}" required autofocus>
             <i class="fa fa-id-card-o" aria-hidden="true"></i>
@@ -16,6 +17,7 @@
         </div>
 
         <div class="inputGroup{{ $errors->has('email') ? ' has-error' : '' }}">
+            <div id="emailError"></div>
             <label for="email">email:</label>
             <input id="email" class="registrationForm__email" type="email" name="email" value="{{ old('email') }}" required>
             <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -27,6 +29,7 @@
         </div>
 
         <div class="inputGroup{{ $errors->has('password') ? ' has-error' : '' }}">
+            <div id="passwordError"></div>
             <label for="password">пароль:</label>
             <input id="password" class="registrationForm__pass" type="password" name="password" required>
             <i class="fa fa-unlock-alt" aria-hidden="true"></i>
@@ -38,6 +41,7 @@
         </div>
 
         <div class="inputGroup{{ $errors->has('password') ? ' has-error' : '' }}">
+            <div id="password_confirmationError"></div>
             <label for="password_confirmation">пароль:</label>
             <input id="password_confirmation" class="registrationForm__pass" type="password" name="password_confirmation" required>
             <i class="fa fa-unlock-alt" aria-hidden="true"></i>

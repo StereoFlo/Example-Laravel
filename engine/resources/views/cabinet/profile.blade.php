@@ -8,9 +8,11 @@
             <h2>Обновление профиля</h2>
         </div>
 
+        @if(!empty(session('updateResult')))
         <div class="sessionUpdateResult">
-            <h3 class="message">{{ session('updateResult') }}</h3>
+            <h3 class="message">{{ session('updateResult') }}. Вернуться в <a href="{{ route('cabinetIndex') }}">личный кабинет</a> </h3>
         </div>
+        @endif
 
 
         <form method="POST" action="{{ route('profileUpdate') }}" enctype="multipart/form-data" id="profileUpdateForm" class="form profileUpdateForm">

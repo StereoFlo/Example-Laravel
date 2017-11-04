@@ -17,6 +17,7 @@
     </div>
 @else
     <form id="ajaxLogin" class="signIn" method="POST" action="{{ route('login') }}">
+        <div id="errors"></div>
         {{ csrf_field() }}
 
         <div class="inputGroup{{ $errors->has('email') ? ' has-error' : '' }}">
