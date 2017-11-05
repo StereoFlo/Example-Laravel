@@ -7,6 +7,8 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\File;
 
 class User extends Authenticatable
@@ -263,15 +265,15 @@ class User extends Authenticatable
     public function getById(int $id): array
     {
         $user = $this
-            ->join('role_user', 'role_user.user_id', '=', 'users.id')
-            ->join('roles', 'roles.id', '=', 'role_user.role_id')
-            ->select('users.*', 'roles.name as roleName', 'roles.id as roleId')
+//            ->join('role_user', 'users.id', '=', 'role_user.user_id')
+//            ->join('roles', 'role_user.role_id', '=', 'roles.id')
+            //->select('users.*', 'roles.name as roleName', 'roles.id as roleId')
             ->where('users.id', $id)
-            ->first()->toArray();
-        if (empty($user)) {
+            ->first();
+        if (empty($user) || empty($user->toArray())) {
             return [];
         }
-        return $user;
+        return $user->toArray();
     }
 
 
