@@ -51,7 +51,7 @@
         <div class="container">
             <div class="flex">
                 <div class="footer__brand">
-                    <a href="#"><img src="{{url('static/images/logo-min.png')}}" alt=""></a>
+                    <a href="{{ url('index.html') }}"><img src="{{url('static/images/logo-min.png')}}" alt=""></a>
                     <span class="sm-fs-12 xs-block">&copy; 2014-2017. Все права защищены.</span>
                 </div>
                 <div class="footer__social">
