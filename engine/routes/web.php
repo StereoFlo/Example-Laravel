@@ -13,6 +13,7 @@ Route::get('/news', 'NewsController@getList')->name('news');
 Route::get('/news/page/{id}', 'NewsController@getList')->where('id', '[0-9]+');
 Route::get('/news/{id}', 'NewsController@show')->where('id', '[0-9]+');
 Route::get('/author/{id}', 'AuthorController@show')->where('id', '[0-9]+');
+Route::get('/work/{id}', 'WorkController@show')->where('id', '[0-9]+')->name('workPublicShow');
 
 Route::group(['middleware' => 'isAdmin'], function () {
     Route::get('/manager/user/list', 'Manager\\User@getList')->name('managerUserList');

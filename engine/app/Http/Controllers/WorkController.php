@@ -142,10 +142,9 @@ class WorkController extends Controller
         if (empty($work)) {
             abort(404, __('work.workNotFound'));
         }
-        if ($request->user()->authorizeRoles([User::ROLE_MODERATOR, User::ROLE_ADMIN]) || $work['userId'] === Auth::id()) {
-            return view('work.show', ['work' => $work]);
+        if (!$work['approved'] && !($request->user()->authorizeRoles([User::ROLE_MODERATOR, User::ROLE_ADMIN]) || $work['userId'] === Auth::id())) {
+            abort(401);
         }
-        abort(401);
-        return \view();//stub
+        return view('work.show', ['work' => $work]);
     }
 }
