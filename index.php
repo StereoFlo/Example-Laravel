@@ -48,9 +48,6 @@ $app = require_once __DIR__.'/engine/bootstrap/app.php';
 | and wonderful application we have prepared for them.
 |
 */
-if ($app->environment('production') && $_SERVER['REQUEST_SCHEME'] === 'http') {
-    header('location: https://' . $_SERVER['HTTP_HOST']);
-}
 
 $app->bind('path.public', function() {
     return __DIR__;
@@ -66,3 +63,7 @@ $response = $kernel->handle(
 $response->send();
 
 $kernel->terminate($request, $response);
+
+if ($app->environment('production') && $_SERVER['REQUEST_SCHEME'] === 'http') {
+    header('location: https://' . $_SERVER['HTTP_HOST']);
+}
