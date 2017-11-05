@@ -11,7 +11,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('/static/css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('/static/libs/fotorama/fotorama.css') }}" rel="stylesheet">
+    <link href="{{ asset('/static/css/main.min.css') }}" rel="stylesheet">
 </head>
 <body>
 <div class="wrapper">

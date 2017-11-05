@@ -39,11 +39,6 @@ $(function () {
      * Slider
     /* ---------------------------------------------- */
 
-    $('.bxslider').bxSlider({
-        mode: 'fade',
-        pagerCustom: '#bx-pager',
-        pagerType: 'full'
-    });
 
     /* ---------------------------------------------- /*
      * LogIn

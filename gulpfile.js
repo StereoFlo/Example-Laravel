@@ -17,6 +17,8 @@ gulp.task('sass', function(){ // Создаем таск Sass
   return gulp.src('static/sass/**/main.scss') // Берем источник
   .pipe(sass()) // Преобразуем Sass в CSS посредством gulp-sass
   .pipe(autoprefixer(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true })) // Создаем префиксы
+  .pipe(cssnano())
+  .pipe(rename({suffix: '.min'}))
   .pipe(gulp.dest('static/css')) // Выгружаем результата в папку static/css
 });
 
@@ -33,10 +35,9 @@ gulp.task('scripts', function() {
   return gulp.src([ // Берем все необходимые библиотеки
     'static/libs/jQuery/dist/jquery.min.js', // Берем jQuery
     'static/libs/smoothscroll-for-websites/SmoothScroll.js',
-    'static/libs/bxslider-4/dist/jquery.bxslider.min.js',
     'static/libs/page-scroll-to-id/jquery.malihu.PageScroll2id.js',
     'static/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js',
-    'static/libs/pg-popup/dist/pignose.popup.min.js'
+    'static/libs/fotorama/fotorama.js',
   ])
   .pipe(concat('libs.min.js')) // Собираем их в кучу в новом файле libs.min.js
   .pipe(uglify()) // Сжимаем JS файл
@@ -60,7 +61,7 @@ gulp.task('css-libs', ['sass'], function() {
   .pipe(gulp.dest('static/css')); // Выгружаем в папку static/css
 });
 
-gulp.task('watch', ['css-libs', 'scripts'], function() {
+gulp.task('watch', ['sass', 'scripts'], function() {
   gulp.watch('static/sass/**/*.scss', ['sass']); // Наблюдение за sass файлами в папке sass
   // gulp.watch('static/js/**/*.js', ['myScripts']);   // Наблюдение за JS файлами в папке js
   // gulp.watch('static/*.html', browserSync.reload);

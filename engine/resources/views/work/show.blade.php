@@ -9,21 +9,20 @@
             </div>
             <div class="work__item">
                 <div class="work__slider">
-                    <ul class="bxslider">
+                    <div class="fotorama"
+                         data-nav="thumbs"
+                         data-allowfullscreen="true"
+                         data-arrows="true"
+                         data-click="true"
+                         data-loop="true"
+                         data-width="100%"
+                         data-thumbwidth="110"
+                         data-thumbheight="60">
                         @if (empty($work['images']))
                             <p>У этой работы нет изображений</p>
                         @else
                             @foreach ($work['images'] as $image)
-                            <li><img src="{{$image['link']}}" alt="" class="work__pic"></li>
-                            @endforeach
-                        @endif
-                    </ul>
-                    <div id="bx-pager">
-                        @if (empty($work['images']))
-                            <p>У этой работы нет изображений</p>
-                        @else
-                            @foreach ($work['images'] as $image)
-                                <a data-slide-index="{{$image['id']}}" href=""><img src="{{$image['link']}}" /></a>
+                            <img src="{{$image['link']}}" alt="" class="work__pic">
                             @endforeach
                         @endif
                     </div>

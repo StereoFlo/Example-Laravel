@@ -126,6 +126,10 @@
       text-decoration: none;
     }
   }
+  &__control {
+    display: flex;
+    align-items: center;
+  }
   &__edit, &__remove {
     display: inline-block;
     color: $gray;

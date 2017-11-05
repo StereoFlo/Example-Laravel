@@ -93,6 +93,14 @@
     border: none;
     border-bottom: 1px dotted $border;
     padding-right: 35px;
+    @include max-screen($break_sm) {
+      font-size: 16px;
+      position: fixed;
+      width: 330px;
+    }
+    @include max-screen($break_xxs) {
+      width: 270px;
+    }
   }
 
   .fa {
@@ -110,7 +118,10 @@
     height: 25px;
     line-height: 1;
     font-size: 0.7em;
-    padding-top: 2px;
+    margin-top: 2px;
+    @include max-screen($break_sm) {
+      margin-top: 32px;
+    }
   }
   &__buttons {
     display: flex;

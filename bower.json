@@ -12,11 +12,10 @@
     "tests"
   ],
   "dependencies": {
-    "bxslider-4": "^4.2.12",
     "font-awesome": "^4.7.0",
     "page-scroll-to-id": "^1.5.8",
     "smoothscroll-for-websites": "^1.4.6",
     "inputmask": "^3.3.10",
-    "pg-popup": "^1.1.0"
+    "fotorama": "^4.6.4"
   }
 }
