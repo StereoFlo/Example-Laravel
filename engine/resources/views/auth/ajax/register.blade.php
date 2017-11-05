@@ -2,6 +2,7 @@
 
 @else
     <form id="ajaxRegistration" class="registrationForm" method="POST" action="{{ route('register') }}" onsubmit="return false;">
+        <div id="errors"></div>
         {{ csrf_field() }}
 
         <div class="inputGroup">

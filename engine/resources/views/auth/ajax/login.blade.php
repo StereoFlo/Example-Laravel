@@ -24,7 +24,7 @@
             <label for="email">email:</label>
             <input id="email" class="signIn__email" type="email" name="email" value="{{ old('email') }}" required autofocus>
             <i class="fa fa-user" aria-hidden="true"></i>
-            <span id="userError" class="errorText"></span>
+            <span id="emailError" class="errorText"></span>
         </div>
 
         <div class="inputGroup{{ $errors->has('password') ? ' has-error' : '' }}">
