@@ -24,7 +24,7 @@
                             Выключенеые роли:<br>
                         <ul>
                             @foreach($roles as $role)
-                                <li>{{$role['name']}} (<a href="{{ route('userRoleAddManager',  ['userId' => $user['id'], 'roleId' => $userRole['id']]) }}">Включить</a>)</li>
+                                <li>{{$role['name']}} (<a href="{{ route('userRoleAddManager',  ['userId' => $user['id'], 'roleId' => $role['id']]) }}">Включить</a>)</li>
                             @endforeach
                         </ul>
                         </p>

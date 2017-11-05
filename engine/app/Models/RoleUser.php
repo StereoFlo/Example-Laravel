@@ -44,6 +44,28 @@ class RoleUser extends Model
         return false;
     }
 
+    /**
+     * @param int $userId
+     * @param string $roleId
+     *
+     * @return bool
+     */
+    public function enableRoleByName(int $userId, string $roleId)
+    {
+        $getRole = (new Role())->getByName($roleId);
+        if (empty($getRole)) {
+            return false;
+        }
+        $role = $this->where('user_id', $userId)->where('role_id', $getRole['id'])->get()->toArray();
+        if (empty($role)) {
+            return $this->create([
+                'role_id' => $getRole['id'],
+                'user_id' => $userId,
+            ]);
+        }
+        return false;
+    }
+
     public function disableRole(int $userId, int $roleId)
     {
         $role = $this->where('user_id', $userId)->where('role_id', $roleId)->get()->toArray();
