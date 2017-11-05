@@ -1,4 +1,4 @@
-@extends('layouts.forWelcome')
+@extends('layouts.welcome')
 
 @section('content')
     <section id="welcome" class="welcome">
