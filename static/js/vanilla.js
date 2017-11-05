@@ -175,7 +175,28 @@ document.addEventListener('DOMContentLoaded', function () {
             loginContainer.classList.add('hidden');
         }
     }, false);
+
+    var tags = document.querySelectorAll('a[id^=tag_]');
+    if (tags.length > 0) {
+        tags.forEach(function (element) {
+            element.addEventListener('click', function (e) {
+                e.preventDefault();
+                sendForm(null,'GET', element.getAttribute('href'), removeTag());
+            })
+        });
+    }
+
 });
+
+function removeTag(e, element) {
+    console.log(e);
+    var json = JSON.parse(e);
+    if (json.isDeleted === true) {
+        element.parentNode.removeChild(element);
+    } else {
+        alert('Элемент не удален');
+    }
+}
 
 /**
  * Clicks
@@ -196,12 +217,13 @@ document.addEventListener('click', function (e) {
  * submit listener
  */
 document.addEventListener('submit', function (e) {
-    e.preventDefault();
     var submitAttribute = e.target.getAttribute('id');
     if (submitAttribute === 'ajaxLogin') {
+        e.preventDefault();
         sendForm(e.target, 'POST', '/login', login);
     }
     if (submitAttribute === 'ajaxRegistration') {
+        e.preventDefault();
         sendForm(e.target, 'POST', '/register', register);
     }
 
@@ -307,12 +329,17 @@ function loadLoginForm(selector, method, url, callback) {
  */
 function sendForm(formContent, method, url, callback) {
     var request = new XMLHttpRequest();
-    var formData = new FormData(formContent);
+    if (formContent) {
+        var formData = new FormData(formContent);
+    }
     if (callback) {
         request.addEventListener('load', callback, false);
     }
     request.open(method, url, true);
     request.setRequestHeader('Accept', 'application/json');
     request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-    request.send(formData);
+    if (formContent) {
+        request.send(formData);
+    }
+    request.send();
 }

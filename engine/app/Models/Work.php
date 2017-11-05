@@ -23,9 +23,12 @@ class Work extends Model
         return new self();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public static function getAll()
     {
-        self::All();
+        return self::All();
     }
 
     /**
@@ -42,11 +45,37 @@ class Work extends Model
         return $works;
     }
 
+    /**
+     * @param int $userId
+     *
+     * @return array
+     */
     public function getListByUserWithImages(int $userId)
     {
         $works = $this->join('work_images', 'work.id', '=', 'work_images.workId')
             ->join('users', 'work.userId', '=', 'users.id')
             ->where('userId', $userId)
+            ->where('isDefault', true)
+            ->where('approved', true)
+            ->get()
+            ->toArray();
+        if (empty($works)) {
+            return [];
+        }
+        return $works;
+    }
+
+    /**
+     * @param int $limit
+     *
+     * @return array
+     */
+    public function getListForHomepage(int $limit = 10)
+    {
+        $works = $this->join('work_images', 'work.id', '=', 'work_images.workId')
+            ->join('users', 'work.userId', '=', 'users.id')
+            ->inRandomOrder()
+            ->limit($limit)
             ->where('isDefault', true)
             ->where('approved', true)
             ->get()

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use RecycleArt\Http\Controllers\Controller;
+use RecycleArt\Models\RoleUser;
 use RecycleArt\Models\User;
 
 class RegisterController extends Controller
@@ -124,6 +125,7 @@ class RegisterController extends Controller
      */
     protected function registered(Request $request, $user)
     {
+        RoleUser::getInstance()->enableRoleByName($user->id, User::ROLE_AUTHOR);
         if ($request->ajax()) {
             return response()->json([
                 'auth' => Auth::check(),

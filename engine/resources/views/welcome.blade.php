@@ -40,72 +40,23 @@
 
     <section id="products" class="products">
             <div class="flex">
-                <a href="#" class="item">
-                    <div class="content">
-                        <div class="border">
-                            <div class="valign">
-                                <h3>Анна Каренина</h3>
-                                <p>«Мусор, как искусство<br> воплощать свои идеи»</p>
+                @if(empty($works))
+                    <p>Работ от авторов пока нет</p>
+                    @else
+                    @foreach($works as $work)
+                        <a href="{{ route('workPublicShow', ['id' => $work['workId']]) }}" class="item">
+                            <div class="content">
+                                <div class="border">
+                                    <div class="valign">
+                                        <h3>{{ $work['name'] }}</h3>
+                                        <p>{{ $work['workName'] }}</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <img src="{{ url('static/images/items/img1.jpg') }}" alt="">
-                </a>
-                <a href="#" class="item">
-                    <div class="content">
-                        <div class="border">
-                            <div class="valign">
-                                <h3>Анна Каренина</h3>
-                                <p>«Мусор, как искусство<br> воплощать свои идеи»</p>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="{{ url('static/images/items/img6.jpg') }}" alt="">
-                </a>
-                <a href="#" class="item">
-                    <div class="content">
-                        <div class="border">
-                            <div class="valign">
-                                <h3>Анна Каренина</h3>
-                                <p>«Мусор, как искусство<br> воплощать свои идеи»</p>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="{{ url('static/images/items/img10.jpg') }}" alt="">
-                </a>
-                <a href="#" class="item">
-                    <div class="content">
-                        <div class="border">
-                            <div class="valign">
-                                <h3>Анна Каренина</h3>
-                                <p>«Мусор, как искусство<br> воплощать свои идеи»</p>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="{{ url('static/images/items/img7.jpg') }}" alt="">
-                </a>
-                <a href="#" class="item">
-                    <div class="content">
-                        <div class="border">
-                            <div class="valign">
-                                <h3>Анна Каренина</h3>
-                                <p>«Мусор, как искусство<br> воплощать свои идеи»</p>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="{{ url('static/images/items/img10.jpg') }}" alt="">
-                </a>
-                <a href="#" class="item">
-                    <div class="content">
-                        <div class="border">
-                            <div class="valign">
-                                <h3>Анна Каренина</h3>
-                                <p>«Мусор, как искусство<br> воплощать свои идеи»</p>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="{{ url('static/images/items/img6.jpg') }}" alt="">
-                </a>
+                            <img src="{{ url($work['link']) }}" alt="">
+                        </a>
+                    @endforeach
+                @endif
             </div>
     </section>
 @endsection

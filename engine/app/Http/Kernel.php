@@ -2,6 +2,7 @@
 
 namespace RecycleArt\Http;
 
+use App;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -19,6 +20,7 @@ class Kernel extends HttpKernel
         \RecycleArt\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \RecycleArt\Http\Middleware\TrustProxies::class,
+        \RecycleArt\Http\Middleware\ForceHttps::class,
     ];
 
     /**

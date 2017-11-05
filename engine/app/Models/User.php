@@ -262,16 +262,11 @@ class User extends Authenticatable
      */
     public function getById(int $id): array
     {
-        $user = $this
-            ->join('role_user', 'role_user.user_id', '=', 'users.id')
-            ->join('roles', 'roles.id', '=', 'role_user.role_id')
-            ->select('users.*', 'roles.name as roleName', 'roles.id as roleId')
-            ->where('users.id', $id)
-            ->first()->toArray();
-        if (empty($user)) {
+        $user = self::find($id);
+        if (empty($user) || empty($user->toArray())) {
             return [];
         }
-        return $user;
+        return $user->toArray();
     }
 
 
