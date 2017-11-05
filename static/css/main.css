@@ -2903,21 +2903,21 @@ template {
     font-family: 'bandera'; }
 
 .item {
-  margin-bottom: 30px;
   position: relative;
   display: inline-block;
+  margin-bottom: 30px;
+  overflow: hidden;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   margin-left: 15px;
   margin-right: 15px;
   word-wrap: break-word;
   width: -webkit-calc(33.333333333333336% - 30px);
-  width: calc(33.333333333333336% - 30px);
-  overflow: hidden;
-  -webkit-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
-  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
+  width: calc(33.333333333333336% - 30px); }
   @media screen and (max-width: 1024px) {
     .item {
       width: -webkit-calc(50% - 30px);
@@ -2926,20 +2926,23 @@ template {
     .item {
       width: -webkit-calc(100% - 30px);
       width: calc(100% - 30px); } }
-  .item:hover {
-    -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
-    .item:hover .content {
-      opacity: 1; }
-    .item:hover img {
-      -webkit-transform: scale(1.2);
-          -ms-transform: scale(1.2);
-              transform: scale(1.2); }
-  .item img {
-    width: 100%;
-    height: 100%;
+  .item:before {
+    content: '';
     display: block;
-    margin: 0 auto;
+    padding-top: 56.25%; }
+  .item:hover .content {
+    opacity: 1; }
+  .item:hover img {
+    -webkit-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+            transform: scale(1.2); }
+  .item img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    min-width: 100%;
     -webkit-transition: all 0.5s ease-in-out;
     transition: all 0.5s ease-in-out; }
   .item .content {
