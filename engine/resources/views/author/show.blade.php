@@ -45,7 +45,7 @@
                     <p>У этого пользователя работ нет</p>
                 @else
                      @foreach($works as $work)
-                        <a href="{{ route('workShow', ['id' => $work['workId']]) }}" class="item">
+                        <a href="{{ route('workPublicShow', ['id' => $work['workId']]) }}" class="item">
                             <div class="content">
                                 <div class="border">
                                     <div class="valign">
