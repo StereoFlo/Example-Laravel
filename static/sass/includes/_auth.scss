@@ -1,0 +1,212 @@
+.auth {
+  width: 100%;
+  height: 100%;
+  .signIn {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    padding: 30px;
+    width: 430px;
+    margin: 0 auto 60px;
+    @include max-screen($break_xs) {
+      box-shadow: none;
+      width: 350px;
+    }
+    @include max-screen($break_xxs) {
+      width: 300px;
+    }
+  }
+}
+.register {
+  width: 100%;
+  height: 100%;
+  .registrationForm {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    padding: 30px;
+    width: 450px;
+    margin: 0 auto 60px;
+    @include max-screen($break_xs) {
+      box-shadow: none;
+      width: 350px;
+      padding: 15px;
+    }
+    @include max-screen($break_xxs) {
+      width: 300px;
+    }
+  }
+}
+
+.logIn {
+  display: flex;
+  position: fixed;
+  overflow: auto;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba($black, 0.98);
+  z-index: 100;
+  @include max-screen($break_xs) {
+    overflow: auto;
+    max-width: none;
+    width: 100%;
+  }
+  &__close {
+    font-size: 1.5em;
+    color: $white;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    cursor: pointer;
+    transition: 220ms;
+    &:hover {
+      transform: scale(1.5);
+    }
+  }
+}
+.forms {
+  margin: auto;
+}
+.signIn, .registrationForm {
+  width: 330px;
+  @include max-screen($break_xxs) {
+    box-shadow: none;
+    width: 300px;
+    padding: 15px;
+  }
+
+  label {
+    color: $white;
+  }
+  label[for="remember"] {
+    margin-right: 10px;
+  }
+  .inputGroup {
+    position: relative;
+  }
+  input:not([type="checkbox"]) {
+    color: $white;
+    font-size: 1.2em;
+    display: block;
+    height: 30px;
+    width: 100%;
+    background: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px dotted $border;
+    padding-right: 35px;
+    @include max-screen($break_sm) {
+      font-size: 16px;
+      position: fixed;
+      width: 330px;
+    }
+    @include max-screen($break_xxs) {
+      width: 270px;
+    }
+  }
+
+  .fa {
+    color: $white;
+    text-align: center;
+    position: absolute;
+    right: 0;
+    top: 20px;
+    width: 30px;
+    font-size: 20px;
+  }
+  .errorText {
+    display: block;
+    color: $red;
+    height: 25px;
+    line-height: 1;
+    font-size: 0.7em;
+    margin-top: 2px;
+    @include max-screen($break_sm) {
+      margin-top: 32px;
+    }
+  }
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  &__enter {
+    background: #4a5281;
+    font-size: 1.2em;
+    outline: none;
+    &:hover {
+      background: darken(#4a5281, 15%);
+    }
+  }
+  .formToggle {
+    color: $white;
+    font-size: 1.2em;
+    display: block;
+    margin: 30px auto;
+    text-align: center;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  &__forgot {
+    color: #0089ef;
+    text-decoration: underline;
+    align-self: flex-end;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+.registrationForm {
+  &__buttons {
+    justify-content: center;
+  }
+}
+.signIn_dark, .registrationForm_dark {
+  label {
+    color: $black;
+  }
+  input:not([type="checkbox"]) {
+    color: $black;
+    border-color: $black;
+  }
+  .fa {
+    color: $black;
+  }
+  .formToggle {
+    color: $black;
+  }
+}
+
+.entered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  &__pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+  }
+  &__login {
+    color: $white;
+    font-size: 1.2em;
+    margin-bottom: 0;
+  }
+  &__link {
+    color: #0089ef;
+    text-decoration: underline;
+    margin-top: 20px;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+.logoutBtn {
+  font-size: 1.2em;
+  display: block;
+  margin: 30px auto;
+  background: #e83b3a;
+  &:hover {
+    background: #bf1716;
+  }
+}

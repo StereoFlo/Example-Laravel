@@ -1,0 +1,140 @@
+.welcome {
+  height: auto;
+  min-height: 100vh;
+  background: url("../images/main.jpg") no-repeat center top;
+  background-size: cover;
+  position: relative;
+  padding: 10% 15px 0;
+  margin-bottom: 0;
+  @include max-screen($break_sm) {
+    padding-top: 15%;
+  }
+  @include max-screen($break_xs) {
+    padding-top: 25%;
+  }
+  .flex {
+    @include row-flex();
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}
+.filter {
+  background: linear-gradient(#0d1423, rgba(61, 95, 191, 0.42));
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.sloganShow {
+  @include col();
+  @include col-5();
+  max-width: 100%;
+  cursor: pointer;
+  z-index: 10;
+  @include max-screen($break_sm) {
+    @include col-8();
+  }
+  @include max-screen($break_xs) {
+    @include col-12();
+  }
+}
+.news {
+  color: $white;
+  @include col();
+  @include col-5();
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  background: rgba($black, 0.7);
+  padding: 10px;
+  margin-bottom: 30px;
+  @include max-screen($break_sm) {
+    @include col-8();
+  }
+  @include max-screen($break_xs) {
+    @include col-12();
+  }
+  a {
+    text-decoration: none;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+  &__item {
+  }
+  &__name {
+    color: $white;
+    margin-bottom: 0;
+  }
+  &__date {
+    font-size: 13px;
+    color: $link;
+  }
+  &__text {
+    text-align: justify;
+    color: $link;
+    margin: 8px 0 0;
+  }
+}
+.slogan {
+  color: $link;
+  @include col();
+  @include col-5();
+  z-index: 10;
+  @include max-screen($break_sm) {
+    @include col-8();
+  }
+  @include max-screen($break_xs) {
+    @include col-12();
+  }
+  &__item {
+    text-align: justify;
+  }
+}
+.scrollDown {
+  position: absolute;
+  left: calc(50% - 15px);
+  bottom: 5%;
+  height: 40px;
+  display: block;
+  z-index: 15;
+  text-align: center;
+  @include max-screen($break_xs) {
+    display: none;
+  }
+  img {
+    display: block;
+    margin-bottom: 5px;
+    position: relative;
+    animation-name: scrollDown;
+    animation-duration: 1.6s;
+    animation-timing-function: linear;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    &:nth-child(2) {
+      animation-delay: 0.3s;
+    }
+    &:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+  }
+}
+@keyframes scrollDown {
+  0% {opacity: 0;}
+  20% {opacity: 0.3;}
+  40% {opacity: 0.7;}
+  60% {opacity: 1;}
+  70% {opacity: 0;}
+  100% {opacity: 0;}
+}
+@-webkit-keyframes scrollDown {
+  0% {opacity: 0;}
+  20% {opacity: 0.3;}
+  40% {opacity: 0.7;}
+  60% {opacity: 1;}
+  70% {opacity: 0;}
+  100% {opacity: 0;}
+}

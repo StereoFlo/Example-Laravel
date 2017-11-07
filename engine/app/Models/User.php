@@ -2,6 +2,8 @@
 
 namespace RecycleArt\Models;
 
+use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
@@ -14,9 +16,9 @@ class User extends Authenticatable
     /**
      * test
      */
-    const ROLE_ADMIN = 'admin';
+    const ROLE_ADMIN     = 'admin';
     const ROLE_MODERATOR = 'moderator';
-    const ROLE_AUTHOR = 'author';
+    const ROLE_AUTHOR    = 'author';
 
     /**
      * The attributes that are mass assignable.
@@ -24,7 +26,13 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'location', 'phone', 'about'
+        'name',
+        'email',
+        'password',
+        'location',
+        'phone',
+        'about',
+        'avatar',
     ];
 
     /**
@@ -33,12 +41,143 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
-    public static function getInstance()
+    /**
+     * @var \Illuminate\Contracts\Auth\Authenticatable|null
+     */
+    protected $currentUser;
+
+    /**
+     * @return self
+     */
+    public static function getInstance(): self
     {
         return new self();
+    }
+
+    /**
+     * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     */
+    public function getCurrentUser()
+    {
+        return $this->currentUser;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return self
+     */
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     *
+     * @return self
+     */
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocation(): string
+    {
+        return $this->location;
+    }
+
+    /**
+     * @param string $location
+     *
+     * @return self
+     */
+    public function setLocation(string $location): self
+    {
+        $this->location = $location;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhone(): string
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param string $phone
+     *
+     * @return self
+     */
+    public function setPhone(string $phone): self
+    {
+        $this->phone = $phone;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAbout(): string
+    {
+        return $this->about;
+    }
+
+    /**
+     * @param string $about
+     *
+     * @return self
+     */
+    public function setAbout(string $about): self
+    {
+        $this->about = $about;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAvatar(): string
+    {
+        return $this->avatar;
+    }
+
+    /**
+     * @param string $avatar
+     *
+     * @return self
+     */
+    public function setAvatar(string $avatar): self
+    {
+        $this->avatar = $avatar;
+        return $this;
     }
 
     /**
@@ -67,7 +206,7 @@ class User extends Authenticatable
 
 
     /**
-     * @param $roles
+     * @param array|string $roles
      *
      * @return bool
      */
@@ -79,12 +218,20 @@ class User extends Authenticatable
                     return true;
                 }
             }
-        } else {
-            if ($this->hasRole($roles)) {
-                return true;
-            }
+            return false;
+        }
+        if ($this->hasRole($roles)) {
+            return true;
         }
         return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isModerator()
+    {
+        return $this->hasAnyRole([self::ROLE_ADMIN, self::ROLE_MODERATOR]);
     }
 
     /**
@@ -103,9 +250,9 @@ class User extends Authenticatable
     /**
      * @return array
      */
-    public function getAll()
+    public static function getAll()
     {
-        return $this->get()->toArray();
+        return self::All();
     }
 
     /**
@@ -115,16 +262,11 @@ class User extends Authenticatable
      */
     public function getById(int $id): array
     {
-        $user = $this
-            ->join('role_user', 'role_user.user_id', '=', 'users.id')
-            ->join('roles', 'roles.id', '=', 'role_user.role_id')
-            ->select('users.*', 'roles.name as roleName', 'roles.id as roleId')
-            ->where('users.id', $id)
-            ->get()->toArray();
-        if (empty($user)) {
+        $user = self::find($id);
+        if (empty($user) || empty($user->toArray())) {
             return [];
         }
-        return $user;
+        return $user->toArray();
     }
 
 
@@ -142,5 +284,59 @@ class User extends Authenticatable
             $isSaved = File::delete($path);
         }
         return $isSaved;
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return bool
+     */
+    public function updateProfile(Request $request)
+    {
+        $user           = Auth::user();
+        $user->name     = $request->post('name');
+        $user->email    = $request->post('email');
+        $user->location = $request->post('location');
+        $user->phone    = $request->post('phone');
+        $user->about    = $request->post('about');
+
+        $this->uploadAvatar($request->file('avatar'), $user);
+        $this->setPassword($request, $user);
+
+        return $user->save();
+    }
+
+    /**
+     * @param UploadedFile|null $avatar
+     * @param                   $user
+     *
+     * @return $this
+     */
+    private function uploadAvatar(UploadedFile $avatar = null, $user)
+    {
+        if (empty($avatar)) {
+            return $this;
+        }
+
+        $avatar->move(\public_path('uploads/' . Auth::id()), 'avatar.' . $avatar->clientExtension());
+        $user->avatar = '/uploads/' . Auth::id() . '/avatar.' . $avatar->clientExtension();
+        return $this;
+    }
+
+    /**
+     * @param Request $request
+     * @param         $user
+     *
+     * @return $this
+     */
+    private function setPassword(Request $request, $user)
+    {
+        if (empty($request->post('password'))) {
+            return $this;
+        }
+        if ($request->post('password') === $request->post('password_confirmation')) {
+            $user->password = bcrypt($request->input('password'));
+        }
+        return $this;
     }
 }

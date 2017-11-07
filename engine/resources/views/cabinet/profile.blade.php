@@ -1,133 +1,118 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
-                {{ session('updateResult') }}
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('profileUpdate') }}" enctype="multipart/form-data">
-                        {{ csrf_field() }}
+<section class="profileUpdate">
+    <div class="container">
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ Auth::user()->name }}" required autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('location') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Location</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="location" value="{{ Auth::user()->location }}">
-
-                                @if ($errors->has('location'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('location') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Phone</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="phone" value="{{ Auth::user()->phone }}">
-
-                                @if ($errors->has('phone'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('phone') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('about') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">about</label>
-
-                            <div class="col-md-6">
-                                <textarea id="name" class="form-control" name="about">{{ Auth::user()->about }}</textarea>
-
-                                @if ($errors->has('about'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('about') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
-                            <label for="avatar" class="col-md-4 control-label">avatar</label>
-
-                            <div class="col-md-6">
-                                <input type="file" name="avatar" id="avatar" class="form-control" value="{{ old('avatar') }}">
-
-                                @if ($errors->has('avatar'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('avatar') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ Auth::user()->email }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password">
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+        <div class="sectionTitle">
+            <h2>Обновление профиля</h2>
         </div>
+
+        @if(!empty(session('updateResult')))
+        <div class="sessionUpdateResult">
+            <h3 class="message">{{ session('updateResult') }}. Вернуться в <a href="{{ route('cabinetIndex') }}">личный кабинет</a> </h3>
+        </div>
+        @endif
+
+
+        <form method="POST" action="{{ route('profileUpdate') }}" enctype="multipart/form-data" id="profileUpdateForm" class="form profileUpdateForm">
+            {{ csrf_field() }}
+
+            <div class="inputGroup{{ $errors->has('name') ? ' has-error' : '' }}">
+                <label for="name">Имя:</label>
+                <input id="name" type="text" name="name" value="{{ Auth::user()->name }}" required>
+                <span class="errorText">
+                    @if ($errors->has('name'))
+                    <strong>{{ $errors->first('name') }}</strong>
+                    @endif
+                </span>
+            </div>
+
+            <div class="inputGroup{{ $errors->has('email') ? ' has-error' : '' }}">
+                <label for="email">email:</label>
+                <input type="text" name="email" value="{{ Auth::user()->email }}" required>
+                <span class="errorText">
+                    @if ($errors->has('email'))
+                        <strong>{{ $errors->first('email') }}</strong>
+                    @endif
+                </span>
+            </div>
+
+            <div class="inputGroup{{ $errors->has('location') ? ' has-error' : '' }}">
+                <label for="location">город:</label>
+                <input type="text" name="location" value="{{ Auth::user()->location }}">
+                <span class="errorText">
+                    @if ($errors->has('location'))
+                        <strong>{{ $errors->first('location') }}</strong>
+                    @endif
+                </span>
+            </div>
+
+            <div class="inputGroup{{ $errors->has('phone') ? ' has-error' : '' }}">
+                <label for="phone">телефон:</label>
+                <input id="phone" type="text" name="phone" value="{{ Auth::user()->phone }}">
+                <span class="errorText">
+                    @if ($errors->has('phone'))
+                        <strong>{{ $errors->first('phone') }}</strong>
+                    @endif
+                </span>
+            </div>
+
+            <div class="inputGroup{{ $errors->has('about') ? ' has-error' : '' }}">
+                <label for="about">о себе:</label>
+                <textarea name="about" rows="8" cols="80">{{ Auth::user()->about }}</textarea>
+                <span class="errorText">
+                    @if ($errors->has('about'))
+                        <strong>{{ $errors->first('about') }}</strong>
+                    @endif
+                </span>
+            </div>
+
+            <div class="inputGroup{{ $errors->has('password') ? ' has-error' : '' }}">
+                <label for="password">пароль:</label>
+                <input type="text" name="password" value="" placeholder="Новый пароль">
+                <span class="errorText">
+                    @if ($errors->has('password'))
+                        <strong>{{ $errors->first('password') }}</strong>
+                    @endif
+                </span>
+            </div>
+            <div class="inputGroup{{ $errors->has('password') ? ' has-error' : '' }}">
+                <label for="password">подтверждение:</label>
+                <input type="text" name="password_confirmation" value="" placeholder="Новый пароль">
+                <span class="errorText">
+                    @if ($errors->has('name'))
+                        <strong>{{ $errors->first('name') }}</strong>
+                    @endif
+                </span>
+            </div>
+
+            @if (empty(Auth::user()->avatar))
+            <div class="inputGroup{{ $errors->has('avatar') ? ' has-error' : '' }}">
+                <label for="avatar">фото:</label>
+                <div class="filearea">
+                    <span>Перенесите файл сюда или нажмите на эту зону!</span>
+                    <input type="file" name="avatar" value="{{ old('avatar') }}">
+                </div>
+                <div class="fileareaPreview"></div>
+                <span class="errorText">
+                    @if ($errors->has('avatar'))
+                        <strong>{{ $errors->first('avatar') }}</strong>
+                    @endif
+                </span>
+            </div>
+            @else
+                <label for="">аватар:</label>
+                <div id="avatar" class="avatar">
+                    <img src="{{ Auth::user()->avatar }}">
+                    <a href="{{ route('removeAvatar') }} " class="del">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                </div>
+            @endif
+
+            <button type="submit" name="button" class="button">Обновить</button>
+        </form>
     </div>
-</div>
+</section>
 @endsection

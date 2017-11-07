@@ -11,80 +11,74 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('/static/libs/fotorama/fotorama.css') }}" rel="stylesheet">
+    <link href="{{ asset('/static/css/main.min.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+<div class="wrapper">
+    <header class="header header_white">
+        <div class="container">
+            <div class="flex">
+                <div class="logo">
+                    <a href="{{ url('index.html') }}">
+                        <img src="{{ url('static/images/logo_dark.png') }}" alt="Logo" class="logo__pic">
+                        <img src="{{ url('static/images/logo_mini.png') }}" alt="Logo" class="logo__picMin">
                     </a>
                 </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('profileForm') }}">
-                                            My profile
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('workList') }}">
-                                            My Works
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endguest
-                    </ul>
+                <a href="#" class="menu__btn">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </a>
+                <nav class="nav">
+                    <a href="{{ url('index.html') }}" class="nav__link">Главная</a>
+                    <a href="#" class="nav__link">Галерея</a>
+                    <a href="#" class="nav__link">О нас</a>
+                    <a href="#" class="nav__link">Общалка</a>
+                    <a href="#" class="nav__link">Контакты</a>
+                </nav>
+                <div class="user">
+                    <a class="user__btn">
+                        <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                    </a>
                 </div>
             </div>
-        </nav>
-
+        </div>
+    </header>
+    <div class="main">
         @yield('content')
     </div>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="flex">
+                <div class="footer__brand">
+                    <a href="{{ url('index.html') }}"><img src="{{url('static/images/logo-min.png')}}" alt=""></a>
+                    <span class="sm-fs-12 xs-block">&copy; 2014-2017. Все права защищены.</span>
+                </div>
+                <div class="footer__social">
+                    <a href="#"><i class="fa fa-vk" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<div class="logIn hidden">
+
+    <div class="logIn__close">
+        <i class="fa fa-times" aria-hidden="true"></i>
+    </div>
+
+    <div class="forms"></div>
+</div>
+
+<!-- Scripts -->
+{{--    <script src="{{ asset('js/app.js') }}"></script>--}}
+<script type="text/javascript" src="//vk.com/js/api/openapi.js?150"></script>
+<script type="text/javascript">VK.init({apiId: 5683855, onlyWidgets: true});</script>
+<script src="{{ url('static/js/libs.min.js') }}"></script>
+<script src="{{ url('static/js/common.js') }}"></script>
 </body>
 </html>

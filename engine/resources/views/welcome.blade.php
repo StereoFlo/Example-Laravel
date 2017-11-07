@@ -1,95 +1,62 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.welcome')
 
-        <title>Hello</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ config('app.url') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Hello
+@section('content')
+    <section id="welcome" class="welcome">
+        <div class="filter"></div>
+        <div class="container">
+            <div class="flex">
+                <img src="{{ url('static/images/logo.png') }}" alt="Logo" class="sloganShow">
+                <div class="slogan">
+                    <p class="slogan__item">
+                        {{ $slogan }}
+                    </p>
                 </div>
 
-                {{--<div class="links">--}}
-                    {{--<a href="https://laravel.com/docs">Documentation</a>--}}
-                    {{--<a href="https://laracasts.com">Laracasts</a>--}}
-                    {{--<a href="https://laravel-news.com">News</a>--}}
-                    {{--<a href="https://forge.laravel.com">Forge</a>--}}
-                    {{--<a href="https://github.com/laravel/laravel">GitHub</a>--}}
-                {{--</div>--}}
+                @if(!empty($news))
+
+                    <div class="news">
+
+                        @foreach($news as $item)
+                            <a href="{{ route('news') }}">
+                                <div class="news__item">
+                                    <h4 class="news__name">{{ $item['name'] }}</h4>
+                                    <span class="news__date">{{ date('d.m.Y', strtotime($item['created_at'])) }}</span>
+                                    <p class="news__text">{{ $item['content'] }}</p>
+                                </div>
+                            </a>
+                        @endforeach
+
+                    </div>
+
+                @endif
             </div>
         </div>
-    </body>
-</html>
+        <a href="#products" class="scrollDown">
+            <img src="{{ url('static/images/scroll.png') }}" alt="scroll">
+            <img src="{{ url('static/images/scroll.png') }}" alt="scroll">
+            <img src="{{ url('static/images/scroll.png') }}" alt="scroll">
+        </a>
+    </section>
+
+    <section id="products" class="products">
+            <div class="flex">
+                @if(empty($works))
+                    <p>Работ от авторов пока нет</p>
+                    @else
+                    @foreach($works as $work)
+                        <a href="/author/{{$work['userId']}}" class="item">
+                            <div class="content">
+                                <div class="border">
+                                    <div class="valign">
+                                        <h3>{{ $work['name'] }}</h3>
+                                        <p>{{ $work['workName'] }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <img src="{{ url($work['link']) }}" alt="">
+                        </a>
+                    @endforeach
+                @endif
+            </div>
+    </section>
+@endsection

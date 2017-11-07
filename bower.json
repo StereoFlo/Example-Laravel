@@ -1,0 +1,21 @@
+{
+  "name": "recycle",
+  "description": "Recycle art",
+  "main": "index.js",
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "^4.7.0",
+    "page-scroll-to-id": "^1.5.8",
+    "smoothscroll-for-websites": "^1.4.6",
+    "inputmask": "^3.3.10",
+    "fotorama": "^4.6.4"
+  }
+}

@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'hello@recycle.cf'),
+        'name' => env('MAIL_FROM_NAME', 'Recycle Art Bot'),
     ],
 
     /*
@@ -120,4 +120,6 @@ return [
         ],
     ],
 
+    'webmaster' => env('WEBMASTER_ADDRESS', 'mail@mail.host'),
+    'maillog'   => env('MAILLOG_ENABLE', false),
 ];

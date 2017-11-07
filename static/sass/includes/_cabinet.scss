@@ -1,0 +1,170 @@
+.cabinet {
+  padding: 0 30px;
+}
+.account {
+  @include row-flex();
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background: $white;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  margin-bottom: 50px;
+  &__card {
+    text-align: center;
+    padding: 20px 15px;
+    //box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    @include col();
+    @include col-3();
+    @include col-sm-5();
+    @include col-xs-12();
+  }
+  &__pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+  }
+  &__login {
+    font-family: 'lato', sans-serif;
+    font-size: 1.3em;
+    font-weight: bold;
+  }
+  &__btn {
+    display: inline-block;
+    text-decoration: none;
+    background: #4a5281;
+    outline: none;
+    margin-bottom: 30px;
+    &:hover {
+      background: darken(#4a5281, 15%);
+    }
+  }
+  &__info {
+    padding: 20px;
+    //box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    @include col();
+    @include col-9();
+    @include col-sm-7();
+    @include col-xs-12();
+  }
+  dl {
+    @include max-screen($break_xs) {
+      margin-top: 0;
+    }
+  }
+  dt, dd {
+    font-size: 1.2em;
+    display: inline-block;
+    margin-bottom: 10px;
+    @include max-screen($break_xs) {
+      display: block;
+      margin-bottom: 3px;
+    }
+  }
+  dt {
+    font-weight: bold;
+    text-align: right;
+    vertical-align: top;
+    width: 100px;
+    margin-right: 30px;
+    @include max-screen($break_xs) {
+      text-align: left;
+    }
+  }
+  dd {
+    text-align: justify;
+    margin: 0;
+    max-width: calc(100% - 130px);
+    @include max-screen($break_xs) {
+      max-width: 100%;
+    }
+  }
+}
+
+.works {
+  display: flex;
+  flex-direction: column;
+  margin: 0 -15px 60px -15px;
+  &__new {
+    color: #0089ef;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    max-width: 120px;
+    margin-bottom: 10px;
+    &:hover .fa{
+      color: $olive;
+    }
+    .fa {
+      font-size: 1.2em;
+      margin: 0 10px;
+      text-decoration: none;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: $white;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  }
+  &__name {
+    color: $black;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: 0;
+    @include max-screen($break_xs) {
+      max-width: 250px;
+      overflow: hidden;
+    }
+    @include max-screen($break_xs) {
+      max-width: 190px;
+      overflow: hidden;
+    }
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  &__control {
+    display: flex;
+    align-items: center;
+  }
+  &__edit, &__remove {
+    display: inline-block;
+    color: $gray;
+    text-decoration: none;
+    font-size: 1.3em;
+    margin: 0 10px;
+    .fa {
+      transition: all 0.1s ease-in-out;
+    }
+  }
+  &__edit {
+    &:hover {
+      color: $blue;
+    }
+  }
+  &__remove {
+    &:hover {
+      color: $red;
+    }
+  }
+  &__status {
+    font-size: 1.3em;
+    color: $red;
+    display: inline-block;
+    &::before {
+      content: '';
+      border-left: 2px solid $gray;
+      margin: 0 10px;
+    }
+    .fa {
+      min-width: 20px;
+      text-align: center;
+    }
+  }
+  .approved {
+    color: $olive;
+  }
+}

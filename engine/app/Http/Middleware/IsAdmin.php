@@ -22,7 +22,7 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (!$request->user()->authorizeRoles([User::ROLE_ADMIN])) {
+        if (empty($request->user()) || !$request->user()->authorizeRoles([User::ROLE_ADMIN])) {
             abort(401, 'This action is unauthorized.');
         }
         return $next($request);

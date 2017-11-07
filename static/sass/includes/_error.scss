@@ -1,0 +1,32 @@
+.error {
+  margin: auto;
+  padding: 30px;
+  &__pic {
+    display: block;
+    width: 35%;
+    margin: 0 auto;
+  }
+  &__code {
+    font-size: 7em;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+  }
+  &__text {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 0;
+  }
+  &__link {
+    font-size: 1.5em;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    color: #0089ef;
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

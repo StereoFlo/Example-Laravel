@@ -50,4 +50,18 @@ class Author extends Model
         }
         return $authors;
     }
+
+    /**
+     * @param int $id
+     *
+     * @return array
+     */
+    public function getByid(int $id): array
+    {
+        $res = self::find($id);
+        if (empty($res) || empty($res->toArray())) {
+            return [];
+        }
+        return $res->toArray();
+    }
 }
