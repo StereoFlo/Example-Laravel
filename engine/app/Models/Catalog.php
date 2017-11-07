@@ -23,6 +23,14 @@ class Catalog extends Model
     ];
 
     /**
+     * @return Catalog
+     */
+    public static function getInstance()
+    {
+        return new self();
+    }
+
+    /**
      * @return array
      */
     public function getList()
@@ -35,15 +43,31 @@ class Catalog extends Model
     }
 
     /**
+     * @param int $id
+     *
+     * @return array
+     */
+    public function getById(int $id)
+    {
+        $category = self::find($id);
+        if (!$this->checkEmptyObject($category)) {
+            return [];
+        }
+        return $category->toArray();
+    }
+
+    /**
      * @param string $name
+     * @param string $descr
      * @param int    $parentId
      *
      * @return bool
      */
-    public function addCategory(string $name, int $parentId = 0)
+    public function addCategory(string $name, string $descr = '', int $parentId = 0)
     {
         $instance = new self();
         $instance->name = $name;
+        $instance->description = $descr;
         if (!empty($parentId)) {
             $instance->parent_id = $parentId;
         }

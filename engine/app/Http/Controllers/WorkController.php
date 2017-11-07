@@ -121,7 +121,7 @@ class WorkController extends Controller
     {
         $work = (new Work)->getById($id);
         if ($work['userId'] !== Auth::id()) {
-            abort(404, __('workNotFound'));
+            abort(401, __('workNotFound'));
         }
         if (empty($work)) {
             abort(404, __('workNotFound'));

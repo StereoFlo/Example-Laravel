@@ -17,6 +17,9 @@
         <a href="{{ route('sloganIndex') }}" class="list-group-item">
             <i class="fa fa-comment-o"></i> Слоган
         </a>
+        <a href="{{ route('managerCatalogList') }}" class="list-group-item">
+            <i class="fa fa-comment-o"></i> Каталог
+        </a>
         <a href="{{ route('newsList') }}" class="list-group-item">
             <i class="fa fa-comment-o"></i> Новости <span class="badge">{{ $newsCount }}</span>
         </a>

@@ -41,6 +41,11 @@ Route::group(['middleware' => 'isModerator'], function () {
     Route::get('/manager/work/list', 'Manager\\Work@getList')->name('workListManager');
     Route::get('/manager/work/list/author/{id}', 'Manager\\Work@getListByAuthor')->where('id', '[0-9]+')->name('workListAuthorManager');
     Route::get('/manager/work/approve/{workId}', 'Manager\\Work@approve')->where('workId', '[0-9]+')->name('managerWorkApprove');
+    Route::get('/manager/catalog/list', 'Manager\\Catalog@getList')->name('managerCatalogList');
+    Route::get('/manager/catalog/add', 'Manager\\Catalog@form')->name('managerCatalogAdd');
+    Route::post('/manager/catalog/process', 'Manager\\Catalog@process')->name('managerCatalogProcess');
+    Route::get('/manager/catalog/{id}/edit', 'Manager\\Catalog@form')->where('id', '[0-9]+')->name('managerCatalogEdit');
+    Route::get('/manager/catalog/{id}/remove', 'Manager\\Catalog@remove')->where('id', '[0-9]+')->name('managerCatalogRemove');
 });
 
 // profile change
