@@ -150,4 +150,23 @@ class WorkController extends Controller
         }
         return view('work.show', ['work' => $work]);
     }
+
+    /**
+     * @param int $id
+     *
+     * @return array
+     */
+    public function setLike(int $id)
+    {
+        if (session()->has('work' . $id)) {
+            return [
+                'isLiked' => false
+            ];
+        }
+        $this->work->where('id', $id)->increment('likes');
+        session(['work' . $id => true]);
+        return [
+            'isLiked' => true
+        ];
+    }
 }

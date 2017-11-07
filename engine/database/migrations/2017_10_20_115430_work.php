@@ -18,9 +18,11 @@ class Work extends Migration
             $table->increments('id');
             $table->string('workName');
             $table->integer('userId');
+            $table->integer('likes')->default(0);
             $table->text('description')->nullable();
             $table->boolean('approved')->default(false);
             $table->timestamps();
+            $table->index('likes');
             $table->index('userId');
             $table->index('approved');
         });

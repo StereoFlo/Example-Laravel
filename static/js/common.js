@@ -164,6 +164,25 @@ $(function () {
     /* ---------------------------------------------- */
 
     $('input[name="phone"]').inputmask({"mask": "+7(999) 999-9999"});
+
+    $('#setLike').click(function (e) {
+        e.preventDefault();
+        var url = $(this).attr('href');
+        var likeSel = $('#likesCount');
+        $.get(url)
+            .done(function (data) {
+                if (data.isLiked === true) {
+                    var currentVal = parseInt(likeSel.text());
+                    likeSel.empty();
+                    likeSel.append(currentVal + 1);
+                }
+            })
+            .fail(function (data) {
+                //todo
+            });
+        return false;
+    });
+
 });
 
 /* ---------------------------------------------- /*

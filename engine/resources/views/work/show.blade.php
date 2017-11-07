@@ -36,8 +36,8 @@
             <div class="work__toolbar">
                 <div class="work__counts">
                     <div class="work__likes">
-                        <a href="#"></a>
-                        <span>0</span>
+                        <a id="setLike" href="{{ route('workPublicLike', ['id' => $work['userId']]) }}" ></a>
+                        <span id="likesCount">{{ $work['likes'] }}</span>
                     </div>
                 </div>
                 <div class="work__circles">
