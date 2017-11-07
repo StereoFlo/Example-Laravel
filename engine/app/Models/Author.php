@@ -45,7 +45,7 @@ class Author extends Model
         if (!$this->checkEmptyObject($authors)) {
             return [];
         }
-        return $authors;
+        return $authors->toArray();
     }
 
     /**

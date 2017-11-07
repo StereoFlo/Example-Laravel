@@ -2,8 +2,6 @@
 
 namespace RecycleArt\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * Class Slogan
  * @package RecycleArt\Models
@@ -24,7 +22,7 @@ class Slogan extends Model
     public function getSlogan(): string
     {
         $getSlogan = $this->where('id', self::DEFAULT_SLOGAN_ID)->first();
-        if (empty($getSlogan)) {
+        if (!$this->checkEmptyObject($getSlogan)) {
             return '';
         }
         if (!isset($getSlogan['content'])) {

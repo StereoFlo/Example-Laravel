@@ -85,20 +85,22 @@ class WorkImages extends Model
     public function addImamges(array $files, $workId): bool
     {
         $isSaved = false;
-        $user = Auth::user();
+        if (empty(Auth::id())) {
+            return $isSaved;
+        }
         if (empty($files)) {
-            return false;
+            return $isSaved;
         }
         foreach ($files as $key => $file) {
             $work = new self();
-            $path = \public_path('uploads/' . $user->id . '/work/' . $workId);
+            $path = \public_path('uploads/' . Auth::id() . '/work/' . $workId);
             $newImageName = \md5(\time() . $key) . '.' . \strtolower($file->getClientOriginalExtension());
             $file->move($path, $newImageName);
             $work->workId = $workId;
             if (0 === $key && !$this->hasDefault($workId)) {
                 $work->isDefault = true;
             }
-            $work->link = '/uploads/' . $user->id . '/work/' . $workId . '/' . $newImageName;
+            $work->link = '/uploads/' . Auth::id() . '/work/' . $workId . '/' . $newImageName;
             $isSaved = $work->save();
         }
         return $isSaved;

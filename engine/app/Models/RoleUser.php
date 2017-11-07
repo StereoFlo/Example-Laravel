@@ -2,8 +2,10 @@
 
 namespace RecycleArt\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
+/**
+ * Class RoleUser
+ * @package RecycleArt\Models
+ */
 class RoleUser extends Model
 {
     /**
@@ -35,7 +37,7 @@ class RoleUser extends Model
     public function enableRole(int $userId, int $roleId)
     {
         $role = $this->where('user_id', $userId)->where('role_id', $roleId)->get();
-        if ($this->checkEmptyObject($role)) {
+        if (!$this->checkEmptyObject($role)) {
             return $this->create([
                 'role_id' => $roleId,
                 'user_id' => $userId,
