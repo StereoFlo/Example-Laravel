@@ -108,6 +108,8 @@ class Work extends Model
      */
     public function removeById(int $workId)
     {
+        (new TagsRel())->deleteByWork($workId);
+        (new CatalogRel())->removeWorkCategory($workId);
         return $this->where('id', $workId)->delete();
     }
 
@@ -129,6 +131,7 @@ class Work extends Model
         $work->workName = $data['workName'];
         $work->description = $data['description'];
         $work->userId = $data['userId'];
+        $work->approved = false;
         $work->save();
         return $work->id ?: 0;
     }
