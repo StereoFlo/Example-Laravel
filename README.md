@@ -1,9 +1,10 @@
 #### Как установить систему
 
 1) **git clone ...** сливаем
-2) **cd engine** && **php composer.phar update**
-3) Настроить БД для нового проекта
-4) Настрокить файл **.env**:
+2) **cd engine** 
+3) **php composer.phar update**
+4) Настроить БД для нового проекта
+5) Настрокить файл **.env**:
 
 ``` bash
 APP_NAME=Recycle
