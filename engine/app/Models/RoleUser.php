@@ -34,8 +34,8 @@ class RoleUser extends Model
      */
     public function enableRole(int $userId, int $roleId)
     {
-        $role = $this->where('user_id', $userId)->where('role_id', $roleId)->get()->toArray();
-        if (empty($role)) {
+        $role = $this->where('user_id', $userId)->where('role_id', $roleId)->get();
+        if ($this->checkEmptyObject($role)) {
             return $this->create([
                 'role_id' => $roleId,
                 'user_id' => $userId,
@@ -56,8 +56,8 @@ class RoleUser extends Model
         if (empty($getRole)) {
             return false;
         }
-        $role = $this->where('user_id', $userId)->where('role_id', $getRole['id'])->get()->toArray();
-        if (empty($role)) {
+        $role = $this->where('user_id', $userId)->where('role_id', $getRole['id'])->get();
+        if ($this->checkEmptyObject($role)) {
             return $this->create([
                 'role_id' => $getRole['id'],
                 'user_id' => $userId,
@@ -68,8 +68,8 @@ class RoleUser extends Model
 
     public function disableRole(int $userId, int $roleId)
     {
-        $role = $this->where('user_id', $userId)->where('role_id', $roleId)->get()->toArray();
-        if (empty($role)) {
+        $role = $this->where('user_id', $userId)->where('role_id', $roleId)->get();
+        if ($this->checkEmptyObject($role)) {
             return false;
         }
         return $this->where('user_id', $userId)->where('role_id', $roleId)->delete();

@@ -2,8 +2,6 @@
 
 namespace RecycleArt\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * Class News
  * @package RecycleArt\Models
@@ -46,7 +44,7 @@ class News extends Model
         } else {
             $news = $this->skip($offset*$limit)->take($limit)->orderBy($orderBy, 'DESC')->get();
         }
-        if (empty($news)) {
+        if (!$this->checkEmptyObject($news)) {
             return [];
         }
         return $news->toArray();
@@ -74,7 +72,7 @@ class News extends Model
     public function getById(int $id)
     {
         $res = $this->where('id', $id)->first();
-        if (empty($res)) {
+        if (!$this->checkEmptyObject($res)) {
             return [];
         }
         return $res->toArray();

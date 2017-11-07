@@ -2,7 +2,6 @@
 
 namespace RecycleArt\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -43,8 +42,9 @@ class WorkImages extends Model
      */
     public static function getbyWorkId(int $workId)
     {
+        $slf = new self();
         $imgs = self::where('workId', $workId)->get();
-        if (empty($imgs) || empty($imgs->toArray())) {
+        if (!$slf->checkEmptyObject($imgs)) {
             return [];
         }
         return $imgs->toArray();
@@ -59,7 +59,7 @@ class WorkImages extends Model
     public function deleteImageFromWork(int $workId, int $imageId)
     {
         $images = $this->where('id', $imageId)->where('workId', $workId)->get();
-        if (empty($images) || empty($images->toArray())) {
+        if (!$this->checkEmptyObject($images)) {
             return false;
         }
         $isSaved = false;
@@ -112,7 +112,7 @@ class WorkImages extends Model
     public function getDefault(int $workId)
     {
         $defaultImage =  $this->where('workId', $workId)->where('isDefault', true)->first();
-        if (empty($defaultImage)) {
+        if (!$this->checkEmptyObject($defaultImage)) {
             return [];
         }
         return $defaultImage->toArray();
@@ -129,7 +129,7 @@ class WorkImages extends Model
             return false;
         }
         $hasDefault = $this->where('workId', $workId)->where('isDefault', true)->get();
-        if (empty($hasDefault) || empty($hasDefault->toArray())) {
+        if (!$this->checkEmptyObject($hasDefault)) {
             return false;
         }
         return true;

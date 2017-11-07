@@ -2,8 +2,10 @@
 
 namespace RecycleArt\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
+/**
+ * Class Tags
+ * @package RecycleArt\Models
+ */
 class Tags extends Model
 {
     const DELIMITER = ',';
@@ -26,7 +28,7 @@ class Tags extends Model
     public function getByName(string $tagName)
     {
         $tag = $this->where('tag', $tagName)->first();
-        if (empty($tag) || empty($tag->toArray())) {
+        if (!$this->checkEmptyObject($tag)) {
             return [];
         }
         return $tag->toArray();

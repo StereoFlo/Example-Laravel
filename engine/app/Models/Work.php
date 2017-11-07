@@ -2,8 +2,6 @@
 
 namespace RecycleArt\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * Class Work
  * @package RecycleArt\Models
@@ -38,11 +36,11 @@ class Work extends Model
      */
     public function getListByUserId(int $userId): array
     {
-        $works = $this->where('userId', $userId)->get()->toArray();
-        if (empty($works)) {
+        $works = $this->where('userId', $userId)->get();
+        if (!$this->checkEmptyObject($works)) {
             return [];
         }
-        return $works;
+        return $works->toArray();
     }
 
     /**
@@ -59,7 +57,7 @@ class Work extends Model
             ->where('approved', true)
             ->get()
             ->toArray();
-        if (empty($works)) {
+        if (!$this->checkEmptyObject($works)) {
             return [];
         }
         return $works;
@@ -80,7 +78,7 @@ class Work extends Model
             ->where('approved', true)
             ->get()
             ->toArray();
-        if (empty($works)) {
+        if (!$this->checkEmptyObject($works)) {
             return [];
         }
         return $works;
@@ -96,7 +94,7 @@ class Work extends Model
         $work = $this->select('users.name as userName', 'users.id as userId', 'work.*')->join('users', 'users.id', '=', 'work.userId')
             ->where('work.id', $workId)
             ->first();
-        if (empty($work) || empty($work->toArray())) {
+        if (!$this->checkEmptyObject($work)) {
             return [];
         }
         $work = $work->toArray();
@@ -149,7 +147,7 @@ class Work extends Model
             $result->where('userId', $id);
         }
         $result = $result->get();
-        if (empty($result) || empty($result->toArray())) {
+        if (!$this->checkEmptyObject($result)) {
             return [];
         }
         return $result->toArray();
@@ -161,7 +159,7 @@ class Work extends Model
     public function getUnapproved()
     {
         $result = $this->select('work.*', 'users.id as userId', 'users.name as userName')->join('users', 'users.id', '=', 'work.userId')->where('approved', false)->get();
-        if (empty($result) || empty($result->toArray())) {
+        if (!$this->checkEmptyObject($result)) {
             return [];
         }
         return $result->toArray();
@@ -175,7 +173,7 @@ class Work extends Model
     public function toggleApprove(int $workId)
     {
         $work = self::find($workId);
-        if (empty($work)) {
+        if (!$this->checkEmptyObject($work)) {
             return false;
         }
         $work->approved = $work->approved ? false : true;

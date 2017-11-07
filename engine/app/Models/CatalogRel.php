@@ -2,8 +2,10 @@
 
 namespace RecycleArt\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
+/**
+ * Class CatalogRel
+ * @package RecycleArt\Models
+ */
 class CatalogRel extends Model
 {
     /**
@@ -36,7 +38,7 @@ class CatalogRel extends Model
     public function isWorkInCategory($categoryId, $workId)
     {
         $res = $this->where('work_id', $workId)->where('catalog_id', $categoryId)->first();
-        if (empty($res) || empty($res->toArray())) {
+        if (!$this->checkEmptyObject($res)) {
             return false;
         }
         return true;

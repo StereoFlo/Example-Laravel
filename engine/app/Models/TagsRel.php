@@ -2,8 +2,10 @@
 
 namespace RecycleArt\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
+/**
+ * Class TagsRel
+ * @package RecycleArt\Models
+ */
 class TagsRel extends Model
 {
     /**
@@ -32,7 +34,7 @@ class TagsRel extends Model
     public function getByWork(int $workId)
     {
         $tags = $this->select('tags.tag', 'tags.id', 'tags_rels.workId')->join('tags', 'tags.id', '=', 'tags_rels.tagId')->where('tags_rels.workId', $workId)->get();
-        if (empty($tags) || empty($tags->toArray())) {
+        if (!$this->checkEmptyObject($tags)) {
             return [];
         }
         return $tags->toArray();

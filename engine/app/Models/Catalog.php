@@ -2,8 +2,6 @@
 
 namespace RecycleArt\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * Class Catalog
  * @package RecycleArt\Models
@@ -23,6 +21,18 @@ class Catalog extends Model
         'name',
         'description',
     ];
+
+    /**
+     * @return array
+     */
+    public function getList()
+    {
+        $res = $this->get();
+        if (!$this->checkEmptyObject($res)) {
+            return [];
+        }
+        return $res->toArray();
+    }
 
     /**
      * @param string $name
@@ -94,5 +104,27 @@ class Catalog extends Model
             return false;
         }
         return $category->delete() && (new CatalogRel())->removeCategory($categoryId);
+    }
+
+    /**
+     * @param int $categoryId
+     *
+     * @return array
+     */
+    public function getCategoryWithWorks(int $categoryId)
+    {
+        $res = $this
+            ->select('catalog.id as categoryId', 'catalog.name as categoryName', 'catalog.description as categoryDescription', 'work.id as workId', 'workName', 'userId', 'work.description as workDescription')
+            ->join('catalog_rel', 'catalog_rel.catalog_id', '=', 'catalog.id')
+            ->join('work', 'work.id', '=', 'catalog_rel.work_id')
+            ->join('work_images', 'work_images.workId', '=','work.id')
+            ->where('catalog.id', $categoryId)
+            ->where('isDefault', true)
+            ->where('approved', true)
+            ->get();
+        if (!$this->checkEmptyObject($res)) {
+            return [];
+        }
+        return $res->toArray();
     }
 }
