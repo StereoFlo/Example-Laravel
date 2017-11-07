@@ -2,8 +2,6 @@
 
 namespace RecycleArt\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * Class Author
  * @package RecycleArt\Models
@@ -43,12 +41,11 @@ class Author extends Model
             ->join('users', 'role_user.user_id', '=', 'users.id')
             ->join('roles', 'role_user.role_id', '=', 'roles.id')
             ->where('roles.name', User::ROLE_AUTHOR)
-            ->get()
-            ->toArray();
-        if (empty($authors)) {
+            ->get();
+        if (!$this->checkEmptyObject($authors)) {
             return [];
         }
-        return $authors;
+        return $authors->toArray();
     }
 
     /**
@@ -59,7 +56,7 @@ class Author extends Model
     public function getByid(int $id): array
     {
         $res = self::find($id);
-        if (empty($res) || empty($res->toArray())) {
+        if (!$this->checkEmptyObject($res)) {
             return [];
         }
         return $res->toArray();

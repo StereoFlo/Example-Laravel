@@ -14,7 +14,7 @@ use RecycleArt\Models\Slogan as SloganModel;
 class Slogan extends ManagerController
 {
     /**
-     * User constructor.
+     * this constructor.
      */
     public function __construct()
     {

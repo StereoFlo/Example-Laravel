@@ -2,8 +2,6 @@
 
 namespace RecycleArt\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * Class Role
  * @package RecycleArt\Models
@@ -28,7 +26,7 @@ class Role extends Model
     public function getByName(string $name)
     {
         $role = $this->where('name', $name)->first();
-        if (empty($role) || empty($role->toArray())) {
+        if (!$this->checkEmptyObject($role)) {
             return [];
         }
         return $role->toArray();

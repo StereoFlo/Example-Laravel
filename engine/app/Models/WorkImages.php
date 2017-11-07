@@ -2,7 +2,6 @@
 
 namespace RecycleArt\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -43,8 +42,9 @@ class WorkImages extends Model
      */
     public static function getbyWorkId(int $workId)
     {
+        $slf = new self();
         $imgs = self::where('workId', $workId)->get();
-        if (empty($imgs) || empty($imgs->toArray())) {
+        if (!$slf->checkEmptyObject($imgs)) {
             return [];
         }
         return $imgs->toArray();
@@ -59,7 +59,7 @@ class WorkImages extends Model
     public function deleteImageFromWork(int $workId, int $imageId)
     {
         $images = $this->where('id', $imageId)->where('workId', $workId)->get();
-        if (empty($images) || empty($images->toArray())) {
+        if (!$this->checkEmptyObject($images)) {
             return false;
         }
         $isSaved = false;
@@ -85,20 +85,22 @@ class WorkImages extends Model
     public function addImamges(array $files, $workId): bool
     {
         $isSaved = false;
-        $user = Auth::user();
+        if (empty(Auth::id())) {
+            return $isSaved;
+        }
         if (empty($files)) {
-            return false;
+            return $isSaved;
         }
         foreach ($files as $key => $file) {
             $work = new self();
-            $path = \public_path('uploads/' . $user->id . '/work/' . $workId);
+            $path = \public_path('uploads/' . Auth::id() . '/work/' . $workId);
             $newImageName = \md5(\time() . $key) . '.' . \strtolower($file->getClientOriginalExtension());
             $file->move($path, $newImageName);
             $work->workId = $workId;
             if (0 === $key && !$this->hasDefault($workId)) {
                 $work->isDefault = true;
             }
-            $work->link = '/uploads/' . $user->id . '/work/' . $workId . '/' . $newImageName;
+            $work->link = '/uploads/' . Auth::id() . '/work/' . $workId . '/' . $newImageName;
             $isSaved = $work->save();
         }
         return $isSaved;
@@ -112,7 +114,7 @@ class WorkImages extends Model
     public function getDefault(int $workId)
     {
         $defaultImage =  $this->where('workId', $workId)->where('isDefault', true)->first();
-        if (empty($defaultImage)) {
+        if (!$this->checkEmptyObject($defaultImage)) {
             return [];
         }
         return $defaultImage->toArray();
@@ -129,7 +131,7 @@ class WorkImages extends Model
             return false;
         }
         $hasDefault = $this->where('workId', $workId)->where('isDefault', true)->get();
-        if (empty($hasDefault) || empty($hasDefault->toArray())) {
+        if (!$this->checkEmptyObject($hasDefault)) {
             return false;
         }
         return true;

@@ -26,8 +26,7 @@
                             <div class="form-group">
                                 <label for="content" class="col-md-4 control-label">Содержание</label>
                                 <div class="col-md-6">
-                                    <textarea id="content" name="content">{{ isset($news['content']) ? $news['content'] : null }}</textarea>
-
+                                    <textarea id="content" class="form-control" name="content">{{ isset($news['content']) ? $news['content'] : null }}</textarea>
                                     @if ($errors->has('content'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('content') }}</strong>
