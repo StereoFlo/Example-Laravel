@@ -55,12 +55,11 @@ class Work extends Model
             ->where('userId', $userId)
             ->where('isDefault', true)
             ->where('approved', true)
-            ->get()
-            ->toArray();
+            ->get();
         if (!$this->checkEmptyObject($works)) {
             return [];
         }
-        return $works;
+        return $works->toArray();
     }
 
     /**
@@ -76,12 +75,11 @@ class Work extends Model
             ->limit($limit)
             ->where('isDefault', true)
             ->where('approved', true)
-            ->get()
-            ->toArray();
+            ->get();
         if (!$this->checkEmptyObject($works)) {
             return [];
         }
-        return $works;
+        return $works->toArray();
     }
 
     /**
