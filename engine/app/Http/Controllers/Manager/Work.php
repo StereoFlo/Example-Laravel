@@ -23,9 +23,19 @@ class Work extends ManagerController
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getUnapprovedList()
+    public function getList()
     {
         return view('manager.work.list', ['works' => \RecycleArt\Models\Work::getInstance()->getList()]);
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getListByAuthor(int $id)
+    {
+        return view('manager.work.list', ['works' => \RecycleArt\Models\Work::getInstance()->getList($id)]);
     }
 
     /**

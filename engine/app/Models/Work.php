@@ -137,15 +137,23 @@ class Work extends Model
         return $work->id ?: 0;
     }
 
-    public function getList()
+    /**
+     * @param int $id
+     *
+     * @return array
+     */
+    public function getList(int $id = 0)
     {
-        $result = $this->select('work.*', 'users.id as userId', 'users.name as userName')->join('users', 'users.id', '=', 'work.userId')->get();
+        $result = $this->select('work.*', 'users.id as userId', 'users.name as userName')->join('users', 'users.id', '=', 'work.userId');
+        if (!empty($id)) {
+            $result->where('userId', $id);
+        }
+        $result = $result->get();
         if (empty($result) || empty($result->toArray())) {
             return [];
         }
         return $result->toArray();
     }
-
 
     /**
      * @return array
