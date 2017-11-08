@@ -138,17 +138,83 @@ class Work extends Model
     }
 
     /**
-     * @param int $id
+     * @param int $categoryId
+     * @param int $offset
      *
      * @return array
      */
-    public function getList(int $id = 0)
+    public function getListByCategory(int $categoryId, int $offset = 0)
     {
-        $result = $this->select('work.*', 'users.id as userId', 'users.name as userName')->join('users', 'users.id', '=', 'work.userId');
-        if (!empty($id)) {
-            $result->where('userId', $id);
+        if (empty($offset)) {
+            $res = $this
+                ->join('catalog_rel', 'catalog_rel.work_id', '=', 'work.id')
+                ->join('work_images', 'work_images.workId', '=', 'work.id')
+                ->take($this->perPage)
+                ->where('catalog_id', $categoryId)
+                ->where('isDefault', true)
+                ->get();
+        } else {
+            $res = $this
+                ->join('catalog_rel', 'catalog_rel.work_id', '=', 'work.id')
+                ->join('work_images', 'work.id', '=', 'work_images.workId')
+                ->skip($offset*$this->perPage)
+                ->take($this->perPage)
+                ->where('catalog_id', $categoryId)
+                ->where('isDefault', true)
+                ->get();
         }
-        $result = $result->get();
+        if (!$this->checkEmptyObject($res)) {
+            return [];
+        }
+        return $res->toArray();
+    }
+
+    /**
+     * @param int $limit
+     *
+     * @return array
+     */
+    public function getListRecentlyLiked(int $limit = 3)
+    {
+        $res = $this
+            ->join('work_images', 'work.id', '=', 'work_images.workId')
+            ->orderBy('likes', 'DESC')
+            ->take($limit)
+            ->where('work_images.isDefault', true)
+            ->get();
+        if (!$this->checkEmptyObject($res)) {
+            return [];
+        }
+        return $res->toArray();
+    }
+
+    /**
+     * @return array
+     */
+    public function getList()
+    {
+        $result = $this
+            ->select('work.*', 'users.id as userId', 'users.name as userName', 'work_images.link')
+            ->join('work_images', 'work.id', '=', 'work_images.workId')
+            ->join('users', 'users.id', '=', 'work.userId')
+            ->get();
+        if (!$this->checkEmptyObject($result)) {
+            return [];
+        }
+        return $result->toArray();
+    }
+
+    /**
+     * @return array
+     */
+    public function getListForGallery()
+    {
+        $result = $this
+            ->select('work.*', 'users.id as userId', 'users.name as userName', 'work_images.link')
+            ->join('work_images', 'work.id', '=', 'work_images.workId')
+            ->join('users', 'users.id', '=', 'work.userId')
+            ->where('work_images.isDefault', true)
+            ->get();
         if (!$this->checkEmptyObject($result)) {
             return [];
         }

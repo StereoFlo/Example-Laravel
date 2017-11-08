@@ -35,7 +35,7 @@ class Work extends ManagerController
      */
     public function getListByAuthor(int $id)
     {
-        return view('manager.work.list', ['works' => \RecycleArt\Models\Work::getInstance()->getList($id)]);
+        return view('manager.work.list', ['works' => \RecycleArt\Models\Work::getInstance()->getListByUserId($id)]);
     }
 
     /**
