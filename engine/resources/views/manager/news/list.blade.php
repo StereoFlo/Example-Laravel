@@ -10,31 +10,32 @@
                     <div class="panel-body">
                         <p>{{ session('newsFlash') }}</p>
                         @if (empty($news))
-                        <p>Новостей пока нет</p>
+                            <p>Новостей пока нет</p>
                         @else
-                        <table class="table table-hover table-responsive">
-                            <tr>
-                                <td>ID</td>
-                                <td>Название</td>
-                                <td>Котент</td>
-                                <td>Действия</td>
-                            </tr>
-                            @foreach ($news as $item)
+                            <table class="table table-hover table-responsive">
                                 <tr>
-                                    <td>{{ $item['id'] }}</td>
-                                    <td>{{ $item['name'] }}</td>
-                                    <td>{{ $item['content'] }}</td>
-                                    <td><a href="{{ route('newsUpdate', ['id' => $item['id']]) }}">Изменить</a> | <a href="{{ route('newsDelete', ['id' => $item['id']]) }}">Удалить</a></td>
+                                    <td>ID</td>
+                                    <td>Название</td>
+                                    <td>Котент</td>
+                                    <td>Действия</td>
                                 </tr>
-                            @endforeach
-                        </table>
+                                @foreach ($news as $item)
+                                    <tr>
+                                        <td>{{ $item['id'] }}</td>
+                                        <td>{{ $item['name'] }}</td>
+                                        <td>{{ $item['content'] }}</td>
+                                        <td><a href="{{ route('newsUpdate', ['id' => $item['id']]) }}">Изменить</a> | <a
+                                                    href="{{ route('newsDelete', ['id' => $item['id']]) }}">Удалить</a></td>
+                                    </tr>
+                                @endforeach
+                            </table>
                         @endif
                         <ul class="pagination">
                             @if($currentPage > 0)
                                 <li><a href="{{ route('newsListPage', ['id' => $currentPage - 1]) }}">«</a></li>
                             @endif
                             @if(($newsCount / $parPage) > 0 && ($newsCount / $parPage) > $currentPage )
-                                    <li><a href="{{ route('newsListPage', ['id' => $currentPage + 1]) }}">»</a></li>
+                                <li><a href="{{ route('newsListPage', ['id' => $currentPage + 1]) }}">»</a></li>
                             @endif
                         </ul>
                     </div>
