@@ -30,7 +30,7 @@
                 </a>
                 <nav class="nav">
                     <a href="{{ url('index.html') }}" class="nav__link">Главная</a>
-                    <a href="#" class="nav__link">Галерея</a>
+                    <a href="{{ route('galleryPublicIndex') }}" class="nav__link">Галерея</a>
                     <a href="#" class="nav__link">О нас</a>
                     <a href="#" class="nav__link">Общалка</a>
                     <a href="#" class="nav__link">Контакты</a>
