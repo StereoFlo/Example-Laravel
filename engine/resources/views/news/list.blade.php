@@ -29,7 +29,7 @@
                         <i class="fa fa-arrow-left" aria-hidden="true"></i>
                     </a>
                 @endif
-                @if(($newsCount / $parPage) > 0 && ($newsCount / $parPage) > $currentPage )
+                @if(($newsCount / $parPage) > 1 && ($newsCount / $parPage) > $currentPage)
                     <a href="{{ url('news/page', ['id' => $currentPage + 1]) }}" class="allNews__next">
                         <i class="fa fa-arrow-right" aria-hidden="true"></i>
                     </a>

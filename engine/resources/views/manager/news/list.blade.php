@@ -34,7 +34,7 @@
                             @if($currentPage > 0)
                                 <li><a href="{{ route('newsListPage', ['id' => $currentPage - 1]) }}">«</a></li>
                             @endif
-                            @if(($newsCount / $parPage) > 0 && ($newsCount / $parPage) > $currentPage )
+                            @if(($newsCount / $parPage) > 1 && ($newsCount / $parPage) > $currentPage)
                                 <li><a href="{{ route('newsListPage', ['id' => $currentPage + 1]) }}">»</a></li>
                             @endif
                         </ul>

@@ -42,7 +42,7 @@ class News extends ManagerController
             'news'        => $news,
             'currentPage' => $page,
             'parPage'     => self::NEWS_PER_PAGE,
-            'newsCount'   => \count($news),
+            'newsCount'   => NewsModel::All()->count(),
         ]);
     }
 
