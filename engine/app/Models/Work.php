@@ -183,6 +183,7 @@ class Work extends Model
             ->orderBy('likes', 'DESC')
             ->take($limit)
             ->where('work_images.isDefault', true)
+            ->where('work.approved', true)
             ->get();
         if (!$this->checkEmptyObject($res)) {
             return [];
