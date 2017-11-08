@@ -57,6 +57,34 @@ class Catalog extends Model
     }
 
     /**
+     * @param int $workId
+     *
+     * @return array
+     */
+    public function getByWorkId(int $workId)
+    {
+        $res = [];
+        $catsInWork = $this
+            ->select('catalog.*')
+            ->join('catalog_rel', 'catalog_rel.catalog_id', '=', 'catalog.id')
+            ->where('catalog_rel.work_id', $workId)
+            ->get();
+        if (!$this->checkEmptyObject($catsInWork)) {
+            $res['inWork'] = [];
+            $res['notInWork'] = $this->getList();
+            return $res;
+        }
+        $tmpCats = [];
+        foreach ($catsInWork->toArray() as $cats) {
+            $tmpCats[] = $cats['id'];
+        }
+        $catsNotInWork = $this->whereNotIn('id', $tmpCats)->get();
+        $res['inWork'] = $catsInWork->toArray();
+        $res['notInWork'] = !$this->checkEmptyObject($catsNotInWork) ? [] : $catsNotInWork->toArray();
+        return $res;
+    }
+
+    /**
      * @param string $name
      * @param string $descr
      * @param int    $parentId

@@ -98,6 +98,7 @@ class Work extends Model
         $work = $work->toArray();
         $work['images'] = WorkImages::getbyWorkId($workId);
         $work['tags'] = (new TagsRel())->getByWork($workId);
+        $work['categories'] = (new Catalog())->getByWorkId($workId);
         return $work;
     }
 

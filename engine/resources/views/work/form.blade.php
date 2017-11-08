@@ -91,12 +91,39 @@
                     </div>
                 @endif
             </div>
-
-            <button type="submit" name="button" class="button">@lang('work.buttonOfNewWork')</button>
-            @if(isset($work['id']))
-                <input type="hidden" name="workId" value="{{ $work['id'] }}">
+            @if(!empty($work['id']))
+                <p>Категории работы:</p>
+                @if(empty($work['categories']['inWork']))
+                    <p>У этой работы не категорий</p>
+                @else
+                    @foreach($work['categories']['inWork'] as $category)
+                        {{ $category['name'] }} <br>
+                    @endforeach
+                @endif
+                <br><br>
+                <p>Все категории:</p>
+                @if(empty($work['categories']['notInWork']))
+                    <p>У нас пока нет категорий</p>
+                @else
+                    <div class="inputGroup">
+                    @foreach($work['categories']['notInWork'] as $category)
+                        <input type="checkbox" name="categories[]" value="{{ $category['id'] }}"> {{ $category['name'] }} <br>
+                    @endforeach
+                    </div>
+                @endif
+                    <input type="hidden" name="workId" value="{{ $work['id'] }}">
+                @else
+                <div class="inputGroup">
+                @foreach($categories as $category)
+                    <input type="checkbox" name="categories[]" value="{{ $category['id'] }}"/> {{ $category['name'] }} <br>
+                @endforeach
+                </div>
             @endif
+            <button type="submit" name="button" class="button">@lang('work.buttonOfNewWork')</button>
         </form>
     </div>
 </section>
 @endsection
+
+
+

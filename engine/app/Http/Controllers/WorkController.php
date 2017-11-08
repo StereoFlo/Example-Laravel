@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use RecycleArt\Models\Catalog;
+use RecycleArt\Models\CatalogRel;
 use RecycleArt\Models\Tags;
 use RecycleArt\Models\TagsRel;
 use RecycleArt\Models\User;
@@ -19,6 +21,8 @@ use RecycleArt\Models\WorkImages;
  */
 class WorkController extends Controller
 {
+    const WORK_PATH = 'uploads/$d/work/%d';
+
     /**
      * @var Work
      */
@@ -47,7 +51,8 @@ class WorkController extends Controller
      */
     public function add(): View
     {
-        return view('work.form');
+        $categories = (new Catalog())->getList();
+        return view('work.form', ['categories' => $categories]);
     }
 
     /**
@@ -71,8 +76,11 @@ class WorkController extends Controller
         if (!empty($request->post('tags'))) {
             (new Tags())->addTagsToWork($request->post('tags'), $workId);
         }
+        if (!empty($request->post('categories'))) {
+            (new CatalogRel())->addToCategory($request->post('categories'), $workId);
+        }
         $request->session()->flash('addWorkResult', __('work.addProcessSuccess'));
-        return Redirect::to('/cabinet/work/'. $workId . '');
+        return Redirect::to(route('workShow', ['id' => $workId]));
     }
 
     /**
@@ -83,15 +91,15 @@ class WorkController extends Controller
      */
     public function remove(Request $request, int $id)
     {
-        $workPath = public_path('uploads/' . Auth::id() . '/work/' . $id);
+        $workPath = public_path(sprintf(self::WORK_PATH, Auth::id(), $id));
         if (Work::getInstance()->removeById($id) && WorkImages::getInstance()->removeByWorkId($id) && (new TagsRel())->deleteByWork($id)) {
             File::cleanDirectory($workPath);
             rmdir($workPath);
             $request->session()->flash('addWorkResult', __('work.addWorkRemovedSuccess'));
-            return Redirect::to('/cabinet/');
+            return Redirect::to(route('cabinetIndex'));
         }
         $request->session()->flash('addWorkResult', __('work.addWorkRemovedError'));
-        return Redirect::to('/cabinet/');
+        return Redirect::to(route('cabinetIndex'));
     }
 
     /**]
@@ -106,10 +114,10 @@ class WorkController extends Controller
         $isSaved = WorkImages::getInstance()->deleteImageFromWork($workId, $imageId);
         if ($isSaved) {
             $request->session()->flash('results', 'Изображение удалено');
-            return Redirect::to('/cabinet/work/' . $workId . '/edit');
+            return Redirect::to(route('workEdit', ['id' => $workId]));
         }
         $request->session()->flash('results', 'Что-то пошло не так =(');
-        return Redirect::to('/cabinet/work/' . $workId . '/edit');
+        return Redirect::to(route('workEdit', ['id' => $workId]));
     }
 
     /**
@@ -154,19 +162,19 @@ class WorkController extends Controller
     /**
      * @param int $id
      *
-     * @return array
+     * @return \Illuminate\Http\JsonResponse
      */
     public function setLike(int $id)
     {
         if (session()->has('work' . $id)) {
-            return [
+            return response()->json([
                 'isLiked' => false
-            ];
+            ]);
         }
         $this->work->where('id', $id)->increment('likes');
         session(['work' . $id => true]);
-        return [
+        return response()->json([
             'isLiked' => true
-        ];
+        ]);
     }
 }

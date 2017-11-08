@@ -64,7 +64,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/cabinet/work/new/process', 'WorkController@process')->name('workProcess');
     Route::get('/cabinet/work/{id}/remove', 'WorkController@remove')->name('workRemove');
     Route::get('/cabinet/work/{id}/edit', 'WorkController@edit')->name('workEdit');
-    Route::get('/cabinet/work/{id}/edit', 'WorkController@edit')->name('workEdit');
     Route::get('/cabinet/work/tag/remove/{workId}/{tagId}', 'TagController@deleteFromWork')
         ->where('workId', '[0-9]+')
         ->where('tagId', '[0-9]+')
@@ -73,5 +72,5 @@ Route::middleware('auth')->group(function () {
         ->where('workId', '[0-9]+')
         ->where('imageId', '[0-9]+')
         ->name('imageDeleteFromWork');
-    Route::get('/cabinet/work/{id}', 'WorkController@show')->name('workShow');
+    Route::get('/cabinet/work/{id}', 'WorkController@show')->where('id', '[0-9]+')->name('workShow');
 });

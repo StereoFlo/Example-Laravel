@@ -45,17 +45,34 @@ class CatalogRel extends Model
     }
 
     /**
-     * @param int $categoryId
-     * @param int $workId
+     * @param mixed $category
+     * @param int   $workId
      *
      * @return bool
      */
-    public function addToCategory(int $categoryId, int $workId)
+    public function addToCategory($category, int $workId)
     {
-        $instance = new self();
-        $instance->catalog_id = $categoryId;
-        $instance->work_id_id = $workId;
-        return $instance->save();
+        switch ($category) {
+            case \is_array($category):
+                $isSave = false;
+                foreach ($category as $cat) {
+                    $instance = new self();
+                    $instance->catalog_id = $cat;
+                    $instance->work_id = $workId;
+                    $isSave = $instance->save();
+                }
+                return $isSave;
+                break;
+            case \is_string($category):
+                $instance = new self();
+                $instance->catalog_id = $category;
+                $instance->work_id = $workId;
+                return $instance->save();
+                break;
+            default:
+                return false;
+                break;
+        }
     }
 
     /**
