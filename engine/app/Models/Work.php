@@ -152,6 +152,7 @@ class Work extends Model
                 ->take($this->perPage)
                 ->where('catalog_id', $categoryId)
                 ->where('isDefault', true)
+                ->where('work.approved', true)
                 ->get();
         } else {
             $res = $this
@@ -161,6 +162,7 @@ class Work extends Model
                 ->take($this->perPage)
                 ->where('catalog_id', $categoryId)
                 ->where('isDefault', true)
+                ->where('work.approved', true)
                 ->get();
         }
         if (!$this->checkEmptyObject($res)) {
@@ -214,6 +216,7 @@ class Work extends Model
             ->join('work_images', 'work.id', '=', 'work_images.workId')
             ->join('users', 'users.id', '=', 'work.userId')
             ->where('work_images.isDefault', true)
+            ->where('work.approved', true)
             ->get();
         if (!$this->checkEmptyObject($result)) {
             return [];
