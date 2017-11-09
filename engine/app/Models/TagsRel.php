@@ -54,7 +54,7 @@ class TagsRel extends Model
      * @param int $workId
      * @param int $tagId
      *
-     * @return mixed
+     * @return bool
      */
     public function deleteFromWork(int $workId, int $tagId)
     {

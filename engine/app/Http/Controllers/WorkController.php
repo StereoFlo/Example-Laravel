@@ -24,26 +24,21 @@ class WorkController extends Controller
     const WORK_PATH = 'uploads/$d/work/%d';
 
     /**
-     * @var Work
-     */
-    protected $work;
-
-    /**
      * WorkController constructor.
      */
     public function __construct()
     {
-        $this->work = new Work();
     }
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getList()
+    public function getList(): View
     {
-        $userId = Auth::id();
-        $works = $this->work->getListByUserId($userId);
-        return view('work.list', ['works' => $works]);
+        $works = Work::getInstance()->getListByUserId(Auth::id());
+        return view('work.list', [
+            'works' => $works,
+        ]);
     }
 
     /**
@@ -52,7 +47,9 @@ class WorkController extends Controller
     public function add(): View
     {
         $categories = (new Catalog())->getList();
-        return view('work.form', ['categories' => $categories]);
+        return view('work.form', [
+            'categories' => $categories,
+        ]);
     }
 
     /**
@@ -145,8 +142,7 @@ class WorkController extends Controller
      */
     public function show(Request $request, int $id): View
     {
-        $work = new Work();
-        $work = $work->getById($id);
+        $work = Work::getInstance()->getById($id);
         if (empty($work)) {
             abort(404, __('work.workNotFound'));
         }
@@ -168,13 +164,13 @@ class WorkController extends Controller
     {
         if (session()->has('work' . $id)) {
             return response()->json([
-                'isLiked' => false
+                'isLiked' => false,
             ]);
         }
-        $this->work->where('id', $id)->increment('likes');
+        Work::getInstance()->where('id', $id)->increment('likes');
         session(['work' . $id => true]);
         return response()->json([
-            'isLiked' => true
+            'isLiked' => true,
         ]);
     }
 }
