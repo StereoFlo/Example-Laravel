@@ -13,13 +13,25 @@
       height: 35px;
     }
   }
+  .checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    input[type=checkbox]+label {
+      min-width: 200px;
+      + label {
+        min-width: 200px;
+      }
+    }
+  }
   button {
     font-size: 1.2em;
     display: block;
     margin: 30px auto ;
-    background: #e83b3a;
+    background: #4a5281;
     &:hover {
-      background: darken(#e83b3a, 15%);
+      background: darken(#4a5281, 15%);
     }
   }
 }

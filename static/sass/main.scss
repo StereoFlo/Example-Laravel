@@ -97,7 +97,7 @@ figure {
 }
 
 section {
-  padding: 0 30px 60px;
+  padding: 0 15px 60px;
 }
 
 .sectionTitle {
@@ -143,6 +143,9 @@ section {
       margin-top: 0;
     }
   }
+  p {
+    margin-top: 0;
+  }
   .inputGroup {
     position: relative;
   }
@@ -183,11 +186,11 @@ section {
       }
     }
   }
-  .tags {
+  .tag, .category {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 -5px;
-    .tag {
+    margin: 0 -5px 10px;
+    &__item {
       background: $white;
       border: 1px solid $border;
       border-radius: 2px;
@@ -197,7 +200,7 @@ section {
       text-decoration: none;
       transition: all 0.2s ease-in-out;
       &:hover {
-        border-color: $gold;
+        border-color: $red;
         box-shadow: 2px 3px 6px rgba(0,0,0,0.16), 2px 3px 6px rgba(0,0,0,0.23);
       }
       &:hover .fa {
@@ -269,7 +272,7 @@ section {
     font-size: 0.9em;
     margin-bottom: 3px;
   }
-  input, textarea {
+  input[type="text"], textarea {
     font-family: 'bandera', sans-serif;
     width: 100%;
     background: $white;
@@ -293,7 +296,7 @@ section {
     max-height: 300px;
     padding-top: 10px;
   }
-  input[type="file"], input[type="checkbox"] {
+  input[type="file"] {
     position: absolute;
     top: 0;
     left: 0;
@@ -304,12 +307,37 @@ section {
       cursor: pointer;
     }
   }
-}
-.has-error {
-  .errorText{
-    opacity: 1;
+
+  input[type="checkbox"] {
+    position: absolute;
+    left: -9999px;
+    + label {
+      font-size: 1em;
+      color: $black;
+      line-height: 24px;
+      cursor: pointer;
+      background: url("../images/cb.png") 0 0 no-repeat;
+      padding-left: 40px;
+      display: inline-block;
+      height: 24px;
+      margin: 5px 0;
+      user-select: none;
+      width: 220px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    &:checked + label {
+      background-position: 0 -24px;
+    }
+  }
+  .has-error {
+    .errorText{
+      opacity: 1;
+    }
   }
 }
+
 
 
 /* slider */

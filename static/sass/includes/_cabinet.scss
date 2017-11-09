@@ -1,5 +1,5 @@
 .cabinet {
-  padding: 0 30px;
+  padding: 0 30px 60px;
 }
 .account {
   @include row-flex();
@@ -82,7 +82,7 @@
 .works {
   display: flex;
   flex-direction: column;
-  margin: 0 -15px 60px -15px;
+  margin: 0 -15px;
   &__new {
     color: #0089ef;
     display: flex;
@@ -114,13 +114,15 @@
     font-weight: bold;
     font-size: 1.2em;
     margin: 0;
+    max-width: 600px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     @include max-screen($break_xs) {
       max-width: 250px;
-      overflow: hidden;
     }
-    @include max-screen($break_xs) {
+    @include max-screen($break_xxs) {
       max-width: 190px;
-      overflow: hidden;
     }
     &:hover {
       text-decoration: none;

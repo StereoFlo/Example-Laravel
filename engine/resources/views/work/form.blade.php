@@ -14,7 +14,7 @@
 
             <div class="inputGroup{{ $errors->has('workName') ? ' has-error' : '' }}">
                 <label for="workName">@lang('work.nameOfNewWork'):</label>
-                <input type="text" name="workName" value="{{ !empty($work['workName']) ? $work['workName'] : null }}" required>
+                <input id="workName" type="text" name="workName" value="{{ !empty($work['workName']) ? $work['workName'] : null }}" required>
                 <span class="errorText">
                 @if ($errors->has('workName'))
                         <strong>{{ $errors->first('workName') }}</strong>
@@ -23,8 +23,8 @@
             </div>
 
             <div class="inputGroup{{ $errors->has('description') ? ' has-error' : '' }}">
-                <label for="qqq">@lang('work.descriptionOfNewWork'):</label>
-                <textarea id="qqq" name="description" cols="80" rows="8" required>{{ !empty($work['description']) ? $work['description'] : null }}</textarea>
+                <label for="desc">@lang('work.descriptionOfNewWork'):</label>
+                <textarea id="desc" name="description" cols="80" rows="8" required>{{ !empty($work['description']) ? $work['description'] : null }}</textarea>
                 <span class="errorText">
                 @if ($errors->has('description'))
                         <strong>{{ $errors->first('description') }}</strong>
@@ -33,18 +33,19 @@
             </div>
 
             <div class="inputGroup{{ $errors->has('tags') ? ' has-error' : '' }}">
-                <label for="location">Теги:</label>
-                <input type="text" name="tags">
+                <label for="tags">Теги:</label>
+                <input id="tags" type="text" name="tags">
                 <span class="errorText">
                 @if ($errors->has('tags'))
                         <strong>{{ $errors->first('tags') }}</strong>
                 @endif
             </span>
                 @if(!empty($work['tags']))
-                    <div class="tags">
+                    <p>Теги работы:</p>
+                    <div class="tag">
                         @foreach($work['tags'] as $tag)
 
-                            <a id="tag_{{ $tag['id'] }}" href="{{ route('deleteFromWork', ['tagId' => $tag['id'], 'workId' => $work['id']]) }}" class="tag">
+                            <a id="tag_{{ $tag['id'] }}" href="{{ route('deleteFromWork', ['tagId' => $tag['id'], 'workId' => $work['id']]) }}" class="tag__item">
                                 <span class="name">{{ $tag['tag'] }}</span>
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
@@ -52,6 +53,41 @@
                     </div>
                 @endif
             </div>
+
+            @if(!empty($work['id']))
+                <p>Категории работы:</p>
+                @if(empty($work['categories']['inWork']))
+                    <p>У этой работы не категорий</p>
+                @else
+                    <div class="category">
+                        @foreach($work['categories']['inWork'] as $category)
+                            <a href="" class="category__item">
+                                <span class="name">{{ $category['name'] }}</span>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        @endforeach
+                    </div>
+                @endif
+                <p>Все категории:</p>
+                @if(empty($work['categories']['notInWork']))
+                    <p>У нас пока нет категорий</p>
+                @else
+                    <div class="inputGroup checkboxes">
+                        @foreach($work['categories']['notInWork'] as $category)
+                            <input id="{{ $category['id'] }}" type="checkbox" name="categories[]" value="{{ $category['id'] }}">
+                            <label for="{{ $category['id'] }}">{{ $category['name'] }}</label>
+                        @endforeach
+                    </div>
+                @endif
+                <input type="hidden" name="workId" value="{{ $work['id'] }}">
+            @else
+                <div class="inputGroup checkboxes">
+                    @foreach($categories as $category)
+                        <input id="{{ $category['id'] }}" type="checkbox" name="categories[]" value="{{ $category['id'] }}">
+                        <label for="{{ $category['id'] }}">{{ $category['name'] }}</label>
+                    @endforeach
+                </div>
+            @endif
 
             <div class="inputGroup{{ $errors->has('images') ? ' has-error' : '' }}">
                 <label for="images">@lang('work.photoOfNewWork'):</label>
@@ -91,34 +127,7 @@
                     </div>
                 @endif
             </div>
-            @if(!empty($work['id']))
-                <p>Категории работы:</p>
-                @if(empty($work['categories']['inWork']))
-                    <p>У этой работы не категорий</p>
-                @else
-                    @foreach($work['categories']['inWork'] as $category)
-                        {{ $category['name'] }} <br>
-                    @endforeach
-                @endif
-                <br><br>
-                <p>Все категории:</p>
-                @if(empty($work['categories']['notInWork']))
-                    <p>У нас пока нет категорий</p>
-                @else
-                    <div class="inputGroup">
-                    @foreach($work['categories']['notInWork'] as $category)
-                        <input type="checkbox" name="categories[]" value="{{ $category['id'] }}"> {{ $category['name'] }} <br>
-                    @endforeach
-                    </div>
-                @endif
-                    <input type="hidden" name="workId" value="{{ $work['id'] }}">
-                @else
-                <div class="inputGroup">
-                @foreach($categories as $category)
-                    <input type="checkbox" name="categories[]" value="{{ $category['id'] }}"/> {{ $category['name'] }} <br>
-                @endforeach
-                </div>
-            @endif
+
             <button type="submit" name="button" class="button">@lang('work.buttonOfNewWork')</button>
         </form>
     </div>

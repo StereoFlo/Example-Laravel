@@ -39,7 +39,7 @@
     </section>
 
     <section id="products" class="products">
-            <div class="flex">
+            <div class="products__wrap">
                 @if(empty($works))
                     <p>Работ от авторов пока нет</p>
                     @else
