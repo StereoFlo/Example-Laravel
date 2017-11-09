@@ -181,7 +181,6 @@ class Work extends Model
      */
     public function getListRecentlyLiked(int $limit = 3)
     {
-        //todo Using where; Using filesort
         $res = $this
             ->join('work_images', 'work.id', '=', 'work_images.workId')
             ->orderBy('likes', 'DESC')
