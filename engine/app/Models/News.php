@@ -40,9 +40,9 @@ class News extends Model
     {
         $news = null;
         if (empty($limit)) {
-            $news = $this->orderBy($orderBy, 'DESC')->get();
+            $news = $this->orderBy($orderBy, 'id')->get();
         } else {
-            $news = $this->skip($offset*$limit)->take($limit)->orderBy($orderBy, 'DESC')->get();
+            $news = $this->skip($offset*$limit)->take($limit)->orderBy($orderBy, 'id')->get();
         }
         if (!$this->checkEmptyObject($news)) {
             return [];

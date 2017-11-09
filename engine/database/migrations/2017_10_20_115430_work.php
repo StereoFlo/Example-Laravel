@@ -25,6 +25,7 @@ class Work extends Migration
             $table->index('likes');
             $table->index('userId');
             $table->index('approved');
+            $table->index(['approved', 'likes']);
         });
     }
 

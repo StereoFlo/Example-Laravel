@@ -27,9 +27,9 @@ class CabinetController extends Controller
      */
     public function index()
     {
-        $userId = Auth::id();
-        $works = Work::getInstance()->getListByUserId($userId);
-        return view('cabinet.index', ['works' => $works]);
+        return view('cabinet.index', [
+            'works' => Work::getInstance()->getListByUserId(Auth::id()),
+        ]);
     }
 
     /**
@@ -54,7 +54,7 @@ class CabinetController extends Controller
         }
         User::getInstance()->updateProfile($request);
         $request->session()->flash('updateResult', __('cabinet.accountUpdated'));
-        return Redirect::to('/cabinet/profile');
+        return Redirect::to(route('profileForm'));
     }
 
     /**
@@ -66,9 +66,9 @@ class CabinetController extends Controller
     {
         if (User::getInstance()->removeAvatar()) {
             $request->session()->flash('updateResult', __('cabinet.AvatarSuccessRemoved'));
-            return Redirect::to('/cabinet/profile');
+            return Redirect::to(route('profileForm'));
         }
         $request->session()->flash('updateResult', __('cabinet.AvatarErrorRemoved'));
-        return Redirect::to('/cabinet/profile');
+        return Redirect::to(route('profileForm'));
     }
 }

@@ -2,6 +2,8 @@
 
 namespace RecycleArt\Models;
 
+use Illuminate\Support\Facades\DB;
+
 /**
  * Class Work
  * @package RecycleArt\Models
@@ -69,7 +71,8 @@ class Work extends Model
      */
     public function getListForHomepage(int $limit = 10)
     {
-        $works = $this->join('work_images', 'work.id', '=', 'work_images.workId')
+        $works = $this
+            ->join('work_images', 'work.id', '=', 'work_images.workId')
             ->join('users', 'work.userId', '=', 'users.id')
             ->inRandomOrder()
             ->limit($limit)
