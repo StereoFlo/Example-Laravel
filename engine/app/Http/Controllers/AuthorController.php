@@ -43,7 +43,7 @@ class AuthorController extends Controller
         }
 
         return \view('author.show', [
-            'author' => $this->user->getById($id),
+            'author' => $author,
             'works'  => $this->work->getListByUserWithImages($id),
         ]);
     }

@@ -21,7 +21,6 @@ class CreateNewsTable extends Migration
             $table->string('name');
             $table->text('content');
             $table->timestamps();
-            $table->index(['created_at']);
         });
     }
 
