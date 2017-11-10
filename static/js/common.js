@@ -207,6 +207,10 @@ $(function () {
             getWorks(catIds, pageId);
         });
 
+        /**
+         * get checked catalog items
+         * @returns {Array}
+         */
         function getCheckCategories() {
             var catIds = [];
             var checks = $('[id^=cid_]');
@@ -223,6 +227,13 @@ $(function () {
             return catIds;
         }
 
+        /**
+         * get works by ajax
+         * @param catIds array
+         * @param pageId integer
+         *
+         * @return void
+         */
         function getWorks(catIds, pageId) {
             var parameters = {};
             if (catIds.length > 0) {
