@@ -195,6 +195,10 @@ $(function () {
             getWorks(catIds, 0);
         });
 
+        $(document).on('click', '#workNext', function () {
+            console.log("OK");
+        });
+
         // $('#workPrevious').click(function () {
         //     var pageId = $(this).attr('data-page');
         //     var catIds = getCheckCategories();
@@ -250,10 +254,6 @@ $(function () {
 
     }
 
-});
-
-$(document).on('click', '#workNext', function () {
-    console.log("OK");
 });
 
 /* ---------------------------------------------- /*
