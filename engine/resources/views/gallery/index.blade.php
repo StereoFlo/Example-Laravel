@@ -53,11 +53,4 @@
             </div>
         </div>
     </section>
-    <div class="pagination">
-        <a href="#" class="previous">&laquo;</a>
-        <a href="#">1</a>
-        <a href="#" class="active">2</a>
-        <a href="#">3</a>
-        <a href="#" class="next">&raquo;</a>
-    </div>
 @endsection

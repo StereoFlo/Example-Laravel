@@ -59,11 +59,16 @@ class GalleryController extends Controller
         $page = $request->get('page', 0);
         if (empty($categories)) {
             $list = $this->work->getListForGallery();
+            $workCount = 0;
         } else {
             $list = $this->work->getListByCategory($categories, $page);
+            $workCount = $this->work->getCountByCategory($categories);
         }
         return view('gallery.ajax.works', [
             'list' => $list,
+            'currentPage' => $page,
+            'parPage'     => $this->work->getPerPage(),
+            'workCount'   => $workCount,
         ]);
     }
 }

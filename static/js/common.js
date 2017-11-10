@@ -209,8 +209,7 @@ $(function () {
                 }
                 catIds.push(catId);
             }
-            console.log(catIds);
-            $.get('/gallery/works', { categories: catIds, page: 0 })
+            $.get('/gallery/works', { categories: catIds})
                 .done(function (data) {
                     $('#galleryWorksAll').empty().append(data);
                 })
@@ -219,6 +218,55 @@ $(function () {
                     console.log(data);
                 });
         });
+
+        $('#workPrevious').click(function () {
+            var pageId = $(this).attr('data-page');
+            var catIds = [];
+            var checks = $('[id^=cid_]');
+            for (var i = 0; i < checks.length; i++) {
+                if (checks[i].id === undefined) {
+                    continue;
+                }
+                var catId = $('#' + checks[i].id + ':checked').attr('data-id');
+                if (catId === undefined) {
+                    continue;
+                }
+                catIds.push(catId);
+            }
+            $.get('/gallery/works', { categories: catIds, page: pageId})
+                .done(function (data) {
+                    $('#galleryWorksAll').empty().append(data);
+                })
+                .fail(function (data) {
+                    $('#galleryWorksAll').empty().append('<p>Мы не смогли загрузить список работ. Возможно возникла ошибка сети</p>');
+                    console.log(data);
+                });
+        });
+
+        $('#workNext').click(function () {
+            var pageId = $(this).attr('data-page');
+            var catIds = [];
+            var checks = $('[id^=cid_]');
+            for (var i = 0; i < checks.length; i++) {
+                if (checks[i].id === undefined) {
+                    continue;
+                }
+                var catId = $('#' + checks[i].id + ':checked').attr('data-id');
+                if (catId === undefined) {
+                    continue;
+                }
+                catIds.push(catId);
+            }
+            $.get('/gallery/works', { categories: catIds, page: pageId})
+                .done(function (data) {
+                    $('#galleryWorksAll').empty().append(data);
+                })
+                .fail(function (data) {
+                    $('#galleryWorksAll').empty().append('<p>Мы не смогли загрузить список работ. Возможно возникла ошибка сети</p>');
+                    console.log(data);
+                });
+        });
+
     }
 
 });

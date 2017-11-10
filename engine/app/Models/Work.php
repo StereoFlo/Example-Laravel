@@ -175,6 +175,26 @@ class Work extends Model
     }
 
     /**
+     * @param array $categories
+     *
+     * @return array
+     */
+    public function getCountByCategory(array $categories)
+    {
+        $res = $this
+            ->join('catalog_rel', 'catalog_rel.work_id', '=', 'work.id')
+            ->join('work_images', 'work.id', '=', 'work_images.workId')
+            ->whereIn('catalog_id', $categories)
+            ->where('isDefault', true)
+            ->where('work.approved', true)
+            ->get();
+        if (!$this->checkEmptyObject($res)) {
+            return [];
+        }
+        return $res->count();
+    }
+
+    /**
      * @param int $limit
      *
      * @return array
