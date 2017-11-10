@@ -25,7 +25,7 @@ class Work extends ManagerController
      */
     public function getList()
     {
-        return view('manager.work.list', ['works' => \RecycleArt\Models\Work::getInstance()->getList()]);
+        return view('manager.work.list', ['works' => \RecycleArt\Models\Work::getInstance()->getListForManager()]);
     }
 
     /**

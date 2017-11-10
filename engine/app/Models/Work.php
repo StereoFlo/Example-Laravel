@@ -238,6 +238,21 @@ class Work extends Model
     }
 
     /**
+     * @return array
+     */
+    public function getListForManager()
+    {
+        $result = $this
+            ->select('work.*', 'users.id as userId', 'users.name as userName')
+            ->join('users', 'users.id', '=', 'work.userId')
+            ->get();
+        if (!$this->checkEmptyObject($result)) {
+            return [];
+        }
+        return $result->toArray();
+    }
+
+    /**
      * @param int $offset
      *
      * @return array
