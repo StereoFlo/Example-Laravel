@@ -60,7 +60,7 @@
       background: url("../images/like.png") no-repeat;
       &:hover {
         background-position: 0 -24px;
-        opacity: .7;
+        opacity: .9;
       }
     }
     span {
@@ -68,6 +68,12 @@
       vertical-align: middle;
       display: inline-block;
       line-height: 27px;
+    }
+    &__likes_chacked {
+      a {
+        background-position: 0 -24px;
+        opacity: .9;
+      }
     }
   }
   &__commentsNum {

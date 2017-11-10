@@ -40,7 +40,7 @@
             <div class="sectionTitle">
                 <h2>Работы автора</h2>
             </div>
-            <div class="flex">
+            <div class="products__wrap">
                 @if(empty($works))
                     <p>У этого пользователя работ нет</p>
                 @else

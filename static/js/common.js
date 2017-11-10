@@ -169,6 +169,10 @@ $(function () {
 
     $('input[name="phone"]').inputmask({"mask": "+7(999) 999-9999"});
 
+    /* ---------------------------------------------- /*
+     * Likes
+    /* ---------------------------------------------- */
+
     $('#setLike').click(function (e) {
         e.preventDefault();
         var url = $(this).attr('href');
@@ -186,6 +190,16 @@ $(function () {
             });
         return false;
     });
+
+    /* ---------------------------------------------- /*
+     * Crop
+    /* ---------------------------------------------- */
+
+    // $('#profileUpdateForm input[type="file"]').PictureCut({
+    //     EnableCrop                  : true,
+    //     FolderOnServer              : "/uploads/",
+    //     CropWindowStyle             : "Bootstrap"
+    // });
 
 });
 
