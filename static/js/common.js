@@ -169,10 +169,6 @@ $(function () {
 
     $('input[name="phone"]').inputmask({"mask": "+7(999) 999-9999"});
 
-    /* ---------------------------------------------- /*
-     * Likes
-    /* ---------------------------------------------- */
-
     $('#setLike').click(function (e) {
         e.preventDefault();
         var url = $(this).attr('href');
@@ -211,18 +207,10 @@ $(function () {
             getWorks(catIds, pageId);
         });
 
-        // $('#workPrevious').click(function () {
-        //     var pageId = $(this).attr('data-page');
-        //     var catIds = getCheckCategories();
-        //     getWorks(catIds, pageId);
-        // });
-
-        // $('#workNext').click(function () {
-        //     var pageId = $(this).attr('data-page');
-        //     var catIds = getCheckCategories();
-        //     getWorks(catIds, pageId);
-        // });
-
+        /**
+         * get checked catalog items
+         * @returns {Array}
+         */
         function getCheckCategories() {
             var catIds = [];
             var checks = $('[id^=cid_]');
@@ -239,6 +227,13 @@ $(function () {
             return catIds;
         }
 
+        /**
+         * get works by ajax
+         * @param catIds array
+         * @param pageId integer
+         *
+         * @return void
+         */
         function getWorks(catIds, pageId) {
             var parameters = {};
             if (catIds.length > 0) {
@@ -249,6 +244,8 @@ $(function () {
             } else {
                 parameters.page = pageId;
             }
+
+            // this is need for post query
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
