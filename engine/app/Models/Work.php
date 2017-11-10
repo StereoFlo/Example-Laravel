@@ -141,19 +141,19 @@ class Work extends Model
     }
 
     /**
-     * @param int $categoryId
-     * @param int $offset
+     * @param array $categories
+     * @param int   $offset
      *
      * @return array
      */
-    public function getListByCategory(int $categoryId, int $offset = 0)
+    public function getListByCategory(array $categories, int $offset = 0)
     {
         if (empty($offset)) {
             $res = $this
                 ->join('catalog_rel', 'catalog_rel.work_id', '=', 'work.id')
                 ->join('work_images', 'work_images.workId', '=', 'work.id')
                 ->take($this->perPage)
-                ->where('catalog_id', $categoryId)
+                ->whereIn('catalog_id', $categories)
                 ->where('isDefault', true)
                 ->where('work.approved', true)
                 ->get();
@@ -163,7 +163,7 @@ class Work extends Model
                 ->join('work_images', 'work.id', '=', 'work_images.workId')
                 ->skip($offset*$this->perPage)
                 ->take($this->perPage)
-                ->where('catalog_id', $categoryId)
+                ->whereIn('catalog_id', $categories)
                 ->where('isDefault', true)
                 ->where('work.approved', true)
                 ->get();

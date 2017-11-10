@@ -38,17 +38,18 @@ class GalleryController extends Controller
     }
 
     /**
-     * @param int $id
-     * @param int $page
+     * @param Request $request
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(int $id = 0, int $page = 0)
+    public function index(Request $request)
     {
-        if (empty($id)) {
+        $categories = $request->get('categories', []);
+        $page = $request->get('page', 0);
+        if (empty($categories)) {
             $list = $this->work->getListForGallery();
         } else {
-            $list = $this->work->getListByCategory($id, $page);
+            $list = $this->work->getListByCategory($categories, $page);
         }
 
         return \view('gallery.index', [
