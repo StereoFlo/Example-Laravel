@@ -198,8 +198,13 @@ $(function () {
         $(document).on('click', '#workNext', function () {
                 var pageId = $(this).attr('data-page');
                 var catIds = getCheckCategories();
-                console.log(pageId, catIds);
                 getWorks(catIds, pageId);
+        });
+
+        $(document).on('click', '#workPrevious', function () {
+            var pageId = $(this).attr('data-page');
+            var catIds = getCheckCategories();
+            getWorks(catIds, pageId);
         });
 
         // $('#workPrevious').click(function () {
