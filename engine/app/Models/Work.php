@@ -231,9 +231,31 @@ class Work extends Model
     }
 
     /**
+     * @param int $offset
+     *
      * @return array
      */
-    public function getListForGallery()
+    public function getListForGallery(int $offset = 0)
+    {
+        $result = $this
+            ->select('work.*', 'users.id as userId', 'users.name as userName', 'work_images.link')
+            ->join('work_images', 'work.id', '=', 'work_images.workId')
+            ->join('users', 'users.id', '=', 'work.userId')
+            ->skip($offset*$this->perPage)
+            ->take($this->perPage)
+            ->where('work_images.isDefault', true)
+            ->where('work.approved', true)
+            ->get();
+        if (!$this->checkEmptyObject($result)) {
+            return [];
+        }
+        return $result->toArray();
+    }
+
+    /**
+     * @return array
+     */
+    public function getCountForGallery()
     {
         $result = $this
             ->select('work.*', 'users.id as userId', 'users.name as userName', 'work_images.link')
@@ -245,7 +267,7 @@ class Work extends Model
         if (!$this->checkEmptyObject($result)) {
             return [];
         }
-        return $result->toArray();
+        return $result->count();
     }
 
     /**
