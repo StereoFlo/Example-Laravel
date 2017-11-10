@@ -38,11 +38,22 @@ class GalleryController extends Controller
     }
 
     /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index()
+    {
+        return \view('gallery.index', [
+            'categories'    => $this->categoryList,
+            'recentlyLiked' => $this->recentlyLiked,
+        ]);
+    }
+
+    /**
      * @param Request $request
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Request $request)
+    public function getWorks(Request $request)
     {
         $categories = $request->get('categories', []);
         $page = $request->get('page', 0);
@@ -51,11 +62,8 @@ class GalleryController extends Controller
         } else {
             $list = $this->work->getListByCategory($categories, $page);
         }
-
-        return \view('gallery.index', [
-            'categories'    => $this->categoryList,
-            'recentlyLiked' => $this->recentlyLiked,
-            'list'          => $list,
+        return view('gallery.ajax.works', [
+            'list' => $list,
         ]);
     }
 }

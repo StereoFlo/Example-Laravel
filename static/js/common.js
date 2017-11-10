@@ -187,6 +187,33 @@ $(function () {
         return false;
     });
 
+    if(window.location.href.indexOf("/gallery") >= 0) {
+        $.get('/gallery/works')
+            .done(function (data) {
+                $('#galleryWorksAll').empty().append(data);
+            })
+            .fail(function (data) {
+                $('#galleryWorksAll').empty().append('<p>Мы не смогли загрузить список работ. Возможно возникла ошибка сети</p>');
+                console.log(data);
+            });
+        $('[id^=cid_]').click(function () {
+
+            var checks = $('[id^=cid_]');
+            for (var i = 0; i < checks.length; i++) {
+                console.log($('#' + checks[i].id + ':checked').attr('data-id'));
+            }
+
+            // $.get('/gallery/works', { 'categories[]': "John", time: "2pm" })
+            //     .done(function (data) {
+            //         $('#galleryWorksAll').empty().append(data);
+            //     })
+            //     .fail(function (data) {
+            //         $('#galleryWorksAll').empty().append('<p>Мы не смогли загрузить список работ. Возможно возникла ошибка сети</p>');
+            //         console.log(data);
+            //     });
+        });
+    }
+
 });
 
 /* ---------------------------------------------- /*
