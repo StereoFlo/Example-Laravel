@@ -191,15 +191,80 @@ $(function () {
         return false;
     });
 
-    /* ---------------------------------------------- /*
-     * Crop
-    /* ---------------------------------------------- */
+    if(window.location.href.indexOf("/gallery") >= 0) {
+        getWorks([], 0);
 
-    // $('#profileUpdateForm input[type="file"]').PictureCut({
-    //     EnableCrop                  : true,
-    //     FolderOnServer              : "/uploads/",
-    //     CropWindowStyle             : "Bootstrap"
-    // });
+        $('[id^=cid_]').click(function () {
+            var catIds = getCheckCategories();
+            getWorks(catIds, 0);
+        });
+
+        $(document).on('click', '#workNext', function () {
+                var pageId = $(this).attr('data-page');
+                var catIds = getCheckCategories();
+                getWorks(catIds, pageId);
+        });
+
+        $(document).on('click', '#workPrevious', function () {
+            var pageId = $(this).attr('data-page');
+            var catIds = getCheckCategories();
+            getWorks(catIds, pageId);
+        });
+
+        // $('#workPrevious').click(function () {
+        //     var pageId = $(this).attr('data-page');
+        //     var catIds = getCheckCategories();
+        //     getWorks(catIds, pageId);
+        // });
+
+        // $('#workNext').click(function () {
+        //     var pageId = $(this).attr('data-page');
+        //     var catIds = getCheckCategories();
+        //     getWorks(catIds, pageId);
+        // });
+
+        function getCheckCategories() {
+            var catIds = [];
+            var checks = $('[id^=cid_]');
+            for (var i = 0; i < checks.length; i++) {
+                if (checks[i].id === undefined) {
+                    continue;
+                }
+                var catId = $('#' + checks[i].id + ':checked').attr('data-id');
+                if (catId === undefined) {
+                    continue;
+                }
+                catIds.push(catId);
+            }
+            return catIds;
+        }
+
+        function getWorks(catIds, pageId) {
+            var parameters = {};
+            if (catIds.length > 0) {
+                parameters.categories = catIds;
+            }
+            if (pageId === undefined) {
+                parameters.page = 0;
+            } else {
+                parameters.page = pageId;
+            }
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.post('/gallery/works', parameters)
+                .done(function (data) {
+                    $('#galleryWorksAll').empty().append(data);
+                })
+                .fail(function (data) {
+                    $('#galleryWorksAll').empty().append('<p>Мы не смогли загрузить список работ. Возможно возникла ошибка сети</p>');
+                    console.log(data);
+                });
+        }
+
+    }
 
 });
 

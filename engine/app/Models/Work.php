@@ -171,7 +171,34 @@ class Work extends Model
         if (!$this->checkEmptyObject($res)) {
             return [];
         }
-        return $res->toArray();
+        $result = [];
+        foreach ($res->toArray() as $work) {
+            if (isset($result[$work['workId']])) {
+                continue;
+            }
+            $result[$work['workId']] = $work;
+        }
+        return $result;
+    }
+
+    /**
+     * @param array $categories
+     *
+     * @return array
+     */
+    public function getCountByCategory(array $categories)
+    {
+        $res = $this
+            ->join('catalog_rel', 'catalog_rel.work_id', '=', 'work.id')
+            ->join('work_images', 'work.id', '=', 'work_images.workId')
+            ->whereIn('catalog_id', $categories)
+            ->where('isDefault', true)
+            ->where('work.approved', true)
+            ->get();
+        if (!$this->checkEmptyObject($res)) {
+            return [];
+        }
+        return $res->count();
     }
 
     /**
@@ -213,7 +240,44 @@ class Work extends Model
     /**
      * @return array
      */
-    public function getListForGallery()
+    public function getListForManager()
+    {
+        $result = $this
+            ->select('work.*', 'users.id as userId', 'users.name as userName')
+            ->join('users', 'users.id', '=', 'work.userId')
+            ->get();
+        if (!$this->checkEmptyObject($result)) {
+            return [];
+        }
+        return $result->toArray();
+    }
+
+    /**
+     * @param int $offset
+     *
+     * @return array
+     */
+    public function getListForGallery(int $offset = 0)
+    {
+        $result = $this
+            ->select('work.*', 'users.id as userId', 'users.name as userName', 'work_images.link')
+            ->join('work_images', 'work.id', '=', 'work_images.workId')
+            ->join('users', 'users.id', '=', 'work.userId')
+            ->skip($offset*$this->perPage)
+            ->take($this->perPage)
+            ->where('work_images.isDefault', true)
+            ->where('work.approved', true)
+            ->get();
+        if (!$this->checkEmptyObject($result)) {
+            return [];
+        }
+        return $result->toArray();
+    }
+
+    /**
+     * @return array
+     */
+    public function getCountForGallery()
     {
         $result = $this
             ->select('work.*', 'users.id as userId', 'users.name as userName', 'work_images.link')
@@ -225,7 +289,7 @@ class Work extends Model
         if (!$this->checkEmptyObject($result)) {
             return [];
         }
-        return $result->toArray();
+        return $result->count();
     }
 
     /**

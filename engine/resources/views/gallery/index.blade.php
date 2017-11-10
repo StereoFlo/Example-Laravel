@@ -11,8 +11,8 @@
                 <ul class="galleryCategory__list">
                     @foreach($categories as $category)
                         <li>
-                            <input type="checkbox" class="checkbox" id="{{ $category['id'] }}"/>
-                            <label for="{{ $category['id'] }}">{{ $category['name'] }}</label>
+                            <input type="checkbox" class="checkbox" id="cid_{{ $category['id'] }}" data-id="{{ $category['id'] }}"/>
+                            <label for="cid_{{ $category['id'] }}">{{ $category['name'] }}</label>
                         </li>
                     @endforeach
                 </ul>
@@ -48,36 +48,9 @@
                         <h2>Все работы</h2>
                     </div>
 
-                    <div class="products">
-                        <div class="products__wrap">
-                            @if(empty($list))
-                                <p>В этой категории работ нет</p>
-                            @else
-                                @foreach($list as $work)
-                                    <a href="/author/{{ $work['userId'] }}" class="item">
-                                        <div class="content">
-                                            <div class="border">
-                                                <div class="valign">
-                                                        <h3>{{ $work['workName'] }}</h3>
-                                                        <p>{{ $work['description'] }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <img src="{{ url($work['link']) }}" alt="">
-                                    </a>
-                                @endforeach
-                            @endif
-                        </div>
-                    </div>
+                    <div class="products" id="galleryWorksAll"></div>
                 </div>
             </div>
         </div>
     </section>
-    <div class="pagination">
-        <a href="#" class="previous">&laquo;</a>
-        <a href="#">1</a>
-        <a href="#" class="active">2</a>
-        <a href="#">3</a>
-        <a href="#" class="next">&raquo;</a>
-    </div>
 @endsection
