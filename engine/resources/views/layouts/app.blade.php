@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ url('static/images/favicon/favicon.png') }}"/>
+    <link rel="apple-touch-icon-precomposed" href="{{ url('static/images/favicon/apple-touch-favicon.png') }}"/>
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -79,6 +83,10 @@
 <script type="text/javascript" src="//vk.com/js/api/openapi.js?150"></script>
 <script type="text/javascript">VK.init({apiId: 5683855, onlyWidgets: true});</script>
 <script src="{{ url('static/js/libs.min.js') }}"></script>
+<script
+        src="http://code.jquery.com/ui/1.12.0/jquery-ui.js"
+        integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk="
+        crossorigin="anonymous"></script>
 <script src="{{ url('static/js/common.js') }}"></script>
 </body>
 </html>

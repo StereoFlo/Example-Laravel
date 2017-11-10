@@ -5,6 +5,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="{{ url('static/images/favicon/favicon.png') }}"/>
+        <link rel="apple-touch-icon-precomposed" href="{{ url('static/images/favicon/apple-touch-favicon.png') }}"/>
+
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
