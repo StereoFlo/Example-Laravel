@@ -207,18 +207,6 @@ $(function () {
             getWorks(catIds, pageId);
         });
 
-        // $('#workPrevious').click(function () {
-        //     var pageId = $(this).attr('data-page');
-        //     var catIds = getCheckCategories();
-        //     getWorks(catIds, pageId);
-        // });
-
-        // $('#workNext').click(function () {
-        //     var pageId = $(this).attr('data-page');
-        //     var catIds = getCheckCategories();
-        //     getWorks(catIds, pageId);
-        // });
-
         function getCheckCategories() {
             var catIds = [];
             var checks = $('[id^=cid_]');
