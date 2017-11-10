@@ -203,7 +203,11 @@ $(function () {
                 if (checks[i].id === undefined) {
                     continue;
                 }
-                catIds[i] = $('#' + checks[i].id + ':checked').attr('data-id');
+                var catId = $('#' + checks[i].id + ':checked').attr('data-id');
+                if (catId === undefined) {
+                    continue;
+                }
+                catIds[i] = catId;
             }
             $.get('/gallery/works', { categories: catIds, page: 0 })
                 .done(function (data) {
