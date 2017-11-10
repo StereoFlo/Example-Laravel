@@ -201,7 +201,7 @@ $(function () {
         //     getWorks(catIds, pageId);
         // });
 
-        $(document).on('submit', '#workPrevious', function () {
+        $(document).on('click', '#workPrevious', function () {
             var pageId = $(this).attr('data-page');
             var catIds = getCheckCategories();
             getWorks(catIds, pageId);
@@ -213,7 +213,7 @@ $(function () {
         //     getWorks(catIds, pageId);
         // });
 
-        $(document).on('submit', '#workNext', function () {
+        $(document).on('click', '#workNext', function () {
             var pageId = $(this).attr('data-page');
             var catIds = getCheckCategories();
             getWorks(catIds, pageId);
