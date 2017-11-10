@@ -195,13 +195,25 @@ $(function () {
             getWorks(catIds, 0);
         });
 
-        $('#workPrevious').click(function () {
+        // $('#workPrevious').click(function () {
+        //     var pageId = $(this).attr('data-page');
+        //     var catIds = getCheckCategories();
+        //     getWorks(catIds, pageId);
+        // });
+
+        $(document).on('submit', '#workPrevious', function () {
             var pageId = $(this).attr('data-page');
             var catIds = getCheckCategories();
             getWorks(catIds, pageId);
         });
 
-        $('#workNext').click(function () {
+        // $('#workNext').click(function () {
+        //     var pageId = $(this).attr('data-page');
+        //     var catIds = getCheckCategories();
+        //     getWorks(catIds, pageId);
+        // });
+
+        $(document).on('submit', '#workNext', function () {
             var pageId = $(this).attr('data-page');
             var catIds = getCheckCategories();
             getWorks(catIds, pageId);
