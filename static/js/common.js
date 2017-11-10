@@ -169,10 +169,6 @@ $(function () {
 
     $('input[name="phone"]').inputmask({"mask": "+7(999) 999-9999"});
 
-    /* ---------------------------------------------- /*
-     * Likes
-    /* ---------------------------------------------- */
-
     $('#setLike').click(function (e) {
         e.preventDefault();
         var url = $(this).attr('href');
@@ -237,6 +233,8 @@ $(function () {
             } else {
                 parameters.page = pageId;
             }
+
+            // this is need for post query
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
