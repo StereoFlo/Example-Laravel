@@ -210,6 +210,7 @@ $(function () {
                 console.log(catId);
                 catIds[i] = catId;
             }
+            console.log(catIds);
             $.get('/gallery/works', { categories: catIds, page: 0 })
                 .done(function (data) {
                     $('#galleryWorksAll').empty().append(data);
