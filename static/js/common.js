@@ -205,7 +205,7 @@ $(function () {
                 }
                 catIds[i] = $('#' + checks[i].id + ':checked').attr('data-id');
             }
-            $.get('/gallery/works', { 'categories': catIds, page: 0 })
+            $.get('/gallery/works', { categories: catIds, page: 0 })
                 .done(function (data) {
                     $('#galleryWorksAll').empty().append(data);
                 })
