@@ -207,6 +207,7 @@ $(function () {
                 if (catId === undefined) {
                     continue;
                 }
+                console.log(catId);
                 catIds[i] = catId;
             }
             $.get('/gallery/works', { categories: catIds, page: 0 })
