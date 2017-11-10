@@ -171,7 +171,14 @@ class Work extends Model
         if (!$this->checkEmptyObject($res)) {
             return [];
         }
-        return $res->toArray();
+        $result = [];
+        foreach ($res->toArray() as $work) {
+            if (isset($result[$work['workId']])) {
+                continue;
+            }
+            $result[$work['workId']] = $work;
+        }
+        return $result;
     }
 
     /**
