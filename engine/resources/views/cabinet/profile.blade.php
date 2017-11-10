@@ -89,7 +89,7 @@
 
             @if (empty(Auth::user()->avatar))
             <div class="inputGroup{{ $errors->has('avatar') ? ' has-error' : '' }}">
-                <label for="avatar">фото:</label>
+                <label for="avatar">фото (1:1, jpeg):</label>
                 <div class="filearea">
                     <span>Перенесите файл сюда или нажмите на эту зону!</span>
                     <input type="file" name="avatar" value="{{ old('avatar') }}">

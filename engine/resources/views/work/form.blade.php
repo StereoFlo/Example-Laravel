@@ -34,7 +34,7 @@
 
             <div class="inputGroup{{ $errors->has('tags') ? ' has-error' : '' }}">
                 <label for="tags">Теги:</label>
-                <input id="tags" type="text" name="tags">
+                <input id="tags" type="text" name="tags" placeholder="добавьте теги через ',' ">
                 <span class="errorText">
                 @if ($errors->has('tags'))
                         <strong>{{ $errors->first('tags') }}</strong>
@@ -44,7 +44,6 @@
                     <p>Теги работы:</p>
                     <div class="tag">
                         @foreach($work['tags'] as $tag)
-
                             <a id="tag_{{ $tag['id'] }}" href="{{ route('deleteFromWork', ['tagId' => $tag['id'], 'workId' => $work['id']]) }}" class="tag__item">
                                 <span class="name">{{ $tag['tag'] }}</span>
                                 <i class="fa fa-trash" aria-hidden="true"></i>
@@ -90,7 +89,7 @@
             @endif
 
             <div class="inputGroup{{ $errors->has('images') ? ' has-error' : '' }}">
-                <label for="images">@lang('work.photoOfNewWork'):</label>
+                <label for="images">@lang('work.photoOfNewWork') (16:9, jpeg):</label>
                 <div class="filearea">
                     <span>@lang('work.photoDescrOfNewWork')</span>
                     <input type="file" name="images[]" value="{{ old('images') }}" multiple {{ !empty($errors->has('images')) ? 'required' : null }}>
