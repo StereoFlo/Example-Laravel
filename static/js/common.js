@@ -197,20 +197,22 @@ $(function () {
                 console.log(data);
             });
         $('[id^=cid_]').click(function () {
-
+            var catIds = [];
             var checks = $('[id^=cid_]');
             for (var i = 0; i < checks.length; i++) {
-                console.log($('#' + checks[i].id + ':checked').attr('data-id'));
+                if (checks[i].id === undefined) {
+                    continue;
+                }
+                catIds[i] = $('#' + checks[i].id + ':checked').attr('data-id');
             }
-
-            // $.get('/gallery/works', { 'categories[]': "John", time: "2pm" })
-            //     .done(function (data) {
-            //         $('#galleryWorksAll').empty().append(data);
-            //     })
-            //     .fail(function (data) {
-            //         $('#galleryWorksAll').empty().append('<p>Мы не смогли загрузить список работ. Возможно возникла ошибка сети</p>');
-            //         console.log(data);
-            //     });
+            $.get('/gallery/works', { 'categories': catIds, page: 0 })
+                .done(function (data) {
+                    $('#galleryWorksAll').empty().append(data);
+                })
+                .fail(function (data) {
+                    $('#galleryWorksAll').empty().append('<p>Мы не смогли загрузить список работ. Возможно возникла ошибка сети</p>');
+                    console.log(data);
+                });
         });
     }
 

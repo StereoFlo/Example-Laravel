@@ -11,7 +11,7 @@
                 <ul class="galleryCategory__list">
                     @foreach($categories as $category)
                         <li>
-                            <input type="checkbox" class="checkbox" id="cid_{{ $category['id'] }} data-id={{ $category['id'] }}"/>
+                            <input type="checkbox" class="checkbox" id="cid_{{ $category['id'] }}" data-id="{{ $category['id'] }}"/>
                             <label for="cid_{{ $category['id'] }}">{{ $category['name'] }}</label>
                         </li>
                     @endforeach
