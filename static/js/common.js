@@ -233,7 +233,12 @@ $(function () {
             } else {
                 parameters.page = pageId;
             }
-            $.get('/gallery/works', parameters)
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.post('/gallery/works', parameters)
                 .done(function (data) {
                     $('#galleryWorksAll').empty().append(data);
                 })

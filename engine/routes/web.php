@@ -16,7 +16,7 @@ Route::get('/author/{id}', 'AuthorController@show')->where('id', '[0-9]+');
 Route::get('/work/{id}', 'WorkController@show')->where('id', '[0-9]+')->name('workPublicShow');
 Route::get('/work/like/{id}', 'WorkController@setLike')->where('id', '[0-9]+')->name('workPublicLike');
 Route::get('/gallery', 'GalleryController@index')->name('galleryPublicIndex');
-Route::get('/gallery/works', 'GalleryController@getWorks')->name('galleryPublicWorks');
+Route::post('/gallery/works', 'GalleryController@getWorks')->name('galleryPublicWorks');
 
 Route::group(['middleware' => 'isAdmin'], function () {
     Route::get('/manager/user/list', 'Manager\\User@getList')->name('managerUserList');
