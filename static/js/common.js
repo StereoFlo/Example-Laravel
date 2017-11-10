@@ -196,7 +196,10 @@ $(function () {
         });
 
         $(document).on('click', '#workNext', function () {
-            console.log("OK");
+                var pageId = $(this).attr('data-page');
+                var catIds = getCheckCategories();
+                console.log(pageId, catIds);
+                getWorks(catIds, pageId);
         });
 
         // $('#workPrevious').click(function () {
