@@ -37,7 +37,7 @@
             </div>
             <div class="work__toolbar">
                 <div class="work__counts">
-                    <div class="work__likes">
+                    <div class="work__likes work__likes_chacked">
                         <a id="setLike" href="{{ route('workPublicLike', ['id' => $work['id']]) }}" ></a>
                         <span id="likesCount">{{ $work['likes'] }}</span>
                     </div>

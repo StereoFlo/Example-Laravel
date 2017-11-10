@@ -69,11 +69,11 @@
       display: inline-block;
       line-height: 27px;
     }
-    &__likes_chacked {
-      a {
-        background-position: 0 -24px;
-        opacity: .9;
-      }
+  }
+  &__likes_chacked {
+    a {
+      background-position: 0 -24px;
+      opacity: .9;
     }
   }
   &__commentsNum {
