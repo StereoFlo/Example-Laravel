@@ -3,20 +3,22 @@
 @section('content')
     <section class="gallery">
         <div class="gallery__wrap">
-            <div class="galleryCategory galleryCategory_opened">
-                <div class="galleryCategory__title">
-                    <span>Категории</span>
-                    <a href="#"></a>
-                </div>
-                <ul class="galleryCategory__list">
-                    @foreach($categories as $category)
-                        <li>
-                            <input type="checkbox" class="checkbox" id="cid_{{ $category['id'] }}" data-id="{{ $category['id'] }}"/>
-                            <label for="cid_{{ $category['id'] }}">{{ $category['name'] }}</label>
-                        </li>
-                    @endforeach
-                </ul>
 
+            <div class="galleryCategory__wrap">
+                <div class="galleryCategory galleryCategory_opened">
+                    <div class="galleryCategory__title">
+                        <span>Категории</span>
+                        <a href="#"></a>
+                    </div>
+                    <ul class="galleryCategory__list">
+                        @foreach($categories as $category)
+                            <li>
+                                <input type="checkbox" class="checkbox" id="cid_{{ $category['id'] }}" data-id="{{ $category['id'] }}"/>
+                                <label for="cid_{{ $category['id'] }}">{{ $category['name'] }}</label>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
 
             <div class="galleryWorks">

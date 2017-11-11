@@ -9,9 +9,7 @@
     @include row-flex();
     flex-wrap: wrap;
     max-width: 1900px;
-    @include max-screen($break_xs) {
-      justify-content: center;
-    }
+    margin: 0 auto;
   }
   h2 {
     text-align: center;
