@@ -96,7 +96,8 @@ $(function () {
 
     $("a[href*='#']").mPageScroll2id({
         scrollSpeed: 900,
-        scrollEasing: "easeInOutSine"
+        scrollEasing: "easeInOutSine",
+        offset: 55,
     });
 
     /* ---------------------------------------------- /*
