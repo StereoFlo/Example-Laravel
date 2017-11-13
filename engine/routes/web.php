@@ -71,6 +71,10 @@ Route::middleware('auth')->group(function () {
         ->where('workId', '[0-9]+')
         ->where('tagId', '[0-9]+')
         ->name('deleteFromWork');
+    Route::get('/cabinet/work/category/remove/{workId}/{catId}', 'WorkController@removeFromCategory')
+        ->where('workId', '[0-9]+')
+        ->where('catId', '[0-9]+')
+        ->name('deleteFromCategory');
     Route::get('/cabinet/work/{workId}/edit/removeImage/{imageId}', 'WorkController@removeImageFromWork')
         ->where('workId', '[0-9]+')
         ->where('imageId', '[0-9]+')

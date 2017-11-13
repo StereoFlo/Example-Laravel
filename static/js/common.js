@@ -188,6 +188,15 @@ $(function () {
         return false;
     });
 
+
+    $('[id^=dcid_]').click(function (event) {
+        event.preventDefault();
+        $.get($(this).attr('href'), function (response) {
+            //todo
+            console.log(response.isRemoved);
+        });
+    });
+
     if(window.location.href.indexOf("/gallery") >= 0) {
         getWorks([], 0);
 

@@ -103,6 +103,18 @@ class CatalogRel extends Model
 
     /**
      * @param int $categoryId
+     * @param int $workId
+     *
+     * @return mixed
+     */
+    public function removeFromCategory(int $categoryId, int $workId)
+    {
+        return $this->where('work_id', $workId)->where('catalog_id', $categoryId)->delete();
+    }
+
+
+    /**
+     * @param int $categoryId
      *
      * @return bool
      */

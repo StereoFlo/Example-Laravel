@@ -158,6 +158,20 @@ class WorkController extends Controller
     }
 
     /**
+     * @param int $workId
+     * @param int $catId
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function removeFromCategory(int $workId, int $catId)
+    {
+        $res = (bool) CatalogRel::getInstance()->removeFromCategory($catId, $workId);
+        return response()->json([
+            'isRemoved' => $res
+        ]);
+    }
+
+    /**
      * @param int $id
      *
      * @return \Illuminate\Http\JsonResponse

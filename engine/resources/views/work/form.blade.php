@@ -62,7 +62,7 @@
                     @else
                         <div class="category">
                             @foreach($work['categories']['inWork'] as $category)
-                                <a href="" class="category__item">
+                                <a href="{{ route('deleteFromCategory', ['workId' => $work['id'], 'catId' => $category['id']]) }}" id="dcid_{{ $category['id'] }}" class="category__item">
                                     <span class="name">{{ $category['name'] }}</span>
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </a>
