@@ -75,13 +75,23 @@
 
                 {{--<button class="work__buyBtn button">Заказать</button>--}}
             </div>
-            <div class="work__meta">
+            <div class="work__tags">
+                <p>мета теги:</p>
                 @if (empty($work['tags']))
                     <p>У этой работы нет тегов</p>
                 @else
-                    <span>мета теги:</span>
                     @foreach ($work['tags'] as $tag)
-                        <a href="#">{{$tag['tag']}},</a>
+                        <a href="#">{{$tag['tag']}}</a>
+                    @endforeach
+                @endif
+            </div>
+            <div class="work__categories">
+                <p>категории:</p>
+                @if (empty($work['categories']['inWork']))
+                    <p>У этой работы нет категорий</p>
+                @else
+                    @foreach ($work['categories']['inWork'] as $categories)
+                        <span>{{$categories['name']}}</span>
                     @endforeach
                 @endif
             </div>

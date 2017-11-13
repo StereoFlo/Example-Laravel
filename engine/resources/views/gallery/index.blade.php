@@ -29,7 +29,7 @@
                     <div class="products">
                         <div class="products__wrap">
                             @foreach($recentlyLiked as $work)
-                                <a href="/author/{{ $work['userId'] }}" class="item">
+                                <a href="/work/{{ $work['id'] }}" class="item">
                                     <div class="content">
                                         <div class="border">
                                             <div class="valign">

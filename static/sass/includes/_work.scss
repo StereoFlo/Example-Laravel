@@ -46,6 +46,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 20px;
   }
   &__likes {
     border-right: 1px solid #d3d1d1;
@@ -159,20 +160,22 @@
       background: darken(#e83b3a, 15%);
     }
   }
-  &__meta {
-    padding: 20px 0;
-    span {
-      display: block;
+  &__tags, &__categories {
+    margin-bottom: 20px;
+    p {
       text-transform: uppercase;
       color: #282c43;
-      margin-bottom: 20px;
+      margin: 0 0 5px;
     }
-    a {
+    a, span {
       color: #80909c;
       text-decoration: none;
       line-height: 25px;
+      padding-right: 10px;
+      margin-right: 10px;
+      border-right: 1px solid $border;
       &:hover {
-        color: #161f26;
+        //color: #161f26;
       }
     }
   }
