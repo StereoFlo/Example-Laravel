@@ -9,13 +9,23 @@ namespace RecycleArt\Models;
 class StaticPage extends Model
 {
     /**
-     * @param int $id
+     * @var string
+     */
+    protected $primaryKey = 'slug';
+
+    /**
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
+     * @param string $slug
      *
      * @return array
      */
-    public function getBy(int $id)
+    public function getBy(string $slug)
     {
-        $page = self::find($id);
+        $page = self::find($slug);
         if (!$this->checkEmptyObject($page)) {
             return [];
         }
