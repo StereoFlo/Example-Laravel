@@ -143,16 +143,32 @@ class WorkController extends Controller
     public function show(Request $request, int $id): View
     {
         $work = Work::getInstance()->getById($id);
+        $isLiked = session()->has('work' . $id);
         if (empty($work)) {
             abort(404, __('work.workNotFound'));
         }
         if (!$work['approved']) {
             if ($request->user()->hasAnyRole([User::ROLE_MODERATOR, User::ROLE_ADMIN]) || $work['userId'] === Auth::id()) {
-                return view('work.show', ['work' => $work]);
+                return view('work.show', ['work' => $work, 'isLiked' => $isLiked]);
             }
             abort(401);
         }
-        return view('work.show', ['work' => $work]);
+
+        return view('work.show', ['work' => $work, 'isLiked' => $isLiked]);
+    }
+
+    /**
+     * @param int $workId
+     * @param int $catId
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function removeFromCategory(int $workId, int $catId)
+    {
+        $res = (bool) CatalogRel::getInstance()->removeFromCategory($catId, $workId);
+        return response()->json([
+            'isRemoved' => $res
+        ]);
     }
 
     /**
