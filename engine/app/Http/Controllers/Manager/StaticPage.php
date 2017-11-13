@@ -17,6 +17,9 @@ class StaticPage extends Controller
         return view('manager.staticPage.list', ['pages' => $pageList]);
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function makeNew()
     {
         return view('manager.staticPage.form');
