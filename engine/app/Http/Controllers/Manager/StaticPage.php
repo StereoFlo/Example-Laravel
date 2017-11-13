@@ -2,10 +2,10 @@
 
 namespace RecycleArt\Http\Controllers\Manager;
 
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Facades\Redirect;
 use RecycleArt\Http\Controllers\Controller;
 use RecycleArt\Models\StaticPage as StaticPageModel;
 
