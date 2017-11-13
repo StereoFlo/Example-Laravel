@@ -2,23 +2,26 @@
 
 namespace RecycleArt\Http\Controllers\Manager;
 
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\View\View;
 use RecycleArt\Http\Controllers\Controller;
+use RecycleArt\Models\StaticPage as StaticPageModel;
 
 class StaticPage extends Controller
 {
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function getList()
     {
-        $pageList = \RecycleArt\Models\StaticPage::getInstance()->getList();
+        $pageList = StaticPageModel::getInstance()->getList();
         return view('manager.staticPage.list', ['pages' => $pageList]);
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function makeNew()
     {
@@ -34,23 +37,23 @@ class StaticPage extends Controller
      */
     public function process(Request $request)
     {
-        \RecycleArt\Models\StaticPage::getInstance()->updateOrMake($request);
+        StaticPageModel::getInstance()->updateOrMake($request);
         return Redirect::to(route('managerPageList'));
     }
 
     public function remove(string $slug)
     {
-        return \RecycleArt\Models\StaticPage::getInstance()->removePage($slug);
+        return StaticPageModel::getInstance()->removePage($slug);
     }
 
     /**
      * @param string $slug
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function update(string $slug)
     {
-        $page = \RecycleArt\Models\StaticPage::getInstance()->getBy($slug);
+        $page = StaticPageModel::getInstance()->getBy($slug);
         if (empty($page)) {
             abort(404, 'page not found');
         }
