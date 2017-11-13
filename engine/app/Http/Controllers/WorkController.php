@@ -143,16 +143,16 @@ class WorkController extends Controller
     public function show(Request $request, int $id): View
     {
         $work = Work::getInstance()->getById($id);
+        $isLiked = session()->has('work' . $id);
         if (empty($work)) {
             abort(404, __('work.workNotFound'));
         }
         if (!$work['approved']) {
             if ($request->user()->hasAnyRole([User::ROLE_MODERATOR, User::ROLE_ADMIN]) || $work['userId'] === Auth::id()) {
-                return view('work.show', ['work' => $work]);
+                return view('work.show', ['work' => $work, 'isLiked' => $isLiked]);
             }
             abort(401);
         }
-        $isLiked = session()->has('work' . $id);
 
         return view('work.show', ['work' => $work, 'isLiked' => $isLiked]);
     }
