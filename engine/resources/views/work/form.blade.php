@@ -58,7 +58,7 @@
                 @if(!empty($work['id']))
                     <p>Категории работы:</p>
                     @if(empty($work['categories']['inWork']))
-                        <p>У этой работы не категорий</p>
+                        <p>Вы не добавили свою работу не в одну категорию</p>
                     @else
                         <div class="category">
                             @foreach($work['categories']['inWork'] as $category)
@@ -71,7 +71,7 @@
                     @endif
                     <p>Все категории:</p>
                     @if(empty($work['categories']['notInWork']))
-                        <p>У нас пока нет категорий</p>
+                        <p>Ваша работа сейчас во всех возможных категориях</p>
                     @else
                         <div class="inputGroup checkboxes">
                             @foreach($work['categories']['notInWork'] as $category)
