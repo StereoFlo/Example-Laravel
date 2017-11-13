@@ -21,6 +21,10 @@ Route::get('/pages/{slug}.html', 'StaticPageController@getPage')->where('slug', 
 
 Route::group(['middleware' => 'isAdmin'], function () {
     Route::get('/manager/user/list', 'Manager\\User@getList')->name('managerUserList');
+    Route::get('/manager/pages', 'Manager\\StaticPage@getList')->name('managerPageList');
+    Route::get('/manager/pages/new', 'Manager\\StaticPage@makeNew')->name('managerPageNew');
+    Route::get('/manager/pages/{slug}/delete', 'Manager\\StaticPage@remove')->where('slug', '[a-z]+')->name('managerPageDelete');
+    Route::get('/manager/pages/{slug}/edit', 'Manager\\StaticPage@update')->where('slug', '[a-z]+')->name('managerPageEdit');
     Route::get('/manager/user/show/{userId}', 'Manager\\User@show')->where('userId', '[0-9]+')->name('managerUserShow');
     Route::get('/manager/user/role/add/{userId}/{roleId}', 'Manager\\User@addRole')
         ->where('userId', '[0-9]+')

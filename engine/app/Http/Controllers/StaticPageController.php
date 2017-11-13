@@ -12,11 +12,11 @@ use RecycleArt\Models\StaticPage;
 class StaticPageController extends Controller
 {
     /**
-     * @param int $id
+     * @param string $id
      *
      * @return array
      */
-    public function getPage(int $id)
+    public function getPage(string $id)
     {
         $page = (new StaticPage())->getBy($id);
         if (empty($page)) {
