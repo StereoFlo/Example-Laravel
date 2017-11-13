@@ -170,6 +170,7 @@ $(function () {
 
     $('input[name="phone"]').inputmask({"mask": "+7(999) 999-9999"});
 
+
     $('#setLike').click(function (e) {
         e.preventDefault();
         var url = $(this).attr('href');

@@ -1,6 +1,9 @@
 @extends('layouts.manager')
 
 @section('content')
+
+    {{--сюда возвращается переменная $page - может быть пустой--}}
+
     <div class="container">
         <div class="row">
             @include('manager.shared.menu')
