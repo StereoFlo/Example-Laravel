@@ -16,10 +16,10 @@
                     <label for="workName">@lang('work.nameOfNewWork'):</label>
                     <input id="workName" type="text" name="workName" value="{{ !empty($work['workName']) ? $work['workName'] : null }}" required>
                     <span class="errorText">
-                @if ($errors->has('workName'))
+                        @if ($errors->has('workName'))
                             <strong>{{ $errors->first('workName') }}</strong>
                         @endif
-            </span>
+                    </span>
                 </div>
 
                 <div class="inputGroup{{ $errors->has('description') ? ' has-error' : '' }}">
@@ -27,20 +27,20 @@
                     <textarea id="desc" name="description" cols="80" rows="8"
                               required>{{ !empty($work['description']) ? $work['description'] : null }}</textarea>
                     <span class="errorText">
-                @if ($errors->has('description'))
+                        @if ($errors->has('description'))
                             <strong>{{ $errors->first('description') }}</strong>
                         @endif
-            </span>
+                    </span>
                 </div>
 
                 <div class="inputGroup{{ $errors->has('tags') ? ' has-error' : '' }}">
                     <label for="tags">Теги:</label>
                     <input id="tags" type="text" name="tags" placeholder="добавьте теги через ',' ">
                     <span class="errorText">
-                @if ($errors->has('tags'))
+                        @if ($errors->has('tags'))
                             <strong>{{ $errors->first('tags') }}</strong>
                         @endif
-            </span>
+                    </span>
                     @if(!empty($work['tags']))
                         <p>Теги работы:</p>
                         <div class="tag">
@@ -98,10 +98,10 @@
                     </div>
                     <div class="fileareaPreview"></div>
                     <span class="errorText">
-                @if ($errors->has('images'))
+                        @if ($errors->has('images'))
                             <strong>{{ $errors->first('images') }}</strong>
                         @endif
-            </span>
+                    </span>
                     @if(!empty($work['images']))
                         <div class="imageGroup">
                             @foreach($work['images'] as $image)
