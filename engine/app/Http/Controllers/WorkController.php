@@ -152,7 +152,9 @@ class WorkController extends Controller
             }
             abort(401);
         }
-        return view('work.show', ['work' => $work]);
+        $isLiked = session()->has('work' . $id);
+
+        return view('work.show', ['work' => $work, 'isLiked' => $isLiked]);
     }
 
     /**
