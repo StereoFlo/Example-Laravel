@@ -208,16 +208,21 @@ $(function () {
         var catId = $(this).attr('id').split('dcid_')[1];
         var catName = $(this).find('span').html();
         var $delLink = $(this);
+        var $category = $('.category');
 
         $.get($(this).attr('href'), function (response) {
             if (response.isRemoved) {
 
                 $delLink.remove();
+                // if($category.length == 0) {
+                //     $(this).append('<p>Вы не добавили свою работу не в одну категорию</p>');
+                // }
 
                 $('#notInWork').append(
                     '<input id="'+ catId +'" type="checkbox" name="categories[]" value="'+ catId +'">' +
                     '<label for="'+ catId +'">'+ catName +'</label>'
                 );
+
             } else {
                 alert('panic!')
             }
