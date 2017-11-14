@@ -152,6 +152,7 @@ class Work extends Model
             $res = $this
                 ->join('catalog_rel', 'catalog_rel.work_id', '=', 'work.id')
                 ->join('work_images', 'work_images.workId', '=', 'work.id')
+                ->join('users', 'work.userId', '=', 'users.id')
                 ->take($this->perPage)
                 ->whereIn('catalog_id', $categories)
                 ->where('isDefault', true)
@@ -161,6 +162,7 @@ class Work extends Model
             $res = $this
                 ->join('catalog_rel', 'catalog_rel.work_id', '=', 'work.id')
                 ->join('work_images', 'work.id', '=', 'work_images.workId')
+                ->join('users', 'work.userId', '=', 'users.id')
                 ->skip($offset*$this->perPage)
                 ->take($this->perPage)
                 ->whereIn('catalog_id', $categories)
@@ -184,7 +186,7 @@ class Work extends Model
     /**
      * @param array $categories
      *
-     * @return array
+     * @return int
      */
     public function getCountByCategory(array $categories)
     {
@@ -196,7 +198,7 @@ class Work extends Model
             ->where('work.approved', true)
             ->get();
         if (!$this->checkEmptyObject($res)) {
-            return [];
+            return 0;
         }
         return $res->count();
     }
@@ -209,7 +211,9 @@ class Work extends Model
     public function getListRecentlyLiked(int $limit = 3)
     {
         $res = $this
+            ->select('work.*', 'users.id as userId', 'users.name as userName', 'work_images.link')
             ->join('work_images', 'work.id', '=', 'work_images.workId')
+            ->join('users', 'users.id', '=', 'work.userId')
             ->orderBy('likes', 'DESC')
             ->take($limit)
             ->where('work_images.isDefault', true)

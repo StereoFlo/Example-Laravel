@@ -33,8 +33,8 @@
                                     <div class="content">
                                         <div class="border">
                                             <div class="valign">
-                                                <h3>{{ $work['workName'] }}</h3>
-                                                <p>{{ $work['description'] }}</p>
+                                                <h3>{{ $work['userName'] }}</h3>
+                                                <p>{{ $work['workName'] }}</p>
                                             </div>
                                         </div>
                                     </div>
