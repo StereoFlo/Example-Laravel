@@ -247,7 +247,7 @@ class Work extends Model
     public function getListForManager()
     {
         $result = $this
-            ->select('work.*', 'users.id as userId', 'users.name as userName')
+            ->select('work.*', 'users.id as userId', 'users.name as name')
             ->join('users', 'users.id', '=', 'work.userId')
             ->get();
         if (!$this->checkEmptyObject($result)) {
