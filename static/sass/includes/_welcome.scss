@@ -87,6 +87,7 @@
   z-index: 10;
   @include max-screen($break_sm) {
     @include col-8();
+    background: rgba($black, 0.7);
   }
   @include max-screen($break_xs) {
     @include col-12();
