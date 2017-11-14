@@ -44,6 +44,10 @@
                     <p>Работ от авторов пока нет</p>
                     @else
                     @foreach($works as $work)
+                        <pre>
+                            {{print_r($work)}}
+                        </pre>
+
                         <a href="/work/{{$work['id']}}" class="item">
                             <div class="content">
                                 <div class="border">

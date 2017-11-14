@@ -76,19 +76,25 @@ $(function () {
     /* ---------------------------------------------- */
 
     $('.slogan').hide();
-    $(".sloganShow").hover(
-        function () {
-            $(this).siblings('.news, .slogan').stop();
-            $(this).siblings('.news').slideUp(600);
-            $(this).siblings('.slogan').slideDown(600);
-        }
-        ,
-        function () {
-            $(this).siblings(".news, .slogan").stop();
-            $(this).siblings(".news").slideDown();
-            $(this).siblings(".slogan").slideUp();
-        }
-    );
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        $(".sloganShow").click(function () {
+            //todo
+        })
+    } else {
+        $(".sloganShow").hover(
+            function () {
+                $(this).siblings('.news, .slogan').stop();
+                $(this).siblings('.news').slideUp(600);
+                $(this).siblings('.slogan').slideDown(600);
+            }
+            ,
+            function () {
+                $(this).siblings(".news, .slogan").stop();
+                $(this).siblings(".news").slideDown();
+                $(this).siblings(".slogan").slideUp();
+            }
+        );
+    }
 
     /* ---------------------------------------------- /*
      * Scroll to id
@@ -184,6 +190,7 @@ $(function () {
                     var currentVal = parseInt(likeSel.text());
                     likeSel.empty();
                     likeSel.append(currentVal + 1);
+                    $('.work__likes').addClass('work__likes_checked');
                 }
             })
             .fail(function (data) {
