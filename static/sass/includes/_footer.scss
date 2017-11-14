@@ -1,7 +1,7 @@
 .footer {
   color: #80909c;
   padding: 15px;
-  background: #3a3d3e;
+  background: #1b1e2d;
   .flex {
     justify-content: space-between;
     align-items: center;
@@ -38,12 +38,12 @@
       width: 45px;
       height: 45px;
       border-radius: 50%;
-      background: #2f3132;
+      background: lighten(#1b1e2d, 10%);
       margin-left: 15px;
       text-decoration: none;
       &:hover {
         color: $white;
-        background: darken(#2f3132, 5%);
+        background: darken(#1b1e2d, 10%);
       }
     }
   }

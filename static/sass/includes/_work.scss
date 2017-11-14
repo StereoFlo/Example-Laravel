@@ -71,10 +71,11 @@
       line-height: 27px;
     }
   }
-  &__likes_chacked {
+  &__likes_checked {
     a {
       background-position: 0 -24px;
       opacity: .9;
+      cursor: default;
     }
   }
   &__commentsNum {
@@ -161,7 +162,7 @@
     }
   }
   &__tags, &__categories {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     p {
       text-transform: uppercase;
       color: #282c43;

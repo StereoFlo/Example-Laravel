@@ -37,7 +37,7 @@
             </div>
             <div class="work__toolbar">
                 <div class="work__counts">
-                    <div class="work__likes {{ $isLiked ? 'work__likes_chacked' : null }}">
+                    <div class="work__likes {{ $isLiked ? 'work__likes_checked' : null }}">
                         <a id="setLike" href="{{ route('workPublicLike', ['id' => $work['id']]) }}" ></a>
                         <span id="likesCount">{{ $work['likes'] }}</span>
                     </div>
@@ -75,16 +75,16 @@
 
                 {{--<button class="work__buyBtn button">Заказать</button>--}}
             </div>
-            <div class="work__tags">
-                <p>мета теги:</p>
-                @if (empty($work['tags']))
-                    <p>У этой работы нет тегов</p>
-                @else
-                    @foreach ($work['tags'] as $tag)
-                        <a href="#">{{$tag['tag']}}</a>
-                    @endforeach
-                @endif
-            </div>
+            {{--<div class="work__tags">--}}
+                {{--<p>мета теги:</p>--}}
+                {{--@if (empty($work['tags']))--}}
+                    {{--<p>У этой работы нет тегов</p>--}}
+                {{--@else--}}
+                    {{--@foreach ($work['tags'] as $tag)--}}
+                        {{--<a href="#">{{$tag['tag']}}</a>--}}
+                    {{--@endforeach--}}
+                {{--@endif--}}
+            {{--</div>--}}
             <div class="work__categories">
                 <p>категории:</p>
                 @if (empty($work['categories']['inWork']))

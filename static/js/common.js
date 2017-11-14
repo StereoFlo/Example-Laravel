@@ -170,6 +170,9 @@ $(function () {
 
     $('input[name="phone"]').inputmask({"mask": "+7(999) 999-9999"});
 
+    /* ---------------------------------------------- /*
+     * Likes
+    /* ---------------------------------------------- */
 
     $('#setLike').click(function (e) {
         e.preventDefault();
@@ -189,14 +192,34 @@ $(function () {
         return false;
     });
 
+    /* ---------------------------------------------- /*
+     * Categories
+    /* ---------------------------------------------- */
 
     $('[id^=dcid_]').click(function (event) {
         event.preventDefault();
+        var catId = $(this).attr('id').split('dcid_')[1];
+        var catName = $(this).find('span').html();
+        var $delLink = $(this);
+
         $.get($(this).attr('href'), function (response) {
-            //todo
-            console.log(response.isRemoved);
+            if (response.isRemoved) {
+
+                $delLink.remove();
+
+                $('#notInWork').append(
+                    '<input id="'+ catId +'" type="checkbox" name="categories[]" value="'+ catId +'">' +
+                    '<label for="'+ catId +'">'+ catName +'</label>'
+                );
+            } else {
+                alert('panic!')
+            }
         });
     });
+
+    /* ---------------------------------------------- /*
+     * Gallery
+    /* ---------------------------------------------- */
 
     if(window.location.href.indexOf("/gallery") >= 0) {
         getWorks([], 0);
