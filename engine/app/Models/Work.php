@@ -38,7 +38,7 @@ class Work extends Model
      */
     public function getListByUserId(int $userId): array
     {
-        $works = $this->join('users', 'work.userId', '=', 'users.id')->where('userId', $userId)->get();
+        $works = $this->where('userId', $userId)->get();
         if (!$this->checkEmptyObject($works)) {
             return [];
         }
