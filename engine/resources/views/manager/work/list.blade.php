@@ -23,7 +23,7 @@
                                     <tr>
                                         <td>{{ $work['id'] }}</td>
                                         <td>{{ $work['workName'] }}</td>
-                                        <td><a href="{{ route('workListAuthorManager', ['id' => $work['userId']]) }}">{{ $work['name'] }}</a></td>
+                                        <td><a href="{{ route('workListAuthorManager', ['id' => $work['userId']]) }}">{{ $work['userName'] }}</a></td>
                                         <td><a href="{{ route('workShow', ['id' => $work['id']]) }}">Открыть</a> </td>
                                         <td><input data-url="{{ route('managerWorkApprove', ['workId' => $work['id']]) }}" id="work_{{ $work['id'] }}" type="checkbox" {{ empty($work['approved']) ? null : 'checked' }}></td>
                                     </tr>
