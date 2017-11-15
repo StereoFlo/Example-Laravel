@@ -9,7 +9,7 @@
                     <div class="panel-heading">Не проверенные работы</div>
                     <div class="panel-body">
                         @if (empty($works))
-                            <p>Пользователей нет! Что оооочень странно.</p>
+                            <p>Работ нет у этого автора нет</p>
                         @else
                             <table class="table table-hover table-responsive">
                                 <tr>
@@ -23,7 +23,7 @@
                                     <tr>
                                         <td>{{ $work['id'] }}</td>
                                         <td>{{ $work['workName'] }}</td>
-                                        <td><a href="{{ route('workListAuthorManager', ['id' => $work['id']]) }}">{{ $work['userName'] }}</a></td>
+                                        <td><a href="{{ route('workListAuthorManager', ['id' => $work['id']]) }}">{{ $work['name'] }}</a></td>
                                         <td><a href="{{ route('workShow', ['id' => $work['id']]) }}">Открыть</a> </td>
                                         <td><input data-url="{{ route('managerWorkApprove', ['workId' => $work['id']]) }}" id="work_{{ $work['id'] }}" type="checkbox" {{ empty($work['approved']) ? null : 'checked' }}></td>
                                     </tr>
