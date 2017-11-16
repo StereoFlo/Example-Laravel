@@ -23,7 +23,7 @@
         &laquo;
     </a>
 @endif
-<a class="active">{{ $currentPage }}</a>
+<a class="active">{{ $currentPage+1 }}</a>
 @if(($workCount / $parPage) > 1 && ($workCount / $parPage) > $currentPage)
     <a href="#page_{{ $currentPage + 1 }}" data-page="{{ $currentPage + 1 }}" class="next" id="workNext">
         &raquo;
