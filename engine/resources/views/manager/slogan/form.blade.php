@@ -11,7 +11,7 @@
                         <p>{{ session('sloganUpdate') }}</p>
                         <form method="post" action="{{ route('sloganUpdate') }}" enctype="multipart/form-data" class="form registrationForm">
                             {{ csrf_field() }}
-                            <textarea name="content" class="form-control">{{ $content }}</textarea>
+                            <textarea id="content" name="content" class="form-control">{{ $content }}</textarea>
                             <button type="submit" name="button" class="button">Обновить</button>
                         </form>
                     </div>
