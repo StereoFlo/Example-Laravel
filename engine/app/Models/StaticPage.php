@@ -72,7 +72,8 @@ class StaticPage extends Model
         }
         $page = self::find($slug);
         if (!$this->checkEmptyObject($page)) {
-            $this->slug = $slug;
+            $page = new self();
+            $page->slug = $slug;
         }
         if ($name) {
             $page->name = $name;

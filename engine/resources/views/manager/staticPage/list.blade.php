@@ -22,20 +22,12 @@
                                     <tr>
                                         <td>{{ $page['slug'] }}</td>
                                         <td>{{ $page['name'] }}</td>
-                                        <td><a href="{{ route('newsUpdate', ['id' => $page['slug']]) }}">Изменить</a> | <a
-                                                    href="{{ route('newsDelete', ['id' => $page['slug']]) }}">Удалить</a></td>
+                                        <td><a href="{{ route('managerPageEdit', ['id' => $page['slug']]) }}">Изменить</a> | <a
+                                                    href="{{ route('managerPageDelete', ['id' => $page['slug']]) }}">Удалить</a></td>
                                     </tr>
                                 @endforeach
                             </table>
                         @endif
-                        <ul class="pagination">
-                            @if($currentPage > 0)
-                                <li><a href="{{ route('newsListPage', ['id' => $currentPage - 1]) }}">«</a></li>
-                            @endif
-                            @if(($newsCount / $parPage) > 1 && ($newsCount / $parPage) > $currentPage)
-                                <li><a href="{{ route('newsListPage', ['id' => $currentPage + 1]) }}">»</a></li>
-                            @endif
-                        </ul>
                     </div>
                 </div>
             </div>
