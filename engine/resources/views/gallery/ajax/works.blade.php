@@ -19,13 +19,13 @@
 </div>
 <div class="pagination">
 @if($currentPage > 0)
-    <a href="#next_page" data-page="{{ $currentPage - 1 }}" class="previous" id="workPrevious">
+    <a href="#page_{{ $currentPage - 1 }}" data-page="{{ $currentPage - 1 }}" class="previous" id="workPrevious">
         &laquo;
     </a>
 @endif
 <a class="active">{{ $currentPage+1 }}</a>
 @if(($workCount / $parPage) > 1 && ($workCount / $parPage) > $currentPage +1 )
-    <a href="#previos_page" class="next" id="workNext">
+    <a href="#page_{{ $currentPage + 1 }}" data-page="{{ $currentPage + 1 }}" class="next" id="workNext">
         &raquo;
     </a>
 @endif
