@@ -22,6 +22,6 @@ class StaticPageController extends Controller
         if (empty($page)) {
             abort(404, 'Static page not found');
         }
-        return view('static_page.main', ['page' => $page['content']]);
+        return view('static_page.main', ['page' => $page]);
     }
 }
