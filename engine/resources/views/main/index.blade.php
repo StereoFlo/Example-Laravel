@@ -8,7 +8,7 @@
                 <img src="{{ url('static/images/logo.png') }}" alt="Logo" class="sloganShow">
                 <div class="slogan">
                     <p class="slogan__item">
-                        {{ $slogan }}
+                        {!! $slogan !!}
                     </p>
                 </div>
 
@@ -21,7 +21,7 @@
                                 <div class="news__item">
                                     <h4 class="news__name">{{ $item['name'] }}</h4>
                                     <span class="news__date">{{ date('d.m.Y', strtotime($item['created_at'])) }}</span>
-                                    <p class="news__text">{{ $item['content'] }}</p>
+                                    <p class="news__text">{!! $item['content'] !!}</p>
                                 </div>
                             </a>
                         @endforeach
