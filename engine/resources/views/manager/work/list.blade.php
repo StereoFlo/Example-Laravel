@@ -6,7 +6,11 @@
             @include('manager.shared.menu')
             <div class="col-md-8 col-md-offset-0">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Не проверенные работы</div>
+                    <div class="panel-heading">
+                        <a href="{{ route('workListManager') }}">Все</a> |
+                        <a href="{{ route('workListUnapprovedManager') }}">Не проверенные работы</a> |
+                        <a href="{{ route('workListManagerApproved') }}">Проверенные</a>
+                    </div>
                     <div class="panel-body">
                         @if (empty($works))
                             <p>Работ нет у этого автора нет</p>

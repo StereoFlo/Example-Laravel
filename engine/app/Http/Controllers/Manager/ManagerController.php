@@ -19,7 +19,7 @@ class ManagerController extends Controller
     public function __construct()
     {
         View::share('userCount', User::getAll()->count());
-        View::share('workCount', \count((new Work())->getUnapproved()));
+        View::share('workCount', \count((new Work())->getUnapprovedList()));
         View::share('newsCount', \RecycleArt\Models\News::getAll()->count());
     }
 
