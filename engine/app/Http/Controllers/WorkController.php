@@ -155,6 +155,7 @@ class WorkController extends Controller
         }
 
         return view('work.show', ['work' => $work, 'isLiked' => $isLiked]);
+
     }
 
     /**
