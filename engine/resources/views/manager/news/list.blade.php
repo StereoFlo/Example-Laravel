@@ -23,7 +23,7 @@
                                     <tr>
                                         <td>{{ $item['id'] }}</td>
                                         <td>{{ $item['name'] }}</td>
-                                        <td>{{ $item['content'] }}</td>
+                                        <td>{!! $item['content'] !!}</td>
                                         <td><a href="{{ route('newsUpdate', ['id' => $item['id']]) }}">Изменить</a> | <a
                                                     href="{{ route('newsDelete', ['id' => $item['id']]) }}">Удалить</a></td>
                                     </tr>
