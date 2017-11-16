@@ -1,3 +1,6 @@
+$(document).ready(function () {
+    $('#content').summernote();
+});
 $('[id^=work_]').click(function () {
     var url = $(this).attr('data-url');
     $.get(url)

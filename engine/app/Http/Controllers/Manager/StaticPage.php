@@ -13,7 +13,7 @@ use RecycleArt\Models\StaticPage as StaticPageModel;
  * Class StaticPage
  * @package RecycleArt\Http\Controllers\Manager
  */
-class StaticPage extends Controller
+class StaticPage extends ManagerController
 {
     /**
      * @return Factory|View
@@ -33,7 +33,7 @@ class StaticPage extends Controller
     }
 
     /**
-     * todo необходимо записывать в сессию результат
+     * todo необходимо записывать в сессию результат сохранения/изменения
      *
      * @param Request $request
      *
@@ -47,7 +47,8 @@ class StaticPage extends Controller
 
     public function remove(string $slug)
     {
-        return StaticPageModel::getInstance()->removePage($slug);
+        StaticPageModel::getInstance()->removePage($slug);
+        return Redirect::to(route('managerPageList'));
     }
 
     /**

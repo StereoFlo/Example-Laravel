@@ -300,11 +300,17 @@ class Work extends Model
     }
 
     /**
+     * @param bool $approve
+     *
      * @return array
      */
-    public function getUnapproved()
+    public function getUnapprovedList(bool $approve = false)
     {
-        $result = $this->select('work.*', 'users.id as userId', 'users.name as userName')->join('users', 'users.id', '=', 'work.userId')->where('approved', false)->get();
+        $result = $this
+            ->select('work.*', 'users.id as userId', 'users.name as userName')
+            ->join('users', 'users.id', '=', 'work.userId')
+            ->where('work.approved', $approve)
+            ->get();
         if (!$this->checkEmptyObject($result)) {
             return [];
         }
