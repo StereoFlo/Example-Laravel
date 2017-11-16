@@ -385,6 +385,11 @@ $(document).on('submit', '#ajaxRegistration', function (e) {
         });
 });
 
+/**
+ * parse parameter in url
+ * @param needleParamName string
+ * @returns {Array}
+ */
 function getUrlParameter(needleParamName) {
     var url = decodeURIComponent(window.location.search.substring(1));
     var result =[];
