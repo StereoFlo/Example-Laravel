@@ -208,7 +208,6 @@ $(function () {
         var catId = $(this).attr('id').split('dcid_')[1];
         var catName = $(this).find('span').html();
         var $delLink = $(this);
-        var $category = $('.category');
 
         $.get($(this).attr('href'), function (response) {
             if (response.isRemoved) {
@@ -234,7 +233,8 @@ $(function () {
     /* ---------------------------------------------- */
 
     if(window.location.href.indexOf("/gallery") >= 0) {
-        getWorks([], 0);
+        var page = getUrlParameter('page').length ? getUrlParameter('page')[0] : 0;
+        getWorks(getUrlParameter('categories[]'), page);
 
         $('[id^=cid_]').click(function () {
             var catIds = getCheckCategories();
@@ -291,6 +291,7 @@ $(function () {
                 parameters.page = pageId;
             }
 
+            setUrl(parameters);
             // this is need for post query
             $.ajaxSetup({
                 headers: {
@@ -305,6 +306,14 @@ $(function () {
                     $('#galleryWorksAll').empty().append('<p>Мы не смогли загрузить список работ. Возможно возникла ошибка сети</p>');
                     console.log(data);
                 });
+        }
+
+        /**
+         * set url to address
+         * @param parameters parameters object
+         */
+        function setUrl(parameters) {
+            history.pushState({}, "", decodeURI(window.location.origin + window.location.pathname + '?' + $.param(parameters)));
         }
 
     }
@@ -375,3 +384,16 @@ $(document).on('submit', '#ajaxRegistration', function (e) {
             console.log(json.errors);
         });
 });
+
+function getUrlParameter(needleParamName) {
+    var url = decodeURIComponent(window.location.search.substring(1));
+    var result =[];
+    var allVars = url.split('&');
+    for (var i = 0; i < allVars.length; i++) {
+        var param = allVars[i].split('=');
+        if (param[0] === needleParamName) {
+            result.push(param[1]);
+        }
+    }
+    return result;
+}
