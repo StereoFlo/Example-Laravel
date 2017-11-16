@@ -29,7 +29,6 @@
                     <div class="products">
                         <div class="products__wrap">
                             @foreach($recentlyLiked as $work)
-{{--                                {{var_dump($work)}}--}}
                                 <a href="/work/{{ $work['id'] }}" class="item">
                                     <div class="content">
                                         <div class="border">
