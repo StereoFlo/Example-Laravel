@@ -13,7 +13,7 @@
                             <h4 class="allNews__name">{{ $item['name'] }}</h4>
                             <span class="allNews__date">{{ date('d.m.Y', strtotime($item['created_at'])) }}</span>
                             <hr>
-                            <p class="allNews__text">{{ $item['content'] }}</p>
+                            <p class="allNews__text">{!! $item['content'] !!}</p>
                         </div>
                     @endforeach
                 </div>
