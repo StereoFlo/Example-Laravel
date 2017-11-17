@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use RecycleArt\Models\Catalog;
 use RecycleArt\Models\CatalogRel;
+use RecycleArt\Models\Material;
 use RecycleArt\Models\Tags;
 use RecycleArt\Models\TagsRel;
 use RecycleArt\Models\User;
@@ -47,8 +48,10 @@ class WorkController extends Controller
     public function add(): View
     {
         $categories = (new Catalog())->getList();
+        $materials = (new Material())->getList();
         return view('work.form', [
             'categories' => $categories,
+            'materials' => $materials,
         ]);
     }
 
