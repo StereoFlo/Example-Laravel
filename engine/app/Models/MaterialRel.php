@@ -10,7 +10,7 @@ class MaterialRel extends Model
 {
     /**
      * @param int       $workId
-     * @param array|int $materialIds
+     * @param array $materialIds
      *
      * @return bool
      */
