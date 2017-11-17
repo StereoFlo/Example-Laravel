@@ -179,6 +179,20 @@ class WorkController extends Controller
     }
 
     /**
+     * @param int $workId
+     * @param int $materialId
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function removeMaterialFromWork(int $workId, int $materialId)
+    {
+        $res = (bool) (new MaterialRel())->removeFromWork($workId, $materialId);
+        return response()->json([
+            'isRemoved' => $res
+        ]);
+    }
+
+    /**
      * @param int $id
      *
      * @return \Illuminate\Http\JsonResponse

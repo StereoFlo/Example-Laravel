@@ -89,6 +89,10 @@ Route::middleware('auth')->group(function () {
         ->where('workId', '[0-9]+')
         ->where('tagId', '[0-9]+')
         ->name('deleteFromWork');
+    Route::get('/cabinet/work/material/remove/{workId}/{materialId}', 'WorkController@removeMaterialFromWork')
+        ->where('workId', '[0-9]+')
+        ->where('materialId', '[0-9]+')
+        ->name('removeMeterialFromWork');
     Route::get('/cabinet/work/category/remove/{workId}/{catId}', 'WorkController@removeFromCategory')
         ->where('workId', '[0-9]+')
         ->where('catId', '[0-9]+')
