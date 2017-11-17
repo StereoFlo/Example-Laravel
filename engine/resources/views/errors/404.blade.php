@@ -4,7 +4,7 @@
     <section class="error">
         <img src="{{ url('static/images/recycle_err.png') }}" alt="" class="error__pic">
         <p class="error__code">404</p>
-        <p class="error__text">Такой страницы нет, либо небыло никогда! <br> Приносим свои извинения.</p>
+        <p class="error__text">Такой страницы нет.</p>
         <p class="error__desc">Возможные причины:
             <ul>
                 <li>ошибка при наборе адреса страницы (URL);</li>
