@@ -91,10 +91,11 @@
                     <p>У этой работы нет категорий</p>
                 @else
                     @foreach ($work['categories']['inWork'] as $categories)
-                        <span>{{$categories['name']}}</span>
+                        <a href="{{ route('galleryPublicIndex') }}?categories[]={{ $categories['id'] }}">{{ $categories['name'] }}</a>
                     @endforeach
                 @endif
             </div>
+            {{--{{ var_dump($work['materials']) }}--}}
             <div  id="work__comments" class="work__comments">
 
             </div>
