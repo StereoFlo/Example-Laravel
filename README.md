@@ -40,5 +40,5 @@ MAIL_PASSWORD=b6609845739bbd
 MAIL_ENCRYPTION=null
 ```
 
-5) запустит миграции **php artisan migrate:install** && **php artisan migrate:refresh --seed**
+5) запустить миграции **php artisan migrate:install** && **php artisan migrate:refresh --seed**
 6) готово 
