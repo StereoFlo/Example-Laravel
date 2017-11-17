@@ -39,24 +39,35 @@ Route::group(['middleware' => 'isAdmin'], function () {
 
 Route::group(['middleware' => 'isModerator'], function () {
     Route::get('/manager', 'Manager\\ManagerController@index')->name('managerIndex');
+
     Route::get('/manager/slogan', 'Manager\\Slogan@index')->name('sloganIndex');
     Route::post('/manager/slogan/update', 'Manager\\Slogan@update')->name('sloganUpdate');
+
     Route::get('/manager/news', 'Manager\\News@getList')->name('newsList');
     Route::get('/manager/news/page/{id}', 'Manager\\News@getList')->where('id', '[0-9]+')->name('newsListPage');
     Route::get('/manager/news/new', 'Manager\\News@makeNew')->name('newsNew');
     Route::get('/manager/news/{id}/delete', 'Manager\\News@delete')->where('id', '[0-9]+')->name('newsDelete');
     Route::get('/manager/news/{id}/update', 'Manager\\News@update')->where('id', '[0-9]+')->name('newsUpdate');
     Route::post('/manager/news/process', 'Manager\\News@process')->name('newsProcess');
+
     Route::get('/manager/work/list', 'Manager\\Work@getList')->name('workListManager');
     Route::get('/manager/work/list/unapproved', 'Manager\\Work@getListUnapproved')->name('workListUnapprovedManager');
     Route::get('/manager/work/list/approved', 'Manager\\Work@getListApproved')->name('workListManagerApproved');
     Route::get('/manager/work/list/author/{id}', 'Manager\\Work@getListByAuthor')->where('id', '[0-9]+')->name('workListAuthorManager');
     Route::get('/manager/work/approve/{workId}', 'Manager\\Work@approve')->where('workId', '[0-9]+')->name('managerWorkApprove');
+
     Route::get('/manager/catalog/list', 'Manager\\Catalog@getList')->name('managerCatalogList');
     Route::get('/manager/catalog/add', 'Manager\\Catalog@form')->name('managerCatalogAdd');
     Route::post('/manager/catalog/process', 'Manager\\Catalog@process')->name('managerCatalogProcess');
     Route::get('/manager/catalog/{id}/edit', 'Manager\\Catalog@form')->where('id', '[0-9]+')->name('managerCatalogEdit');
     Route::get('/manager/catalog/{id}/remove', 'Manager\\Catalog@remove')->where('id', '[0-9]+')->name('managerCatalogRemove');
+
+    Route::get('/manager/material/list', 'Manager\\Material@getList')->name('managerMaterialList');
+    Route::get('/manager/material/add', 'Manager\\Material@add')->name('managerMaterialAdd');
+    Route::get('/manager/material/{id}/edit', 'Manager\\Material@edit')->where('id', '[0-9]+')->name('managerMaterialAdd');
+    Route::get('/manager/material/{id}/edit', 'Manager\\Material@edit')->where('id', '[0-9]+')->name('managerMaterialEdit');
+    Route::get('/manager/material/{id}/remove', 'Manager\\Material@remove')->where('id', '[0-9]+')->name('managerMaterialRemove');
+    Route::post('/manager/material/process', 'Manager\\Material@process')->name('managerMaterialProcess');
 });
 
 // profile change
