@@ -91,7 +91,7 @@
                     <p>У этой работы нет категорий</p>
                 @else
                     @foreach ($work['categories']['inWork'] as $categories)
-                        <span>{{$categories['name']}}</span>
+                        <a href="{{ route('galleryPublicIndex') }}?categories[]={{ $categories['id'] }}">{{ $categories['name'] }}</a>
                     @endforeach
                 @endif
             </div>
