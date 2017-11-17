@@ -227,6 +227,38 @@ $(function () {
         });
     });
 
+
+    // $('[id^=dcid_]').click(function (event) {
+    //     event.preventDefault();
+    //     var itemId = $(this).attr('id').split('dcid_')[1];
+    //     var itemName = $(this).find('span').html();
+    //     var itemPosition = $(this).className;
+    //     console.log(itemPosition);
+    //     var $delLink = $(this);
+    //
+    //     $.get($(this).attr('href'), function (response) {
+    //         if (response.isRemoved) {
+    //
+    //             $delLink.remove();
+    //
+    //             if ( itemPosition == 'materials') {
+    //                 $('#materialsNotInWork').append(
+    //                     '<input id="'+ itemId +'" type="checkbox" name="categories[]" value="'+ itemId +'">' +
+    //                     '<label for="'+ itemId +'">'+ itemName +'</label>'
+    //                 );
+    //             }else if (itemPosition == 'categories') {
+    //                 $('#categoriesNotInWork').append(
+    //                     '<input id="'+ itemId +'" type="checkbox" name="categories[]" value="'+ itemId +'">' +
+    //                     '<label for="'+ itemId +'">'+ itemName +'</label>'
+    //                 );
+    //             }
+    //
+    //         } else {
+    //             alert('panic!');
+    //         }
+    //     });
+    // });
+
     /* ---------------------------------------------- /*
      * Gallery
     /* ---------------------------------------------- */
