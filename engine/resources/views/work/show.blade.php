@@ -43,6 +43,7 @@
                     </div>
                 </div>
                 <div class="work__circles">
+                    {{ var_dump($work['materials']) }}
                     <div class="work__circle">
                         <span>Бумага</span>
                         <img src="images/icons/1.png" alt="">
@@ -95,7 +96,6 @@
                     @endforeach
                 @endif
             </div>
-            {{--{{ var_dump($work['materials']) }}--}}
             <div  id="work__comments" class="work__comments">
 
             </div>

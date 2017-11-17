@@ -55,7 +55,23 @@
                     {{--@endif--}}
                 {{--</div>--}}
 
-                {{--{{ var_dump($work['materials']) }}--}}
+                {{ var_dump($work['materials']) }}
+                @if(!empty($work['id']))
+                    <p>Материалы работы:</p>
+                    @if(empty($work['materials']['inWork']))
+                        <p>Вы не добавили свою работу не одного материала</p>
+                    @else
+                        <div class="materials">
+                            @foreach($work['materials']['inWork'] as $material)
+                                <a href="#" class="material__item">
+                                    <span class="name">{{ $material['name'] }}</span>
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            @endforeach
+                        </div>
+                    @endif
+                @endif
+
                 @if(!empty($work['id']))
                     <p>Категории работы:</p>
                     @if(empty($work['categories']['inWork']))
