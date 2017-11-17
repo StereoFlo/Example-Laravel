@@ -1,4 +1,4 @@
-<div class="col-sm-4 col-md-3 sidebar">
+<div class="col-md-3 col-sm-12 sidebar">
     <div class="mini-submenu">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>

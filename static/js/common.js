@@ -42,6 +42,11 @@ $(function () {
     $('.user__btn, .logIn__close').click(function (e) {
         e.preventDefault();
         $('.logIn .forms').empty();
+        $(document).keydown(function(e) {
+            if( e.keyCode === 27 ) {
+                $('.logIn').addClass('hidden');
+            }
+        });
 
         $.get('/login/ajax')
             .done(function (data) {
@@ -76,25 +81,19 @@ $(function () {
     /* ---------------------------------------------- */
 
     $('.slogan').hide();
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        $(".sloganShow").click(function () {
-            //todo
-        })
-    } else {
-        $(".sloganShow").hover(
-            function () {
-                $(this).siblings('.news, .slogan').stop();
-                $(this).siblings('.news').slideUp(600);
-                $(this).siblings('.slogan').slideDown(600);
-            }
-            ,
-            function () {
-                $(this).siblings(".news, .slogan").stop();
-                $(this).siblings(".news").slideDown();
-                $(this).siblings(".slogan").slideUp();
-            }
-        );
-    }
+    $(".sloganShow").hover(
+        function () {
+            $(this).siblings('.news, .slogan').stop();
+            $(this).siblings('.news').slideUp(600);
+            $(this).siblings('.slogan').slideDown(600);
+        }
+        ,
+        function () {
+            $(this).siblings(".news, .slogan").stop();
+            $(this).siblings(".news").slideDown();
+            $(this).siblings(".slogan").slideUp();
+        }
+    );
 
     /* ---------------------------------------------- /*
      * Scroll to id

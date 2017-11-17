@@ -32,9 +32,9 @@
                 <nav class="nav">
                     <a href="{{ url('index.html') }}" class="nav__link">Главная</a>
                     <a href="{{ route('galleryPublicIndex') }}" class="nav__link">Галерея</a>
-                    <a href="#" class="nav__link">О нас</a>
+                    <a href="{{ url('pages/about.html') }}" class="nav__link">О нас</a>
                     <a href="#" class="nav__link">Общалка</a>
-                    <a href="#" class="nav__link">Контакты</a>
+                    <a href="{{ url('pages/contacts.html') }}" class="nav__link">Контакты</a>
                 </nav>
                 <div class="user">
                     <a href="#" class="user__btn">
@@ -55,11 +55,11 @@
                     <a href="{{ url('index.html') }}"><img src="{{url('static/images/logo-min.png')}}" alt=""></a>
                     <span class="sm-fs-12 xs-block">&copy; 2014-2017. Все права защищены.</span>
                 </div>
-                <div class="footer__social">
-                    <a href="#"><i class="fa fa-vk" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                </div>
+                {{--<div class="footer__social">--}}
+                    {{--<a href="#"><i class="fa fa-vk" aria-hidden="true"></i></a>--}}
+                    {{--<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>--}}
+                    {{--<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>--}}
+                {{--</div>--}}
             </div>
         </div>
     </footer>

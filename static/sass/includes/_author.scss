@@ -25,14 +25,18 @@
     padding: 20px 15px;
     @include col();
     @include col-5();
-    @include col-sm-5();
-    @include col-xs-12();
+    @include col-sm-12();
   }
   &__pic {
     width: 100%;
+    height: 100%;
     max-width: 350px;
     max-height: 350px;
     border-radius: 50%;
+    @include max-screen($break_xs) {
+      max-width: 300px;
+      max-height: 300px;
+    }
   }
   &__login {
     font-family: 'lato', sans-serif;
@@ -54,8 +58,7 @@
     //box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     @include col();
     @include col-7();
-    @include col-sm-7();
-    @include col-xs-12();
+    @include col-sm-12();
   }
   dl {
     @include max-screen($break_xs) {
