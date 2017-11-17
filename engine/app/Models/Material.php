@@ -2,6 +2,8 @@
 
 namespace RecycleArt\Models;
 
+use Illuminate\Support\Facades\File;
+
 /**
  * Class Material
  * @package RecycleArt\Models
@@ -114,6 +116,10 @@ class Material extends Model
      */
     public function removeBy(int $id)
     {
-        return $this->where('id', $id)->delete();
+        $file = self::find($id);
+        if (!$this->checkEmptyObject($file)) {
+            abort(404);
+        }
+        return File::delete(public_path($file->url)) && $file->delete();
     }
 }
