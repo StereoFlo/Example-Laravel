@@ -33,6 +33,23 @@ class Material extends Model
     }
 
     /**
+     * @param int $workId
+     *
+     * @return array
+     */
+    public function getListByWork(int $workId)
+    {
+        $list = $this
+            ->join('material_rels', 'material_rels.material_id', '=', 'materials.id')
+            ->where('work_id', $workId)
+            ->get();
+        if (!$this->checkEmptyObject($list)) {
+            return [];
+        }
+        return $list;
+    }
+
+    /**
      * @param int $id
      *
      * @return array
