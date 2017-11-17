@@ -39,14 +39,23 @@ class Material extends Model
      */
     public function getListByWork(int $workId)
     {
+        $res = [];
         $list = $this
             ->join('material_rels', 'material_rels.material_id', '=', 'materials.id')
             ->where('work_id', $workId)
             ->get();
         if (!$this->checkEmptyObject($list)) {
-            return [];
+            $res['inWork'] = [];
+            $res['notInWork'] = $this->getList();
         }
-        return $list;
+        $tmpCats = [];
+        foreach ($list->toArray() as $material) {
+            $tmpCats[] = $material['id'];
+        }
+        $materialNotInWork = $this->whereNotIn('id', $tmpCats)->get();
+        $res['inWork'] = $list->toArray();
+        $res['notInWork'] = !$this->checkEmptyObject($materialNotInWork) ? [] : $materialNotInWork->toArray();
+        return $res;
     }
 
     /**
