@@ -55,6 +55,7 @@
                     {{--@endif--}}
                 {{--</div>--}}
 
+                {{--{{ var_dump($work['materials']) }}--}}
                 @if(!empty($work['id']))
                     <p>Категории работы:</p>
                     @if(empty($work['categories']['inWork']))

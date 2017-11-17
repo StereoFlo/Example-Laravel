@@ -95,6 +95,7 @@
                     @endforeach
                 @endif
             </div>
+            {{--{{ var_dump($work['materials']) }}--}}
             <div  id="work__comments" class="work__comments">
 
             </div>
