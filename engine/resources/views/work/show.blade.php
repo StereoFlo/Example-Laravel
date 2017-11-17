@@ -43,35 +43,14 @@
                     </div>
                 </div>
                 <div class="work__circles">
-                    {{ var_dump($work['materials']) }}
-                    <div class="work__circle">
-                        <span>Бумага</span>
-                        <img src="images/icons/1.png" alt="">
-                    </div>
-                    <div class="work__circle">
-                        <span>Бумага</span>
-                        <img src="images/icons/2.png" alt="">
-                    </div>
-                    <div class="work__circle">
-                        <span>Бумага</span>
-                        <img src="images/icons/3.png" alt="">
-                    </div>
-                    <div class="work__circle">
-                        <span>Бумага</span>
-                        <img src="images/icons/4.png" alt="">
-                    </div>
-                    <div class="work__circle">
-                        <span>Бумага</span>
-                        <img src="images/icons/6.png" alt="">
-                    </div>
-                    <div class="work__circle">
-                        <span>Бумага</span>
-                        <img src="images/icons/7.png" alt="">
-                    </div>
-                    <div class="work__circle">
-                        <span>Бумага</span>
-                        <img src="images/icons/4.png" alt="">
-                    </div>
+                    @if(!empty($work['materials']['inWork']))
+                        @foreach($work['materials']['inWork'] as $material)
+                            <div class="work__circle">
+                                <span>{{ $material['name'] }}</span>
+                                <img src="{{ url($material['url']) }}" alt="">
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
 
                 {{--<button class="work__buyBtn button">Заказать</button>--}}
