@@ -63,7 +63,7 @@
                     @else
                         <div class="materials">
                             @foreach($work['materials']['inWork'] as $material)
-                                <a href="#" class="materials__item">
+                                <a href="{{ route('removeMaterialFromWork', ['workId' => $work['id'], 'materialId' => $material['material_id']]) }}" class="materials__item">
                                     <span class="name">{{ $material['name'] }}</span>
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </a>
