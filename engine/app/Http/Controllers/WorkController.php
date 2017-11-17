@@ -10,6 +10,7 @@ use Illuminate\View\View;
 use RecycleArt\Models\Catalog;
 use RecycleArt\Models\CatalogRel;
 use RecycleArt\Models\Material;
+use RecycleArt\Models\MaterialRel;
 use RecycleArt\Models\Tags;
 use RecycleArt\Models\TagsRel;
 use RecycleArt\Models\User;
@@ -78,6 +79,9 @@ class WorkController extends Controller
         }
         if (!empty($request->post('categories'))) {
             (new CatalogRel())->addToCategory($request->post('categories'), $workId);
+        }
+        if (!empty($request->post('materials'))) {
+            (new MaterialRel())->addToWork($workId, $request->post('materials'));
         }
         $request->session()->flash('addWorkResult', __('work.addProcessSuccess'));
         return Redirect::to(route('workShow', ['id' => $workId]));
