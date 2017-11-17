@@ -165,7 +165,7 @@ $(function () {
      * Slider
     /* ---------------------------------------------- */
 
-    $('.galleryCategory__title a').click(function (e) {
+    $('.galleryCategory__title a').click(function () {
         event.preventDefault();
         $('.galleryCategory').toggleClass('galleryCategory_opened');
     });
@@ -292,6 +292,8 @@ $(function () {
             }
 
             setUrl(parameters);
+            setCheckboxes(parameters);
+
             // this is need for post query
             $.ajaxSetup({
                 headers: {
@@ -314,6 +316,18 @@ $(function () {
          */
         function setUrl(parameters) {
             history.pushState({}, "", decodeURI(window.location.origin + window.location.pathname + '?' + $.param(parameters)));
+        }
+
+        /**
+         * set checkboxes
+         * @param parameters
+         */
+        function setCheckboxes(parameters) {
+           if (parameters.categories && parameters.categories.length > 0) {
+               for (var cat of parameters.categories) {
+                   $('#cid_' + cat).prop('checked', true);
+               }
+           }
         }
 
     }

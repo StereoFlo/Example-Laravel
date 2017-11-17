@@ -105,6 +105,7 @@ class Work extends Model
         $work['images'] = WorkImages::getbyWorkId($workId);
         $work['tags'] = (new TagsRel())->getByWork($workId);
         $work['categories'] = (new Catalog())->getByWorkId($workId);
+        $work['materials'] = (new Material())->getListByWork($workId);
         return $work;
     }
 
