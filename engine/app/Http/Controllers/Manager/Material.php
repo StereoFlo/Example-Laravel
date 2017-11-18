@@ -21,11 +21,13 @@ class Material extends ManagerController
     }
 
     /**
+     * @param MaterialModel $material
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getList()
+    public function getList(MaterialModel $material)
     {
-        $list = (new MaterialModel())->getList();
+        $list = $material->getList();
 
         return view('manager.material.list', ['list' => $list]);
     }
@@ -38,15 +40,15 @@ class Material extends ManagerController
         return view('manager.material.form');
     }
 
-    public function edit(int $id)
+    public function edit(MaterialModel $material, int $id)
     {
-        $material = (new MaterialModel())->getBy($id);
+        $material = $material->getBy($id);
         return view('manager.material.form', ['material' => $material]);
     }
 
-    public function remove(int $id)
+    public function remove(MaterialModel $material, int $id)
     {
-        (new MaterialModel())->removeBy($id);
+        $material->removeBy($id);
         return Redirect::to(route('managerMaterialList'));
     }
 
@@ -55,7 +57,7 @@ class Material extends ManagerController
      *
      * @return mixed
      */
-    public function process(Request $request)
+    public function process(Request $request, MaterialModel $material)
     {
         $id          = $request->post('id', false);
         $name        = $request->post('name', false);
@@ -70,7 +72,7 @@ class Material extends ManagerController
         $file->move($path, $newImageName);
         $url = $url . $newImageName;
 
-        (new MaterialModel())->makeNew($id, $name, $url, $description);
+        $material->makeNew($id, $name, $url, $description);
         return Redirect::to(route('managerMaterialList'));
     }
 }

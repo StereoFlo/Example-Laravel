@@ -24,17 +24,19 @@ class User extends ManagerController
     }
 
     /**
+     * @param UserModel $user
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getList()
+    public function getList(UserModel $user)
     {
-        $users = UserModel::getAll();
+        $users = $user->getAll();
         return view('manager.user.list', ['users' => $users]);
     }
 
-    public function show(int $userId)
+    public function show(Role $role, Work $work, UserModel $user, int $userId)
     {
-        $user = UserModel::find($userId);
+        $user = $user->find($userId);
         if (empty($user)) {
             abort(404, 'User not found');
             return []; // stub
@@ -44,20 +46,21 @@ class User extends ManagerController
         foreach ($userRoles as $userRole) {
             $rolesIds[] = $userRole['id'];
         }
-        $roles = Role::whereNotIn('id', $rolesIds)->get()->toArray();
-        $works = Work::getInstance()->getListByUserId($user->id);
+        $roles = $role->whereNotIn('id', $rolesIds)->get()->toArray();
+        $works = $work->getListByUserId($user->id);
         return view('manager.user.show', ['user' => $user->toArray(), 'userRoles' => $userRoles, 'roles'=> $roles, 'works' => $works]);
     }
 
     /**
-     * @param int $userId
-     * @param int $roleId
+     * @param RoleUser $roleUser
+     * @param int      $userId
+     * @param int      $roleId
      *
      * @return int
      */
-    public function addRole(int $userId, int $roleId)
+    public function addRole(RoleUser $roleUser, int $userId, int $roleId)
     {
-        RoleUser::getInstance()->enableRole($userId, $roleId);
+        $roleUser->enableRole($userId, $roleId);
         return Redirect::to(route('managerUserShow', ['userId' =>$userId]));
     }
 
@@ -67,9 +70,9 @@ class User extends ManagerController
      *
      * @return int
      */
-    public function removeRole(int $userId, int $roleId)
+    public function removeRole(RoleUser $roleUser, int $userId, int $roleId)
     {
-        RoleUser::getInstance()->disableRole($userId, $roleId);
+        $roleUser->disableRole($userId, $roleId);
         return Redirect::to(route('managerUserShow', ['userId' =>$userId]));
     }
 }

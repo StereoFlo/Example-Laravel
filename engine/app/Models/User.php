@@ -248,9 +248,9 @@ class User extends Authenticatable
     }
 
     /**
-     * @return array
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public static function getAll()
+    public function getAll()
     {
         return self::All();
     }

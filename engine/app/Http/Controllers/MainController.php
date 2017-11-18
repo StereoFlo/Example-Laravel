@@ -32,12 +32,16 @@ class MainController extends Controller
 
     /**
      * MainController constructor.
+     *
+     * @param Slogan $slogan
+     * @param News   $news
+     * @param Work   $work
      */
-    public function __construct()
+    public function __construct(Slogan $slogan, News $news, Work $work)
     {
-        $this->slogan = new Slogan();
-        $this->news = new News();
-        $this->work = new Work();
+        $this->slogan = $slogan;
+        $this->news = $news;
+        $this->work = $work;
     }
 
     /**

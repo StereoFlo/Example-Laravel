@@ -12,13 +12,14 @@ use RecycleArt\Models\StaticPage;
 class StaticPageController extends Controller
 {
     /**
-     * @param string $id
+     * @param StaticPage $staticPage
+     * @param string     $id
      *
      * @return array
      */
-    public function getPage(string $id)
+    public function getPage(StaticPage $staticPage, string $id)
     {
-        $page = (new StaticPage())->getBy($id);
+        $page = $staticPage->getBy($id);
         if (empty($page)) {
             abort(404, 'Static page not found');
         }
