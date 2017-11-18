@@ -14,14 +14,6 @@ class Author extends Model
     private $user;
 
     /**
-     * @return Author
-     */
-    public static function getInstance(): self
-    {
-        return new self();
-    }
-
-    /**
      * Author constructor.
      */
     public function __construct()

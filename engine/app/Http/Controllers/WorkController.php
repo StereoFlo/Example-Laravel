@@ -82,7 +82,7 @@ class WorkController extends Controller
             'userId'      => Auth::id(),
         ]);
         if (!empty($request->file('images'))) {
-            $workImages->addImamges($request->file('images'), $workId);
+            $workImages->addImages($request->file('images'), $workId);
         }
         if (!empty($request->post('tags'))) {
             $tags->addTagsToWork($request->post('tags'), $workId);
