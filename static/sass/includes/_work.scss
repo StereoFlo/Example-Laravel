@@ -14,7 +14,7 @@
   }
   &__item {
     @include row-flex();
-    margin-bottom: 30px;
+    margin-bottom: 45px;
   }
   &__slider {
     @include col();
@@ -45,7 +45,7 @@
   &__toolbar {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     margin-bottom: 20px;
   }
   &__likes {

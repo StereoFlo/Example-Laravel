@@ -227,36 +227,65 @@ $(function () {
     //     });
     // });
 
-    $('[id^=dcid_]').click(function (event) {
-        event.preventDefault();
-        var itemId = $(this).attr('id').split('dcid_')[1];
-        var itemName = $(this).find('span').html();
-        var itemPosition = $(this).attr('class').split('__')[0];
-        var $delLink = $(this);
+    function testDel(item) {
+        $(item).click(function(e) {
+            e.preventDefault();
 
-        $.get($(this).attr('href'), function (response) {
-            if (response.isRemoved) {
+            var itemId = $(this).attr('id').split('_')[1];
+            var itemName = $(this).find('span').html();
+            var $position = $(this).parent().siblings('.notInWork').find('.inputGroup');
+            var $message = $(this).parent().siblings('.notInWork').find('.empty');
+            var $delLink = $(this);
 
-                $delLink.remove();
+            $.get($(this).attr('href'), function (response) {
+                if (response.isRemoved) {
+                    $delLink.remove();
+                    $message.remove();
 
-                if ( itemPosition == 'materials') {
-                    $('#materialsNotInWork').append(
+                    $position.append(
                         '<input id="'+ itemId +'" type="checkbox" name="materials[]" value="'+ itemId +'">' +
                         '<label for="'+ itemId +'">'+ itemName +'</label>'
                     );
-                }
-                else if (itemPosition == 'category') {
-                    $('#categoriesNotInWork').append(
-                        '<input id="'+ itemId +'" type="checkbox" name="categories[]" value="'+ itemId +'">' +
-                        '<label for="'+ itemId +'">'+ itemName +'</label>'
-                    );
-                }
 
-            } else {
-                alert('panic!');
-            }
+                } else {
+                    alert('panic!');
+                }
+            });
         });
-    });
+    }
+    testDel('[id^=dcid_]');
+    testDel('[id^=dmid_]');
+
+    // $('[id^=dcid_]').click(function (event) {
+    //     event.preventDefault();
+    //     var itemId = $(this).attr('id').split('dcid_')[1];
+    //     var itemName = $(this).find('span').html();
+    //     var itemPosition = $(this).attr('class').split('__')[0];
+    //     var $delLink = $(this);
+    //
+    //     $.get($(this).attr('href'), function (response) {
+    //         if (response.isRemoved) {
+    //
+    //             $delLink.remove();
+    //
+    //             if ( itemPosition == 'materials') {
+    //                 $('#materialsNotInWork').append(
+    //                     '<input id="'+ itemId +'" type="checkbox" name="materials[]" value="'+ itemId +'">' +
+    //                     '<label for="'+ itemId +'">'+ itemName +'</label>'
+    //                 );
+    //             }
+    //             else if (itemPosition == 'category') {
+    //                 $('#categoriesNotInWork').append(
+    //                     '<input id="'+ itemId +'" type="checkbox" name="categories[]" value="'+ itemId +'">' +
+    //                     '<label for="'+ itemId +'">'+ itemName +'</label>'
+    //                 );
+    //             }
+    //
+    //         } else {
+    //             alert('panic!');
+    //         }
+    //     });
+    // });
 
     /* ---------------------------------------------- /*
      * Gallery

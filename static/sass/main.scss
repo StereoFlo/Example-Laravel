@@ -189,9 +189,21 @@ section {
     }
   }
   .tag, .category, .materials {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 -5px 10px;
+    .inWork, .notInWork .inputGroup {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 -5px 10px;
+    }
+
+    p, span {
+      margin-bottom: 15px;
+    }
+    span {
+      font-size: 0.9em;
+      color: $border;
+      display: inline-block;
+      margin: 5px;
+    }
     &__item {
       background: $white;
       border: 1px solid $border;
@@ -201,6 +213,9 @@ section {
       color: $black;
       text-decoration: none;
       transition: all 0.2s ease-in-out;
+      .name {
+        color: $black;
+      }
       &:hover {
         border-color: $red;
         box-shadow: 2px 3px 6px rgba(0,0,0,0.16), 2px 3px 6px rgba(0,0,0,0.23);
@@ -322,7 +337,7 @@ section {
       padding-left: 40px;
       display: inline-block;
       height: 24px;
-      margin: 5px 0;
+      margin: 5px;
       user-select: none;
       width: 220px;
       white-space: nowrap;
