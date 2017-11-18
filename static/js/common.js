@@ -256,37 +256,6 @@ $(function () {
     testDel('[id^=dcid_]');
     testDel('[id^=dmid_]');
 
-    // $('[id^=dcid_]').click(function (event) {
-    //     event.preventDefault();
-    //     var itemId = $(this).attr('id').split('dcid_')[1];
-    //     var itemName = $(this).find('span').html();
-    //     var itemPosition = $(this).attr('class').split('__')[0];
-    //     var $delLink = $(this);
-    //
-    //     $.get($(this).attr('href'), function (response) {
-    //         if (response.isRemoved) {
-    //
-    //             $delLink.remove();
-    //
-    //             if ( itemPosition == 'materials') {
-    //                 $('#materialsNotInWork').append(
-    //                     '<input id="'+ itemId +'" type="checkbox" name="materials[]" value="'+ itemId +'">' +
-    //                     '<label for="'+ itemId +'">'+ itemName +'</label>'
-    //                 );
-    //             }
-    //             else if (itemPosition == 'category') {
-    //                 $('#categoriesNotInWork').append(
-    //                     '<input id="'+ itemId +'" type="checkbox" name="categories[]" value="'+ itemId +'">' +
-    //                     '<label for="'+ itemId +'">'+ itemName +'</label>'
-    //                 );
-    //             }
-    //
-    //         } else {
-    //             alert('panic!');
-    //         }
-    //     });
-    // });
-
     /* ---------------------------------------------- /*
      * Gallery
     /* ---------------------------------------------- */
@@ -407,9 +376,12 @@ $(document).on('submit', '#ajaxLogin', function (e) {
             if (data.auth === true) {
                 $.get('/login/ajax')
                     .done(function (data) {
-                        $('.logIn').addClass('hidden');
                         $(this).empty();
-                        $(this).append(data);
+                        window.location.href = '/cabinet';
+                        // $('.logIn').addClass('hidden');
+                        // $(this).append(data);
+
+
                     })
                     .fail(function (data) {
                     });
@@ -430,9 +402,10 @@ $(document).on('submit', '#ajaxRegistration', function (e) {
             if (data.auth === true) {
                 $.get('/login/ajax')
                     .done(function (data) {
-                        $('.logIn').addClass('hidden');
+                        window.location.href = '/cabinet';
                         $(this).empty();
-                        $(this).append(data);
+                        // $('.logIn').addClass('hidden');
+                        // $(this).append(data);
                     })
                     .fail(function (data) {
                         //todo
