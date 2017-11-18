@@ -55,7 +55,7 @@
                     {{--@endif--}}
                 {{--</div>--}}
 
-{{--                {{ var_dump($work['materials']) }}--}}
+                {{ var_dump($work['materials']) }}
                 @if(!empty($work['id']))
                     <p>Материалы работы:</p>
                     @if(empty($work['materials']['inWork']))
@@ -63,7 +63,7 @@
                     @else
                         <div class="materials">
                             @foreach($work['materials']['inWork'] as $material)
-                                <a href="{{ route('removeMaterialFromWork', ['workId' => $work['id'], 'materialId' => $material['material_id']]) }}" class="materials__item">
+                                <a href="{{ route('removeMaterialFromWork', ['workId' => $work['id'], 'materialId' => $material['material_id']]) }}" id="dcid_{{$material['material_id']}} " class="materials__item">
                                     <span class="name">{{ $material['name'] }}</span>
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </a>
@@ -73,6 +73,7 @@
                     @if(empty($work['materials']['notInWork']))
                         <p>Все возможные материалы добавлены в работу</p>
                     @else
+                        <p>Все материалы:</p>
                         <div id="materialsNotInWork" class="inputGroup checkboxes">
                             @foreach($work['materials']['notInWork'] as $material)
                                 <input id="{{ $material['id'] }}" type="checkbox" name="materials[]" value="{{ $material['id'] }}">
@@ -82,6 +83,7 @@
                     @endif
                     <input type="hidden" name="workId" value="{{ $work['id'] }}">
                 @else
+                    <p>Материалы:</p>
                     <div class="inputGroup checkboxes">
                         @foreach($materials as $material)
                             <input id="{{ $material['id'] }}" type="checkbox" name="materials[]" value="{{ $material['id'] }}">
@@ -117,6 +119,7 @@
                     @endif
                     <input type="hidden" name="workId" value="{{ $work['id'] }}">
                 @else
+                    <p>Категории:</p>
                     <div class="inputGroup checkboxes">
                         @foreach($categories as $category)
                             <input id="{{ $category['id'] }}" type="checkbox" name="categories[]" value="{{ $category['id'] }}">

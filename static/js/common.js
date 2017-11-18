@@ -202,61 +202,61 @@ $(function () {
      * Categories
     /* ---------------------------------------------- */
 
-    $('[id^=dcid_]').click(function (event) {
-        event.preventDefault();
-        var catId = $(this).attr('id').split('dcid_')[1];
-        var catName = $(this).find('span').html();
-        var $delLink = $(this);
-
-        $.get($(this).attr('href'), function (response) {
-            if (response.isRemoved) {
-
-                $delLink.remove();
-                // if($category.length == 0) {
-                //     $(this).append('<p>Вы не добавили свою работу не в одну категорию</p>');
-                // }
-
-                $('#notInWork').append(
-                    '<input id="'+ catId +'" type="checkbox" name="categories[]" value="'+ catId +'">' +
-                    '<label for="'+ catId +'">'+ catName +'</label>'
-                );
-
-            } else {
-                alert('panic!')
-            }
-        });
-    });
-
     // $('[id^=dcid_]').click(function (event) {
     //     event.preventDefault();
-    //     var itemId = $(this).attr('id').split('dcid_')[1];
-    //     var itemName = $(this).find('span').html();
-    //     var itemPosition = $(this).className;
-    //     console.log(itemPosition);
+    //     var catId = $(this).attr('id').split('dcid_')[1];
+    //     var catName = $(this).find('span').html();
     //     var $delLink = $(this);
     //
     //     $.get($(this).attr('href'), function (response) {
     //         if (response.isRemoved) {
     //
     //             $delLink.remove();
+    //             // if($category.length == 0) {
+    //             //     $(this).append('<p>Вы не добавили свою работу не в одну категорию</p>');
+    //             // }
     //
-    //             if ( itemPosition == 'materials') {
-    //                 $('#materialsNotInWork').append(
-    //                     '<input id="'+ itemId +'" type="checkbox" name="categories[]" value="'+ itemId +'">' +
-    //                     '<label for="'+ itemId +'">'+ itemName +'</label>'
-    //                 );
-    //             }else if (itemPosition == 'categories') {
-    //                 $('#categoriesNotInWork').append(
-    //                     '<input id="'+ itemId +'" type="checkbox" name="categories[]" value="'+ itemId +'">' +
-    //                     '<label for="'+ itemId +'">'+ itemName +'</label>'
-    //                 );
-    //             }
+    //             $('#notInWork').append(
+    //                 '<input id="'+ catId +'" type="checkbox" name="categories[]" value="'+ catId +'">' +
+    //                 '<label for="'+ catId +'">'+ catName +'</label>'
+    //             );
     //
     //         } else {
-    //             alert('panic!');
+    //             alert('panic!')
     //         }
     //     });
     // });
+
+    $('[id^=dcid_]').click(function (event) {
+        event.preventDefault();
+        var itemId = $(this).attr('id').split('dcid_')[1];
+        var itemName = $(this).find('span').html();
+        var itemPosition = $(this).attr('class').split('__')[0];
+        var $delLink = $(this);
+
+        $.get($(this).attr('href'), function (response) {
+            if (response.isRemoved) {
+
+                $delLink.remove();
+
+                if ( itemPosition == 'materials') {
+                    $('#materialsNotInWork').append(
+                        '<input id="'+ itemId +'" type="checkbox" name="materials[]" value="'+ itemId +'">' +
+                        '<label for="'+ itemId +'">'+ itemName +'</label>'
+                    );
+                }
+                else if (itemPosition == 'category') {
+                    $('#categoriesNotInWork').append(
+                        '<input id="'+ itemId +'" type="checkbox" name="categories[]" value="'+ itemId +'">' +
+                        '<label for="'+ itemId +'">'+ itemName +'</label>'
+                    );
+                }
+
+            } else {
+                alert('panic!');
+            }
+        });
+    });
 
     /* ---------------------------------------------- /*
      * Gallery
