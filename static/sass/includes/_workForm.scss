@@ -1,0 +1,97 @@
+.workAdd {
+  background: #f3f1f1;
+  width: 100%;
+  height: 100%;
+}
+
+.workAddForm {
+  max-width: 800px;
+  margin: 0 auto;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  .inputGroup {
+    input {
+      height: 35px;
+    }
+  }
+  .tag, .category, .materials {
+    margin-bottom: 15px;
+    .inWork, .notInWork .inputGroup {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 -5px 10px;
+    }
+    p, span {
+      margin-bottom: 10px;
+    }
+    span {
+      font-size: 0.9em;
+      color: $border;
+      display: inline-block;
+      margin: 5px 0;
+    }
+    &__item {
+      background: $white;
+      border: 1px solid $border;
+      border-radius: 2px;
+      padding: 3px 6px;
+      margin: 0 5px 10px;
+      color: $black;
+      text-decoration: none;
+      transition: all 0.2s ease-in-out;
+      .name {
+        color: $black;
+      }
+      &:hover {
+        border-color: $red;
+        box-shadow: 2px 3px 6px rgba(0,0,0,0.16), 2px 3px 6px rgba(0,0,0,0.23);
+      }
+      &:hover .fa {
+        color: $red;
+      }
+      .fa {
+        margin-left: 3px;
+        color: $gray;
+        transition: all 0.2s ease-in-out;
+      }
+    }
+  }
+  button {
+    font-size: 1.2em;
+    display: block;
+    margin: 30px auto ;
+    background: #4a5281;
+    &:hover {
+      background: darken(#4a5281, 15%);
+    }
+  }
+}
+
+.category .checkboxes, .materials .checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  input[type="checkbox"] {
+    display: none;
+    + label {
+      font-size: 1em;
+      color: $black;
+      line-height: 24px;
+      cursor: pointer;
+      background: url("../images/cb.png") 0 0 no-repeat;
+      padding-left: 40px;
+      display: inline-block;
+      height: 24px;
+      margin: 5px;
+      user-select: none;
+      width: 220px;
+      min-width: 200px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    &:checked + label {
+      background-position: 0 -24px;
+    }
+  }
+}

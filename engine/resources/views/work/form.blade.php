@@ -71,11 +71,11 @@
                             @endif
                         </div>
                         <div class="notInWork">
+                            <p>Все материалы:</p>
                             @if(empty($work['materials']['notInWork']))
                                 <span class="empty">Все возможные материалы добавлены в работу</span>
                                 <div class="inputGroup checkboxes"></div>
                             @else
-                                <p>Все материалы:</p>
                                 <div class="inputGroup checkboxes">
                                     @foreach($work['materials']['notInWork'] as $material)
                                         <input id="{{ $material['id'] }}" type="checkbox" name="materials[]" value="{{ $material['id'] }}">
@@ -114,7 +114,8 @@
                         <div class="notInWork">
                             <p>Все категории:</p>
                             @if(empty($work['categories']['notInWork']))
-                                <p>Ваша работа сейчас во всех возможных категориях</p>
+                                <span class="empty">Ваша работа сейчас во всех возможных категориях</span>
+                                <div class="inputGroup checkboxes"></div>
                             @else
                                 <div class="inputGroup checkboxes">
                                     @foreach($work['categories']['notInWork'] as $category)
