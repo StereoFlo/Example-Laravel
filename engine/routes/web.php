@@ -40,7 +40,7 @@ Route::group(['middleware' => 'isAdmin'], function () {
 Route::group(['middleware' => 'isModerator'], function () {
     Route::get('/manager', 'Manager\\ManagerController@index')->name('managerIndex');
 
-    Route::get('/manager/slogan', 'Manager\\Slogan@index')->name('sloganIndex');
+    Route::get('/manager/slogan', 'Manager\\Slogan@form')->name('sloganForm');
     Route::post('/manager/slogan/update', 'Manager\\Slogan@update')->name('sloganUpdate');
 
     Route::get('/manager/news', 'Manager\\News@getList')->name('newsList');
@@ -89,6 +89,10 @@ Route::middleware('auth')->group(function () {
         ->where('workId', '[0-9]+')
         ->where('tagId', '[0-9]+')
         ->name('deleteFromWork');
+    Route::get('/cabinet/work/material/remove/{workId}/{materialId}', 'WorkController@removeMaterialFromWork')
+        ->where('workId', '[0-9]+')
+        ->where('materialId', '[0-9]+')
+        ->name('removeMaterialFromWork');
     Route::get('/cabinet/work/category/remove/{workId}/{catId}', 'WorkController@removeFromCategory')
         ->where('workId', '[0-9]+')
         ->where('catId', '[0-9]+')

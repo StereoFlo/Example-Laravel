@@ -42,6 +42,11 @@ $(function () {
     $('.user__btn, .logIn__close').click(function (e) {
         e.preventDefault();
         $('.logIn .forms').empty();
+        $(document).keydown(function(e) {
+            if( e.keyCode === 27 ) {
+                $('.logIn').addClass('hidden');
+            }
+        });
 
         $.get('/login/ajax')
             .done(function (data) {
@@ -76,25 +81,19 @@ $(function () {
     /* ---------------------------------------------- */
 
     $('.slogan').hide();
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        $(".sloganShow").click(function () {
-            //todo
-        })
-    } else {
-        $(".sloganShow").hover(
-            function () {
-                $(this).siblings('.news, .slogan').stop();
-                $(this).siblings('.news').slideUp(600);
-                $(this).siblings('.slogan').slideDown(600);
-            }
-            ,
-            function () {
-                $(this).siblings(".news, .slogan").stop();
-                $(this).siblings(".news").slideDown();
-                $(this).siblings(".slogan").slideUp();
-            }
-        );
-    }
+    $(".sloganShow").hover(
+        function () {
+            $(this).siblings('.news, .slogan').stop();
+            $(this).siblings('.news').slideUp(600);
+            $(this).siblings('.slogan').slideDown(600);
+        }
+        ,
+        function () {
+            $(this).siblings(".news, .slogan").stop();
+            $(this).siblings(".news").slideDown();
+            $(this).siblings(".slogan").slideUp();
+        }
+    );
 
     /* ---------------------------------------------- /*
      * Scroll to id
@@ -203,27 +202,58 @@ $(function () {
      * Categories
     /* ---------------------------------------------- */
 
+    // $('[id^=dcid_]').click(function (event) {
+    //     event.preventDefault();
+    //     var catId = $(this).attr('id').split('dcid_')[1];
+    //     var catName = $(this).find('span').html();
+    //     var $delLink = $(this);
+    //
+    //     $.get($(this).attr('href'), function (response) {
+    //         if (response.isRemoved) {
+    //
+    //             $delLink.remove();
+    //             // if($category.length == 0) {
+    //             //     $(this).append('<p>Вы не добавили свою работу не в одну категорию</p>');
+    //             // }
+    //
+    //             $('#notInWork').append(
+    //                 '<input id="'+ catId +'" type="checkbox" name="categories[]" value="'+ catId +'">' +
+    //                 '<label for="'+ catId +'">'+ catName +'</label>'
+    //             );
+    //
+    //         } else {
+    //             alert('panic!')
+    //         }
+    //     });
+    // });
+
     $('[id^=dcid_]').click(function (event) {
         event.preventDefault();
-        var catId = $(this).attr('id').split('dcid_')[1];
-        var catName = $(this).find('span').html();
+        var itemId = $(this).attr('id').split('dcid_')[1];
+        var itemName = $(this).find('span').html();
+        var itemPosition = $(this).attr('class').split('__')[0];
         var $delLink = $(this);
 
         $.get($(this).attr('href'), function (response) {
             if (response.isRemoved) {
 
                 $delLink.remove();
-                // if($category.length == 0) {
-                //     $(this).append('<p>Вы не добавили свою работу не в одну категорию</p>');
-                // }
 
-                $('#notInWork').append(
-                    '<input id="'+ catId +'" type="checkbox" name="categories[]" value="'+ catId +'">' +
-                    '<label for="'+ catId +'">'+ catName +'</label>'
-                );
+                if ( itemPosition == 'materials') {
+                    $('#materialsNotInWork').append(
+                        '<input id="'+ itemId +'" type="checkbox" name="materials[]" value="'+ itemId +'">' +
+                        '<label for="'+ itemId +'">'+ itemName +'</label>'
+                    );
+                }
+                else if (itemPosition == 'category') {
+                    $('#categoriesNotInWork').append(
+                        '<input id="'+ itemId +'" type="checkbox" name="categories[]" value="'+ itemId +'">' +
+                        '<label for="'+ itemId +'">'+ itemName +'</label>'
+                    );
+                }
 
             } else {
-                alert('panic!')
+                alert('panic!');
             }
         });
     });

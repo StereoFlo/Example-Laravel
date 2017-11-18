@@ -82,7 +82,7 @@ class WorkImages extends Model
      *
      * @return bool
      */
-    public function addImamges(array $files, $workId): bool
+    public function addImages(array $files, $workId): bool
     {
         $isSaved = false;
         if (empty(Auth::id())) {

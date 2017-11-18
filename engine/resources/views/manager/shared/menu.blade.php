@@ -1,4 +1,4 @@
-<div class="col-sm-4 col-md-3 sidebar">
+<div class="col-md-3 col-sm-12 sidebar">
     <div class="mini-submenu">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -14,7 +14,7 @@
         <a href="{{ route('managerUserList') }}" class="list-group-item">
             <i class="fa fa-comment-o"></i> Пользователи <span class="badge">{{ $userCount }}</span>
         </a>
-        <a href="{{ route('sloganIndex') }}" class="list-group-item">
+        <a href="{{ route('sloganForm') }}" class="list-group-item">
             <i class="fa fa-comment-o"></i> Слоган
         </a>
         <a href="{{ route('managerMaterialList') }}" class="list-group-item">

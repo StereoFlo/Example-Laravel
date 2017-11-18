@@ -52,7 +52,7 @@ class Material extends Model
         }
         $tmpCats = [];
         foreach ($list->toArray() as $material) {
-            $tmpCats[] = $material['id'];
+            $tmpCats[] = $material['material_id'];
         }
         $materialNotInWork = $this->whereNotIn('id', $tmpCats)->get();
         $res['inWork'] = $list->toArray();

@@ -17,10 +17,12 @@ class TagController extends Controller
 
     /**
      * TagController constructor.
+     *
+     * @param TagsRel $tagsRel
      */
-    public function __construct()
+    public function __construct(TagsRel $tagsRel)
     {
-        $this->tagRelModel = new TagsRel();
+        $this->tagRelModel = $tagsRel;
     }
 
     /**

@@ -19,10 +19,12 @@ class NewsController extends Controller
 
     /**
      * NewsController constructor.
+     *
+     * @param News $news
      */
-    public function __construct()
+    public function __construct(News $news)
     {
-        $this->newsModel = new News();
+        $this->newsModel = $news;
     }
 
     /**

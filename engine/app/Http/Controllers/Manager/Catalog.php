@@ -13,32 +13,35 @@ use RecycleArt\Models\Catalog as CatalogModel;
 class Catalog extends ManagerController
 {
     /**
+     * @param CatalogModel $catalog
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getList()
+    public function getList(CatalogModel $catalog)
     {
-        $list = CatalogModel::getInstance()->getList();
+        $list = $catalog->getList();
         return view('manager.catalog.list', ['categories' => $list]);
     }
 
     /**
-     * @param int $id
+     * @param CatalogModel $catalog
+     * @param int          $id
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function form(int $id = 0)
+    public function form(CatalogModel $catalog, int $id = 0)
     {
         if (empty($id)) {
             return \view('manager.catalog.form');
         }
-        $category = CatalogModel::getInstance()->getById($id);
+        $category = $catalog->getById($id);
         if (empty($category)) {
             abort(404, 'category has not found');
         }
         return \view('manager.catalog.form', ['category' => $category]);
     }
 
-    public function process(Request $request)
+    public function process(CatalogModel $catalog, Request $request)
     {
         $this->validate($request, [
             'name'        => 'required|string',
@@ -50,10 +53,10 @@ class Catalog extends ManagerController
         $description = $request->post('description');
 
         if (empty($id)) {
-            CatalogModel::getInstance()->addCategory($name, $description);
+            $catalog->addCategory($name, $description);
             return Redirect::to(route('managerCatalogList'));
         }
-        CatalogModel::getInstance()->updateCategory($id, [
+        $catalog->updateCategory($id, [
             'name' => $name,
             'description' => $description
         ]);
@@ -61,13 +64,14 @@ class Catalog extends ManagerController
     }
 
     /**
-     * @param int $id
+     * @param CatalogModel $catalog
+     * @param int          $id
      *
      * @return mixed
      */
-    public function remove(int $id)
+    public function remove(CatalogModel $catalog, int $id)
     {
-        CatalogModel::getInstance()->removeCategory($id);
+        $catalog->removeCategory($id);
         return Redirect::to(route('managerCatalogList'));
     }
 }

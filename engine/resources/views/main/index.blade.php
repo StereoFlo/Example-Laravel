@@ -5,7 +5,11 @@
         <div class="filter"></div>
         <div class="container">
             <div class="flex">
-                <img src="{{ url('static/images/logo.png') }}" alt="Logo" class="sloganShow">
+                <a href="{{url('pages/style.html')}}" class="sloganShow">
+                    <img src="{{ url('static/images/logo.png') }}" alt="Logo" class="">
+                </a>
+                {{--<img src="{{ url('static/images/logo.png') }}" alt="Logo" class="sloganShow">--}}
+
                 <div class="slogan">
                     <p class="slogan__item">
                         {!! $slogan !!}
