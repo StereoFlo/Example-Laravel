@@ -40,7 +40,7 @@ Route::group(['middleware' => 'isAdmin'], function () {
 Route::group(['middleware' => 'isModerator'], function () {
     Route::get('/manager', 'Manager\\ManagerController@index')->name('managerIndex');
 
-    Route::get('/manager/slogan', 'Manager\\Slogan@index')->name('sloganIndex');
+    Route::get('/manager/slogan', 'Manager\\Slogan@form')->name('sloganForm');
     Route::post('/manager/slogan/update', 'Manager\\Slogan@update')->name('sloganUpdate');
 
     Route::get('/manager/news', 'Manager\\News@getList')->name('newsList');

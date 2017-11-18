@@ -22,11 +22,13 @@ class Slogan extends ManagerController
     }
 
     /**
+     * @param SloganModel $slogan
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function form(SloganModel $slogan)
     {
-        $slogan = (new SloganModel())->getSlogan();
+        $slogan = $slogan->getSlogan();
         return view('manager.slogan.form', ['content' => $slogan]);
     }
 
@@ -40,15 +42,15 @@ class Slogan extends ManagerController
         $content = $request->input('content');
         if (empty($content)) {
             $request->session()->flash('sloganUpdate', 'Содержимое слогана не может быть пустым');
-            return Redirect::to(route('sloganIndex'));
+            return Redirect::to(route('sloganForm'));
         }
 
         $isSaved = (new SloganModel())->updateSlogan($content);
         if (!$isSaved) {
             $request->session()->flash('sloganUpdate', 'Что-то пошло не так при обновлении слоганаБ смотри логи');
-            return Redirect::to(route('sloganIndex'));
+            return Redirect::to(route('sloganForm'));
         }
         $request->session()->flash('sloganUpdate', 'Все обновлено!');
-        return Redirect::to(route('sloganIndex'));
+        return Redirect::to(route('sloganForm'));
     }
 }

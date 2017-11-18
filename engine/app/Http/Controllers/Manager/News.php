@@ -23,10 +23,12 @@ class News extends ManagerController
 
     /**
      * News constructor.
+     *
+     * @param NewsModel $news
      */
-    public function __construct()
+    public function __construct(NewsModel $news)
     {
-        $this->newsModel = new NewsModel();
+        $this->newsModel = $news;
         parent::__construct();
     }
 

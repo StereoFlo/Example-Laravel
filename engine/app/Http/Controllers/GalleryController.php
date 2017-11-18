@@ -29,12 +29,15 @@ class GalleryController extends Controller
 
     /**
      * GalleryController constructor.
+     *
+     * @param Catalog $catalog
+     * @param Work    $work
      */
-    public function __construct()
+    public function __construct(Catalog $catalog, Work $work)
     {
-        $this->categoryList = (new Catalog())->getList();
-        $this->recentlyLiked = (new Work())->getListRecentlyLiked();
-        $this->work = new Work();
+        $this->work = $work;
+        $this->categoryList = $catalog->getList();
+        $this->recentlyLiked = $work->getListRecentlyLiked();
     }
 
     /**

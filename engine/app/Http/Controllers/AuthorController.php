@@ -23,11 +23,14 @@ class AuthorController extends Controller
 
     /**
      * AuthorController constructor.
+     *
+     * @param User $user
+     * @param Work $work
      */
-    public function __construct()
+    public function __construct(User $user, Work $work)
     {
-        $this->user = new User();
-        $this->work = new Work();
+        $this->user = $user;
+        $this->work = $work;
     }
 
     /**

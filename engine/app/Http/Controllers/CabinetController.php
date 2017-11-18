@@ -23,12 +23,14 @@ class CabinetController extends Controller
     }
 
     /**
+     * @param Work $work
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(Work $work)
     {
         return view('cabinet.index', [
-            'works' => Work::getInstance()->getListByUserId(Auth::id()),
+            'works' => $work->getListByUserId(Auth::id()),
         ]);
     }
 
@@ -42,29 +44,31 @@ class CabinetController extends Controller
 
     /**
      * @param Request $request
+     * @param User    $user
      *
      * @return mixed
      */
-    public function profileUpdate(Request $request)
+    public function profileUpdate(Request $request, User $user)
     {
         if (!empty($request->file('avatar'))) {
             $this->validate($request, [
                 'avatar' => 'mimes:jpeg,bmp,png',
             ]);
         }
-        User::getInstance()->updateProfile($request);
+        $user->updateProfile($request);
         $request->session()->flash('updateResult', __('cabinet.accountUpdated'));
         return Redirect::to(route('profileForm'));
     }
 
     /**
      * @param Request $request
+     * @param User    $user
      *
      * @return int
      */
-    public function removeAvatar(Request $request)
+    public function removeAvatar(Request $request, User $user)
     {
-        if (User::getInstance()->removeAvatar()) {
+        if ($user->removeAvatar()) {
             $request->session()->flash('updateResult', __('cabinet.AvatarSuccessRemoved'));
             return Redirect::to(route('profileForm'));
         }

@@ -33,23 +33,28 @@ class WorkController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param Work $work
+     *
+     * @return View
      */
-    public function getList(): View
+    public function getList(Work $work): View
     {
-        $works = Work::getInstance()->getListByUserId(Auth::id());
+        $works = $work->getListByUserId(Auth::id());
         return view('work.list', [
             'works' => $works,
         ]);
     }
 
     /**
+     * @param Catalog  $catalog
+     * @param Material $material
+     *
      * @return View
      */
-    public function add(): View
+    public function add(Catalog $catalog, Material $material): View
     {
-        $categories = (new Catalog())->getList();
-        $materials = (new Material())->getList();
+        $categories = $catalog->getList();
+        $materials = $material->getList();
         return view('work.form', [
             'categories' => $categories,
             'materials' => $materials,
@@ -59,29 +64,34 @@ class WorkController extends Controller
     /**
      * Process for add/edit work
      *
-     * @param Request $request
+     * @param Request     $request
+     * @param Work        $work
+     * @param WorkImages  $workImages
+     * @param Tags        $tags
+     * @param CatalogRel  $catalogRel
+     * @param MaterialRel $materialRel
      *
      * @return mixed
      */
-    public function process(Request $request)
+    public function process(Request $request, Work $work, WorkImages $workImages, Tags $tags, CatalogRel $catalogRel, MaterialRel $materialRel)
     {
         $workId = $request->post('workId') ?: 0;
-        $workId = Work::getInstance()->updateOrSave($workId, [
+        $workId = $work->updateOrSave($workId, [
             'workName'    => $request->post('workName'),
             'description' => $request->post('description'),
             'userId'      => Auth::id(),
         ]);
         if (!empty($request->file('images'))) {
-            WorkImages::getInstance()->addImamges($request->file('images'), $workId);
+            $workImages->addImamges($request->file('images'), $workId);
         }
         if (!empty($request->post('tags'))) {
-            (new Tags())->addTagsToWork($request->post('tags'), $workId);
+            $tags->addTagsToWork($request->post('tags'), $workId);
         }
         if (!empty($request->post('categories'))) {
-            (new CatalogRel())->addToCategory($request->post('categories'), $workId);
+            $catalogRel->addToCategory($request->post('categories'), $workId);
         }
         if (!empty($request->post('materials'))) {
-            (new MaterialRel())->addToWork($workId, $request->post('materials'));
+            $materialRel->addToWork($workId, $request->post('materials'));
         }
         $request->session()->flash('addWorkResult', __('work.addProcessSuccess'));
         return Redirect::to(route('workShow', ['id' => $workId]));
@@ -107,15 +117,16 @@ class WorkController extends Controller
     }
 
     /**]
-     * @param Request $request
-     * @param int     $workId
-     * @param int     $imageId
+     * @param Request    $request
+     * @param WorkImages $workImages
+     * @param int        $workId
+     * @param int        $imageId
      *
      * @return mixed
      */
-    public function removeImageFromWork(Request $request, int $workId, int $imageId)
+    public function removeImageFromWork(Request $request, WorkImages $workImages, int $workId, int $imageId)
     {
-        $isSaved = WorkImages::getInstance()->deleteImageFromWork($workId, $imageId);
+        $isSaved = $workImages->deleteImageFromWork($workId, $imageId);
         if ($isSaved) {
             $request->session()->flash('results', 'Изображение удалено');
             return Redirect::to(route('workEdit', ['id' => $workId]));
@@ -129,9 +140,9 @@ class WorkController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|View
      */
-    public function edit(int $id)
+    public function edit(Work $work, int $id)
     {
-        $work = (new Work)->getById($id);
+        $work = $work->getById($id);
         if ($work['userId'] !== Auth::id()) {
             abort(401, __('workNotFound'));
         }
@@ -143,13 +154,14 @@ class WorkController extends Controller
 
     /**
      * @param Request $request
+     * @param Work    $work
      * @param int     $id
      *
      * @return View
      */
-    public function show(Request $request, int $id): View
+    public function show(Request $request, Work $work, int $id): View
     {
-        $work = Work::getInstance()->getById($id);
+        $work = $work->getById($id);
         $isLiked = session()->has('work' . $id);
         if (empty($work)) {
             abort(404, __('work.workNotFound'));
@@ -165,46 +177,49 @@ class WorkController extends Controller
     }
 
     /**
-     * @param int $workId
-     * @param int $catId
+     * @param CatalogRel $catalogRel
+     * @param int        $workId
+     * @param int        $catId
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function removeFromCategory(int $workId, int $catId)
+    public function removeFromCategory(CatalogRel $catalogRel, int $workId, int $catId)
     {
-        $res = (bool) CatalogRel::getInstance()->removeFromCategory($catId, $workId);
+        $res = (bool) $catalogRel->removeFromCategory($catId, $workId);
         return response()->json([
             'isRemoved' => $res
         ]);
     }
 
     /**
-     * @param int $workId
-     * @param int $materialId
+     * @param MaterialRel $materialRel
+     * @param int         $workId
+     * @param int         $materialId
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function removeMaterialFromWork(int $workId, int $materialId)
+    public function removeMaterialFromWork(MaterialRel $materialRel, int $workId, int $materialId)
     {
-        $res = (bool) (new MaterialRel())->removeFromWork($workId, $materialId);
+        $res = (bool) $materialRel->removeFromWork($workId, $materialId);
         return response()->json([
             'isRemoved' => $res
         ]);
     }
 
     /**
-     * @param int $id
+     * @param Work $work
+     * @param int  $id
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function setLike(int $id)
+    public function setLike(Work $work, int $id)
     {
         if (session()->has('work' . $id)) {
             return response()->json([
                 'isLiked' => false,
             ]);
         }
-        Work::getInstance()->where('id', $id)->increment('likes');
+        $work->where('id', $id)->increment('likes');
         session(['work' . $id => true]);
         return response()->json([
             'isLiked' => true,
