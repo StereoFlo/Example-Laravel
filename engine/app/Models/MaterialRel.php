@@ -28,6 +28,16 @@ class MaterialRel extends Model
     }
 
     /**
+     * @param int $materialId
+     *
+     * @return mixed
+     */
+    public function removeMaterial(int $materialId)
+    {
+        return $this->where('material_id', $materialId)->delete();
+    }
+
+    /**
      * @param int $workId
      * @param int $materialId
      *
