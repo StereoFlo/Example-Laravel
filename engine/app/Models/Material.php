@@ -120,6 +120,6 @@ class Material extends Model
         if (!$this->checkEmptyObject($file)) {
             abort(404);
         }
-        return File::delete(public_path($file->url)) && $file->delete();
+        return File::delete(public_path($file->url)) && $file->delete() && (new MaterialRel())->removeMaterial($id);
     }
 }
