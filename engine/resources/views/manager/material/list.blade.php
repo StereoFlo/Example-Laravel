@@ -22,8 +22,9 @@
                                     <tr>
                                         <td>{{ $page['name'] }}</td>
                                         <td>{{ $page['url'] }}</td>
-                                        <td><a href="{{ route('managerMaterialEdit', ['id' => $page['id']]) }}">Изменить</a> | <a
-                                                    href="{{ route('managerMaterialRemove', ['id' => $page['id']]) }}">Удалить</a></td>
+                                        <td>
+                                            {{--<a href="{{ route('managerMaterialEdit', ['id' => $page['id']]) }}">Изменить</a> | --}}
+                                            <a href="{{ route('managerMaterialRemove', ['id' => $page['id']]) }}">Удалить</a></td>
                                     </tr>
                                 @endforeach
                             </table>
