@@ -36,7 +36,7 @@
                     <a href="{{ url('index.html') }}" class="nav__link">Главная</a>
                     <a href="{{ route('galleryPublicIndex') }}" class="nav__link">Галерея</a>
                     <a href="{{ url('pages/about.html') }}" class="nav__link">О нас</a>
-                    <a href="#" class="nav__link">Общалка</a>
+                    <a href="#" class="nav__link hidden">Общалка</a>
                     <a href="{{ url('pages/contacts.html') }}" class="nav__link">Контакты</a>
                 </nav>
                 <div class="user">
