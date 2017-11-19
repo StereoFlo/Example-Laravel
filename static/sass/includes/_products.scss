@@ -11,10 +11,19 @@
     max-width: 1900px;
     margin: 0 auto;
   }
+  &__toGallery {
+    a {
+      color: #0258d2;
+      transition: .25s;
+      &:hover {
+        color: darken(#0258d2, 20%);
+      }
+    }
+  }
   h2 {
     text-align: center;
     color: #3c434d;
-    font-size: 32px;
+    font-size: 1.7em;
     margin: 50px 0 20px;
     font-family: 'bandera';
   }

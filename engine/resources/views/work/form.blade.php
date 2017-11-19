@@ -55,78 +55,87 @@
                     {{--@endif--}}
                 {{--</div>--}}
 
-{{--                {{ var_dump($work['materials']) }}--}}
-                @if(!empty($work['id']))
-                    <p>Материалы работы:</p>
-                    @if(empty($work['materials']['inWork']))
-                        <p>Вы не добавили свою работу не одного материала</p>
-                    @else
-                        <div class="materials">
-                            @foreach($work['materials']['inWork'] as $material)
-                                <a href="{{ route('removeMaterialFromWork', ['workId' => $work['id'], 'materialId' => $material['material_id']]) }}" id="dcid_{{$material['material_id']}} " class="materials__item">
-                                    <span class="name">{{ $material['name'] }}</span>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </a>
-                            @endforeach
+                <div class="materials">
+                    @if(!empty($work['id']))
+                        <p>Материалы работы:</p>
+                        <div class="inWork">
+                            @if(empty($work['materials']['inWork']))
+                                <span>Вы не добавили свою работу не одного материала</span>
+                            @else
+                                @foreach($work['materials']['inWork'] as $material)
+                                    <a href="{{ route('removeMaterialFromWork', ['workId' => $work['id'], 'materialId' => $material['material_id']]) }}" id="dmid_{{$material['material_id']}} " class="materials__item">
+                                        <span class="name">{{ $material['name'] }}</span>
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </a>
+                                @endforeach
+                            @endif
                         </div>
-                    @endif
-                    @if(empty($work['materials']['notInWork']))
-                        <p>Все возможные материалы добавлены в работу</p>
+                        <div class="notInWork">
+                            <p>Все материалы:</p>
+                            @if(empty($work['materials']['notInWork']))
+                                <span class="empty">Все возможные материалы добавлены в работу</span>
+                                <div class="inputGroup checkboxes"></div>
+                            @else
+                                <div class="inputGroup checkboxes">
+                                    @foreach($work['materials']['notInWork'] as $material)
+                                        <input id="{{ $material['id'] }}" type="checkbox" name="materials[]" value="{{ $material['id'] }}">
+                                        <label for="{{ $material['id'] }}">{{ $material['name'] }}</label>
+                                    @endforeach
+                                </div>
+                            @endif
+                            <input type="hidden" name="workId" value="{{ $work['id'] }}">
+                        </div>
                     @else
-                        <p>Все материалы:</p>
-                        <div id="materialsNotInWork" class="inputGroup checkboxes">
-                            @foreach($work['materials']['notInWork'] as $material)
+                        <p>Материалы:</p>
+                        <div class="inputGroup checkboxes">
+                            @foreach($materials as $material)
                                 <input id="{{ $material['id'] }}" type="checkbox" name="materials[]" value="{{ $material['id'] }}">
                                 <label for="{{ $material['id'] }}">{{ $material['name'] }}</label>
                             @endforeach
                         </div>
                     @endif
-                    <input type="hidden" name="workId" value="{{ $work['id'] }}">
-                @else
-                    <p>Материалы:</p>
-                    <div class="inputGroup checkboxes">
-                        @foreach($materials as $material)
-                            <input id="{{ $material['id'] }}" type="checkbox" name="materials[]" value="{{ $material['id'] }}">
-                            <label for="{{ $material['id'] }}">{{ $material['name'] }}</label>
-                        @endforeach
-                    </div>
-                @endif
+                </div>
 
-                @if(!empty($work['id']))
-                    <p>Категории работы:</p>
-                    @if(empty($work['categories']['inWork']))
-                        <p>Вы не добавили свою работу не в одну категорию</p>
-                    @else
-                        <div class="category">
-                            @foreach($work['categories']['inWork'] as $category)
-                                <a href="{{ route('deleteFromCategory', ['workId' => $work['id'], 'catId' => $category['id']]) }}" id="dcid_{{ $category['id'] }}" class="category__item">
-                                    <span class="name">{{ $category['name'] }}</span>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </a>
-                            @endforeach
+                <div class="category">
+                    @if(!empty($work['id']))
+                        <p>Категории работы:</p>
+                        <div class="inWork">
+                            @if(empty($work['categories']['inWork']))
+                                <span>Вы не добавили свою работу не в одну категорию</span>
+                            @else
+                                @foreach($work['categories']['inWork'] as $category)
+                                    <a href="{{ route('deleteFromCategory', ['workId' => $work['id'], 'catId' => $category['id']]) }}" id="dcid_{{ $category['id'] }}" class="category__item">
+                                        <span class="name">{{ $category['name'] }}</span>
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </a>
+                                @endforeach
+                            @endif
                         </div>
-                    @endif
-                    <p>Все категории:</p>
-                    @if(empty($work['categories']['notInWork']))
-                        <p>Ваша работа сейчас во всех возможных категориях</p>
+                        <div class="notInWork">
+                            <p>Все категории:</p>
+                            @if(empty($work['categories']['notInWork']))
+                                <span class="empty">Ваша работа сейчас во всех возможных категориях</span>
+                                <div class="inputGroup checkboxes"></div>
+                            @else
+                                <div class="inputGroup checkboxes">
+                                    @foreach($work['categories']['notInWork'] as $category)
+                                        <input id="{{ $category['id'] }}" type="checkbox" name="categories[]" value="{{ $category['id'] }}">
+                                        <label for="{{ $category['id'] }}">{{ $category['name'] }}</label>
+                                    @endforeach
+                                </div>
+                            @endif
+                            <input type="hidden" name="workId" value="{{ $work['id'] }}">
+                        </div>
                     @else
-                        <div id="categoriesNotInWork" class="inputGroup checkboxes">
-                            @foreach($work['categories']['notInWork'] as $category)
+                        <p>Категории:</p>
+                        <div class="inputGroup checkboxes">
+                            @foreach($categories as $category)
                                 <input id="{{ $category['id'] }}" type="checkbox" name="categories[]" value="{{ $category['id'] }}">
                                 <label for="{{ $category['id'] }}">{{ $category['name'] }}</label>
                             @endforeach
                         </div>
                     @endif
-                    <input type="hidden" name="workId" value="{{ $work['id'] }}">
-                @else
-                    <p>Категории:</p>
-                    <div class="inputGroup checkboxes">
-                        @foreach($categories as $category)
-                            <input id="{{ $category['id'] }}" type="checkbox" name="categories[]" value="{{ $category['id'] }}">
-                            <label for="{{ $category['id'] }}">{{ $category['name'] }}</label>
-                        @endforeach
-                    </div>
-                @endif
+                </div>
 
                 <div class="inputGroup{{ $errors->has('images') ? ' has-error' : '' }}">
                     <label for="images">@lang('work.photoOfNewWork') (16:9, jpeg):</label>

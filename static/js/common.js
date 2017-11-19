@@ -227,36 +227,34 @@ $(function () {
     //     });
     // });
 
-    $('[id^=dcid_]').click(function (event) {
-        event.preventDefault();
-        var itemId = $(this).attr('id').split('dcid_')[1];
-        var itemName = $(this).find('span').html();
-        var itemPosition = $(this).attr('class').split('__')[0];
-        var $delLink = $(this);
+    function testDel(item) {
+        $(item).click(function(e) {
+            e.preventDefault();
 
-        $.get($(this).attr('href'), function (response) {
-            if (response.isRemoved) {
+            var itemId = $(this).attr('id').split('_')[1];
+            var itemName = $(this).find('span').html();
+            var $position = $(this).parent().siblings('.notInWork').find('.inputGroup');
+            var $message = $(this).parent().siblings('.notInWork').find('.empty');
+            var $delLink = $(this);
 
-                $delLink.remove();
+            $.get($(this).attr('href'), function (response) {
+                if (response.isRemoved) {
+                    $delLink.remove();
+                    $message.remove();
 
-                if ( itemPosition == 'materials') {
-                    $('#materialsNotInWork').append(
+                    $position.append(
                         '<input id="'+ itemId +'" type="checkbox" name="materials[]" value="'+ itemId +'">' +
                         '<label for="'+ itemId +'">'+ itemName +'</label>'
                     );
-                }
-                else if (itemPosition == 'category') {
-                    $('#categoriesNotInWork').append(
-                        '<input id="'+ itemId +'" type="checkbox" name="categories[]" value="'+ itemId +'">' +
-                        '<label for="'+ itemId +'">'+ itemName +'</label>'
-                    );
-                }
 
-            } else {
-                alert('panic!');
-            }
+                } else {
+                    alert('panic!');
+                }
+            });
         });
-    });
+    }
+    testDel('[id^=dcid_]');
+    testDel('[id^=dmid_]');
 
     /* ---------------------------------------------- /*
      * Gallery
@@ -378,9 +376,12 @@ $(document).on('submit', '#ajaxLogin', function (e) {
             if (data.auth === true) {
                 $.get('/login/ajax')
                     .done(function (data) {
-                        $('.logIn').addClass('hidden');
                         $(this).empty();
-                        $(this).append(data);
+                        window.location.href = '/cabinet';
+                        // $('.logIn').addClass('hidden');
+                        // $(this).append(data);
+
+
                     })
                     .fail(function (data) {
                     });
@@ -401,9 +402,10 @@ $(document).on('submit', '#ajaxRegistration', function (e) {
             if (data.auth === true) {
                 $.get('/login/ajax')
                     .done(function (data) {
-                        $('.logIn').addClass('hidden');
+                        window.location.href = '/cabinet';
                         $(this).empty();
-                        $(this).append(data);
+                        // $('.logIn').addClass('hidden');
+                        // $(this).append(data);
                     })
                     .fail(function (data) {
                         //todo
