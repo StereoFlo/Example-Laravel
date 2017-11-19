@@ -82,6 +82,18 @@ figure {
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   }
 }
+.btn_ok {
+  background: $btn__ok;
+  &:hover {
+    background: $btn__ok_hover;
+  }
+}
+.btn_caution {
+  background: $btn__caution;
+  &:hover {
+    background: $btn__caution_hover;
+  }
+}
 
 .flex {
   display: flex;

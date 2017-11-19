@@ -41,6 +41,7 @@
       background: lighten(#1b1e2d, 10%);
       margin-left: 15px;
       text-decoration: none;
+      transition: 0.25s;
       &:hover {
         color: $white;
       }

@@ -5,9 +5,15 @@
     <section class="workAdd">
         <div class="container">
 
-            <div class="sectionTitle">
-                <h2>@lang('work.new')</h2>
-            </div>
+            @if(empty($work['id']))
+                <div class="sectionTitle">
+                    <h2>@lang('work.new')</h2>
+                </div>
+            @else
+                <div class="sectionTitle">
+                    <h2>Редактирование работы</h2>
+                </div>
+            @endif
 
             <form method="post" action="{{ route('workProcess') }}" enctype="multipart/form-data" class="form workAddForm">
                 {{ csrf_field() }}
@@ -176,7 +182,11 @@
                     @endif
                 </div>
 
-                <button type="submit" name="button" class="button">@lang('work.buttonOfNewWork')</button>
+                @if(empty($work['id']))
+                    <button type="submit" name="button" class="button btn_ok">@lang('work.buttonOfNewWork')</button>
+                @else
+                    <button type="submit" name="button" class="button btn_caution">Изменить</button>
+                @endif
             </form>
         </div>
     </section>
