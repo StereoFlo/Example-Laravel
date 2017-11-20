@@ -307,6 +307,18 @@ class User extends Authenticatable
     }
 
     /**
+     * @param int $id
+     *
+     * @return bool]
+     */
+    public function removeUser(int $id)
+    {
+        $user = self::findOrFail($id);
+        return $this->where('id', $user->id)->delete() && RoleUser::getInstance()->disableAllRole($user->id);
+
+    }
+
+    /**
      * @param UploadedFile|null $avatar
      * @param                   $user
      *

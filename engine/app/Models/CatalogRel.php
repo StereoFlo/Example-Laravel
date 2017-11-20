@@ -22,14 +22,6 @@ class CatalogRel extends Model
     ];
 
     /**
-     * @return self
-     */
-    public static function getInstance()
-    {
-        return new self();
-    }
-
-    /**
      * @param int $categoryId
      * @param int $workId
      *

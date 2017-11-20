@@ -3,7 +3,6 @@
 namespace RecycleArt\Http\Controllers\Manager;
 
 use Illuminate\Support\Facades\Redirect;
-use RecycleArt\Http\Controllers\Controller;
 use RecycleArt\Models\Role;
 use RecycleArt\Models\RoleUser;
 use RecycleArt\Models\User as UserModel;
@@ -65,8 +64,9 @@ class User extends ManagerController
     }
 
     /**
-     * @param int $userId
-     * @param int $roleId
+     * @param RoleUser $roleUser
+     * @param int      $userId
+     * @param int      $roleId
      *
      * @return int
      */
@@ -74,5 +74,21 @@ class User extends ManagerController
     {
         $roleUser->disableRole($userId, $roleId);
         return Redirect::to(route('managerUserShow', ['userId' =>$userId]));
+    }
+
+    /**
+     * @param UserModel $user
+     * @param Work      $work
+     * @param int       $id
+     */
+    public function removeUser(UserModel $user, Work $work, int $id)
+    {
+        $userToRemove = $user->findOrFail($id);
+        $works = $work->getListByUserId($userToRemove->id);
+        foreach ($works as $workItem) {
+            $work->removeById($workItem['id']);
+        }
+        $user->removeUser($id);
+        return Redirect::to(route('managerUserList'));
     }
 }

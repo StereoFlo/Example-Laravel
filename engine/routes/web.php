@@ -27,6 +27,7 @@ Route::get('/pages/{slug}.html', 'StaticPageController@getPage')->where('slug', 
 
 Route::group(['middleware' => 'isAdmin'], function () {
     Route::get('/manager/user/list', 'Manager\\User@getList')->name('managerUserList');
+    Route::get('/manager/user/{id}/remove', 'Manager\\User@removeUser')->where('id', '[0-9]+')->name('managerUserRemove');
     Route::get('/manager/pages', 'Manager\\StaticPage@getList')->name('managerPageList');
     Route::get('/manager/pages/new', 'Manager\\StaticPage@makeNew')->name('managerPageNew');
     Route::post('/manager/pages/process', 'Manager\\StaticPage@process')->name('managerPageProcess');
