@@ -16,14 +16,11 @@ class ManagerController extends Controller
 {
     /**
      * ManagerController constructor.
-     *
-     * @param Work $work
-     * @param User $user
      */
-    public function __construct(Work $work, User $user)
+    public function __construct()
     {
-        View::share('userCount', $user->getAll()->count());
-        View::share('workCount', \count($work->getUnapprovedList()));
+        View::share('userCount', User::All()->count());
+        View::share('workCount', \count((new Work())->getUnapprovedList()));
         View::share('newsCount', News::getAll()->count());
     }
 
