@@ -88,6 +88,7 @@ class User extends ManagerController
         foreach ($works as $workItem) {
             $work->removeById($workItem['id']);
         }
+        $user->removeUser($id);
         return Redirect::to(route('managerUserList'));
     }
 }

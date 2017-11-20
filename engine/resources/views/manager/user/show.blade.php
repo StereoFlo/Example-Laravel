@@ -35,7 +35,7 @@
                             <p>Все {{ count($works) }} || <a href="{{ route('workListManager') }}">Не проверенные</a> {{ $workCount }}</p>
                         @endif
                         <p>Действия:</p>
-                        <a href="{{ route('managerUserRemove') }}">Удалить</a>.
+                        <a href="{{ route('managerUserRemove', ['id' => $user['id']]) }}">Удалить</a>.
                         <i>Внимание! Удаление пользователя приведет к удалению всех его работ и прочего.</i>
                     </div>
                 </div>

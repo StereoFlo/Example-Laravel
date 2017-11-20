@@ -68,12 +68,18 @@ class RoleUser extends Model
         return false;
     }
 
-    public function disableRole(int $userId, int $roleId)
+    public function disableRole(int $userId, int $roleId = 0)
     {
-        $role = $this->where('user_id', $userId)->where('role_id', $roleId)->get();
-        if ($this->checkEmptyObject($role)) {
-            return false;
-        }
         return $this->where('user_id', $userId)->where('role_id', $roleId)->delete();
+    }
+
+    /**
+     * @param int $userId
+     *
+     * @return mixed
+     */
+    public function disableAllRole(int $userId)
+    {
+        return $this->where('user_id', $userId)->delete();
     }
 }
