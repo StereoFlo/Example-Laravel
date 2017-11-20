@@ -23,7 +23,7 @@ class IsModerator
     public function handle($request, Closure $next)
     {
         if (empty($request->user()) || !$request->user()->authorizeRoles([User::ROLE_MODERATOR, User::ROLE_ADMIN])) {
-            abort(401, 'This action is unauthorized.');
+            \abort(401, 'This action is unauthorized.');
         }
         return $next($request);
     }

@@ -109,7 +109,7 @@ class Model extends EModel
         if (empty($obj)) {
             return false;
         }
-        if (!method_exists($obj, 'toArray')) {
+        if (!\method_exists($obj, 'toArray')) {
             return false;
         }
         if (empty($obj->toArray())) {

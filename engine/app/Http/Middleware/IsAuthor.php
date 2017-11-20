@@ -23,7 +23,7 @@ class IsAuthor
     public function handle($request, Closure $next)
     {
         if (empty($request->user()) || !$request->user()->authorizeRoles([User::ROLE_MODERATOR, User::ROLE_ADMIN, User::ROLE_AUTHOR])) {
-            abort(401, 'This action is unauthorized.');
+            \abort(401, 'This action is unauthorized.');
         }
         return $next($request);
     }
