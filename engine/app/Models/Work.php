@@ -283,7 +283,7 @@ class Work extends Model
     }
 
     /**
-     * @return array
+     * @return int
      */
     public function getCountForGallery()
     {
@@ -295,7 +295,7 @@ class Work extends Model
             ->where('work.approved', true)
             ->get();
         if (!$this->checkEmptyObject($result)) {
-            return [];
+            return 0;
         }
         return $result->count();
     }
