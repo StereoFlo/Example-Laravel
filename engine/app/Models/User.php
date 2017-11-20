@@ -347,7 +347,7 @@ class User extends Authenticatable
             return $this;
         }
         if ($request->post('password') === $request->post('password_confirmation')) {
-            $user->password = bcrypt($request->input('password'));
+            $user->password = \bcrypt($request->input('password'));
         }
         return $this;
     }

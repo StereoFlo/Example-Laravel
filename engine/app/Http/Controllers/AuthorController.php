@@ -42,7 +42,7 @@ class AuthorController extends Controller
     {
         $author = $this->user->getById($id);
         if (empty($author)) {
-            abort(404);
+            \abort(404);
         }
 
         return \view('author.show', [

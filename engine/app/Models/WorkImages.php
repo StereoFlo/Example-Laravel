@@ -18,14 +18,6 @@ class WorkImages extends Model
     protected $table = 'work_images';
 
     /**
-     * @return WorkImages
-     */
-    public static function getInstance()
-    {
-        return new self();
-    }
-
-    /**
      * @param int $workId
      *
      * @return mixed
@@ -40,11 +32,10 @@ class WorkImages extends Model
      *
      * @return mixed
      */
-    public static function getbyWorkId(int $workId)
+    public function getbyWorkId(int $workId)
     {
-        $slf = new self();
-        $imgs = self::where('workId', $workId)->get();
-        if (!$slf->checkEmptyObject($imgs)) {
+        $imgs = $this->where('workId', $workId)->get();
+        if (!$this->checkEmptyObject($imgs)) {
             return [];
         }
         return $imgs->toArray();
@@ -56,7 +47,7 @@ class WorkImages extends Model
      *
      * @return bool
      */
-    public function deleteImageFromWork(int $workId, int $imageId)
+    public function removeFromWork(int $workId, int $imageId)
     {
         $images = $this->where('id', $imageId)->where('workId', $workId)->get();
         if (!$this->checkEmptyObject($images)) {
@@ -64,7 +55,7 @@ class WorkImages extends Model
         }
         $isSaved = false;
         foreach ($images as $image) {
-            $path = public_path($image->link);
+            $path = \public_path($image->link);
             $isSaved = File::delete($path) && $this->where('id', $imageId)->where('workId', $workId)->delete();
             if ($image->isDefault) {
                 $minId = $this->select('id')->where('workId', $workId)->min('id');
@@ -81,7 +72,7 @@ class WorkImages extends Model
      *
      * @return bool
      */
-    public function deleteAllImages(int $workId)
+    public function removeAllImages(int $workId)
     {
         $images = $this->where('workId', $workId)->get();
         if (!$this->checkEmptyObject($images)) {
@@ -89,7 +80,7 @@ class WorkImages extends Model
         }
         $isSaved = false;
         foreach ($images as $image) {
-            $path = public_path($image->link);
+            $path = \public_path($image->link);
             $isSaved = File::delete($path) && $this->where('id', $image->id)->delete();
         }
         return $isSaved;

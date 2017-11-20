@@ -2,8 +2,6 @@
 
 namespace RecycleArt\Models;
 
-use Illuminate\Support\Facades\DB;
-
 /**
  * Class Work
  * @package RecycleArt\Models
@@ -14,14 +12,6 @@ class Work extends Model
      * @var string
      */
     protected $table = 'work';
-
-    /**
-     * @return Work
-     */
-    public static function getInstance()
-    {
-        return new self();
-    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Collection|static[]
@@ -95,17 +85,19 @@ class Work extends Model
      */
     public function getById(int $workId): array
     {
-        $work = $this->select('users.name as userName', 'users.id as userId', 'work.*')->join('users', 'users.id', '=', 'work.userId')
+        $work = $this
+            ->select('users.name as userName', 'users.id as userId', 'work.*')
+            ->join('users', 'users.id', '=', 'work.userId')
             ->where('work.id', $workId)
             ->first();
         if (!$this->checkEmptyObject($work)) {
             return [];
         }
         $work = $work->toArray();
-        $work['images'] = WorkImages::getbyWorkId($workId);
-        $work['tags'] = (new TagsRel())->getByWork($workId);
-        $work['categories'] = (new Catalog())->getByWorkId($workId);
-        $work['materials'] = (new Material())->getListByWork($workId);
+        $work['images'] = $this->getWorkImages()->getbyWorkId($workId);
+        $work['tags'] = $this->getTagsRelation()->getByWork($workId);
+        $work['categories'] = $this->getCatalog()->getByWorkId($workId);
+        $work['materials'] = $this->getMaterial()->getListByWork($workId);
         return $work;
     }
 
@@ -116,10 +108,10 @@ class Work extends Model
      */
     public function removeById(int $workId)
     {
-        (new MaterialRel())->removeWork($workId);
-        (new TagsRel())->deleteByWork($workId);
-        (new CatalogRel())->removeWorkCategory($workId);
-        (new WorkImages())->deleteAllImages($workId);
+        $this->getMaterialRelation()->removeWork($workId);
+        $this->getTagsRelation()->deleteByWork($workId);
+        $this->getCatalogRelation()->removeWorkCategory($workId);
+        $this->getWorkImages()->removeAllImages($workId);
         return $this->where('id', $workId)->delete();
     }
 

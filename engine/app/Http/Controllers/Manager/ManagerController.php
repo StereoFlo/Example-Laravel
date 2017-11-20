@@ -4,6 +4,7 @@ namespace RecycleArt\Http\Controllers\Manager;
 
 use Illuminate\Support\Facades\View;
 use RecycleArt\Http\Controllers\Controller;
+use RecycleArt\Models\News;
 use RecycleArt\Models\User;
 use RecycleArt\Models\Work;
 
@@ -15,13 +16,15 @@ class ManagerController extends Controller
 {
     /**
      * ManagerController constructor.
+     *
+     * @param Work $work
+     * @param User $user
      */
-    public function __construct()
+    public function __construct(Work $work, User $user)
     {
-        $user = new User();
         View::share('userCount', $user->getAll()->count());
-        View::share('workCount', \count((new Work())->getUnapprovedList()));
-        View::share('newsCount', \RecycleArt\Models\News::getAll()->count());
+        View::share('workCount', \count($work->getUnapprovedList()));
+        View::share('newsCount', News::getAll()->count());
     }
 
     /**

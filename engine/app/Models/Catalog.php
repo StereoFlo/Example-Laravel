@@ -23,18 +23,11 @@ class Catalog extends Model
     ];
 
     /**
-     * @return Catalog
-     */
-    public static function getInstance()
-    {
-        return new self();
-    }
-
-    /**
      * @return array
      */
     public function getList()
     {
+        /** @var Model $res */
         $res = $this->get();
         if (!$this->checkEmptyObject($res)) {
             return [];
@@ -49,6 +42,7 @@ class Catalog extends Model
      */
     public function getById(int $id)
     {
+        /** @var Model $category */
         $category = self::find($id);
         if (!$this->checkEmptyObject($category)) {
             return [];
@@ -114,12 +108,12 @@ class Catalog extends Model
         if (empty($category) || empty($category->toArray())) {
             return false;
         }
-        $isWorkInCategory = (new CatalogRel())->isWorkInCategory($categoryId, $workId);
+        $isWorkInCategory = $this->getCatalogRelation()->isWorkInCategory($categoryId, $workId);
         if ($isWorkInCategory) {
             return false;
         }
 
-        return (new CatalogRel())->addToCategory($categoryId, $workId);
+        return $this->getCatalogRelation()->addToCategory($categoryId, $workId);
     }
 
     /**
@@ -130,8 +124,9 @@ class Catalog extends Model
      */
     public function updateCategory(int $categoryId, array $data)
     {
+        /** @var Model $category */
         $category = self::find($categoryId);
-        if (empty($category) || empty($category->toArray())) {
+        if ($this->checkEmptyObject($category)) {
             return false;
         }
         $category->name = $data['name'];
@@ -151,11 +146,12 @@ class Catalog extends Model
      */
     public function removeCategory(int $categoryId)
     {
+        /** @var Model $category */
         $category = self::find($categoryId);
         if (empty($category) || empty($category->toArray())) {
             return false;
         }
-        return $category->delete() && (new CatalogRel())->removeCategory($categoryId);
+        return $category->delete() && $this->getCatalogRelation()->removeCategory($categoryId);
     }
 
     /**
@@ -165,6 +161,7 @@ class Catalog extends Model
      */
     public function getCategoryWithWorks(int $categoryId)
     {
+        /** @var Model $res */
         $res = $this
             ->select('catalog.id as categoryId', 'catalog.name as categoryName', 'catalog.description as categoryDescription', 'work.id as workId', 'workName', 'userId', 'work.description as workDescription')
             ->join('catalog_rel', 'catalog_rel.catalog_id', '=', 'catalog.id')

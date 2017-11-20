@@ -73,7 +73,7 @@ class Tags extends Model
             if (empty($existingTag)) {
                 $existingTag['id'] = $this->add($tag);
             }
-            TagsRel::getInstance()->addToWork($existingTag['id'], $workId);
+            $this->getTagsRelation()->addToWork($existingTag['id'], $workId);
         }
         return true;
     }

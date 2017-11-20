@@ -54,7 +54,7 @@ class RoleUser extends Model
      */
     public function enableRoleByName(int $userId, string $roleId)
     {
-        $getRole = (new Role())->getByName($roleId);
+        $getRole = $this->getRole()->getByName($roleId);
         if (empty($getRole)) {
             return false;
         }

@@ -21,7 +21,7 @@ class StaticPage extends ManagerController
     public function getList(StaticPageModel $staticPage)
     {
         $pageList = $staticPage->getList();
-        return view('manager.staticPage.list', ['pages' => $pageList]);
+        return \view('manager.staticPage.list', ['pages' => $pageList]);
     }
 
     /**
@@ -29,7 +29,7 @@ class StaticPage extends ManagerController
      */
     public function makeNew()
     {
-        return view('manager.staticPage.form');
+        return \view('manager.staticPage.form');
     }
 
     /**
@@ -69,8 +69,8 @@ class StaticPage extends ManagerController
     {
         $page = $staticPage->getBy($slug);
         if (empty($page)) {
-            abort(404, 'page not found');
+            \abort(404, 'page not found');
         }
-        return view('manager.staticPage.form', ['page' => $page]);
+        return \view('manager.staticPage.form', ['page' => $page]);
     }
 }

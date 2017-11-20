@@ -29,15 +29,16 @@ class Slogan extends ManagerController
     public function form(SloganModel $slogan)
     {
         $slogan = $slogan->getSlogan();
-        return view('manager.slogan.form', ['content' => $slogan]);
+        return \view('manager.slogan.form', ['content' => $slogan]);
     }
 
     /**
-     * @param Request $request
+     * @param Request     $request
+     * @param SloganModel $slogan
      *
      * @return mixed
      */
-    public function update(Request $request)
+    public function update(Request $request, SloganModel $slogan)
     {
         $content = $request->input('content');
         if (empty($content)) {
@@ -45,7 +46,7 @@ class Slogan extends ManagerController
             return Redirect::to(route('sloganForm'));
         }
 
-        $isSaved = (new SloganModel())->updateSlogan($content);
+        $isSaved = $slogan->updateSlogan($content);
         if (!$isSaved) {
             $request->session()->flash('sloganUpdate', 'Что-то пошло не так при обновлении слоганаБ смотри логи');
             return Redirect::to(route('sloganForm'));

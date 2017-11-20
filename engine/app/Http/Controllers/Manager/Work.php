@@ -34,7 +34,7 @@ class Work extends ManagerController
      */
     public function getList()
     {
-        return view('manager.work.list', ['works' => $this->work->getListForManager()]);
+        return \view('manager.work.list', ['works' => $this->work->getListForManager()]);
     }
 
     /**
@@ -42,7 +42,7 @@ class Work extends ManagerController
      */
     public function getListUnapproved()
     {
-        return view('manager.work.list', ['works' => $this->work->getUnapprovedList(false)]);
+        return \view('manager.work.list', ['works' => $this->work->getUnapprovedList(false)]);
     }
 
     /**
@@ -50,7 +50,7 @@ class Work extends ManagerController
      */
     public function getListApproved()
     {
-        return view('manager.work.list', ['works' => $this->work->getUnapprovedList(true)]);
+        return \view('manager.work.list', ['works' => $this->work->getUnapprovedList(true)]);
     }
 
     /**
@@ -60,7 +60,7 @@ class Work extends ManagerController
      */
     public function getListByAuthor(int $id)
     {
-        return view('manager.work.list', ['works' => $this->work->getListByUserId($id)]);
+        return \view('manager.work.list', ['works' => $this->work->getListByUserId($id)]);
     }
 
     /**

@@ -118,8 +118,8 @@ class Material extends Model
     {
         $file = self::find($id);
         if (!$this->checkEmptyObject($file)) {
-            abort(404);
+            \abort(404);
         }
-        return File::delete(public_path($file->url)) && $file->delete() && (new MaterialRel())->removeMaterial($id);
+        return File::delete(\public_path($file->url)) && $file->delete() && $this->getMaterialRelation()->removeMaterial($id);
     }
 }

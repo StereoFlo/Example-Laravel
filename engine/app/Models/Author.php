@@ -9,16 +9,10 @@ namespace RecycleArt\Models;
 class Author extends Model
 {
     /**
-     * @var User
-     */
-    private $user;
-
-    /**
      * Author constructor.
      */
     public function __construct()
     {
-        $this->user = new User();
         parent::__construct();
     }
 
@@ -29,6 +23,7 @@ class Author extends Model
      */
     public function getList()
     {
+        /** @var Model $authors */
         $authors = $this->from('role_user')
             ->join('users', 'role_user.user_id', '=', 'users.id')
             ->join('roles', 'role_user.role_id', '=', 'roles.id')
@@ -47,6 +42,7 @@ class Author extends Model
      */
     public function getByid(int $id): array
     {
+        /** @var Model $res */
         $res = self::find($id);
         if (!$this->checkEmptyObject($res)) {
             return [];
