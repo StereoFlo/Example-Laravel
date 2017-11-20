@@ -41,4 +41,5 @@ MAIL_ENCRYPTION=null
 ```
 
 5) запустить миграции **php artisan migrate:install** && **php artisan migrate:refresh --seed**
-6) готово 
+6) запустить php artisan key:generate
+7) готово 

@@ -30,8 +30,6 @@
 .sloganShow {
   @include col();
   @include col-5();
-  max-width: 100%;
-  cursor: pointer;
   z-index: 10;
   @include max-screen($break_sm) {
     @include col-8();
@@ -39,6 +37,10 @@
   }
   @include max-screen($break_xs) {
     @include col-12();
+  }
+  img {
+    width: 100%;
+    height: auto;
   }
 }
 .news {
@@ -74,7 +76,7 @@
     font-size: 13px;
     color: $link;
   }
-  &__text {
+  &__text, p {
     text-align: justify;
     color: $link;
     margin: 8px 0 0;

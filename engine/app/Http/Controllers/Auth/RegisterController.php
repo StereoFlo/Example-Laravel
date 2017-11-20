@@ -20,7 +20,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/cabinet';
 
     /**
      * Show the application registration form.

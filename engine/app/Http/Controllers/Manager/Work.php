@@ -12,11 +12,20 @@ use RecycleArt\Http\Controllers\Controller;
  */
 class Work extends ManagerController
 {
+
+    /**
+     * @var \RecycleArt\Models\Work
+     */
+    protected $work;
+
     /**
      * User constructor.
+     *
+     * @param \RecycleArt\Models\Work $work
      */
-    public function __construct()
+    public function __construct(\RecycleArt\Models\Work $work)
     {
+        $this->work = $work;
         parent::__construct();
     }
 
@@ -25,7 +34,7 @@ class Work extends ManagerController
      */
     public function getList()
     {
-        return view('manager.work.list', ['works' => \RecycleArt\Models\Work::getInstance()->getListForManager()]);
+        return view('manager.work.list', ['works' => $this->work->getListForManager()]);
     }
 
     /**
@@ -33,7 +42,7 @@ class Work extends ManagerController
      */
     public function getListUnapproved()
     {
-        return view('manager.work.list', ['works' => \RecycleArt\Models\Work::getInstance()->getUnapprovedList(false)]);
+        return view('manager.work.list', ['works' => $this->work->getUnapprovedList(false)]);
     }
 
     /**
@@ -41,7 +50,7 @@ class Work extends ManagerController
      */
     public function getListApproved()
     {
-        return view('manager.work.list', ['works' => \RecycleArt\Models\Work::getInstance()->getUnapprovedList(true)]);
+        return view('manager.work.list', ['works' => $this->work->getUnapprovedList(true)]);
     }
 
     /**
@@ -51,7 +60,7 @@ class Work extends ManagerController
      */
     public function getListByAuthor(int $id)
     {
-        return view('manager.work.list', ['works' => \RecycleArt\Models\Work::getInstance()->getListByUserId($id)]);
+        return view('manager.work.list', ['works' => $this->work->getListByUserId($id)]);
     }
 
     /**
@@ -62,7 +71,7 @@ class Work extends ManagerController
     public function approve(int $workId): array
     {
         return [
-            'isApproved' => \RecycleArt\Models\Work::getInstance()->toggleApprove($workId)
+            'isApproved' => $this->work->toggleApprove($workId)
         ];
     }
 }

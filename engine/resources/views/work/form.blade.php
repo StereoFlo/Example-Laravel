@@ -5,9 +5,15 @@
     <section class="workAdd">
         <div class="container">
 
-            <div class="sectionTitle">
-                <h2>@lang('work.new')</h2>
-            </div>
+            @if(empty($work['id']))
+                <div class="sectionTitle">
+                    <h2>@lang('work.new')</h2>
+                </div>
+            @else
+                <div class="sectionTitle">
+                    <h2>Редактирование работы</h2>
+                </div>
+            @endif
 
             <form method="post" action="{{ route('workProcess') }}" enctype="multipart/form-data" class="form workAddForm">
                 {{ csrf_field() }}
@@ -55,40 +61,87 @@
                     {{--@endif--}}
                 {{--</div>--}}
 
-                @if(!empty($work['id']))
-                    <p>Категории работы:</p>
-                    @if(empty($work['categories']['inWork']))
-                        <p>Вы не добавили свою работу не в одну категорию</p>
+                <div class="materials">
+                    @if(!empty($work['id']))
+                        <p>Материалы работы:</p>
+                        <div class="inWork">
+                            @if(empty($work['materials']['inWork']))
+                                <span>Вы не добавили свою работу не одного материала</span>
+                            @else
+                                @foreach($work['materials']['inWork'] as $material)
+                                    <a href="{{ route('removeMaterialFromWork', ['workId' => $work['id'], 'materialId' => $material['material_id']]) }}" id="dmid_{{$material['material_id']}} " class="materials__item">
+                                        <span class="name">{{ $material['name'] }}</span>
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </a>
+                                @endforeach
+                            @endif
+                        </div>
+                        <div class="notInWork">
+                            <p>Все материалы:</p>
+                            @if(empty($work['materials']['notInWork']))
+                                <span class="empty">Все возможные материалы добавлены в работу</span>
+                                <div class="inputGroup checkboxes"></div>
+                            @else
+                                <div class="inputGroup checkboxes">
+                                    @foreach($work['materials']['notInWork'] as $material)
+                                        <input id="{{ $material['id'] }}" type="checkbox" name="materials[]" value="{{ $material['id'] }}">
+                                        <label for="{{ $material['id'] }}">{{ $material['name'] }}</label>
+                                    @endforeach
+                                </div>
+                            @endif
+                            <input type="hidden" name="workId" value="{{ $work['id'] }}">
+                        </div>
                     @else
-                        <div class="category">
-                            @foreach($work['categories']['inWork'] as $category)
-                                <a href="{{ route('deleteFromCategory', ['workId' => $work['id'], 'catId' => $category['id']]) }}" id="dcid_{{ $category['id'] }}" class="category__item">
-                                    <span class="name">{{ $category['name'] }}</span>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </a>
+                        <p>Материалы:</p>
+                        <div class="inputGroup checkboxes">
+                            @foreach($materials as $material)
+                                <input id="{{ $material['id'] }}" type="checkbox" name="materials[]" value="{{ $material['id'] }}">
+                                <label for="{{ $material['id'] }}">{{ $material['name'] }}</label>
                             @endforeach
                         </div>
                     @endif
-                    <p>Все категории:</p>
-                    @if(empty($work['categories']['notInWork']))
-                        <p>Ваша работа сейчас во всех возможных категориях</p>
+                </div>
+
+                <div class="category">
+                    @if(!empty($work['id']))
+                        <p>Категории работы:</p>
+                        <div class="inWork">
+                            @if(empty($work['categories']['inWork']))
+                                <span>Вы не добавили свою работу не в одну категорию</span>
+                            @else
+                                @foreach($work['categories']['inWork'] as $category)
+                                    <a href="{{ route('deleteFromCategory', ['workId' => $work['id'], 'catId' => $category['id']]) }}" id="dcid_{{ $category['id'] }}" class="category__item">
+                                        <span class="name">{{ $category['name'] }}</span>
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </a>
+                                @endforeach
+                            @endif
+                        </div>
+                        <div class="notInWork">
+                            <p>Все категории:</p>
+                            @if(empty($work['categories']['notInWork']))
+                                <span class="empty">Ваша работа сейчас во всех возможных категориях</span>
+                                <div class="inputGroup checkboxes"></div>
+                            @else
+                                <div class="inputGroup checkboxes">
+                                    @foreach($work['categories']['notInWork'] as $category)
+                                        <input id="{{ $category['id'] }}" type="checkbox" name="categories[]" value="{{ $category['id'] }}">
+                                        <label for="{{ $category['id'] }}">{{ $category['name'] }}</label>
+                                    @endforeach
+                                </div>
+                            @endif
+                            <input type="hidden" name="workId" value="{{ $work['id'] }}">
+                        </div>
                     @else
-                        <div id="notInWork" class="inputGroup checkboxes">
-                            @foreach($work['categories']['notInWork'] as $category)
+                        <p>Категории:</p>
+                        <div class="inputGroup checkboxes">
+                            @foreach($categories as $category)
                                 <input id="{{ $category['id'] }}" type="checkbox" name="categories[]" value="{{ $category['id'] }}">
                                 <label for="{{ $category['id'] }}">{{ $category['name'] }}</label>
                             @endforeach
                         </div>
                     @endif
-                    <input type="hidden" name="workId" value="{{ $work['id'] }}">
-                @else
-                    <div class="inputGroup checkboxes">
-                        @foreach($categories as $category)
-                            <input id="{{ $category['id'] }}" type="checkbox" name="categories[]" value="{{ $category['id'] }}">
-                            <label for="{{ $category['id'] }}">{{ $category['name'] }}</label>
-                        @endforeach
-                    </div>
-                @endif
+                </div>
 
                 <div class="inputGroup{{ $errors->has('images') ? ' has-error' : '' }}">
                     <label for="images">@lang('work.photoOfNewWork') (16:9, jpeg):</label>
@@ -129,7 +182,11 @@
                     @endif
                 </div>
 
-                <button type="submit" name="button" class="button">@lang('work.buttonOfNewWork')</button>
+                @if(empty($work['id']))
+                    <button type="submit" name="button" class="button btn_ok">@lang('work.buttonOfNewWork')</button>
+                @else
+                    <button type="submit" name="button" class="button btn_caution">Изменить</button>
+                @endif
             </form>
         </div>
     </section>

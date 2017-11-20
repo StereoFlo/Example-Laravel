@@ -27,12 +27,6 @@
             </div>
 
         </div>
-
-        {{--<a href="#authorWorks" class="scrollDown">--}}
-            {{--<img src="{{ url('static/images/scroll.png') }}" alt="scroll">--}}
-            {{--<img src="{{ url('static/images/scroll.png') }}" alt="scroll">--}}
-            {{--<img src="{{ url('static/images/scroll.png') }}" alt="scroll">--}}
-        {{--</a>--}}
     </section>
 
     <section id="authorWorks" class="products authorWorks">

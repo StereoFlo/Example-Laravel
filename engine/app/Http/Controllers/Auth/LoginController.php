@@ -17,7 +17,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/cabinet';
 
     /**
      * LoginController constructor.
@@ -137,13 +137,13 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        if ($request->ajax()) {
-            return response()->json([
-                'auth' => Auth::check(),
-                'user' => $user,
-            ]);
+        if (!$request->ajax()) {
+            return redirect()->intended($this->redirectPath());
         }
-        return redirect()->intended($this->redirectPath());
+        return response()->json([
+            'auth' => Auth::check(),
+            'user' => $user,
+        ]);
     }
 
     /**

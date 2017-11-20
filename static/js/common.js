@@ -42,6 +42,11 @@ $(function () {
     $('.user__btn, .logIn__close').click(function (e) {
         e.preventDefault();
         $('.logIn .forms').empty();
+        $(document).keydown(function(e) {
+            if( e.keyCode === 27 ) {
+                $('.logIn').addClass('hidden');
+            }
+        });
 
         $.get('/login/ajax')
             .done(function (data) {
@@ -76,25 +81,19 @@ $(function () {
     /* ---------------------------------------------- */
 
     $('.slogan').hide();
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        $(".sloganShow").click(function () {
-            //todo
-        })
-    } else {
-        $(".sloganShow").hover(
-            function () {
-                $(this).siblings('.news, .slogan').stop();
-                $(this).siblings('.news').slideUp(600);
-                $(this).siblings('.slogan').slideDown(600);
-            }
-            ,
-            function () {
-                $(this).siblings(".news, .slogan").stop();
-                $(this).siblings(".news").slideDown();
-                $(this).siblings(".slogan").slideUp();
-            }
-        );
-    }
+    $(".sloganShow").hover(
+        function () {
+            $(this).siblings('.news, .slogan').stop();
+            $(this).siblings('.news').slideUp(600);
+            $(this).siblings('.slogan').slideDown(600);
+        }
+        ,
+        function () {
+            $(this).siblings(".news, .slogan").stop();
+            $(this).siblings(".news").slideDown();
+            $(this).siblings(".slogan").slideUp();
+        }
+    );
 
     /* ---------------------------------------------- /*
      * Scroll to id
@@ -165,7 +164,7 @@ $(function () {
      * Slider
     /* ---------------------------------------------- */
 
-    $('.galleryCategory__title a').click(function (e) {
+    $('.galleryCategory__title a').click(function () {
         event.preventDefault();
         $('.galleryCategory').toggleClass('galleryCategory_opened');
     });
@@ -203,30 +202,59 @@ $(function () {
      * Categories
     /* ---------------------------------------------- */
 
-    $('[id^=dcid_]').click(function (event) {
-        event.preventDefault();
-        var catId = $(this).attr('id').split('dcid_')[1];
-        var catName = $(this).find('span').html();
-        var $delLink = $(this);
+    // $('[id^=dcid_]').click(function (event) {
+    //     event.preventDefault();
+    //     var catId = $(this).attr('id').split('dcid_')[1];
+    //     var catName = $(this).find('span').html();
+    //     var $delLink = $(this);
+    //
+    //     $.get($(this).attr('href'), function (response) {
+    //         if (response.isRemoved) {
+    //
+    //             $delLink.remove();
+    //             // if($category.length == 0) {
+    //             //     $(this).append('<p>Вы не добавили свою работу не в одну категорию</p>');
+    //             // }
+    //
+    //             $('#notInWork').append(
+    //                 '<input id="'+ catId +'" type="checkbox" name="categories[]" value="'+ catId +'">' +
+    //                 '<label for="'+ catId +'">'+ catName +'</label>'
+    //             );
+    //
+    //         } else {
+    //             alert('panic!')
+    //         }
+    //     });
+    // });
 
-        $.get($(this).attr('href'), function (response) {
-            if (response.isRemoved) {
+    function testDel(item) {
+        $(item).click(function(e) {
+            e.preventDefault();
 
-                $delLink.remove();
-                // if($category.length == 0) {
-                //     $(this).append('<p>Вы не добавили свою работу не в одну категорию</p>');
-                // }
+            var itemId = $(this).attr('id').split('_')[1];
+            var itemName = $(this).find('span').html();
+            var $position = $(this).parent().siblings('.notInWork').find('.inputGroup');
+            var $message = $(this).parent().siblings('.notInWork').find('.empty');
+            var $delLink = $(this);
 
-                $('#notInWork').append(
-                    '<input id="'+ catId +'" type="checkbox" name="categories[]" value="'+ catId +'">' +
-                    '<label for="'+ catId +'">'+ catName +'</label>'
-                );
+            $.get($(this).attr('href'), function (response) {
+                if (response.isRemoved) {
+                    $delLink.remove();
+                    $message.remove();
 
-            } else {
-                alert('panic!')
-            }
+                    $position.append(
+                        '<input id="'+ itemId +'" type="checkbox" name="materials[]" value="'+ itemId +'">' +
+                        '<label for="'+ itemId +'">'+ itemName +'</label>'
+                    );
+
+                } else {
+                    alert('panic!');
+                }
+            });
         });
-    });
+    }
+    testDel('[id^=dcid_]');
+    testDel('[id^=dmid_]');
 
     /* ---------------------------------------------- /*
      * Gallery
@@ -292,6 +320,8 @@ $(function () {
             }
 
             setUrl(parameters);
+            setCheckboxes(parameters);
+
             // this is need for post query
             $.ajaxSetup({
                 headers: {
@@ -316,6 +346,18 @@ $(function () {
             history.pushState({}, "", decodeURI(window.location.origin + window.location.pathname + '?' + $.param(parameters)));
         }
 
+        /**
+         * set checkboxes
+         * @param parameters
+         */
+        function setCheckboxes(parameters) {
+           if (parameters.categories && parameters.categories.length > 0) {
+               for (var cat of parameters.categories) {
+                   $('#cid_' + cat).prop('checked', true);
+               }
+           }
+        }
+
     }
 
 });
@@ -334,9 +376,12 @@ $(document).on('submit', '#ajaxLogin', function (e) {
             if (data.auth === true) {
                 $.get('/login/ajax')
                     .done(function (data) {
-                        $('.logIn').addClass('hidden');
                         $(this).empty();
-                        $(this).append(data);
+                        window.location.href = '/cabinet';
+                        // $('.logIn').addClass('hidden');
+                        // $(this).append(data);
+
+
                     })
                     .fail(function (data) {
                     });
@@ -357,9 +402,10 @@ $(document).on('submit', '#ajaxRegistration', function (e) {
             if (data.auth === true) {
                 $.get('/login/ajax')
                     .done(function (data) {
-                        $('.logIn').addClass('hidden');
+                        window.location.href = '/cabinet';
                         $(this).empty();
-                        $(this).append(data);
+                        // $('.logIn').addClass('hidden');
+                        // $(this).append(data);
                     })
                     .fail(function (data) {
                         //todo

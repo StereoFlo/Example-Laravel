@@ -5,7 +5,11 @@
         <div class="filter"></div>
         <div class="container">
             <div class="flex">
-                <img src="{{ url('static/images/logo.png') }}" alt="Logo" class="sloganShow">
+                <a href="{{url('pages/style.html')}}" class="sloganShow">
+                    <img src="{{ url('static/images/logo.png') }}" alt="Logo" class="">
+                </a>
+                {{--<img src="{{ url('static/images/logo.png') }}" alt="Logo" class="sloganShow">--}}
+
                 <div class="slogan">
                     <p class="slogan__item">
                         {!! $slogan !!}
@@ -39,24 +43,25 @@
     </section>
 
     <section id="products" class="products">
-            <div class="products__wrap">
-                @if(empty($works))
-                    <p>Работ от авторов пока нет</p>
-                    @else
-                    @foreach($works as $work)
-                        <a href="/work/{{$work['workId']}}" class="item">
-                            <div class="content">
-                                <div class="border">
-                                    <div class="valign">
-                                        <h3>{{ $work['name'] }}</h3>
-                                        <p>{{ $work['workName'] }}</p>
-                                    </div>
+        <div class="products__wrap">
+            @if(empty($works))
+                <p>Работ от авторов пока нет</p>
+                @else
+                @foreach($works as $work)
+                    <a href="/work/{{$work['workId']}}" class="item">
+                        <div class="content">
+                            <div class="border">
+                                <div class="valign">
+                                    <h3>{{ $work['name'] }}</h3>
+                                    <p>{{ $work['workName'] }}</p>
                                 </div>
                             </div>
-                            <img src="{{ url($work['link']) }}" alt="">
-                        </a>
-                    @endforeach
-                @endif
-            </div>
+                        </div>
+                        <img src="{{ url($work['link']) }}" alt="">
+                    </a>
+                @endforeach
+            @endif
+        </div>
+        <h2 class="products__toGallery"><a href="{{ route('galleryPublicIndex') }}">Все работы</a></h2>
     </section>
 @endsection

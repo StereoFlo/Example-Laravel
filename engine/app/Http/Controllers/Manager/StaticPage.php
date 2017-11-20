@@ -18,9 +18,9 @@ class StaticPage extends ManagerController
     /**
      * @return Factory|View
      */
-    public function getList()
+    public function getList(StaticPageModel $staticPage)
     {
-        $pageList = StaticPageModel::getInstance()->getList();
+        $pageList = $staticPage->getList();
         return view('manager.staticPage.list', ['pages' => $pageList]);
     }
 
@@ -35,30 +35,39 @@ class StaticPage extends ManagerController
     /**
      * todo необходимо записывать в сессию результат сохранения/изменения
      *
-     * @param Request $request
+     * @param Request         $request
+     *
+     * @param StaticPageModel $staticPage
      *
      * @return mixed
      */
-    public function process(Request $request)
+    public function process(Request $request, StaticPageModel $staticPage)
     {
-        StaticPageModel::getInstance()->updateOrMake($request);
-        return Redirect::to(route('managerPageList'));
-    }
-
-    public function remove(string $slug)
-    {
-        StaticPageModel::getInstance()->removePage($slug);
+        $staticPage->updateOrMake($request);
         return Redirect::to(route('managerPageList'));
     }
 
     /**
-     * @param string $slug
+     * @param StaticPageModel $staticPage
+     * @param string          $slug
+     *
+     * @return mixed
+     */
+    public function remove(StaticPageModel $staticPage, string $slug)
+    {
+        $staticPage->removePage($slug);
+        return Redirect::to(route('managerPageList'));
+    }
+
+    /**
+     * @param StaticPageModel $staticPage
+     * @param string          $slug
      *
      * @return Factory|View
      */
-    public function update(string $slug)
+    public function update(StaticPageModel $staticPage, string $slug)
     {
-        $page = StaticPageModel::getInstance()->getBy($slug);
+        $page = $staticPage->getBy($slug);
         if (empty($page)) {
             abort(404, 'page not found');
         }

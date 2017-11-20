@@ -17,6 +17,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('static/css/app.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 </head>
 <body>
 <div id="app">
@@ -52,7 +53,7 @@
                         <li><a href="{{ route('register') }}">Register</a></li>
                         @else
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
@@ -84,10 +85,9 @@
 </div>
 
 <!-- Scripts -->
-<script src="{{ asset('static/js/app.js') }}"></script>
+{{--<script src="{{ asset('static/js/app.js') }}"></script>--}}
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 <script src="{{ asset('static/js/manager.js') }}"></script>
 </body>
