@@ -52,7 +52,7 @@
             <div class="flex">
                 <div class="footer__brand">
                     <a href="{{ url('index.html') }}"><img src="{{url('static/images/logo-min.png')}}" alt=""></a>
-                    <span class="sm-fs-12 xs-block">&copy; 2014-2017. Все права защищены.</span>
+                    <span class="sm-fs-12 xs-block">&copy; 2014-{{ date('Y') }}. Все права защищены.</span>
                 </div>
                 <div class="footer__social">
                     <a href="https://vk.com/fe26room" class="footer__vk"><i class="fa fa-vk" aria-hidden="true"></i></a>
