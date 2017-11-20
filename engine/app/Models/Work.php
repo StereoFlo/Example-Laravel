@@ -119,6 +119,7 @@ class Work extends Model
         (new MaterialRel())->removeWork($workId);
         (new TagsRel())->deleteByWork($workId);
         (new CatalogRel())->removeWorkCategory($workId);
+        (new WorkImages())->deleteAllImages($workId);
         return $this->where('id', $workId)->delete();
     }
 
