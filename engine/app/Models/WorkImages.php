@@ -77,6 +77,25 @@ class WorkImages extends Model
     }
 
     /**
+     * @param int $workId
+     *
+     * @return bool
+     */
+    public function deleteAllImages(int $workId)
+    {
+        $images = $this->where('workId', $workId)->get();
+        if (!$this->checkEmptyObject($images)) {
+            return false;
+        }
+        $isSaved = false;
+        foreach ($images as $image) {
+            $path = public_path($image->link);
+            $isSaved = File::delete($path) && $this->where('id', $image->id)->delete();
+        }
+        return $isSaved;
+    }
+
+    /**
      * @param UploadedFile[] $files
      * @param int $workId
      *
