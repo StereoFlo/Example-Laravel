@@ -6,17 +6,23 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/{index}', 'MainController@index')->where('index', '^(index\.html$|index\.jsp$|index\.php$)?');
+
 Route::get('/login/ajax', 'Auth\\LoginController@ajaxLogin');
 Route::get('/register/ajax', 'Auth\\RegisterController@ajaxRegister');
 Route::get('/register', 'Auth\\RegisterController@register')->name('register');
+
 Route::get('/news', 'NewsController@getList')->name('news');
 Route::get('/news/page/{id}', 'NewsController@getList')->where('id', '[0-9]+');
 Route::get('/news/{id}', 'NewsController@show')->where('id', '[0-9]+');
+
 Route::get('/author/{id}', 'AuthorController@show')->where('id', '[0-9]+');
+
 Route::get('/work/{id}', 'WorkController@show')->where('id', '[0-9]+')->name('workPublicShow');
 Route::get('/work/like/{id}', 'WorkController@setLike')->where('id', '[0-9]+')->name('workPublicLike');
+
 Route::get('/gallery', 'GalleryController@index')->name('galleryPublicIndex');
 Route::post('/gallery/works', 'GalleryController@getWorks')->name('galleryPublicWorks');
+
 Route::get('/pages/{slug}.html', 'StaticPageController@getPage')->where('slug', '[a-z]+');
 
 Route::group(['middleware' => 'isAdmin'], function () {
