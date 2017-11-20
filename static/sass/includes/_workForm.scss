@@ -55,14 +55,9 @@
       }
     }
   }
-  button {
-    font-size: 1.2em;
+  .button {
     display: block;
     margin: 30px auto ;
-    background: #4a5281;
-    &:hover {
-      background: darken(#4a5281, 15%);
-    }
   }
 }
 
