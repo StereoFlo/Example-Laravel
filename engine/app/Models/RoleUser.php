@@ -59,7 +59,7 @@ class RoleUser extends Model
             return false;
         }
         $role = $this->where('user_id', $userId)->where('role_id', $getRole['id'])->get();
-        if ($this->checkEmptyObject($role)) {
+        if (!$this->checkEmptyObject($role)) {
             return $this->create([
                 'role_id' => $getRole['id'],
                 'user_id' => $userId,
