@@ -4,6 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="yandex-verification" content="9762865d68b5cd4d" />
+    <meta name="google-site-verification" content="4mGGokrJVC89yaOhDLqqA_1N-sI_rpbPP_VWGl4yx1I" />
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+    <meta name="Description" content="Портал любителей стиля Recycle Art"/>
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ url('static/images/favicon/favicon.png') }}"/>
@@ -11,9 +16,20 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Schema.org -->
+    <meta property="og:locale"           content="ru_RU">
+    <meta property="og:title"            content="Recycle Art" />
+    <meta property="og:type"             content="website" />
+    <meta property="og:url"              content="https://www.recycleart.ru" />
+    <meta property="og:description"      content="Портал любителей стиля Recycle Art" />
+    <meta property="og:image"            content="https://www.recycleart.ru/static/images/prew.jpg" />
+    <meta property="og:image:width"      content="968">
+    <meta property="og:image:height"     content="504">
+
     <!-- Styles -->
     <link href="{{ asset('/static/css/main.min.css') }}" rel="stylesheet">
+
 </head>
 <body>
 <div class="wrapper">
@@ -29,7 +45,7 @@
                 <a href="#" class="menu__btn">
                     <i class="fa fa-bars" aria-hidden="true"></i>
                 </a>
-                <nav class="nav">
+                <nav class="nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
                     <a href="{{ url('index.html') }}" class="nav__link">Главная</a>
                     <a href="{{ route('galleryPublicIndex') }}" class="nav__link">Галерея</a>
                     <a href="{{ url('pages/about.html') }}" class="nav__link">О нас</a>

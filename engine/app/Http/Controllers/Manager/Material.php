@@ -29,7 +29,7 @@ class Material extends ManagerController
     {
         $list = $material->getList();
 
-        return view('manager.material.list', ['list' => $list]);
+        return \view('manager.material.list', ['list' => $list]);
     }
 
     /**
@@ -37,13 +37,13 @@ class Material extends ManagerController
      */
     public function add()
     {
-        return view('manager.material.form');
+        return \view('manager.material.form');
     }
 
     public function edit(MaterialModel $material, int $id)
     {
         $material = $material->getBy($id);
-        return view('manager.material.form', ['material' => $material]);
+        return \view('manager.material.form', ['material' => $material]);
     }
 
     public function remove(MaterialModel $material, int $id)
@@ -53,7 +53,8 @@ class Material extends ManagerController
     }
 
     /**
-     * @param Request $request
+     * @param Request       $request
+     * @param MaterialModel $material
      *
      * @return mixed
      */
@@ -61,10 +62,10 @@ class Material extends ManagerController
     {
         $id          = $request->post('id', false);
         $name        = $request->post('name', false);
-        $file       = $request->file('file');
+        $file        = $request->file('file');
         $description = $request->post('description', '');
         if (!$id) {
-            $id = time();
+            $id = \time();
         }
         $url = '/uploads/materials/';
         $path = \public_path($url);

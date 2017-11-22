@@ -40,7 +40,7 @@ class News extends ManagerController
     public function getList(int $page = 0)
     {
         $news = $this->newsModel->getList(self::NEWS_PER_PAGE, $page);
-        return view('manager.news.list', [
+        return \view('manager.news.list', [
             'news'        => $news,
             'currentPage' => $page,
             'parPage'     => self::NEWS_PER_PAGE,
@@ -53,16 +53,16 @@ class News extends ManagerController
      */
     public function makeNew()
     {
-        return view('manager.news.form');
+        return \view('manager.news.form');
     }
 
     public function update(int $id)
     {
         $news = $this->newsModel->getById($id);
         if (empty($news)) {
-            abort(404, 'Новость не найдена');
+            \abort(404, 'Новость не найдена');
         }
-        return view('manager.news.form', ['news' => $news]);
+        return \view('manager.news.form', ['news' => $news]);
     }
 
     /**

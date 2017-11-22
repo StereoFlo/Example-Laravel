@@ -34,7 +34,7 @@ class TagController extends Controller
     public function deleteFromWork(int $workId, int $tagId)
     {
         $isDeleted = $this->tagRelModel->deleteFromWork($workId, $tagId);
-        return response()->json([
+        return \response()->json([
             'isDeleted' => (bool) $isDeleted,
         ]);
     }

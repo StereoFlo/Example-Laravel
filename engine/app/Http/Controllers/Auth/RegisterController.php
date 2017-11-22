@@ -119,13 +119,15 @@ class RegisterController extends Controller
     /**
      * The user has been registered.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  mixed  $user
+     * @param  \Illuminate\Http\Request $request
+     * @param RoleUser                  $roleUser
+     * @param  mixed                    $user
+     *
      * @return mixed
      */
-    protected function registered(Request $request, $user)
+    protected function registered(Request $request, RoleUser $roleUser, $user)
     {
-        RoleUser::getInstance()->enableRoleByName($user->id, User::ROLE_AUTHOR);
+        $roleUser->enableRoleByName($user->id, User::ROLE_AUTHOR);
         if ($request->ajax()) {
             return response()->json([
                 'auth' => Auth::check(),

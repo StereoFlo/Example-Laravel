@@ -98,15 +98,18 @@ class WorkController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param int     $id
+     * @param Request    $request
+     * @param Work       $work
+     * @param WorkImages $workImages
+     * @param TagsRel    $tagsRel
+     * @param int        $id
      *
      * @return int
      */
-    public function remove(Request $request, int $id)
+    public function remove(Request $request, Work $work, WorkImages $workImages, TagsRel $tagsRel, int $id)
     {
-        $workPath = public_path(sprintf(self::WORK_PATH, Auth::id(), $id));
-        if (Work::getInstance()->removeById($id) && WorkImages::getInstance()->removeByWorkId($id) && (new TagsRel())->deleteByWork($id)) {
+        $workPath = \public_path(\sprintf(self::WORK_PATH, Auth::id(), $id));
+        if ($work->removeById($id) && $workImages->removeByWorkId($id) && $tagsRel->deleteByWork($id)) {
             File::cleanDirectory($workPath);
             rmdir($workPath);
             $request->session()->flash('addWorkResult', __('work.addWorkRemovedSuccess'));
@@ -126,7 +129,7 @@ class WorkController extends Controller
      */
     public function removeImageFromWork(Request $request, WorkImages $workImages, int $workId, int $imageId)
     {
-        $isSaved = $workImages->deleteImageFromWork($workId, $imageId);
+        $isSaved = $workImages->removeFromWork($workId, $imageId);
         if ($isSaved) {
             $request->session()->flash('results', 'Изображение удалено');
             return Redirect::to(route('workEdit', ['id' => $workId]));

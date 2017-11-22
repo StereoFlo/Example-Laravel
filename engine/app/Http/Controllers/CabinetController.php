@@ -29,7 +29,7 @@ class CabinetController extends Controller
      */
     public function index(Work $work)
     {
-        return view('cabinet.index', [
+        return \view('cabinet.index', [
             'works' => $work->getListByUserId(Auth::id()),
         ]);
     }
@@ -39,7 +39,7 @@ class CabinetController extends Controller
      */
     public function profile()
     {
-        return view('cabinet.profile');
+        return \view('cabinet.profile');
     }
 
     /**

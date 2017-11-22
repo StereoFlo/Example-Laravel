@@ -13,8 +13,6 @@ use RecycleArt\Models\Work;
  */
 class MainController extends Controller
 {
-    const WORK_LIMIT = 15;
-
     /**
      * @var Slogan
      */
@@ -52,7 +50,7 @@ class MainController extends Controller
         return view('main.index', [
             'slogan' => $this->slogan->getSlogan(),
             'news'   => $this->news->getList(),
-            'works'  => $this->work->getListForHomepage(self::WORK_LIMIT),
+            'works'  => $this->work->getListForHomepage($this->work->getPerPage()),
         ]);
     }
 }

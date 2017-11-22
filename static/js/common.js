@@ -248,7 +248,7 @@ $(function () {
                     );
 
                 } else {
-                    alert('panic!');
+                    console.log(response);
                 }
             });
         });
@@ -397,6 +397,7 @@ $(document).on('submit', '#ajaxRegistration', function (e) {
     e.preventDefault();
     var formData = $(this).serialize();
     var url = $(this).attr('action');
+    $('.errorText').empty();
     $.post(url, formData)
         .done(function (data) {
             if (data.auth === true) {
@@ -419,7 +420,7 @@ $(document).on('submit', '#ajaxRegistration', function (e) {
                     if (json.errors.hasOwnProperty(fieldName)) {
                         if (json.errors[fieldName] instanceof Array) {
                             json.errors[fieldName].forEach(function (error) {
-                                $('#' + fieldName + 'Error').empty().append(error);
+                                $('#' + fieldName + 'Error').append(error);
                             });
                         }
                     }

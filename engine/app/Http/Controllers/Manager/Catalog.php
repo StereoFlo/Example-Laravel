@@ -20,7 +20,7 @@ class Catalog extends ManagerController
     public function getList(CatalogModel $catalog)
     {
         $list = $catalog->getList();
-        return view('manager.catalog.list', ['categories' => $list]);
+        return \view('manager.catalog.list', ['categories' => $list]);
     }
 
     /**
@@ -36,7 +36,7 @@ class Catalog extends ManagerController
         }
         $category = $catalog->getById($id);
         if (empty($category)) {
-            abort(404, 'category has not found');
+            \abort(404, 'category has not found');
         }
         return \view('manager.catalog.form', ['category' => $category]);
     }

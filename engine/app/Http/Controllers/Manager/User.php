@@ -30,7 +30,7 @@ class User extends ManagerController
     public function getList(UserModel $user)
     {
         $users = $user->getAll();
-        return view('manager.user.list', ['users' => $users]);
+        return \view('manager.user.list', ['users' => $users]);
     }
 
     public function show(Role $role, Work $work, UserModel $user, int $userId)
@@ -47,7 +47,7 @@ class User extends ManagerController
         }
         $roles = $role->whereNotIn('id', $rolesIds)->get()->toArray();
         $works = $work->getListByUserId($user->id);
-        return view('manager.user.show', ['user' => $user->toArray(), 'userRoles' => $userRoles, 'roles'=> $roles, 'works' => $works]);
+        return \view('manager.user.show', ['user' => $user->toArray(), 'userRoles' => $userRoles, 'roles'=> $roles, 'works' => $works]);
     }
 
     /**

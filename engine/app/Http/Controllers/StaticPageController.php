@@ -2,7 +2,6 @@
 
 namespace RecycleArt\Http\Controllers;
 
-use Illuminate\Http\Request;
 use RecycleArt\Models\StaticPage;
 
 /**
@@ -21,8 +20,8 @@ class StaticPageController extends Controller
     {
         $page = $staticPage->getBy($id);
         if (empty($page)) {
-            abort(404, 'Static page not found');
+            \abort(404, 'Static page not found');
         }
-        return view('static_page.main', ['page' => $page]);
+        return \view('static_page.main', ['page' => $page]);
     }
 }
