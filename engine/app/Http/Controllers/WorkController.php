@@ -26,13 +26,6 @@ class WorkController extends Controller
     const WORK_PATH = 'uploads/$d/work/%d';
 
     /**
-     * WorkController constructor.
-     */
-    public function __construct()
-    {
-    }
-
-    /**
      * @param Work $work
      *
      * @return View
@@ -40,7 +33,7 @@ class WorkController extends Controller
     public function getList(Work $work): View
     {
         $works = $work->getListByUserId(Auth::id());
-        return view('work.list', [
+        return \view('work.list', [
             'works' => $works,
         ]);
     }
@@ -53,11 +46,9 @@ class WorkController extends Controller
      */
     public function add(Catalog $catalog, Material $material): View
     {
-        $categories = $catalog->getList();
-        $materials = $material->getList();
         return view('work.form', [
-            'categories' => $categories,
-            'materials' => $materials,
+            'categories' => $catalog->getList(),
+            'materials' => $material->getList(),
         ]);
     }
 
@@ -94,7 +85,7 @@ class WorkController extends Controller
             $materialRel->addToWork($workId, $request->post('materials'));
         }
         $request->session()->flash('addWorkResult', __('work.addProcessSuccess'));
-        return Redirect::to(route('workShow', ['id' => $workId]));
+        return Redirect::to(\route('workShow', ['id' => $workId]));
     }
 
     /**
@@ -113,10 +104,10 @@ class WorkController extends Controller
             File::cleanDirectory($workPath);
             rmdir($workPath);
             $request->session()->flash('addWorkResult', __('work.addWorkRemovedSuccess'));
-            return Redirect::to(route('cabinetIndex'));
+            return Redirect::to(\route('cabinetIndex'));
         }
         $request->session()->flash('addWorkResult', __('work.addWorkRemovedError'));
-        return Redirect::to(route('cabinetIndex'));
+        return Redirect::to(\route('cabinetIndex'));
     }
 
     /**]
@@ -132,14 +123,15 @@ class WorkController extends Controller
         $isSaved = $workImages->removeFromWork($workId, $imageId);
         if ($isSaved) {
             $request->session()->flash('results', 'Изображение удалено');
-            return Redirect::to(route('workEdit', ['id' => $workId]));
+            return Redirect::to(\route('workEdit', ['id' => $workId]));
         }
         $request->session()->flash('results', 'Что-то пошло не так =(');
-        return Redirect::to(route('workEdit', ['id' => $workId]));
+        return Redirect::to(\route('workEdit', ['id' => $workId]));
     }
 
     /**
-     * @param int $id
+     * @param Work $work
+     * @param int  $id
      *
      * @return \Illuminate\Contracts\View\Factory|View
      */
@@ -147,10 +139,10 @@ class WorkController extends Controller
     {
         $work = $work->getById($id);
         if ($work['userId'] !== Auth::id()) {
-            abort(401, __('workNotFound'));
+            \abort(401, __('workNotFound'));
         }
         if (empty($work)) {
-            abort(404, __('workNotFound'));
+            \abort(404, __('workNotFound'));
         }
         return \view('work.form', ['work' => $work]);
     }

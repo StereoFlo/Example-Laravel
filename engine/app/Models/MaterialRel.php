@@ -40,7 +40,7 @@ class MaterialRel extends Model
     /**
      * @param int $workId
      *
-     * @return mixed
+     * @return bool
      */
     public function removeWork(int $workId)
     {

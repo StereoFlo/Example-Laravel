@@ -43,7 +43,7 @@ class TagsRel extends Model
     /**
      * @param int $workId
      *
-     * @return mixed
+     * @return bool
      */
     public function deleteByWork(int $workId)
     {

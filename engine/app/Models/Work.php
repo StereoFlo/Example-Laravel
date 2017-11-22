@@ -109,11 +109,11 @@ class Work extends Model
      */
     public function removeById(int $workId)
     {
-        $this->getMaterialRelation()->removeWork($workId);
-        $this->getTagsRelation()->deleteByWork($workId);
-        $this->getCatalogRelation()->removeWorkCategory($workId);
-        $this->getWorkImages()->removeAllImages($workId);
-        return $this->where('id', $workId)->delete();
+        return $this->getMaterialRelation()->removeWork($workId) &&
+                $this->getTagsRelation()->deleteByWork($workId) &&
+                $this->getCatalogRelation()->removeWorkCategory($workId) &&
+                $this->getWorkImages()->removeAllImages($workId) &&
+                $this->where('id', $workId)->delete();
     }
 
     /**
