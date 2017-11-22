@@ -42,7 +42,7 @@ class Work extends ManagerController
      */
     public function getListUnapproved()
     {
-        return \view('manager.work.list', ['works' => $this->work->getUnapprovedList(false)]);
+        return \view('manager.work.list', ['works' => $this->work->getByApprove(false)]);
     }
 
     /**
@@ -50,7 +50,7 @@ class Work extends ManagerController
      */
     public function getListApproved()
     {
-        return \view('manager.work.list', ['works' => $this->work->getUnapprovedList(true)]);
+        return \view('manager.work.list', ['works' => $this->work->getByApprove(true)]);
     }
 
     /**

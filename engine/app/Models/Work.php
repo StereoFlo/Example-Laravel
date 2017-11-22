@@ -8,6 +8,8 @@ namespace RecycleArt\Models;
  */
 class Work extends Model
 {
+    public $approved;
+
     /**
      * @var string
      */
@@ -297,7 +299,7 @@ class Work extends Model
      *
      * @return array
      */
-    public function getUnapprovedList(bool $approve = false)
+    public function getByApprove(bool $approve = false)
     {
         /** @var Model $result */
         $result = $this
@@ -319,7 +321,7 @@ class Work extends Model
     public function toggleApprove(int $workId)
     {
         /** @var Model $work */
-        $work = self::find($workId);
+        $work = $this->find($workId);
         if (!$this->checkEmptyObject($work)) {
             return false;
         }
