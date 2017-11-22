@@ -92,10 +92,12 @@ class RegisterController extends Controller
     /**
      * Handle a registration request for the application.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     * @param RoleUser                  $roleUser
+     *
      * @return \Illuminate\Http\Response
      */
-    public function register(Request $request)
+    public function register(Request $request, RoleUser $roleUser)
     {
         $this->validator($request);
 
@@ -103,7 +105,7 @@ class RegisterController extends Controller
 
         $this->guard()->login($user);
 
-        return $this->registered($request, $user);
+        return $this->registered($request, $roleUser, $user);
     }
 
     /**
