@@ -124,11 +124,27 @@ class WorkController extends Controller
     {
         $isSaved = $workImages->removeFromWork($workId, $imageId);
         if ($isSaved) {
-            $request->session()->flash('results', 'Изображение удалено');
+            if (!$request->ajax()) {
+                $request->session()->flash('results', 'Изображение удалено');
+                return Redirect::to(\route('workEdit', ['id' => $workId]));
+            }
+            return [
+                'isDeleted' => true,
+                'data' => [
+                    'imageId' => $imageId,
+                ]
+            ];
+        }
+        if (!$request->ajax()) {
+            $request->session()->flash('results', 'Что-то пошло не так =(');
             return Redirect::to(\route('workEdit', ['id' => $workId]));
         }
-        $request->session()->flash('results', 'Что-то пошло не так =(');
-        return Redirect::to(\route('workEdit', ['id' => $workId]));
+        return [
+            'isDeleted' => false,
+            'data' => [
+                'imageId' => $imageId,
+            ]
+        ];
     }
 
     /**
