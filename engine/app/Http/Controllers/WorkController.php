@@ -177,13 +177,13 @@ class WorkController extends Controller
         $work = $work->getById($id);
         $isLiked = session()->has('work' . $id);
         if (empty($work)) {
-            abort(404, __('work.workNotFound'));
+            \abort(404, __('work.workNotFound'));
         }
         if (!$work['approved']) {
             if ($request->user()->hasAnyRole([User::ROLE_MODERATOR, User::ROLE_ADMIN]) || $work['userId'] === Auth::id()) {
                 return view('work.show', ['work' => $work, 'isLiked' => $isLiked]);
             }
-            abort(401);
+            \abort(401);
         }
 
         return view('work.show', ['work' => $work, 'isLiked' => $isLiked]);
@@ -199,7 +199,7 @@ class WorkController extends Controller
     public function removeFromCategory(CatalogRel $catalogRel, int $workId, int $catId)
     {
         $res = (bool) $catalogRel->removeFromCategory($catId, $workId);
-        return response()->json([
+        return \response()->json([
             'isRemoved' => $res
         ]);
     }
@@ -214,7 +214,7 @@ class WorkController extends Controller
     public function removeMaterialFromWork(MaterialRel $materialRel, int $workId, int $materialId)
     {
         $res = (bool) $materialRel->removeFromWork($workId, $materialId);
-        return response()->json([
+        return \response()->json([
             'isRemoved' => $res
         ]);
     }
@@ -227,14 +227,14 @@ class WorkController extends Controller
      */
     public function setLike(Work $work, int $id)
     {
-        if (session()->has('work' . $id)) {
-            return response()->json([
+        if (\session()->has('work' . $id)) {
+            return \response()->json([
                 'isLiked' => false,
             ]);
         }
         $work->where('id', $id)->increment('likes');
-        session(['work' . $id => true]);
-        return response()->json([
+        \session(['work' . $id => true]);
+        return \response()->json([
             'isLiked' => true,
         ]);
     }

@@ -2,6 +2,7 @@
 
 namespace RecycleArt\Http\Controllers;
 
+use Illuminate\View\View;
 use RecycleArt\Models\StaticPage;
 
 /**
@@ -14,7 +15,7 @@ class StaticPageController extends Controller
      * @param StaticPage $staticPage
      * @param string     $id
      *
-     * @return array
+     * @return View
      */
     public function getPage(StaticPage $staticPage, string $id)
     {
