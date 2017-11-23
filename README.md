@@ -1,3 +1,9 @@
+#### О проекте
+Реальнеый проект для людей знамающимися искуством recycle art. 
+
+#### Благодарности
+@silaevd  - верстка
+
 #### Как установить систему
 
 1) **git clone ...** сливаем
@@ -40,6 +46,6 @@ MAIL_PASSWORD=b6609845739bbd
 MAIL_ENCRYPTION=null
 ```
 
-5) запустить миграции **php artisan migrate:install** && **php artisan migrate:refresh --seed**
-6) запустить php artisan key:generate
-7) готово 
+6) запустить миграции **php artisan migrate:install** && **php artisan migrate:refresh --seed**
+7) запустить php artisan key:generate
+8) готово 
