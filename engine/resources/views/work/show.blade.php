@@ -24,7 +24,7 @@
                             <p>У этой работы нет изображений</p>
                         @else
                             @foreach ($work['images'] as $image)
-                            <img src="{{$image['link']}}" alt="" class="work__pic">
+                            <img src="{{ url($image['link']) }}" alt="" class="work__pic">
                             @endforeach
                         @endif
                     </div>

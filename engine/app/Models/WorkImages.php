@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\File;
  */
 class WorkImages extends Model
 {
-    const WORK_PATH = 'uploads/$d/work/%d';
-    const LINK_PATH = 'uploads/$d/work/%d/%w';
+    const WORK_PATH = 'uploads/%d/work/%d';
+    const LINK_PATH = 'uploads/%d/work/%d/%s';
 
     /**
      * @var string
@@ -106,12 +106,13 @@ class WorkImages extends Model
         }
         foreach ($files as $key => $file) {
             $work = new self();
-            $newImageName = $this->uploadImage($workId, $key, $file);
             $work->workId = $workId;
             if (0 === $key && !$this->hasDefault($workId)) {
                 $work->isDefault = true;
             }
-            $work->link = \sprintf(self::WORK_PATH, Auth::id(), $workId, $newImageName);
+            $newImageName = $this->uploadImage($workId, $key, $file);
+            $test = \sprintf(self::LINK_PATH, Auth::id(), $workId, $newImageName);
+            $work->link = $test;
             $isSaved = $work->save();
         }
         return $isSaved;
@@ -153,13 +154,13 @@ class WorkImages extends Model
      * @param int          $key
      * @param UploadedFile $file
      *
-     * @return string
+     * @return string path
      */
     protected function uploadImage(int $workId, int $key, UploadedFile $file): string
     {
         $path = \public_path(\sprintf(self::WORK_PATH, Auth::id(), $workId));
         $newImageName = \md5(\time() . $key) . '.' . \strtolower($file->getClientOriginalExtension());
-        $file->move($path, $newImageName);
+        $file->move($path, $path . '/' .$newImageName);
         return $newImageName;
     }
 }

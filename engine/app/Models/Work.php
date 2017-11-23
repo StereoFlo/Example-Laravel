@@ -111,11 +111,12 @@ class Work extends Model
      */
     public function removeById(int $workId)
     {
-        return $this->getMaterialRelation()->removeWork($workId) &&
-                $this->getTagsRelation()->deleteByWork($workId) &&
-                $this->getCatalogRelation()->removeWorkCategory($workId) &&
-                $this->getWorkImages()->removeAllImages($workId) &&
-                $this->where('id', $workId)->delete();
+        $this->getMaterialRelation()->removeWork($workId);
+        $this->getTagsRelation()->deleteByWork($workId);
+        $this->getCatalogRelation()->removeWorkCategory($workId);
+        $this->getWorkImages()->removeAllImages($workId);
+        $this->where('id', $workId)->delete();
+        return true;
     }
 
     /**
@@ -126,7 +127,7 @@ class Work extends Model
      */
     public function updateOrSave(int $workId = 0, array $data): int
     {
-        if (empty($work)) {
+        if (empty($workId)) {
             $work = new self();
         } else {
             $work = self::find($workId);

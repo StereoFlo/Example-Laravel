@@ -164,14 +164,14 @@
                                         <div class="default">
                                             <i class="fa fa-check-square" aria-hidden="true"></i>
                                         </div>
-                                        <img src="{{ $image['link'] }}" alt="">
+                                        <img src="{{ url($image['link']) }}" alt="">
                                         <a href="{{ route('imageDeleteFromWork', ['workId' => $work['id'], 'imageId' => $image['id']]) }}" class="del">
                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                         </a>
                                     </div>
                                 @else
                                     <div class="image">
-                                        <img src="{{ $image['link'] }}" alt="">
+                                        <img src="{{ url($image['link']) }}" alt="">
                                         <a href="{{ route('imageDeleteFromWork', ['workId' => $work['id'], 'imageId' => $image['id']]) }}" class="del">
                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                         </a>

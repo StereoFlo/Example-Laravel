@@ -23,7 +23,7 @@ use RecycleArt\Models\WorkImages;
  */
 class WorkController extends Controller
 {
-    const WORK_PATH = 'uploads/$d/work/%d';
+    const WORK_PATH = 'uploads/%d/work/%d';
 
     /**
      * @param Work $work
@@ -100,13 +100,15 @@ class WorkController extends Controller
     public function remove(Request $request, Work $work, WorkImages $workImages, TagsRel $tagsRel, int $id)
     {
         $workPath = \public_path(\sprintf(self::WORK_PATH, Auth::id(), $id));
-        if ($work->removeById($id) && $workImages->removeByWorkId($id) && $tagsRel->deleteByWork($id)) {
-            File::cleanDirectory($workPath);
-            rmdir($workPath);
-            $request->session()->flash('addWorkResult', __('work.addWorkRemovedSuccess'));
-            return Redirect::to(\route('cabinetIndex'));
+        $tagsRel->deleteByWork($id);
+        $workImages->removeByWorkId($id);
+        $work->removeById($id);
+
+        File::cleanDirectory($workPath);
+        if (\is_dir($workPath)) {
+            \rmdir($workPath);
         }
-        $request->session()->flash('addWorkResult', __('work.addWorkRemovedError'));
+        $request->session()->flash('addWorkResult', __('work.addWorkRemovedSuccess'));
         return Redirect::to(\route('cabinetIndex'));
     }
 
@@ -122,11 +124,27 @@ class WorkController extends Controller
     {
         $isSaved = $workImages->removeFromWork($workId, $imageId);
         if ($isSaved) {
-            $request->session()->flash('results', 'Изображение удалено');
+            if (!$request->ajax()) {
+                $request->session()->flash('results', 'Изображение удалено');
+                return Redirect::to(\route('workEdit', ['id' => $workId]));
+            }
+            return [
+                'isDeleted' => true,
+                'data' => [
+                    'imageId' => $imageId,
+                ]
+            ];
+        }
+        if (!$request->ajax()) {
+            $request->session()->flash('results', 'Что-то пошло не так =(');
             return Redirect::to(\route('workEdit', ['id' => $workId]));
         }
-        $request->session()->flash('results', 'Что-то пошло не так =(');
-        return Redirect::to(\route('workEdit', ['id' => $workId]));
+        return [
+            'isDeleted' => false,
+            'data' => [
+                'imageId' => $imageId,
+            ]
+        ];
     }
 
     /**
