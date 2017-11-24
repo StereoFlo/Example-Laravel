@@ -231,37 +231,52 @@ $(function () {
     });
 
     /* ---------------------------------------------- /*
-     * Categories
+     * Categories, Materials
     /* ---------------------------------------------- */
 
-    function testDel(item) {
-        $(item).click(function(e) {
-            e.preventDefault();
+    $('[id^=dcid_]').click(function (e) {
+        e.preventDefault();
+        var itemId = $(this).attr('id').split('_')[1];
+        var itemName = $(this).find('span').html();
+        var $position = $(this).parent().siblings('.notInWork').find('.inputGroup');
+        var $message = $(this).parent().siblings('.notInWork').find('.empty');
+        var $delLink = $(this);
 
-            var itemId = $(this).attr('id').split('_')[1];
-            var itemName = $(this).find('span').html();
-            var $position = $(this).parent().siblings('.notInWork').find('.inputGroup');
-            var $message = $(this).parent().siblings('.notInWork').find('.empty');
-            var $delLink = $(this);
+        $.get($(this).attr('href'), function (response) {
+            if (response.isRemoved) {
+                $delLink.remove();
+                $message.remove();
 
-            $.get($(this).attr('href'), function (response) {
-                if (response.isRemoved) {
-                    $delLink.remove();
-                    $message.remove();
+                $position.append(
+                    '<input id="'+ itemId +'" type="checkbox" name="categories[]" value="'+ itemId +'">' +
+                    '<label for="'+ itemId +'">'+ itemName +'</label>'
+                );
 
-                    $position.append(
-                        '<input id="'+ itemId +'" type="checkbox" name="materials[]" value="'+ itemId +'">' +
-                        '<label for="'+ itemId +'">'+ itemName +'</label>'
-                    );
-
-                } else {
-                    console.log(response);
-                }
-            });
+            }
         });
-    }
-    testDel('[id^=dcid_]');
-    testDel('[id^=dmid_]');
+    });
+
+    $('[id^=dmid_]').click(function (e) {
+        e.preventDefault();
+        var itemId = $(this).attr('id').split('_')[1];
+        var itemName = $(this).find('span').html();
+        var $position = $(this).parent().siblings('.notInWork').find('.inputGroup');
+        var $message = $(this).parent().siblings('.notInWork').find('.empty');
+        var $delLink = $(this);
+
+        $.get($(this).attr('href'), function (response) {
+            if (response.isRemoved) {
+                $delLink.remove();
+                $message.remove();
+
+                $position.append(
+                    '<input id="'+ itemId +'" type="checkbox" name="materials[]" value="'+ itemId +'">' +
+                    '<label for="'+ itemId +'">'+ itemName +'</label>'
+                );
+
+            }
+        });
+    });
 
     /* ---------------------------------------------- /*
      * Gallery
