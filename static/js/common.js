@@ -253,7 +253,6 @@ $(function () {
                 );
 
             } else {
-                console.log(response);
             }
         });
     });
@@ -277,7 +276,6 @@ $(function () {
                 );
 
             } else {
-                console.log(response);
             }
         });
     });
