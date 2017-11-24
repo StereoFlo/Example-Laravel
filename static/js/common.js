@@ -142,23 +142,40 @@ $(function () {
     });
 
     /* ---------------------------------------------- /*
-     * Tag delete
+     * Elements delete
     /* ---------------------------------------------- */
 
-    $('[id^=tag_]').click(function (event) {
-        event.preventDefault();
-        var url = $(this).attr('href');
-        var element = $(this);
-        $.get(url)
-            .done(function (data) {
-                if (data.isDeleted === true) {
-                    element.remove();
-                }
-            })
-            .fail(function (data) {
-                console.log(data);
-            });
-    });
+        $('.workImgDel').click(function (event) {
+            event.preventDefault();
+            var url = $(this).attr('href');
+            var element = $(this).parent('.image');
+
+            $.get(url)
+                .done(function (data) {
+                    if (data.isDeleted === true) {
+                        element.remove();
+                    }
+                })
+                .fail(function (data) {
+                    console.log(data);
+                });
+        });
+
+
+    // $('[id^=tag_]').click(function (event) {
+    //     event.preventDefault();
+    //     var url = $(this).attr('href');
+    //     var element = $(this);
+    //     $.get(url)
+    //         .done(function (data) {
+    //             if (data.isDeleted === true) {
+    //                 element.remove();
+    //             }
+    //         })
+    //         .fail(function (data) {
+    //             console.log(data);
+    //         });
+    // });
 
     /* ---------------------------------------------- /*
      * Slider
@@ -168,6 +185,21 @@ $(function () {
         event.preventDefault();
         $('.galleryCategory').toggleClass('galleryCategory_opened');
     });
+
+    /* ---------------------------------------------- /*
+     * Input fix for ios
+    /* ---------------------------------------------- */
+    // if (window.width <= 480) {
+    //     var $body = $('body');
+    //     var $inputs = $('input');
+    //
+    //     $inputs.on('focus', function(e) {
+    //         $body.addClass('fixfixed');
+    //     });
+    //     $inputs.on('blur', function(e) {
+    //         $body.removeClass('fixfixed');
+    //     });
+    // }
 
     /* ---------------------------------------------- /*
      * Phone mask
@@ -201,31 +233,6 @@ $(function () {
     /* ---------------------------------------------- /*
      * Categories
     /* ---------------------------------------------- */
-
-    // $('[id^=dcid_]').click(function (event) {
-    //     event.preventDefault();
-    //     var catId = $(this).attr('id').split('dcid_')[1];
-    //     var catName = $(this).find('span').html();
-    //     var $delLink = $(this);
-    //
-    //     $.get($(this).attr('href'), function (response) {
-    //         if (response.isRemoved) {
-    //
-    //             $delLink.remove();
-    //             // if($category.length == 0) {
-    //             //     $(this).append('<p>Вы не добавили свою работу не в одну категорию</p>');
-    //             // }
-    //
-    //             $('#notInWork').append(
-    //                 '<input id="'+ catId +'" type="checkbox" name="categories[]" value="'+ catId +'">' +
-    //                 '<label for="'+ catId +'">'+ catName +'</label>'
-    //             );
-    //
-    //         } else {
-    //             alert('panic!')
-    //         }
-    //     });
-    // });
 
     function testDel(item) {
         $(item).click(function(e) {

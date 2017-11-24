@@ -102,6 +102,11 @@ figure {
 .fixed {
   position: fixed;
 }
+.fixfixed header,
+.fixfixed footer,
+.fixfixed .logIn{
+  position: absolute;
+}
 .opacity {
   opacity: 1;
 }
