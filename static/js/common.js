@@ -252,7 +252,6 @@ $(function () {
                     '<label for="'+ itemId +'">'+ itemName +'</label>'
                 );
 
-            } else {
             }
         });
     });
@@ -275,7 +274,6 @@ $(function () {
                     '<label for="'+ itemId +'">'+ itemName +'</label>'
                 );
 
-            } else {
             }
         });
     });
