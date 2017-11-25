@@ -72,7 +72,6 @@
     width: 300px;
     padding: 15px;
   }
-
   label {
     color: $white;
   }
@@ -95,7 +94,6 @@
     padding-right: 35px;
     @include max-screen($break_sm) {
       font-size: 16px;
-      position: fixed;
       width: 330px;
     }
     @include max-screen($break_xxs) {
