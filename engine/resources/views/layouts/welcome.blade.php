@@ -80,7 +80,7 @@
     </footer>
 </div>
 
-<div class="logIn hidden">
+<div id="logIn" class="logIn hidden">
 
     <div class="logIn__close">
         <i class="fa fa-times" aria-hidden="true"></i>

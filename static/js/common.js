@@ -72,6 +72,7 @@ $(function () {
             });
 
         $('.logIn').toggleClass('hidden');
+        $('body').toggleClass('fixed');
         $('#ajaxRegistration').hide();
         $('#ajaxLogin').show();
     });
@@ -185,21 +186,6 @@ $(function () {
         event.preventDefault();
         $('.galleryCategory').toggleClass('galleryCategory_opened');
     });
-
-    /* ---------------------------------------------- /*
-     * Input fix for ios
-    /* ---------------------------------------------- */
-    // if (window.width <= 480) {
-    //     var $body = $('body');
-    //     var $inputs = $('input');
-    //
-    //     $inputs.on('focus', function(e) {
-    //         $body.addClass('fixfixed');
-    //     });
-    //     $inputs.on('blur', function(e) {
-    //         $body.removeClass('fixfixed');
-    //     });
-    // }
 
     /* ---------------------------------------------- /*
      * Phone mask
@@ -398,12 +384,7 @@ $(document).on('submit', '#ajaxLogin', function (e) {
             if (data.auth === true) {
                 $.get('/login/ajax')
                     .done(function (data) {
-                        $(this).empty();
                         window.location.href = '/cabinet';
-                        // $('.logIn').addClass('hidden');
-                        // $(this).append(data);
-
-
                     })
                     .fail(function (data) {
                     });
@@ -426,9 +407,6 @@ $(document).on('submit', '#ajaxRegistration', function (e) {
                 $.get('/login/ajax')
                     .done(function (data) {
                         window.location.href = '/cabinet';
-                        $(this).empty();
-                        // $('.logIn').addClass('hidden');
-                        // $(this).append(data);
                     })
                     .fail(function (data) {
                         //todo
