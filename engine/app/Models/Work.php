@@ -8,8 +8,6 @@ namespace RecycleArt\Models;
  */
 class Work extends Model
 {
-    public $approved;
-
     /**
      * @var string
      */

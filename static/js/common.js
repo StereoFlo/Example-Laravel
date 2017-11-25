@@ -72,6 +72,7 @@ $(function () {
             });
 
         $('.logIn').toggleClass('hidden');
+        $('body').toggleClass('fixed');
         $('#ajaxRegistration').hide();
         $('#ajaxLogin').show();
     });
@@ -142,23 +143,40 @@ $(function () {
     });
 
     /* ---------------------------------------------- /*
-     * Tag delete
+     * Elements delete
     /* ---------------------------------------------- */
 
-    $('[id^=tag_]').click(function (event) {
-        event.preventDefault();
-        var url = $(this).attr('href');
-        var element = $(this);
-        $.get(url)
-            .done(function (data) {
-                if (data.isDeleted === true) {
-                    element.remove();
-                }
-            })
-            .fail(function (data) {
-                console.log(data);
-            });
-    });
+        $('.workImgDel').click(function (event) {
+            event.preventDefault();
+            var url = $(this).attr('href');
+            var element = $(this).parent('.image');
+
+            $.get(url)
+                .done(function (data) {
+                    if (data.isDeleted === true) {
+                        element.remove();
+                    }
+                })
+                .fail(function (data) {
+                    console.log(data);
+                });
+        });
+
+
+    // $('[id^=tag_]').click(function (event) {
+    //     event.preventDefault();
+    //     var url = $(this).attr('href');
+    //     var element = $(this);
+    //     $.get(url)
+    //         .done(function (data) {
+    //             if (data.isDeleted === true) {
+    //                 element.remove();
+    //             }
+    //         })
+    //         .fail(function (data) {
+    //             console.log(data);
+    //         });
+    // });
 
     /* ---------------------------------------------- /*
      * Slider
@@ -199,62 +217,52 @@ $(function () {
     });
 
     /* ---------------------------------------------- /*
-     * Categories
+     * Categories, Materials
     /* ---------------------------------------------- */
 
-    // $('[id^=dcid_]').click(function (event) {
-    //     event.preventDefault();
-    //     var catId = $(this).attr('id').split('dcid_')[1];
-    //     var catName = $(this).find('span').html();
-    //     var $delLink = $(this);
-    //
-    //     $.get($(this).attr('href'), function (response) {
-    //         if (response.isRemoved) {
-    //
-    //             $delLink.remove();
-    //             // if($category.length == 0) {
-    //             //     $(this).append('<p>Вы не добавили свою работу не в одну категорию</p>');
-    //             // }
-    //
-    //             $('#notInWork').append(
-    //                 '<input id="'+ catId +'" type="checkbox" name="categories[]" value="'+ catId +'">' +
-    //                 '<label for="'+ catId +'">'+ catName +'</label>'
-    //             );
-    //
-    //         } else {
-    //             alert('panic!')
-    //         }
-    //     });
-    // });
+    $('[id^=dcid_]').click(function (e) {
+        e.preventDefault();
+        var itemId = $(this).attr('id').split('_')[1];
+        var itemName = $(this).find('span').html();
+        var $position = $(this).parent().siblings('.notInWork').find('.inputGroup');
+        var $message = $(this).parent().siblings('.notInWork').find('.empty');
+        var $delLink = $(this);
 
-    function testDel(item) {
-        $(item).click(function(e) {
-            e.preventDefault();
+        $.get($(this).attr('href'), function (response) {
+            if (response.isRemoved) {
+                $delLink.remove();
+                $message.remove();
 
-            var itemId = $(this).attr('id').split('_')[1];
-            var itemName = $(this).find('span').html();
-            var $position = $(this).parent().siblings('.notInWork').find('.inputGroup');
-            var $message = $(this).parent().siblings('.notInWork').find('.empty');
-            var $delLink = $(this);
+                $position.append(
+                    '<input id="'+ itemId +'" type="checkbox" name="categories[]" value="'+ itemId +'">' +
+                    '<label for="'+ itemId +'">'+ itemName +'</label>'
+                );
 
-            $.get($(this).attr('href'), function (response) {
-                if (response.isRemoved) {
-                    $delLink.remove();
-                    $message.remove();
-
-                    $position.append(
-                        '<input id="'+ itemId +'" type="checkbox" name="materials[]" value="'+ itemId +'">' +
-                        '<label for="'+ itemId +'">'+ itemName +'</label>'
-                    );
-
-                } else {
-                    console.log(response);
-                }
-            });
+            }
         });
-    }
-    testDel('[id^=dcid_]');
-    testDel('[id^=dmid_]');
+    });
+
+    $('[id^=dmid_]').click(function (e) {
+        e.preventDefault();
+        var itemId = $(this).attr('id').split('_')[1];
+        var itemName = $(this).find('span').html();
+        var $position = $(this).parent().siblings('.notInWork').find('.inputGroup');
+        var $message = $(this).parent().siblings('.notInWork').find('.empty');
+        var $delLink = $(this);
+
+        $.get($(this).attr('href'), function (response) {
+            if (response.isRemoved) {
+                $delLink.remove();
+                $message.remove();
+
+                $position.append(
+                    '<input id="'+ itemId +'" type="checkbox" name="materials[]" value="'+ itemId +'">' +
+                    '<label for="'+ itemId +'">'+ itemName +'</label>'
+                );
+
+            }
+        });
+    });
 
     /* ---------------------------------------------- /*
      * Gallery
@@ -376,12 +384,7 @@ $(document).on('submit', '#ajaxLogin', function (e) {
             if (data.auth === true) {
                 $.get('/login/ajax')
                     .done(function (data) {
-                        $(this).empty();
                         window.location.href = '/cabinet';
-                        // $('.logIn').addClass('hidden');
-                        // $(this).append(data);
-
-
                     })
                     .fail(function (data) {
                     });
@@ -404,9 +407,6 @@ $(document).on('submit', '#ajaxRegistration', function (e) {
                 $.get('/login/ajax')
                     .done(function (data) {
                         window.location.href = '/cabinet';
-                        $(this).empty();
-                        // $('.logIn').addClass('hidden');
-                        // $(this).append(data);
                     })
                     .fail(function (data) {
                         //todo
