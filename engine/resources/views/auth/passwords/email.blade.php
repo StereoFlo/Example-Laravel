@@ -9,8 +9,8 @@
             </div>
 
             @if (session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
+                <div class="sessionUpdateResult">
+                    <h3 class="message">{{ session('status') }}</h3>
                 </div>
             @endif
 
@@ -18,7 +18,7 @@
                 {{ csrf_field() }}
 
                 <div class="inputGroup{{ $errors->has('email') ? ' has-error' : '' }}">
-                    <label for="email" class="col-md-4 control-label">E-Mail:</label>
+                    <label for="email" >E-Mail:</label>
                     <input id="email" type="email" name="email" value="{{ old('email') }}" required>
                     <span class="errorText">
                         @if ($errors->has('email'))

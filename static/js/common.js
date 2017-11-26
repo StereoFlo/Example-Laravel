@@ -391,7 +391,7 @@ $(document).on('submit', '#ajaxLogin', function (e) {
             }
         })
         .fail(function (data) {
-
+            $('#emailError').html('Неверная пара логин/пароль');
         });
 
 });

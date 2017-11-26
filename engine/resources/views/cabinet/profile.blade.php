@@ -77,12 +77,12 @@
                     @endif
                 </span>
             </div>
-            <div class="inputGroup{{ $errors->has('password') ? ' has-error' : '' }}">
+            <div class="inputGroup{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
                 <label for="password">подтверждение:</label>
                 <input type="text" name="password_confirmation" value="" placeholder="Новый пароль">
                 <span class="errorText">
-                    @if ($errors->has('name'))
-                        <strong>{{ $errors->first('name') }}</strong>
+                    @if ($errors->has('password_confirmation'))
+                        <strong>{{ $errors->first('password_confirmation') }}</strong>
                     @endif
                 </span>
             </div>
