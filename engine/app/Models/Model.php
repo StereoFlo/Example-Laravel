@@ -14,7 +14,7 @@ class Model extends EModel
     /**
      * @return Author
      */
-    protected function getAutor()
+    protected function getAutor(): Author
     {
         return App::make('RecycleArt\Models\Author');
     }
@@ -22,7 +22,7 @@ class Model extends EModel
     /**
      * @return Catalog
      */
-    protected function getCatalog()
+    protected function getCatalog(): Catalog
     {
         return App::make('RecycleArt\Models\Catalog');
     }
@@ -30,7 +30,7 @@ class Model extends EModel
     /**
      * @return CatalogRel
      */
-    protected function getCatalogRelation()
+    protected function getCatalogRelation(): CatalogRel
     {
         return App::make('RecycleArt\Models\CatalogRel');
     }
@@ -38,7 +38,7 @@ class Model extends EModel
     /**
      * @return Material
      */
-    protected function getMaterial()
+    protected function getMaterial(): Material
     {
         return App::make('RecycleArt\Models\Material');
     }
@@ -46,7 +46,7 @@ class Model extends EModel
     /**
      * @return MaterialRel
      */
-    protected function getMaterialRelation()
+    protected function getMaterialRelation(): MaterialRel
     {
         return App::make('RecycleArt\Models\MaterialRel');
     }
@@ -54,7 +54,7 @@ class Model extends EModel
     /**
      * @return News
      */
-    protected function getNews()
+    protected function getNews(): News
     {
         return App::make('RecycleArt\Models\News');
     }
@@ -62,7 +62,7 @@ class Model extends EModel
     /**
      * @return Role
      */
-    protected function getRole()
+    protected function getRole(): Role
     {
         return App::make('RecycleArt\Models\Role');
     }
@@ -70,7 +70,7 @@ class Model extends EModel
     /**
      * @return RoleUser
      */
-    protected function getRoleRelation()
+    protected function getRoleRelation(): RoleUser
     {
         return App::make('RecycleArt\Models\RoleUser');
     }
@@ -78,7 +78,7 @@ class Model extends EModel
     /**
      * @return TagsRel
      */
-    protected function getTagsRelation()
+    protected function getTagsRelation(): TagsRel
     {
         return App::make('RecycleArt\Models\TagsRel');
     }
@@ -86,7 +86,7 @@ class Model extends EModel
     /**
      * @return Work
      */
-    protected function getWork()
+    protected function getWork(): Work
     {
         return App::make('RecycleArt\Models\Work');
     }
@@ -94,7 +94,7 @@ class Model extends EModel
     /**
      * @return WorkImages
      */
-    protected function getWorkImages()
+    protected function getWorkImages(): WorkImages
     {
         return App::make('RecycleArt\Models\WorkImages');
     }
@@ -104,7 +104,7 @@ class Model extends EModel
      *
      * @return bool
      */
-    protected function checkEmptyObject($obj = null)
+    protected function checkEmptyObject($obj = null): bool 
     {
         if (empty($obj)) {
             return false;
