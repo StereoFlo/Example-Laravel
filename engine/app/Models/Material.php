@@ -25,7 +25,7 @@ class Material extends Model
     /**
      * @return array
      */
-    public function getList()
+    public function getList(): array
     {
         $all = self::all();
         if (!$this->checkEmptyObject($all)) {
@@ -39,7 +39,7 @@ class Material extends Model
      *
      * @return array
      */
-    public function getListByWork(int $workId)
+    public function getListByWork(int $workId): array
     {
         $res = [];
         $list = $this
@@ -113,6 +113,7 @@ class Material extends Model
      * @param int $id
      *
      * @return bool
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      */
     public function removeBy(int $id)
     {

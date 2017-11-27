@@ -80,16 +80,16 @@ class Catalog extends Model
 
     /**
      * @param string $name
-     * @param string $descr
+     * @param string $description
      * @param int    $parentId
      *
      * @return bool
      */
-    public function addCategory(string $name, string $descr = '', int $parentId = 0)
+    public function addCategory(string $name, string $description = '', int $parentId = 0)
     {
         $instance = new self();
         $instance->name = $name;
-        $instance->description = $descr;
+        $instance->description = $description;
         if (!empty($parentId)) {
             $instance->parent_id = $parentId;
         }
