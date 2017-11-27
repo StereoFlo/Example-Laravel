@@ -23,9 +23,9 @@ class WorkImages extends Model
     /**
      * @param int $workId
      *
-     * @return mixed
+     * @return bool
      */
-    public function removeByWorkId(int $workId)
+    public function removeByWorkId(int $workId): bool
     {
         return $this->where('workId', $workId)->delete();
     }
@@ -33,9 +33,9 @@ class WorkImages extends Model
     /**
      * @param int $workId
      *
-     * @return mixed
+     * @return array
      */
-    public function getbyWorkId(int $workId)
+    public function getbyWorkId(int $workId): array
     {
         $imgs = $this->where('workId', $workId)->get();
         if (!$this->checkEmptyObject($imgs)) {
@@ -75,7 +75,7 @@ class WorkImages extends Model
      *
      * @return bool
      */
-    public function removeAllImages(int $workId)
+    public function removeAllImages(int $workId): bool
     {
         $images = $this->where('workId', $workId)->get();
         if (!$this->checkEmptyObject($images)) {
@@ -98,7 +98,7 @@ class WorkImages extends Model
     public function addImages(array $files, $workId): bool
     {
         $isSaved = false;
-        if (empty(Auth::id())) {
+        if (Auth::id() !== 0 || empty(Auth::id())) {
             return $isSaved;
         }
         if (empty($files)) {
@@ -123,9 +123,12 @@ class WorkImages extends Model
      *
      * @return array
      */
-    public function getDefault(int $workId)
+    public function getDefault(int $workId): array
     {
-        $defaultImage =  $this->where('workId', $workId)->where('isDefault', true)->first();
+        $defaultImage =  $this
+            ->where('workId', $workId)
+            ->where('isDefault', true)
+            ->first();
         if (!$this->checkEmptyObject($defaultImage)) {
             return [];
         }
@@ -137,7 +140,7 @@ class WorkImages extends Model
      *
      * @return bool
      */
-    public function hasDefault(int $workId = 0)
+    public function hasDefault(int $workId = 0): bool
     {
         if (empty($workId)) {
             return false;
