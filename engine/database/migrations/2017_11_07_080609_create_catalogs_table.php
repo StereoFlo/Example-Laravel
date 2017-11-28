@@ -17,7 +17,7 @@ class CreateCatalogsTable extends Migration
             $table->increments('id');
             $table->integer('parent_id')->default(0)->index();
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
         Schema::create('catalog_rel', function (Blueprint $table) {
