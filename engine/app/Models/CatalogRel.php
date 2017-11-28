@@ -27,7 +27,7 @@ class CatalogRel extends Model
      *
      * @return bool
      */
-    public function isWorkInCategory($categoryId, $workId)
+    public function isWorkInCategory(int $categoryId, int $workId)
     {
         $res = $this->where('work_id', $workId)->where('catalog_id', $categoryId)->first();
         if (!$this->checkEmptyObject($res)) {
@@ -37,7 +37,7 @@ class CatalogRel extends Model
     }
 
     /**
-     * @param mixed $category
+     * @param int|array $category
      * @param int   $workId
      *
      * @return bool

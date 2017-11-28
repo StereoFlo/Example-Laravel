@@ -21,16 +21,6 @@ class StaticPage extends Model
     public $incrementing = false;
 
     /**
-     * static call
-     *
-     * @return StaticPage
-     */
-    public static function getInstance()
-    {
-        return new self();
-    }
-
-    /**
      * @param string $slug
      *
      * @return array
@@ -47,7 +37,7 @@ class StaticPage extends Model
     /**
      * @return array
      */
-    public function getList()
+    public function getList(): array
     {
         $all = self::All();
         if (!$this->checkEmptyObject($all)) {

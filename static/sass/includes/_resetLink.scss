@@ -3,7 +3,7 @@
   height: 100%;
 }
 
-.resetLinkForm {
+.resetLinkForm, .resetPasswordForm {
   max-width: 330px;
   margin: 0 auto;
   margin-bottom: 30px;
@@ -11,15 +11,31 @@
   .inputGroup {
     input {
       height: 35px;
+      font-family: 'bandera', sans-serif;
+      font-size: 16px;
+      width: 100%;
+      background: $white;
+      border: 1px solid $border;
+      padding: 0 10px;
+      border-radius: 2px;
+      vertical-align: middle;
+      transition: all 0.25s ease-in-out;
+      &:focus {
+        font-size: 16px;
+        outline: none;
+        border-color: $gold;
+        border-width: 2px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+      }
     }
   }
   button {
     font-size: 1.2em;
     display: block;
     margin: 0 auto 30px;
-    background: #e83b3a;
+    background: $btn__ok;
     &:hover {
-      background: darken(#e83b3a, 15%);
+      background: $btn__ok_hover;
     }
   }
 }
