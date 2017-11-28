@@ -7,14 +7,14 @@
             <h2>Авторизация</h2>
         </div>
 
-        <form class="signIn signIn_dark" method="POST" action="{{ route('login') }}">
+        <form id="login" class="signIn signIn_dark" method="POST" action="{{ route('login') }}">
             {{ csrf_field() }}
 
             <div class="inputGroup{{ $errors->has('email') ? ' has-error' : '' }}">
                 <label for="email">email:</label>
                 <input id="email" class="signIn__email" type="email" name="email" value="{{ old('email') }}" required autofocus>
                 <i class="fa fa-user" aria-hidden="true"></i>
-                <span class="errorText">
+                <span class="errorText" id="emailError">
                     @if ($errors->has('email'))
                         <strong>{{ $errors->first('email') }}</strong>
                     @endif
