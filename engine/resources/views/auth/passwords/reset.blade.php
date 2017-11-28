@@ -23,7 +23,7 @@
 
                 <div class="inputGroup{{ $errors->has('password') ? ' has-error' : '' }}">
                     <label for="password">пароль:</label>
-                    <input type="text" name="password" value="" placeholder="Новый пароль">
+                    <input type="password" name="password" value="" placeholder="Новый пароль">
                     <span class="errorText">
                             @if ($errors->has('password'))
                             <strong>{{ $errors->first('password') }}</strong>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="inputGroup{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
                     <label for="password">подтверждение:</label>
-                    <input type="text" name="password_confirmation" value="" placeholder="Новый пароль">
+                    <input type="password" name="password_confirmation" value="" placeholder="Новый пароль">
                     <span class="errorText">
                             @if ($errors->has('password_confirmation'))
                             <strong>{{ $errors->first('password_confirmation') }}</strong>
