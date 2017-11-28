@@ -14,7 +14,7 @@ class Model extends EModel
     /**
      * @return Author
      */
-    protected function getAutor(): Author
+    protected function getAuthor(): Author
     {
         return App::make('RecycleArt\Models\Author');
     }
