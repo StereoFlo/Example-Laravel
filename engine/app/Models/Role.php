@@ -23,7 +23,7 @@ class Role extends Model
      *
      * @return array
      */
-    public function getByName(string $name)
+    public function getByName(string $name): array
     {
         $role = $this->where('name', $name)->first();
         if (!$this->checkEmptyObject($role)) {

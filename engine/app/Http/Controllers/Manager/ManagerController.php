@@ -21,7 +21,7 @@ class ManagerController extends Controller
     {
         View::share('userCount', User::All()->count());
         View::share('workCount', \count((new Work())->getByApprove()));
-        View::share('newsCount', News::getAll()->count());
+        View::share('newsCount', News::getNewsCount());
     }
 
     /**

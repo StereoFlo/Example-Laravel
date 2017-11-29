@@ -14,19 +14,11 @@ class News extends Model
     protected $fillable = ['name', 'content'];
 
     /**
-     * @return News
+     * @return int
      */
-    public static function getInstance(): self
+    public static function getNewsCount(): int
     {
-        return new self();
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
-     */
-    public static function getAll()
-    {
-        return self::All();
+        return self::All()->count();
     }
 
     /**
@@ -54,9 +46,9 @@ class News extends Model
      * @param string $name
      * @param string $content
      *
-     * @return mixed
+     * @return bool
      */
-    public function make(string $name, string $content)
+    public function make(string $name, string $content): bool
     {
         return self::create([
             'name'    => $name,
@@ -69,7 +61,7 @@ class News extends Model
      *
      * @return array
      */
-    public function getById(int $id)
+    public function getById(int $id): array
     {
         $res = $this->where('id', $id)->first();
         if (!$this->checkEmptyObject($res)) {
@@ -81,11 +73,11 @@ class News extends Model
     /**
      * @param int $id
      *
-     * @return mixed
+     * @return bool
      */
-    public function deleteById(int $id)
+    public function deleteById(int $id): bool
     {
-        return $this->where('id', $id)->delete();
+        return (bool) $this->where('id', $id)->delete();
     }
 
     /**
@@ -93,9 +85,9 @@ class News extends Model
      * @param string $name
      * @param string $content
      *
-     * @return mixed
+     * @return bool
      */
-    public function updateById(int $id, string $name, string $content)
+    public function updateById(int $id, string $name, string $content): bool
     {
         return $this->where('id', $id)->update([
             'name'    => $name,
