@@ -14,27 +14,27 @@ class MaterialRel extends Model
      *
      * @return bool
      */
-    public function addToWork(int $workId, array $materialIds)
+    public function addToWork(int $workId, array $materialIds): bool
     {
-        $isSaved = false;
+        $recordsToSave = [];
         foreach ($materialIds as $materialId)
         {
-            $obj = new self();
-            $obj->work_id = $workId;
-            $obj->material_id = $materialId;
-            $isSaved = $obj->save();
+            $recordsToSave[] = [
+                'work_id' => $workId,
+                'material_id' => $materialId,
+            ];
         }
-        return $isSaved;
+        return (bool) self::insert($recordsToSave);
     }
 
     /**
      * @param int $materialId
      *
-     * @return mixed
+     * @return bool
      */
-    public function removeMaterial(int $materialId)
+    public function removeMaterial(int $materialId): bool
     {
-        return $this->where('material_id', $materialId)->delete();
+        return (bool) $this->where('material_id', $materialId)->delete();
     }
 
     /**
@@ -42,9 +42,9 @@ class MaterialRel extends Model
      *
      * @return bool
      */
-    public function removeWork(int $workId)
+    public function removeWork(int $workId): bool
     {
-        return $this->where('work_id', $workId)->delete();
+        return (bool) $this->where('work_id', $workId)->delete();
     }
 
     /**
@@ -53,8 +53,8 @@ class MaterialRel extends Model
      *
      * @return mixed
      */
-    public function removeFromWork(int $workId, int $materialId)
+    public function removeFromWork(int $workId, int $materialId): bool
     {
-        return $this->where('work_id', $workId)->where('material_id', $materialId)->delete();
+        return (bool) $this->where('work_id', $workId)->where('material_id', $materialId)->delete();
     }
 }

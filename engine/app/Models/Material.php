@@ -65,8 +65,9 @@ class Material extends Model
      *
      * @return array
      */
-    public function getBy(int $id)
+    public function getBy(int $id): array
     {
+        /** @var Model $item */
         $item = self::find($id);
         if (!$this->checkEmptyObject($item)) {
             return [];
@@ -82,14 +83,13 @@ class Material extends Model
      *
      * @return bool
      */
-    public function makeNew(int $id, string $name, string $url, string $description = '')
+    public function makeNew(int $id, string $name, string $url, string $description = ''): bool
     {
-        $obj = new self();
-        $obj->id = $id;
-        $obj->name = $name;
-        $obj->url = $url;
-        $obj->description = $description;
-        return $obj->save();
+        $this->id = $id;
+        $this->name = $name;
+        $this->url = $url;
+        $this->description = $description;
+        return $this->save();
     }
 
     /**
@@ -100,8 +100,9 @@ class Material extends Model
      *
      * @return bool
      */
-    public function updateBy(int $id, string $name, string $url, string $description = '')
+    public function updateBy(int $id, string $name, string $url, string $description = ''): bool
     {
+        /** @var Model $obj */
         $obj = self::find($id);
         $obj->name = $name;
         $obj->url = $url;
