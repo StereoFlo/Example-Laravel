@@ -9,29 +9,11 @@ namespace RecycleArt\Models;
 class TagsRel extends Model
 {
     /**
-     * @return TagsRel
-     */
-    public static function getInstance(): self
-    {
-        return new self();
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function roles()
-    {
-        return $this
-            ->belongsToMany('RecycleArt\Models\Tags')
-            ->withTimestamps();
-    }
-
-    /**
      * @param int $workId
      *
      * @return array
      */
-    public function getByWork(int $workId)
+    public function getByWork(int $workId): array
     {
         $tags = $this->select('tags.tag', 'tags.id', 'tags_rels.workId')->join('tags', 'tags.id', '=', 'tags_rels.tagId')->where('tags_rels.workId', $workId)->get();
         if (!$this->checkEmptyObject($tags)) {
@@ -45,7 +27,7 @@ class TagsRel extends Model
      *
      * @return bool
      */
-    public function deleteByWork(int $workId)
+    public function deleteByWork(int $workId): bool
     {
         return $this->where('tags_rels.workId', $workId)->delete();
     }
@@ -56,7 +38,7 @@ class TagsRel extends Model
      *
      * @return bool
      */
-    public function deleteFromWork(int $workId, int $tagId)
+    public function deleteFromWork(int $workId, int $tagId): bool
     {
         return $this->where('workId', $workId)->where('tagId', $tagId)->delete();
     }
@@ -64,9 +46,9 @@ class TagsRel extends Model
     /**
      * @param int $tagId
      *
-     * @return mixed
+     * @return bool
      */
-    public function deleteByTag(int $tagId)
+    public function deleteByTag(int $tagId): bool
     {
         return $this->where('tags_rels.tagId', $tagId)->delete();
     }
@@ -75,13 +57,12 @@ class TagsRel extends Model
      * @param $tagId
      * @param $workId
      *
-     * @return mixed
+     * @return bool
      */
-    public function addToWork($tagId, $workId)
+    public function addToWork(int $tagId, int $workId): bool
     {
         $this->tagId = $tagId;
         $this->workId = $workId;
-        $this->save();
-        return $this->id;
+        return $this->save();
     }
 }

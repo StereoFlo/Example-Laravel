@@ -9,6 +9,10 @@ namespace RecycleArt\Models;
 class Slogan extends Model
 {
     const DEFAULT_SLOGAN_ID = 1;
+
+    /**
+     * @var string
+     */
     protected $table = 'slogan';
 
     /**
@@ -34,9 +38,9 @@ class Slogan extends Model
     /**
      * @param string $content
      *
-     * @return boolean
+     * @return bool
      */
-    public function updateSlogan(string $content)
+    public function updateSlogan(string $content): bool
     {
         return $this->where('id', self::DEFAULT_SLOGAN_ID)->update(['content' => $content]);
     }

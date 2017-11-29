@@ -50,7 +50,7 @@ class WorkImages extends Model
      *
      * @return bool
      */
-    public function removeFromWork(int $workId, int $imageId)
+    public function removeFromWork(int $workId, int $imageId): bool
     {
         $images = $this->where('id', $imageId)->where('workId', $workId)->get();
         if (!$this->checkEmptyObject($images)) {

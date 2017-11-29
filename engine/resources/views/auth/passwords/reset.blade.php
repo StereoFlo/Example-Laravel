@@ -11,6 +11,8 @@
             <form class="form resetPasswordForm" method="POST" action="{{ route('password.request') }}">
                 {{ csrf_field() }}
 
+                <input type="hidden" name="token" value="{{ $token }}">
+
                 <div class="inputGroup{{ $errors->has('email') ? ' has-error' : '' }}">
                     <label for="email" >E-Mail:</label>
                     <input id="email" type="email" name="email" value="{{ $email or old('email') }}" required>
@@ -25,19 +27,19 @@
                     <label for="password">пароль:</label>
                     <input type="password" name="password" value="" placeholder="Новый пароль">
                     <span class="errorText">
-                            @if ($errors->has('password'))
+                        @if ($errors->has('password'))
                             <strong>{{ $errors->first('password') }}</strong>
                         @endif
-                        </span>
+                    </span>
                 </div>
                 <div class="inputGroup{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
                     <label for="password">подтверждение:</label>
                     <input type="password" name="password_confirmation" value="" placeholder="Новый пароль">
                     <span class="errorText">
-                            @if ($errors->has('password_confirmation'))
+                        @if ($errors->has('password_confirmation'))
                             <strong>{{ $errors->first('password_confirmation') }}</strong>
                         @endif
-                        </span>
+                    </span>
                 </div>
 
                 <button type="submit" name="button" class="button">отправить</button>
