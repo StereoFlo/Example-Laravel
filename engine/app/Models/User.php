@@ -309,12 +309,12 @@ class User extends Authenticatable
     /**
      * @param int $id
      *
-     * @return bool]
+     * @return bool
      */
-    public function removeUser(int $id)
+    public function removeUser(int $id): bool
     {
         $user = self::findOrFail($id);
-        return $this->where('id', $user->id)->delete() && RoleUser::getInstance()->disableAllRole($user->id);
+        return $this->where('id', $user->id)->delete() && Model::getModel()->getRoleRelation()->disableAllRole($user->id);
 
     }
 

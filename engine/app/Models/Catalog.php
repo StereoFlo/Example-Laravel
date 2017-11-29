@@ -25,7 +25,7 @@ class Catalog extends Model
     /**
      * @return array
      */
-    public function getList()
+    public function getList(): array
     {
         /** @var Model $res */
         $res = $this->get();
@@ -40,7 +40,7 @@ class Catalog extends Model
      *
      * @return array
      */
-    public function getById(int $id)
+    public function getById(int $id): array
     {
         /** @var Model $category */
         $category = self::find($id);
@@ -55,7 +55,7 @@ class Catalog extends Model
      *
      * @return array
      */
-    public function getByWorkId(int $workId)
+    public function getByWorkId(int $workId): array
     {
         $res = [];
         $catsInWork = $this
@@ -85,15 +85,14 @@ class Catalog extends Model
      *
      * @return bool
      */
-    public function addCategory(string $name, string $description = '', int $parentId = 0)
+    public function addCategory(string $name, string $description = '', int $parentId = 0): bool
     {
-        $instance = new self();
-        $instance->name = $name;
-        $instance->description = $description;
+        $this->name = $name;
+        $this->description = $description;
         if (!empty($parentId)) {
-            $instance->parent_id = $parentId;
+            $this->parent_id = $parentId;
         }
-        return $instance->save();
+        return $this->save();
     }
 
     /**
@@ -102,7 +101,7 @@ class Catalog extends Model
      *
      * @return bool
      */
-    public function addToCategory(int $categoryId, int $workId)
+    public function addToCategory(int $categoryId, int $workId): bool
     {
         $category = $this->where('id', $categoryId)->first();
         if (empty($category) || empty($category->toArray())) {
@@ -122,7 +121,7 @@ class Catalog extends Model
      *
      * @return bool
      */
-    public function updateCategory(int $categoryId, array $data)
+    public function updateCategory(int $categoryId, array $data): bool
     {
         /** @var Model $category */
         $category = self::find($categoryId);
@@ -151,7 +150,7 @@ class Catalog extends Model
         if (empty($category) || empty($category->toArray())) {
             return false;
         }
-        return $category->delete() && $this->getCatalogRelation()->removeCategory($categoryId);
+        return (bool) $category->delete() && $this->getCatalogRelation()->removeCategory($categoryId);
     }
 
     /**
@@ -159,7 +158,7 @@ class Catalog extends Model
      *
      * @return array
      */
-    public function getCategoryWithWorks(int $categoryId)
+    public function getCategoryWithWorks(int $categoryId): array
     {
         /** @var Model $res */
         $res = $this

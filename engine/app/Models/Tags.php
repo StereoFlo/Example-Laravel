@@ -25,7 +25,7 @@ class Tags extends Model
      *
      * @return array
      */
-    public function getByName(string $tagName)
+    public function getByName(string $tagName): array
     {
         $tag = $this->where('tag', $tagName)->first();
         if (!$this->checkEmptyObject($tag)) {
@@ -39,7 +39,7 @@ class Tags extends Model
      *
      * @return int
      */
-    public function add(string $tagName)
+    public function add(string $tagName): int
     {
         $tag = new self();
         $tag->tag = $tagName;
@@ -53,7 +53,7 @@ class Tags extends Model
      *
      * @return bool
      */
-    public function addTagsToWork(string $tagsString = '', int $workId = 0)
+    public function addTagsToWork(string $tagsString = '', int $workId = 0): bool
     {
         if (empty($tagsString) || empty($workId)) {
             return false;

@@ -21,7 +21,7 @@ class Author extends Model
      *
      * @return array
      */
-    public function getList()
+    public function getList(): array
     {
         /** @var Model $authors */
         $authors = $this->from('role_user')
@@ -40,7 +40,7 @@ class Author extends Model
      *
      * @return array
      */
-    public function getByid(int $id): array
+    public function getById(int $id): array
     {
         /** @var Model $res */
         $res = self::find($id);
