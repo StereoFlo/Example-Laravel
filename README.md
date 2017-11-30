@@ -1,14 +1,12 @@
 ####An english version contained below
 
-#### О проекте || About
+#### О проекте
 Реальнеый проект для людей знамающимися искуством recycle art. 
-It's a real project for people interesting for the recycle art
 
-#### Благодарности || Regards
+#### Благодарности
 @silaevd  - верстка + js программирование
-            layout and javascript programming
 
-#### Как установить систему || How to install
+#### Как установить систему
 
 1) **git clone ...** сливаем
 2) **cd engine** 
