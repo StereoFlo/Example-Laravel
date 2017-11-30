@@ -104,7 +104,7 @@ MAIL_PASSWORD=b6609845739bbd
 MAIL_ENCRYPTION=null
 ```
 
-6) run install migrations **php artisan migrate:install** && run refresh migrations with sample data (--seed) **php artisan migrate:refresh --seed**
+6) run installation for migrations **php artisan migrate:install** && then run refresh for migrations with a sample data (--seed) **php artisan migrate:refresh --seed**
 7) then run a command **php artisan key:generate** for make a unique key for you project
 8) project are ready for use! log in into an admin section with credentials admin@recycle.lan:admin and set up the rest options
 9) enjoy!
