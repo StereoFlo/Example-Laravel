@@ -27,7 +27,7 @@ class CatalogRel extends Model
      *
      * @return bool
      */
-    public function isWorkInCategory(int $categoryId, int $workId)
+    public function isWorkInCategory(int $categoryId, int $workId): bool
     {
         $res = $this->where('work_id', $workId)->where('catalog_id', $categoryId)->first();
         if (!$this->checkEmptyObject($res)) {
@@ -42,7 +42,7 @@ class CatalogRel extends Model
      *
      * @return bool
      */
-    public function addToCategory($category, int $workId)
+    public function addToCategory($category, int $workId): bool
     {
         switch ($category) {
             case \is_array($category):
@@ -54,16 +54,13 @@ class CatalogRel extends Model
                     $isSave = $instance->save();
                 }
                 return $isSave;
-                break;
             case \is_string($category):
                 $instance = new self();
                 $instance->catalog_id = $category;
                 $instance->work_id = $workId;
                 return $instance->save();
-                break;
             default:
                 return false;
-                break;
         }
     }
 
@@ -73,13 +70,13 @@ class CatalogRel extends Model
      *
      * @return bool
      */
-    public function updateWorkCategory(int $categoryId, int $workId)
+    public function updateWorkCategory(int $categoryId, int $workId): bool
     {
         if (!$this->isWorkInCategory($categoryId, $workId)) {
             return $this->addToCategory($categoryId, $workId);
         }
         $this->catalog_id = $categoryId;
-        $this->work_id_id = $workId;
+        $this->work_id = $workId;
         return $this->save();
     }
 
@@ -88,9 +85,9 @@ class CatalogRel extends Model
      *
      * @return bool
      */
-    public function removeWorkCategory(int $workId)
+    public function removeWorkCategory(int $workId): bool
     {
-        return $this->where('work_id', $workId)->delete();
+        return (bool) $this->where('work_id', $workId)->delete();
     }
 
     /**
@@ -99,9 +96,9 @@ class CatalogRel extends Model
      *
      * @return mixed
      */
-    public function removeFromCategory(int $categoryId, int $workId)
+    public function removeFromCategory(int $categoryId, int $workId): bool
     {
-        return $this->where('work_id', $workId)->where('catalog_id', $categoryId)->delete();
+        return (bool) $this->where('work_id', $workId)->where('catalog_id', $categoryId)->delete();
     }
 
 
@@ -110,8 +107,8 @@ class CatalogRel extends Model
      *
      * @return bool
      */
-    public function removeCategory(int $categoryId)
+    public function removeCategory(int $categoryId): bool
     {
-        return $this->where('catalog_id', $categoryId)->delete();
+        return (bool) $this->where('catalog_id', $categoryId)->delete();
     }
 }

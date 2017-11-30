@@ -94,10 +94,7 @@
     padding-right: 35px;
     @include max-screen($break_sm) {
       font-size: 16px;
-      width: 330px;
-    }
-    @include max-screen($break_xxs) {
-      width: 270px;
+      width: 100%;
     }
   }
 
@@ -114,11 +111,11 @@
     display: block;
     color: $red;
     height: 25px;
-    line-height: 1;
+    line-height: 2;
     font-size: 0.7em;
     margin-top: 2px;
     @include max-screen($break_sm) {
-      margin-top: 32px;
+      //margin-top: 32px;
     }
   }
   &__buttons {

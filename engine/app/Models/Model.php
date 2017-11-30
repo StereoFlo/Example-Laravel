@@ -12,9 +12,25 @@ use Illuminate\Support\Facades\App;
 class Model extends EModel
 {
     /**
+     * @return self
+     */
+    public static function getModel(): self
+    {
+        return new self();
+    }
+
+    /**
+     * @return RoleUser
+     */
+    public function getRoleRelation(): RoleUser
+    {
+        return App::make('RecycleArt\Models\RoleUser');
+    }
+
+    /**
      * @return Author
      */
-    protected function getAutor(): Author
+    protected function getAuthor(): Author
     {
         return App::make('RecycleArt\Models\Author');
     }
@@ -65,14 +81,6 @@ class Model extends EModel
     protected function getRole(): Role
     {
         return App::make('RecycleArt\Models\Role');
-    }
-
-    /**
-     * @return RoleUser
-     */
-    protected function getRoleRelation(): RoleUser
-    {
-        return App::make('RecycleArt\Models\RoleUser');
     }
 
     /**

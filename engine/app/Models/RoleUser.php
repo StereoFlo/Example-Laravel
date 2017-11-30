@@ -21,20 +21,12 @@ class RoleUser extends Model
     ];
 
     /**
-     * @return RoleUser
-     */
-    public static function getInstance()
-    {
-        return new self();
-    }
-
-    /**
      * @param int $userId
      * @param int $roleId
      *
      * @return bool
      */
-    public function enableRole(int $userId, int $roleId)
+    public function enableRole(int $userId, int $roleId): bool
     {
         $role = $this->where('user_id', $userId)->where('role_id', $roleId)->get();
         if (!$this->checkEmptyObject($role)) {
@@ -52,7 +44,7 @@ class RoleUser extends Model
      *
      * @return bool
      */
-    public function enableRoleByName(int $userId, string $roleId)
+    public function enableRoleByName(int $userId, string $roleId): bool
     {
         $getRole = $this->getRole()->getByName($roleId);
         if (empty($getRole)) {
@@ -68,7 +60,13 @@ class RoleUser extends Model
         return false;
     }
 
-    public function disableRole(int $userId, int $roleId = 0)
+    /**
+     * @param int $userId
+     * @param int $roleId
+     *
+     * @return bool
+     */
+    public function disableRole(int $userId, int $roleId = 0): bool
     {
         return $this->where('user_id', $userId)->where('role_id', $roleId)->delete();
     }
@@ -76,9 +74,9 @@ class RoleUser extends Model
     /**
      * @param int $userId
      *
-     * @return mixed
+     * @return bool
      */
-    public function disableAllRole(int $userId)
+    public function disableAllRole(int $userId): bool
     {
         return $this->where('user_id', $userId)->delete();
     }

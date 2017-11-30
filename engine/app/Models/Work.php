@@ -14,14 +14,6 @@ class Work extends Model
     protected $table = 'work';
 
     /**
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
-     */
-    public static function getAll()
-    {
-        return self::All();
-    }
-
-    /**
      * @param $userId
      *
      * @return array
@@ -43,7 +35,7 @@ class Work extends Model
      *
      * @return array
      */
-    public function getListByUserWithImages(int $userId)
+    public function getListByUserWithImages(int $userId): array
     {
         $works = $this->join('work_images', 'work.id', '=', 'work_images.workId')
             ->join('users', 'work.userId', '=', 'users.id')
@@ -62,7 +54,7 @@ class Work extends Model
      *
      * @return array
      */
-    public function getListForHomepage(int $limit = 10)
+    public function getListForHomepage(int $limit = 10): array
     {
         $works = $this
             ->join('work_images', 'work.id', '=', 'work_images.workId')
@@ -107,7 +99,7 @@ class Work extends Model
      *
      * @return bool
      */
-    public function removeById(int $workId)
+    public function removeById(int $workId): bool
     {
         $this->getMaterialRelation()->removeWork($workId);
         $this->getTagsRelation()->deleteByWork($workId);
@@ -144,8 +136,9 @@ class Work extends Model
      *
      * @return array
      */
-    public function getListByCategory(array $categories, int $offset = 0)
+    public function getListByCategory(array $categories, int $offset = 0): array
     {
+        $result = [];
         if (empty($offset)) {
             $res = $this
                 ->join('catalog_rel', 'catalog_rel.work_id', '=', 'work.id')
@@ -171,8 +164,10 @@ class Work extends Model
         if (!$this->checkEmptyObject($res)) {
             return [];
         }
-        $result = [];
         foreach ($res->toArray() as $work) {
+            if (empty($work) || empty($work['workId'])) {
+                continue;
+            }
             if (isset($result[$work['workId']])) {
                 continue;
             }
@@ -186,7 +181,7 @@ class Work extends Model
      *
      * @return int
      */
-    public function getCountByCategory(array $categories)
+    public function getCountByCategory(array $categories): int
     {
         $res = $this
             ->join('catalog_rel', 'catalog_rel.work_id', '=', 'work.id')
@@ -206,7 +201,7 @@ class Work extends Model
      *
      * @return array
      */
-    public function getListRecentlyLiked(int $limit = 3)
+    public function getListRecentlyLiked(int $limit = 3): array
     {
         $res = $this
             ->select('work.*', 'users.id as userId', 'users.name as userName', 'work_images.link')
@@ -226,7 +221,7 @@ class Work extends Model
     /**
      * @return array
      */
-    public function getList()
+    public function getList(): array
     {
         $result = $this
             ->select('work.*', 'users.id as userId', 'users.name as userName', 'work_images.link')
@@ -242,7 +237,7 @@ class Work extends Model
     /**
      * @return array
      */
-    public function getListForManager()
+    public function getListForManager(): array
     {
         $result = $this
             ->select('work.*', 'users.id as userId', 'users.name as userName')
@@ -259,7 +254,7 @@ class Work extends Model
      *
      * @return array
      */
-    public function getListForGallery(int $offset = 0)
+    public function getListForGallery(int $offset = 0): array
     {
         $result = $this
             ->join('work_images', 'work.id', '=', 'work_images.workId')
@@ -278,7 +273,7 @@ class Work extends Model
     /**
      * @return int
      */
-    public function getCountForGallery()
+    public function getCountForGallery(): int
     {
         $result = $this
             ->select('work.*', 'users.id as userId', 'users.name as userName', 'work_images.link')
@@ -298,7 +293,7 @@ class Work extends Model
      *
      * @return array
      */
-    public function getByApprove(bool $approve = false)
+    public function getByApprove(bool $approve = false): array
     {
         /** @var Model $result */
         $result = $this
@@ -317,7 +312,7 @@ class Work extends Model
      *
      * @return bool
      */
-    public function toggleApprove(int $workId)
+    public function toggleApprove(int $workId): bool
     {
         /** @var Model $work */
         $work = $this->find($workId);

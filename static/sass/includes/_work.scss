@@ -114,7 +114,7 @@
     height: 50px;
     border-radius: 50%;
     background-color: #282c43;
-    margin: 0 7px;
+    margin: 7px;
     position: relative;
     text-align: center;
     img {
@@ -134,6 +134,7 @@
       text-align: center;
       visibility: hidden;
       border-radius: 3px;
+      padding: 0 5px;
       &:after {
         content: '';
         position: absolute;
@@ -153,7 +154,7 @@
       bottom: 60px;
       left: 50%;
       margin-left: -40px;
-      z-index: 999;
+      z-index: 3;
     }
   }
   &__buyBtn {

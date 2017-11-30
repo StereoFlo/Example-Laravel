@@ -25,7 +25,7 @@ class StaticPage extends Model
      *
      * @return array
      */
-    public function getBy(string $slug)
+    public function getBy(string $slug): array
     {
         $page = self::find($slug);
         if (!$this->checkEmptyObject($page)) {
@@ -51,7 +51,7 @@ class StaticPage extends Model
      *
      * @return bool
      */
-    public function updateOrMake(Request $request)
+    public function updateOrMake(Request $request): bool
     {
         $slug    = $request->post('slug', false);
         $name    = $request->post('name', false);
@@ -79,7 +79,7 @@ class StaticPage extends Model
      *
      * @return bool
      */
-    public function removePage(string $slug)
+    public function removePage(string $slug): bool
     {
         return $this->where('slug', $slug)->delete();
     }
