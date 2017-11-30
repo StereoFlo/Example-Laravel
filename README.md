@@ -12,7 +12,7 @@
 2) **cd engine** 
 3) **php composer.phar update**
 4) Настроить БД для нового проекта
-5) Настрокить файл **.env**:
+5) Настрокить файл **.env** (WARNING! This file for local use only!):
 
 ``` bash
 APP_NAME=Recycle
