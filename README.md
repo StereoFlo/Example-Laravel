@@ -69,7 +69,7 @@ It's a real project for people interesting for the recycle art
 1) **git clone ...** for clone a repo
 2) **cd engine** go to framework folder
 3) **php composer.phar install** for download a composer dependencies
-4) the set up a database for project. Make a database, user, password, etc...
+4) Set up a database for project. Make a database, user, password, etc...
 5) make a file **.env** in a current folder and put the content below:
 
 ``` bash
