@@ -38,7 +38,7 @@ gulp.task('scripts', function() {
     'static/libs/page-scroll-to-id/jquery.malihu.PageScroll2id.js',
     'static/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js',
     'static/libs/fotorama/fotorama.js',
-    'static/libs/picturecut/src/jquery.picture.cut.js',
+    'static/libs/Tooltip/jquery.tooltip.js',
   ])
   .pipe(concat('libs.min.js')) // Собираем их в кучу в новом файле libs.min.js
   .pipe(uglify()) // Сжимаем JS файл
