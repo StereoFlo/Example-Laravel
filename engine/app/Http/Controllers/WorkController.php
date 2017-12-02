@@ -99,6 +99,9 @@ class WorkController extends Controller
      */
     public function remove(Request $request, Work $work, WorkImages $workImages, TagsRel $tagsRel, int $id)
     {
+        if (!$this->checkWork($work, $request, $id)) {
+            abort(401);
+        }
         $workPath = \public_path(\sprintf(self::WORK_PATH, Auth::id(), $id));
         $tagsRel->deleteByWork($id);
         $workImages->removeByWorkId($id);
@@ -115,13 +118,17 @@ class WorkController extends Controller
     /**]
      * @param Request    $request
      * @param WorkImages $workImages
+     * @param Work       $work
      * @param int        $workId
      * @param int        $imageId
      *
      * @return mixed
      */
-    public function removeImageFromWork(Request $request, WorkImages $workImages, int $workId, int $imageId)
+    public function removeImageFromWork(Request $request, WorkImages $workImages, Work $work, int $workId, int $imageId)
     {
+        if (!$this->checkWork($work, $request, $workId)) {
+            abort(401);
+        }
         $isSaved = $workImages->removeFromWork($workId, $imageId);
         if ($isSaved) {
             if (!$request->ajax()) {
@@ -148,17 +155,18 @@ class WorkController extends Controller
     }
 
     /**
-     * @param Work $work
-     * @param int  $id
+     * @param Request $request
+     * @param Work    $work
+     * @param int     $id
      *
      * @return \Illuminate\Contracts\View\Factory|View
      */
-    public function edit(Work $work, int $id)
+    public function edit(Request $request, Work $work, int $id)
     {
-        $work = $work->getById($id);
-        if ($work['userId'] !== Auth::id()) {
-            \abort(401, __('workNotFound'));
+        if (!$this->checkWork($work, $request, $id)) {
+            abort(401);
         }
+        $work = $work->getById($id);
         if (empty($work)) {
             \abort(404, __('workNotFound'));
         }
@@ -190,14 +198,19 @@ class WorkController extends Controller
     }
 
     /**
+     * @param Request    $request
+     * @param Work       $work
      * @param CatalogRel $catalogRel
      * @param int        $workId
      * @param int        $catId
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function removeFromCategory(CatalogRel $catalogRel, int $workId, int $catId)
+    public function removeFromCategory(Request $request, Work $work, CatalogRel $catalogRel, int $workId, int $catId)
     {
+        if (!$this->checkWork($work, $request, $workId)) {
+            abort(401);
+        }
         $res = (bool) $catalogRel->removeFromCategory($catId, $workId);
         return \response()->json([
             'isRemoved' => $res
@@ -205,14 +218,20 @@ class WorkController extends Controller
     }
 
     /**
+     * @param Request     $request
+     * @param Work        $work
      * @param MaterialRel $materialRel
      * @param int         $workId
      * @param int         $materialId
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function removeMaterialFromWork(MaterialRel $materialRel, int $workId, int $materialId)
+    public function removeMaterialFromWork(Request $request, Work $work, MaterialRel $materialRel, int $workId, int $materialId)
     {
+        if (!$this->checkWork($work, $request, $workId)) {
+            abort(401);
+        }
+
         $res = (bool) $materialRel->removeFromWork($workId, $materialId);
         return \response()->json([
             'isRemoved' => $res
@@ -237,5 +256,21 @@ class WorkController extends Controller
         return \response()->json([
             'isLiked' => true,
         ]);
+    }
+
+    /**
+     * @param Work    $work
+     * @param Request $request
+     * @param int     $id
+     *
+     * @return bool
+     */
+    private function checkWork(Work $work, Request $request, int $id): bool
+    {
+        $workCheck = $work->find($id);
+        if ($workCheck !== Auth::id() || $request->user()->hasAnyRole([User::ROLE_MODERATOR, User::ROLE_ADMIN])) {
+            return false;
+        }
+        return true;
     }
 }
