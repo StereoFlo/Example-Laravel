@@ -39,11 +39,13 @@
                     </span>
                 </div>
 
-                @include('work.includes.materials')
 
-                @include('work.includes.category')
+                @include('work.partials.materials')
 
-                @include('work.includes.images')
+                @include('work.partials.category')
+
+                @include('work.partials.images')
+
 
                 @if(empty($work['id']))
                     <button type="submit" name="button" class="button btn_ok">@lang('work.buttonOfNewWork')</button>

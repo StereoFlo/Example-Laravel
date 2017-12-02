@@ -62,6 +62,7 @@ Route::group(['middleware' => 'isModerator'], function () {
     Route::get('/manager/work/list/approved', 'Manager\\Work@getListApproved')->name('workListManagerApproved');
     Route::get('/manager/work/list/author/{id}', 'Manager\\Work@getListByAuthor')->where('id', '[0-9]+')->name('workListAuthorManager');
     Route::get('/manager/work/approve/{workId}', 'Manager\\Work@approve')->where('workId', '[0-9]+')->name('managerWorkApprove');
+    Route::get('/manager/work/{workId}/remove', 'Manager\\Work@remove')->where('workId', '[0-9]+')->name('managerWorkRemove');
 
     Route::get('/manager/catalog/list', 'Manager\\Catalog@getList')->name('managerCatalogList');
     Route::get('/manager/catalog/add', 'Manager\\Catalog@form')->name('managerCatalogAdd');

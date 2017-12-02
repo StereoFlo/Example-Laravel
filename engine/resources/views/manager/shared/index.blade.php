@@ -6,7 +6,9 @@
             @include('manager.shared.menu')
             <div class="col-md-8 col-md-offset-0">
                 <div class="panel panel-default">
-                    <p>раздел администратора</p>
+                    <div class="panel-body">
+                        <strong>Раздел администратора</strong>
+                    </div>
                 </div>
             </div>
         </div>
