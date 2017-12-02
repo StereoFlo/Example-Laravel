@@ -18,13 +18,13 @@
             <i class="fa fa-comment-o"></i> Слоган
         </a>
         <a href="{{ route('managerMaterialList') }}" class="list-group-item">
-            <i class="fa fa-comment-o"></i> Материалы
+            <i class="fa fa-comment-o"></i> Инструменты
         </a>
         <a href="{{ route('managerPageList') }}" class="list-group-item">
             <i class="fa fa-comment-o"></i> Страницы
         </a>
         <a href="{{ route('managerCatalogList') }}" class="list-group-item">
-            <i class="fa fa-comment-o"></i> Каталог
+            <i class="fa fa-comment-o"></i> Категории
         </a>
         <a href="{{ route('newsList') }}" class="list-group-item">
             <i class="fa fa-comment-o"></i> Новости <span class="badge">{{ $newsCount }}</span>

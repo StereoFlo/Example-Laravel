@@ -118,7 +118,7 @@
     position: relative;
     text-align: center;
     img {
-      width: 25px;
+      width: 35px;
       height: auto;
       display: inline-block;
       margin: auto;
@@ -139,8 +139,7 @@
         content: '';
         position: absolute;
         top: 100%;
-        left: 50%;
-        margin-left: -8px;
+        left: 16px;
         width: 0;
         height: 0;
         border-top: 8px solid #E83B3A;
@@ -152,8 +151,6 @@
       visibility: visible;
       opacity: 1;
       bottom: 60px;
-      left: 50%;
-      margin-left: -40px;
       z-index: 3;
     }
   }

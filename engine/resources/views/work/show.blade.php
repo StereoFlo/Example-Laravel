@@ -45,8 +45,7 @@
                 <div class="work__circles">
                     @if(!empty($work['materials']['inWork']))
                         @foreach($work['materials']['inWork'] as $material)
-                            <div class="work__circle">
-                                <span>{{ $material['name'] }}</span>
+                            <div class="work__circle" data-tt="{{ $material['name'] }}">
                                 <img src="{{ url($material['url']) }}" alt="">
                             </div>
                         @endforeach
