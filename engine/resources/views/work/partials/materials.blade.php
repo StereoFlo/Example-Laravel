@@ -29,12 +29,14 @@
             <input type="hidden" name="workId" value="{{ $work['id'] }}">
         </div>
     @else
-        <p>Материалы:</p>
-        <div class="inputGroup checkboxes">
-            @foreach($materials as $material)
-                <input id="{{ $material['id'] }}" type="checkbox" name="materials[]" value="{{ $material['id'] }}">
-                <label for="{{ $material['id'] }}">{{ $material['name'] }}</label>
-            @endforeach
-        </div>
+        @if(!empty($materials))
+            <p>Материалы:</p>
+            <div class="inputGroup checkboxes">
+                @foreach($materials as $material)
+                    <input id="{{ $material['id'] }}" type="checkbox" name="materials[]" value="{{ $material['id'] }}">
+                    <label for="{{ $material['id'] }}">{{ $material['name'] }}</label>
+                @endforeach
+            </div>
+        @endif
     @endif
 </div>
