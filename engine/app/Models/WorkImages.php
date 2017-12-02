@@ -98,7 +98,7 @@ class WorkImages extends Model
     public function addImages(array $files, $workId): bool
     {
         $isSaved = false;
-        if (Auth::id() !== 0 || empty(Auth::id())) {
+        if (empty(Auth::id())) {
             return $isSaved;
         }
         if (empty($files)) {

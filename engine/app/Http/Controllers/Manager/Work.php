@@ -2,9 +2,14 @@
 
 namespace RecycleArt\Http\Controllers\Manager;
 
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use RecycleArt\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use RecycleArt\Http\Controllers\WorkController;
+use RecycleArt\Models\TagsRel;
+use RecycleArt\Models\Work as WorkModel;
+use RecycleArt\Models\WorkImages;
 
 /**
  * Class Work
@@ -73,5 +78,33 @@ class Work extends ManagerController
         return [
             'isApproved' => $this->work->toggleApprove($workId)
         ];
+    }
+
+    /**
+     * @param Request    $request
+     * @param WorkModel  $work
+     * @param WorkImages $workImages
+     * @param TagsRel    $tagsRel
+     * @param int        $id
+     *
+     * @return mixed
+     */
+    public function remove(Request $request, WorkModel $work, WorkImages $workImages, TagsRel $tagsRel, int $id)
+    {
+        return 'Это нужно оплатить';
+
+        if (!$this->checkWork($work, $request, $id)) {
+            abort(401);
+        }
+        $workPath = \public_path(\sprintf(WorkController::WORK_PATH, Auth::id(), $id));
+        $tagsRel->deleteByWork($id);
+        $workImages->removeByWorkId($id);
+        $work->removeById($id);
+
+        File::cleanDirectory($workPath);
+        if (\is_dir($workPath)) {
+            \rmdir($workPath);
+        }
+        return Redirect::to(\route('managerIndex'));
     }
 }
