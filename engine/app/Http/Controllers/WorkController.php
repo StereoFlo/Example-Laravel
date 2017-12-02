@@ -257,20 +257,4 @@ class WorkController extends Controller
             'isLiked' => true,
         ]);
     }
-
-    /**
-     * @param Work    $work
-     * @param Request $request
-     * @param int     $id
-     *
-     * @return bool
-     */
-    private function checkWork(Work $work, Request $request, int $id): bool
-    {
-        $workCheck = $work->find($id);
-        if ($workCheck !== Auth::id() || $request->user()->hasAnyRole([User::ROLE_MODERATOR, User::ROLE_ADMIN])) {
-            return false;
-        }
-        return true;
-    }
 }
