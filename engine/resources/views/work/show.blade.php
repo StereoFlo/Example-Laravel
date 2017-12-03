@@ -77,6 +77,10 @@
             <div  id="work__comments" class="work__comments">
 
             </div>
+            <script type="text/javascript">VK.init({apiId: 6283264, onlyWidgets: true});</script>
+            <script type="text/javascript">
+                VK.Widgets.Comments("work__comments", {limit: 20, attach: "*"}, {{$work['id']}});
+            </script>
         </div>
     </section>
 @endsection
