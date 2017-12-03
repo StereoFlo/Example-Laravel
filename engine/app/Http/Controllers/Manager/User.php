@@ -83,7 +83,6 @@ class User extends ManagerController
      */
     public function removeUser(UserModel $user, Work $work, int $id)
     {
-        return 'Это нужно оплатить';
         $userToRemove = $user->findOrFail($id);
         $works = $work->getListByUserId($userToRemove->id);
         foreach ($works as $workItem) {
