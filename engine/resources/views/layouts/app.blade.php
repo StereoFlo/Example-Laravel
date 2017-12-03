@@ -28,6 +28,9 @@
     <!-- Styles -->
     <link href="{{ asset('/static/libs/fotorama/fotorama.css') }}" rel="stylesheet">
     <link href="{{ asset('/static/css/main.min.css') }}" rel="stylesheet">
+
+    <!-- VK Comments -->
+    <script type="text/javascript" src="//vk.com/js/api/openapi.js?150"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -91,8 +94,6 @@
 
 <!-- Scripts -->
 {{--    <script src="{{ asset('js/app.js') }}"></script>--}}
-<script type="text/javascript" src="//vk.com/js/api/openapi.js?150"></script>
-<script type="text/javascript">VK.init({apiId: 5683855, onlyWidgets: true});</script>
 <script src="{{ url('static/js/libs.min.js') }}"></script>
 <script src="{{ url('static/js/common.js') }}"></script>
 </body>
