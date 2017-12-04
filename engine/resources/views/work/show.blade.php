@@ -5,7 +5,7 @@
         <div class="container">
             <div class="work__header flex">
                 <h2 class="work__title">{{ $work['workName']  }}</h2>
-                <a href="/author/{{$work['userId']}}" class="work__author">by {{$work['userName']}}</a>
+                <a href="{{ route('authorPage', ['id' => $work['userId']]) }}" class="work__author">by {{$work['userName']}}</a>
             </div>
             <div class="work__item">
                 <div class="work__slider">
@@ -31,7 +31,7 @@
                 </div>
                 <div class="work__desc">
                     <p>
-                        {{$work['description']}}
+                        {{ $work['description'] }}
                     </p>
                 </div>
             </div>

@@ -28,7 +28,7 @@ class News extends Model
      *
      * @return array
      */
-    public function getList(int $limit = 2, int $offset = 0, $orderBy = 'created_at'): array
+    public function getList(int $limit = 2, int $offset = 0, $orderBy = 'id'): array
     {
         $news = null;
         if (empty($limit)) {

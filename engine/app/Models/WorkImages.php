@@ -145,8 +145,8 @@ class WorkImages extends Model
         if (empty($workId)) {
             return false;
         }
-        $hasDefault = $this->getDefault($workId);
-        if (!$this->checkEmptyObject($hasDefault)) {
+
+        if (empty($this->getDefault($workId))) {
             return false;
         }
         return true;
