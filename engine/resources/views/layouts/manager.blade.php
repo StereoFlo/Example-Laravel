@@ -59,7 +59,7 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="/">
+                                        <a href="{{ url('/') }}">
                                             Основной сайт
                                         </a>
                                     </li>
