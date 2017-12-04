@@ -3,7 +3,7 @@
         <p>В этой категории работ нет</p>
     @else
         @foreach($list as $work)
-            <a href="/work/{{ $work['workId'] }}" class="item">
+            <a href="{{ route('workPublicShow', ['id' => $work['workId']]) }}" class="item">
                 <div class="content">
                     <div class="border">
                         <div class="valign">
