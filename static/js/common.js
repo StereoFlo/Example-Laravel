@@ -107,12 +107,14 @@ $(function () {
     });
 
     /* ---------------------------------------------- /*
-     * VK Comments
+     * Tooltip
     /* ---------------------------------------------- */
 
-    if ($("#work__comments").length) {
-        VK.Widgets.Comments("work__comments", {limit: 20, attach: "*"});
-    }
+    $('.work__circle').tooltip({
+        position:'top',
+        backgroundColor: '#E83B3A',
+        offset: 1
+    });
 
     /* ---------------------------------------------- /*
      * ImagesUploadPreview

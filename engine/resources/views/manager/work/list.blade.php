@@ -20,16 +20,23 @@
                                     <td>ID</td>
                                     <td>Имя</td>
                                     <td>автор</td>
-                                    <td>Просмотреть</td>
                                     <td>Проверена</td>
+                                    <td>Действия</td>
                                 </tr>
                                 @foreach ($works as $work)
                                     <tr>
                                         <td>{{ $work['id'] }}</td>
                                         <td>{{ $work['workName'] }}</td>
-                                        <td><a href="{{ route('workListAuthorManager', ['id' => $work['userId']]) }}">{{ $work['userName'] }}</a></td>
-                                        <td><a href="{{ route('workShow', ['id' => $work['id']]) }}">Открыть</a> </td>
-                                        <td><input data-url="{{ route('managerWorkApprove', ['workId' => $work['id']]) }}" id="work_{{ $work['id'] }}" type="checkbox" {{ empty($work['approved']) ? null : 'checked' }}></td>
+                                        <td>
+                                            <a href="{{ route('workListAuthorManager', ['id' => $work['userId']]) }}">{{ $work['userName'] }}</a>
+                                        </td>
+                                        <td>
+                                            <input data-url="{{ route('managerWorkApprove', ['workId' => $work['id']]) }}" id="work_{{ $work['id'] }}" type="checkbox" {{ empty($work['approved']) ? null : 'checked' }}>
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('workShow', ['id' => $work['id']]) }}">Открыть</a> |
+{{--                                            <a href="{{ route('managerWorkRemove', ['цщклШв' => $work['id']]) }}">Удалить</a>--}}
+                                        </td>
                                     </tr>
                                 @endforeach
                             </table>

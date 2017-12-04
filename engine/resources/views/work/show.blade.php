@@ -45,8 +45,7 @@
                 <div class="work__circles">
                     @if(!empty($work['materials']['inWork']))
                         @foreach($work['materials']['inWork'] as $material)
-                            <div class="work__circle">
-                                <span>{{ $material['name'] }}</span>
+                            <div class="work__circle" data-tt="{{ $material['name'] }}">
                                 <img src="{{ url($material['url']) }}" alt="">
                             </div>
                         @endforeach
@@ -78,6 +77,10 @@
             <div  id="work__comments" class="work__comments">
 
             </div>
+            <script type="text/javascript">VK.init({apiId: 6283406, onlyWidgets: true});</script>
+            <script type="text/javascript">
+                VK.Widgets.Comments("work__comments", {limit: 20, attach: "*"}, {{$work['id']}});
+            </script>
         </div>
     </section>
 @endsection
