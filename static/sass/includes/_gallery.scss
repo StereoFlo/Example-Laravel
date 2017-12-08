@@ -84,12 +84,15 @@
       display: inline-block;
       height: 24px;
       margin: 5px 0;
-      width: 190px;
+      width: 100%;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      @include max-screen($break_xs) {
-        width: 140px;
+      @include max-screen($break_sm) {
+        width: 240px;
+      }
+      @include max-screen($break_xxs) {
+        width: 100%;
       }
     }
     &:checked + label {
