@@ -29,7 +29,7 @@
                     <div class="products">
                         <div class="products__wrap">
                             @foreach($recentlyLiked as $work)
-                                <a href="/work/{{ $work['id'] }}" class="item">
+                                <a href="{{ route('workPublicShow', ['id' =>$work['id'] ]) }}" class="item">
                                     <div class="content">
                                         <div class="border">
                                             <div class="valign">

@@ -91,8 +91,7 @@ class Work extends ManagerController
      */
     public function remove(Request $request, WorkModel $work, WorkImages $workImages, TagsRel $tagsRel, int $id)
     {
-        return 'Это нужно оплатить';
-
+        return 'Это нужно оплатить'; // the customer didnt pay for this feature
         if (!$this->checkWork($work, $request, $id)) {
             abort(401);
         }

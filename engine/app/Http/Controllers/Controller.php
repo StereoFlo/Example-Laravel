@@ -29,7 +29,7 @@ class Controller extends BaseController
     protected function checkWork(Work $work, Request $request, int $id): bool
     {
         $workCheck = $work->getById($id);
-        if (empty($workCheck) || $workCheck['userId'] !== Auth::id() || !$request->user()->hasAnyRole([User::ROLE_MODERATOR, User::ROLE_ADMIN])) {
+        if (empty($workCheck) || (Auth::id() !== $workCheck['userId'] && !$request->user()->hasAnyRole([User::ROLE_MODERATOR, User::ROLE_ADMIN]))) {
             return false;
         }
         return true;
