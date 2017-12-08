@@ -53,6 +53,7 @@
                     <a href="{{ route('galleryPublicIndex') }}" class="nav__link">Галерея</a>
                     <a href="{{ url('pages/about.html') }}" class="nav__link">О нас</a>
                     <a href="#" class="nav__link hidden">Общалка</a>
+                    <a href="{{ url('pages/friends.html') }}" class="nav__link">Друзья и партнеры</a>
                     <a href="{{ url('pages/contacts.html') }}" class="nav__link">Контакты</a>
                 </nav>
                 <div class="user">
