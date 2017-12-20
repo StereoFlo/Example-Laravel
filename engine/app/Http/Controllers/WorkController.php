@@ -73,6 +73,10 @@ class WorkController extends Controller
             'userId'      => Auth::id(),
         ]);
         if (!empty($request->file('images'))) {
+            $this->validate($request, [
+                'images' => 'mimes:jpeg,png,jpg,gif,svg',
+
+            ]);
             $workImages->addImages($request->file('images'), $workId);
         }
         if (!empty($request->post('tags'))) {
