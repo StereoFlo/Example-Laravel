@@ -77,13 +77,13 @@ class WorkController extends Controller
                 $request->session()->flash('addWorkResult', $exception->getMessage());
                 return Redirect::to(\route('workAdd'));
             }
+            $workId = $work->updateOrSave($workId, [
+                'workName'    => $request->post('workName'),
+                'description' => $request->post('description'),
+                'userId'      => Auth::id(),
+            ]);
             $workImages->addImages($request->file('images'), $workId);
         }
-        $workId = $work->updateOrSave($workId, [
-            'workName'    => $request->post('workName'),
-            'description' => $request->post('description'),
-            'userId'      => Auth::id(),
-        ]);
         if (!empty($request->post('tags'))) {
             $tags->addTagsToWork($request->post('tags'), $workId);
         }
