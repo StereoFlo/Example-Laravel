@@ -14,6 +14,15 @@ class Work extends Model
     protected $table = 'work';
 
     /**
+     * Work constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->perPage = 30;
+    }
+
+    /**
      * @param $userId
      *
      * @return array
