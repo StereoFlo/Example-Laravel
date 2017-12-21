@@ -16,11 +16,6 @@ class Work extends Model
     /**
      * Work constructor.
      */
-    public function __construct()
-    {
-        parent::__construct();
-        $this->perPage = 30;
-    }
 
     /**
      * @param $userId
@@ -265,6 +260,7 @@ class Work extends Model
      */
     public function getListForGallery(int $offset = 0): array
     {
+        $this->perPage = 30;
         $result = $this
             ->join('work_images', 'work.id', '=', 'work_images.workId')
             ->join('users', 'users.id', '=', 'work.userId')
@@ -284,6 +280,7 @@ class Work extends Model
      */
     public function getCountForGallery(): int
     {
+        $this->perPage = 30;
         $result = $this
             ->select('work.*', 'users.id as userId', 'users.name as userName', 'work_images.link')
             ->join('work_images', 'work.id', '=', 'work_images.workId')
