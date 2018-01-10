@@ -283,7 +283,7 @@ class User extends Authenticatable
             'name'     => $data['name'],
             //'location' => $data['location'],
             //'phone'    => $data['phone'],
-            'vkId'     => $data['vkId'],
+            'vk_id'    => $data['vkId'],
             'email'    => $data['email'],
             'password' => \bcrypt($data['password']),
         ]);
