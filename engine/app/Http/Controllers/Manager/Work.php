@@ -2,11 +2,13 @@
 
 namespace RecycleArt\Http\Controllers\Manager;
 
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use RecycleArt\Http\Controllers\WorkController;
+use RecycleArt\Models\CatalogRel;
 use RecycleArt\Models\TagsRel;
 use RecycleArt\Models\Work as WorkModel;
 use RecycleArt\Models\WorkImages;
@@ -81,26 +83,27 @@ class Work extends ManagerController
     }
 
     /**
-     * @param Request    $request
-     * @param WorkModel  $work
+     * @param Request $request
+     * @param WorkModel $work
      * @param WorkImages $workImages
-     * @param TagsRel    $tagsRel
-     * @param int        $id
+     * @param CatalogRel $catalogRel
+     * @param TagsRel $tagsRel
+     * @param Filesystem $filesystem
+     * @param int $id
      *
      * @return mixed
      */
-    public function remove(Request $request, WorkModel $work, WorkImages $workImages, TagsRel $tagsRel, int $id)
+    public function remove(Request $request, WorkModel $work, WorkImages $workImages, CatalogRel $catalogRel,  TagsRel $tagsRel, Filesystem $filesystem, int $id)
     {
-        return 'Это нужно оплатить'; // the customer didnt pay for this feature
         if (!$this->checkWork($work, $request, $id)) {
             abort(401);
         }
         $workPath = \public_path(\sprintf(WorkController::WORK_PATH, Auth::id(), $id));
+        $catalogRel->removeWorkCategories($id);
         $tagsRel->deleteByWork($id);
         $workImages->removeByWorkId($id);
         $work->removeById($id);
-
-        File::cleanDirectory($workPath);
+        $filesystem->cleanDirectory($workPath);
         if (\is_dir($workPath)) {
             \rmdir($workPath);
         }

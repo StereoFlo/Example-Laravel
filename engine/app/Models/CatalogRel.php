@@ -85,7 +85,7 @@ class CatalogRel extends Model
      *
      * @return bool
      */
-    public function removeWorkCategory(int $workId): bool
+    public function removeWorkCategories(int $workId): bool
     {
         return (bool) $this->where('work_id', $workId)->delete();
     }
