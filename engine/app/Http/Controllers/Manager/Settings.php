@@ -3,7 +3,6 @@
 namespace RecycleArt\Http\Controllers\Manager;
 
 use Illuminate\Http\Request;
-use RecycleArt\Http\Controllers\Controller;
 
 /**
  * Class Settings
@@ -17,5 +16,15 @@ class Settings extends ManagerController
     public function __construct()
     {
         parent::__construct();
+    }
+
+    public function form()
+    {
+
+    }
+
+    public function process()
+    {
+
     }
 }

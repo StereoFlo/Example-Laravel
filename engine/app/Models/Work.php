@@ -107,7 +107,7 @@ class Work extends Model
     {
         $this->getMaterialRelation()->removeWork($workId);
         $this->getTagsRelation()->deleteByWork($workId);
-        $this->getCatalogRelation()->removeWorkCategory($workId);
+        $this->getCatalogRelation()->removeWorkCategories($workId);
         $this->getWorkImages()->removeAllImages($workId);
         $this->where('id', $workId)->delete();
         return true;

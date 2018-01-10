@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Mockery\Exception;
 use RecycleArt\Models\Catalog;
 use RecycleArt\Models\CatalogRel;
 use RecycleArt\Models\Material;
@@ -67,12 +68,20 @@ class WorkController extends Controller
     public function process(Request $request, Work $work, WorkImages $workImages, Tags $tags, CatalogRel $catalogRel, MaterialRel $materialRel)
     {
         $workId = $request->post('workId') ?: 0;
-        $workId = $work->updateOrSave($workId, [
-            'workName'    => $request->post('workName'),
-            'description' => $request->post('description'),
-            'userId'      => Auth::id(),
-        ]);
         if (!empty($request->file('images'))) {
+            try {
+                $this->validate($request, [
+                    'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+                ]);
+            } catch (\Exception $exception) {
+                $request->session()->flash('addWorkResult', $exception->getMessage());
+                return Redirect::to(\route('workAdd'));
+            }
+            $workId = $work->updateOrSave($workId, [
+                'workName'    => $request->post('workName'),
+                'description' => $request->post('description'),
+                'userId'      => Auth::id(),
+            ]);
             $workImages->addImages($request->file('images'), $workId);
         }
         if (!empty($request->post('tags'))) {

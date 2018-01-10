@@ -2,7 +2,7 @@
     <label for="images">@lang('work.photoOfNewWork') (16:9, jpeg):</label>
     <div class="filearea">
         <span>@lang('work.photoDescrOfNewWork')</span>
-        <input type="file" name="images[]" value="{{ old('images') }}" multiple {{ !empty($errors->has('images')) ? 'required' : null }}>
+        <input type="file" name="images[]" multiple {{ !empty($errors->has('images')) ? 'required' : null }}>
     </div>
     <div class="fileareaPreview"></div>
     <span class="errorText">

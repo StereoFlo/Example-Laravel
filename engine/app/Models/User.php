@@ -256,6 +256,8 @@ class User extends Authenticatable
     }
 
     /**
+     * get user by id
+     *
      * @param int $id
      *
      * @return array
@@ -269,6 +271,23 @@ class User extends Authenticatable
         return $user->toArray();
     }
 
+    /**
+     * create a new user
+     *
+     * @param array $data
+     * @return self
+     */
+    public function createUser(array $data)
+    {
+        return self::create([
+            'name'     => $data['name'],
+            //'location' => $data['location'],
+            //'phone'    => $data['phone'],
+            'vk_id'    => $data['vkId'],
+            'email'    => $data['email'],
+            'password' => \bcrypt($data['password']),
+        ]);
+    }
 
     /**
      * @return bool
@@ -280,7 +299,7 @@ class User extends Authenticatable
         $currentUser->avatar = null;
         $isSaved = $currentUser->save();
         if (!empty($avatar) && $isSaved) {
-            $path = public_path($avatar);
+            $path = \public_path($avatar);
             $isSaved = File::delete($path);
         }
         return $isSaved;

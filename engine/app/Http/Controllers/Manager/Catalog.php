@@ -65,9 +65,10 @@ class Catalog extends ManagerController
 
     /**
      * @param CatalogModel $catalog
-     * @param int          $id
+     * @param int $id
      *
      * @return mixed
+     * @throws \Exception
      */
     public function remove(CatalogModel $catalog, int $id)
     {
