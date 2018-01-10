@@ -60,11 +60,13 @@ class RegisterController extends Controller
         $rules = [
             'name'     => 'required|string|max:255',
             'email'    => 'required|string|email|max:255|unique:users',
+            'vkId'     => 'string|max:255',
             'password' => 'required|string|min:6|confirmed',
         ];
         $niceNames = [
             'name'     => 'Имя',
             'email'    => 'Email',
+            'vkId'     => 'Ваш ID во Вконтакте',
             'password' => 'Пароль',
         ];
         $this->validate($request, $rules, [], $niceNames);
@@ -73,20 +75,14 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
+     * @param User $user
      * @param  array $data
      *
      * @return \RecycleArt\Models\User
      */
-    protected function create(array $data)
+    protected function create(User $user, array $data)
     {
-        return User::create([
-            'name'     => $data['name'],
-            //'location' => $data['location'],
-            //'phone'    => $data['phone'],
-            //'about'    => $data['about'],
-            'email'    => $data['email'],
-            'password' => \bcrypt($data['password']),
-        ]);
+        return $user->createUser($data);
     }
 
     /**
