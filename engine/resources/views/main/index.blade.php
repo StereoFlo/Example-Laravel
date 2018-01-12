@@ -12,7 +12,7 @@
 
                 <div class="slogan">
                     <p class="slogan__item">
-                        {!! $slogan !!}
+                        {!! $slogan['setting_value'] !!}
                     </p>
                 </div>
 

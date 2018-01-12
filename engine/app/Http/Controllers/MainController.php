@@ -4,7 +4,7 @@ namespace RecycleArt\Http\Controllers;
 
 use Illuminate\Contracts\View\Factory;
 use RecycleArt\Models\News;
-use RecycleArt\Models\Slogan;
+use RecycleArt\Models\Settings;
 use RecycleArt\Models\Work;
 
 /**
@@ -13,10 +13,7 @@ use RecycleArt\Models\Work;
  */
 class MainController extends Controller
 {
-    /**
-     * @var Slogan
-     */
-    private $slogan;
+    private $settings;
 
     /**
      * @var News
@@ -31,13 +28,13 @@ class MainController extends Controller
     /**
      * MainController constructor.
      *
-     * @param Slogan $slogan
-     * @param News   $news
-     * @param Work   $work
+     * @param Settings $settings
+     * @param News $news
+     * @param Work $work
      */
-    public function __construct(Slogan $slogan, News $news, Work $work)
+    public function __construct(Settings $settings, News $news, Work $work)
     {
-        $this->slogan = $slogan;
+        $this->settings = $settings;
         $this->news = $news;
         $this->work = $work;
     }
@@ -48,7 +45,7 @@ class MainController extends Controller
     public function index()
     {
         return view('main.index', [
-            'slogan' => $this->slogan->getSlogan(),
+            'slogan' => $this->settings->getOneFromArray('slogan'),
             'news'   => $this->news->getList(),
             'works'  => $this->work->getListForHomepage($this->work->getPerPage()),
         ]);

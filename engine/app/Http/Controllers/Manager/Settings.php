@@ -18,12 +18,12 @@ class Settings extends ManagerController
         parent::__construct();
     }
 
-    public function form()
+    public function form(\RecycleArt\Models\Settings $settings)
     {
-
+        return view('manager.settings.form', ['settings' => $settings->getAllArray()]);
     }
 
-    public function process()
+    public function process(Request $request)
     {
 
     }
