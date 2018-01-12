@@ -18,12 +18,20 @@ class Settings extends Model
     ];
 
     /**
+     * @var self
+     */
+    protected static $allSettings;
+
+    /**
      * get all settings
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function getAll()
     {
-        return self::all();
+        if (empty(self::$allSettings)) {
+            self::$allSettings = self::all();
+        }
+        return self::$allSettings;
     }
 
     /**
@@ -36,13 +44,7 @@ class Settings extends Model
         if (empty($allSettings)) {
             return [];
         }
-
-        foreach ($allSettings as $val) {
-            if ($val['setting_slug'] === $settingSlug) {
-                return $val;
-            }
-        }
-        return [];
+        return $this->getFromArray($settingSlug, $allSettings);
     }
 
     /**
@@ -65,7 +67,7 @@ class Settings extends Model
         $isSaved = false;
         $allSettings = $this->getAllArray();
         foreach ($data as $settingSlug => $settingValue) {
-            if (isset($allSettings[$settingSlug]) && $allSettings[$settingSlug] !== $settingValue) {
+            if (!empty($this->getFromArray($settingSlug, $allSettings))) {
                 $isSaved = $this->updateSetting($settingSlug, $settingValue);
             }
         }
@@ -82,5 +84,20 @@ class Settings extends Model
     {
         $setting = new self();
         return $setting->where('setting_slug', $settingSlug)->update(['setting_value' => $settingValue]);
+    }
+
+    /**
+     * @param string $settingSlug
+     * @param $allSettings
+     * @return array
+     */
+    protected function getFromArray(string $settingSlug, array $allSettings): array
+    {
+        foreach ($allSettings as $val) {
+            if ($val['setting_slug'] === $settingSlug) {
+                return $val;
+            }
+        }
+        return [];
     }
 }

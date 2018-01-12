@@ -11,15 +11,15 @@
                         <form class="form-horizontal" method="POST" action="{{ route('managerSettingsProcess') }}">
                             {{ csrf_field() }}
                             <p>{{ session('settingsFlash') }}</p>
-                            @if(isset($setting['setting_slug']) && $setting['setting_slug'] === 'limitWorksForGallery')
-                                <div class="form-group">
-                                    <label for="limitWorksForGallery" class="col-md-4 control-label">Количество работ на странице галлереи</label>
-                                    <div class="col-md-6">
-                                        <input id="limitWorksForGallery" type="text" class="form-control" name="limitWorksForGallery" value="{{ $setting['limitWorksForGallery'] }}" required autofocus>
-                                    </div>
-                                </div>
-                            @endif
                             @foreach($settings as $setting)
+                                @if(isset($setting['setting_slug']) && $setting['setting_slug'] === 'limitWorksForGallery')
+                                    <div class="form-group">
+                                        <label for="limitWorksForGallery" class="col-md-4 control-label">Количество работ на странице галлереи</label>
+                                        <div class="col-md-6">
+                                            <input id="limitWorksForGallery" type="text" class="form-control" name="limitWorksForGallery" value="{{ $setting['setting_value'] }}" required autofocus>
+                                        </div>
+                                    </div>
+                                @endif
                                 @if(isset($setting['setting_slug']) && $setting['setting_slug'] === 'slogan')
                                     <div class="form-group">
                                         <label for="slogan" class="col-md-4 control-label">Слоган</label>
