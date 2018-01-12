@@ -260,7 +260,8 @@ class Work extends Model
      */
     public function getListForGallery(int $offset = 0): array
     {
-        $this->perPage = 30;
+        $settings = $this->getSettings()->getOneFromArray('limitWorksForGallery');
+        $this->perPage = empty($settings['setting_value']) ? 30 : $settings['setting_value'];
         $result = $this
             ->join('work_images', 'work.id', '=', 'work_images.workId')
             ->join('users', 'users.id', '=', 'work.userId')
@@ -280,7 +281,8 @@ class Work extends Model
      */
     public function getCountForGallery(): int
     {
-        $this->perPage = 30;
+        $settings = $this->getSettings()->getOneFromArray('limitWorksForGallery');
+        $this->perPage = empty($settings['setting_value']) ? 30 : $settings['setting_value'];
         $result = $this
             ->select('work.*', 'users.id as userId', 'users.name as userName', 'work_images.link')
             ->join('work_images', 'work.id', '=', 'work_images.workId')
