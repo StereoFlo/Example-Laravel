@@ -67,7 +67,8 @@ class Settings extends Model
         $isSaved = false;
         $allSettings = $this->getAllArray();
         foreach ($data as $settingSlug => $settingValue) {
-            if (!empty($this->getFromArray($settingSlug, $allSettings))) {
+            $settingArray = $this->getFromArray($settingSlug, $allSettings);
+            if (!empty($settingArray) && $settingArray['setting_value'] !== $settingValue) {
                 $isSaved = $this->updateSetting($settingSlug, $settingValue);
             }
         }
