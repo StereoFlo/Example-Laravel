@@ -4,16 +4,16 @@ $(function () {
      * Header
     /* ---------------------------------------------- */
 
-    var header = $('header');
-    var $window = $(window);
+    window.onscroll = getScrollPosition;
 
-    $window.scroll(function(){
-        if ( $window.scrollTop() > 200) {
-            header.addClass("fixed");
-        } else {
-            header.removeClass('fixed');
+    function getScrollPosition() {
+        const header = document.getElementsByTagName('header');
+        if (window.pageYOffset > 200) {
+            header[0].classList.add('fixed');
+            return;
         }
-    });
+        header[0].classList.remove('fixed');
+    }
 
     /* ---------------------------------------------- /*
      * Menu button
@@ -21,18 +21,16 @@ $(function () {
 
     $('.menu__btn').click(function (e) {
         e.preventDefault();
-        var navSelector = $('.nav');
-        var windowWidth = $window.width();
+        const navSelector = $('.nav');
+        console.log(navSelector);
 
-        if (windowWidth < 769) {
-            var headerHeight = $('header').innerHeight();
+        if (screen.width < 769) {
+            const headerHeight = $('header').innerHeight();
             navSelector.css('top', headerHeight);
             navSelector.slideToggle();
-        }
-        else {
+        } else {
             navSelector.toggleClass('opacity');
         }
-
     });
 
     /* ---------------------------------------------- /*
@@ -42,8 +40,8 @@ $(function () {
     $('.user__btn, .logIn__close').click(function (e) {
         e.preventDefault();
         $('.logIn .forms').empty();
-        $(document).keydown(function(e) {
-            if( e.keyCode === 27 ) {
+        $(document).keydown(function (e) {
+            if (e.keyCode === 27) {
                 $('.logIn').addClass('hidden');
             }
         });
@@ -111,7 +109,7 @@ $(function () {
     /* ---------------------------------------------- */
 
     $('.work__circle').tooltip({
-        position:'top',
+        position: 'top',
         backgroundColor: '#E83B3A',
         offset: 1
     });
@@ -120,13 +118,13 @@ $(function () {
      * ImagesUploadPreview
     /* ---------------------------------------------- */
 
-    var imagesPreview = function(input, placeToInsertImagePreview) {
+    var imagesPreview = function (input, placeToInsertImagePreview) {
 
         if (input.files) {
             var filesAmount = input.files.length;
             for (i = 0; i < filesAmount; i++) {
                 var reader = new FileReader();
-                reader.onload = function(event) {
+                reader.onload = function (event) {
                     $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
                 };
                 reader.readAsDataURL(input.files[i]);
@@ -135,7 +133,7 @@ $(function () {
 
     };
 
-    $('.filearea input').on('change', function() {
+    $('.filearea input').on('change', function () {
 
         imagesPreview(this, 'div.fileareaPreview');
 
@@ -148,21 +146,21 @@ $(function () {
      * Elements delete
     /* ---------------------------------------------- */
 
-        $('.workImgDel').click(function (event) {
-            event.preventDefault();
-            var url = $(this).attr('href');
-            var element = $(this).parent('.image');
+    $('.workImgDel').click(function (event) {
+        event.preventDefault();
+        var url = $(this).attr('href');
+        var element = $(this).parent('.image');
 
-            $.get(url)
-                .done(function (data) {
-                    if (data.isDeleted === true) {
-                        element.remove();
-                    }
-                })
-                .fail(function (data) {
-                    console.log(data);
-                });
-        });
+        $.get(url)
+            .done(function (data) {
+                if (data.isDeleted === true) {
+                    element.remove();
+                }
+            })
+            .fail(function (data) {
+                console.log(data);
+            });
+    });
 
 
     // $('[id^=tag_]').click(function (event) {
@@ -236,8 +234,8 @@ $(function () {
                 $message.remove();
 
                 $position.append(
-                    '<input id="'+ itemId +'" type="checkbox" name="categories[]" value="'+ itemId +'">' +
-                    '<label for="'+ itemId +'">'+ itemName +'</label>'
+                    '<input id="' + itemId + '" type="checkbox" name="categories[]" value="' + itemId + '">' +
+                    '<label for="' + itemId + '">' + itemName + '</label>'
                 );
 
             }
@@ -258,8 +256,8 @@ $(function () {
                 $message.remove();
 
                 $position.append(
-                    '<input id="'+ itemId +'" type="checkbox" name="materials[]" value="'+ itemId +'">' +
-                    '<label for="'+ itemId +'">'+ itemName +'</label>'
+                    '<input id="' + itemId + '" type="checkbox" name="materials[]" value="' + itemId + '">' +
+                    '<label for="' + itemId + '">' + itemName + '</label>'
                 );
 
             }
@@ -270,7 +268,7 @@ $(function () {
      * Gallery
     /* ---------------------------------------------- */
 
-    if(window.location.href.indexOf("/gallery") >= 0) {
+    if (window.location.href.indexOf("/gallery") >= 0) {
         var page = getUrlParameter('page').length ? getUrlParameter('page')[0] : 0;
         getWorks(getUrlParameter('categories[]'), page);
 
@@ -280,9 +278,9 @@ $(function () {
         });
 
         $(document).on('click', '#workNext', function () {
-                var pageId = $(this).attr('data-page');
-                var catIds = getCheckCategories();
-                getWorks(catIds, pageId);
+            var pageId = $(this).attr('data-page');
+            var catIds = getCheckCategories();
+            getWorks(catIds, pageId);
         });
 
         $(document).on('click', '#workPrevious', function () {
@@ -361,11 +359,11 @@ $(function () {
          * @param parameters
          */
         function setCheckboxes(parameters) {
-           if (parameters.categories && parameters.categories.length > 0) {
-               for (var cat of parameters.categories) {
-                   $('#cid_' + cat).prop('checked', true);
-               }
-           }
+            if (parameters.categories && parameters.categories.length > 0) {
+                for (var cat of parameters.categories) {
+                    $('#cid_' + cat).prop('checked', true);
+                }
+            }
         }
 
     }
@@ -441,7 +439,7 @@ $(document).on('submit', '#ajaxRegistration', function (e) {
  */
 function getUrlParameter(needleParamName) {
     var url = decodeURIComponent(window.location.search.substring(1));
-    var result =[];
+    var result = [];
     var allVars = url.split('&');
     for (var i = 0; i < allVars.length; i++) {
         var param = allVars[i].split('=');
