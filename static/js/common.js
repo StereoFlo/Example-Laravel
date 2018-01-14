@@ -437,11 +437,11 @@ $(document).on('submit', '#ajaxRegistration', function (e) {
  * @returns {Array}
  */
 function getUrlParameter(needleParamName) {
-    var url = decodeURIComponent(window.location.search.substring(1));
-    var result = [];
-    var allVars = url.split('&');
-    for (var i = 0; i < allVars.length; i++) {
-        var param = allVars[i].split('=');
+    const url = decodeURIComponent(window.location.search.substring(1));
+    const result = [];
+    const allVars = url.split('&');
+    for (let i = 0; i < allVars.length; i++) {
+        const param = allVars[i].split('=');
         if (param[0] === needleParamName) {
             result.push(param[1]);
         }
