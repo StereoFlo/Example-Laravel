@@ -268,23 +268,23 @@ $(function () {
     /* ---------------------------------------------- */
 
     if (window.location.href.indexOf("/gallery") >= 0) {
-        var page = getUrlParameter('page').length ? getUrlParameter('page')[0] : 0;
+        const page = getUrlParameter('page').length ? getUrlParameter('page')[0] : 0;
         getWorks(getUrlParameter('categories[]'), page);
 
         $('[id^=cid_]').click(function () {
-            var catIds = getCheckCategories();
+            const catIds = getCheckCategories();
             getWorks(catIds, 0);
         });
 
         $(document).on('click', '#workNext', function () {
-            var pageId = $(this).attr('data-page');
-            var catIds = getCheckCategories();
+            const pageId = $(this).attr('data-page');
+            const catIds = getCheckCategories();
             getWorks(catIds, pageId);
         });
 
         $(document).on('click', '#workPrevious', function () {
-            var pageId = $(this).attr('data-page');
-            var catIds = getCheckCategories();
+            const pageId = $(this).attr('data-page');
+            const catIds = getCheckCategories();
             getWorks(catIds, pageId);
         });
 
@@ -293,13 +293,13 @@ $(function () {
          * @returns {Array}
          */
         function getCheckCategories() {
-            var catIds = [];
-            var checks = $('[id^=cid_]');
-            for (var i = 0; i < checks.length; i++) {
+            const catIds = [];
+            const checks = $('[id^=cid_]');
+            for (let i = 0; i < checks.length; i++) {
                 if (checks[i].id === undefined) {
                     continue;
                 }
-                var catId = $('#' + checks[i].id + ':checked').attr('data-id');
+                const catId = $('#' + checks[i].id + ':checked').attr('data-id');
                 if (catId === undefined) {
                     continue;
                 }
