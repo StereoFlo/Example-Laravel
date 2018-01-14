@@ -22,7 +22,6 @@ $(function () {
     $('.menu__btn').click(function (e) {
         e.preventDefault();
         const navSelector = $('.nav');
-        console.log(navSelector);
 
         if (screen.width < 769) {
             const headerHeight = $('header').innerHeight();
