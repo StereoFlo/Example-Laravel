@@ -316,7 +316,7 @@ $(function () {
          * @return void
          */
         function getWorks(catIds, pageId) {
-            var parameters = {};
+            let parameters = {};
             if (catIds.length > 0) {
                 parameters.categories = catIds;
             }
@@ -329,7 +329,7 @@ $(function () {
             setUrl(parameters);
             setCheckboxes(parameters);
 
-            // this is need for post query
+            // this is need for post query with laravel
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -359,7 +359,7 @@ $(function () {
          */
         function setCheckboxes(parameters) {
             if (parameters.categories && parameters.categories.length > 0) {
-                for (var cat of parameters.categories) {
+                for (const cat of parameters.categories) {
                     $('#cid_' + cat).prop('checked', true);
                 }
             }
