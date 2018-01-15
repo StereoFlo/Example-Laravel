@@ -45,28 +45,31 @@ $(function () {
             }
         });
 
-        $.get('/login/ajax')
-            .done(function (data) {
-                $('.logIn .forms').append(data);
+        http('/login/ajax').then(
+            response => {
+                $('.logIn .forms').append(response);
                 $('#toReg').click(function () {
                     $('.forms form').toggle(600);
                 });
-            })
-            .fail(function (data) {
-                //todo
-            });
+            },
+            onError => {
+                // todo
+            }
+        );
 
-        $.get('/register/ajax')
-            .done(function (data) {
-                $('.logIn .forms').append(data);
+        http('/register/ajax').then(
+            onSuccess => {
+                $('.logIn .forms').append(onSuccess);
                 $('#ajaxRegistration').hide();
                 $('#toLog').click(function () {
                     $('.forms form').toggle(600);
                 });
-            })
-            .fail(function (data) {
+            },
+            onError => {
+                console.log(onError);
                 //todo
-            });
+            }
+        );
 
         $('.logIn').toggleClass('hidden');
         $('body').toggleClass('fixed');
@@ -117,12 +120,12 @@ $(function () {
      * ImagesUploadPreview
     /* ---------------------------------------------- */
 
-    var imagesPreview = function (input, placeToInsertImagePreview) {
+    const imagesPreview = function (input, placeToInsertImagePreview) {
 
         if (input.files) {
-            var filesAmount = input.files.length;
-            for (i = 0; i < filesAmount; i++) {
-                var reader = new FileReader();
+            const filesAmount = input.files.length;
+            for (let i = 0; i < filesAmount; i++) {
+                const reader = new FileReader();
                 reader.onload = function (event) {
                     $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
                 };
@@ -136,7 +139,7 @@ $(function () {
 
         imagesPreview(this, 'div.fileareaPreview');
 
-        var filesCount = $(this)[0].files.length;
+        const filesCount = $(this)[0].files.length;
         $(this).parent('.filearea').addClass('haveFile');
         $(this).siblings('span').html("Добавлен " + filesCount + " файл(ов)");
     });
@@ -147,18 +150,19 @@ $(function () {
 
     $('.workImgDel').click(function (event) {
         event.preventDefault();
-        var url = $(this).attr('href');
-        var element = $(this).parent('.image');
+        const url = $(this).attr('href');
+        const element = $(this).parent('.image');
 
-        $.get(url)
-            .done(function (data) {
-                if (data.isDeleted === true) {
+        http(url).then(
+            response => {
+                if (response.isDeleted === true) {
                     element.remove();
                 }
-            })
-            .fail(function (data) {
-                console.log(data);
-            });
+            },
+            onError => {
+                console.log(onError);
+            }
+        );
     });
 
 
@@ -198,69 +202,82 @@ $(function () {
 
     $('#setLike').click(function (e) {
         e.preventDefault();
-        var url = $(this).attr('href');
-        var likeSel = $('#likesCount');
-        $.get(url)
-            .done(function (data) {
-                if (data.isLiked === true) {
-                    var currentVal = parseInt(likeSel.text());
+        const url = $(this).attr('href');
+        const likeSel = $('#likesCount');
+
+        http(url).then(
+            response => {
+                if (response.isLiked === true) {
+                    const currentVal = parseInt(likeSel.text());
                     likeSel.empty();
                     likeSel.append(currentVal + 1);
                     $('.work__likes').addClass('work__likes_checked');
                 }
-            })
-            .fail(function (data) {
-                //todo
-            });
+            }
+        );
         return false;
     });
 
     /* ---------------------------------------------- /*
-     * Categories, Materials
+     * Categories
     /* ---------------------------------------------- */
 
     $('[id^=dcid_]').click(function (e) {
         e.preventDefault();
-        var itemId = $(this).attr('id').split('_')[1];
-        var itemName = $(this).find('span').html();
-        var $position = $(this).parent().siblings('.notInWork').find('.inputGroup');
-        var $message = $(this).parent().siblings('.notInWork').find('.empty');
-        var $delLink = $(this);
+        const itemId = $(this).attr('id').split('_')[1];
+        const itemName = $(this).find('span').html();
+        const $position = $(this).parent().siblings('.notInWork').find('.inputGroup');
+        const $message = $(this).parent().siblings('.notInWork').find('.empty');
+        const $delLink = $(this);
 
-        $.get($(this).attr('href'), function (response) {
-            if (response.isRemoved) {
-                $delLink.remove();
-                $message.remove();
+        http($(this).attr('href')).then(
+            response => {
+                const json = JSON.parse(response);
+                if (json.isRemoved) {
+                    $delLink.remove();
+                    $message.remove();
 
-                $position.append(
-                    '<input id="' + itemId + '" type="checkbox" name="categories[]" value="' + itemId + '">' +
-                    '<label for="' + itemId + '">' + itemName + '</label>'
-                );
+                    $position.append(
+                        '<input id="' + itemId + '" type="checkbox" name="categories[]" value="' + itemId + '">' +
+                        '<label for="' + itemId + '">' + itemName + '</label>'
+                    );
 
+                }
+            },
+            onError => {
+                console.log(onError);
             }
-        });
+        );
     });
 
+    /**
+     * Materials
+     */
     $('[id^=dmid_]').click(function (e) {
         e.preventDefault();
-        var itemId = $(this).attr('id').split('_')[1];
-        var itemName = $(this).find('span').html();
-        var $position = $(this).parent().siblings('.notInWork').find('.inputGroup');
-        var $message = $(this).parent().siblings('.notInWork').find('.empty');
-        var $delLink = $(this);
+        const itemId = $(this).attr('id').split('_')[1];
+        const itemName = $(this).find('span').html();
+        const $position = $(this).parent().siblings('.notInWork').find('.inputGroup');
+        const $message = $(this).parent().siblings('.notInWork').find('.empty');
+        const $delLink = $(this);
 
-        $.get($(this).attr('href'), function (response) {
-            if (response.isRemoved) {
-                $delLink.remove();
-                $message.remove();
+        http($(this).attr('href')).then(
+            response => {
+                const json = JSON.parse(response);
+                if (json.isRemoved) {
+                    $delLink.remove();
+                    $message.remove();
+                    $position.append(
+                        '<input id="' + itemId + '" type="checkbox" name="materials[]" value="' + itemId + '">' +
+                        '<label for="' + itemId + '">' + itemName + '</label>'
+                    );
 
-                $position.append(
-                    '<input id="' + itemId + '" type="checkbox" name="materials[]" value="' + itemId + '">' +
-                    '<label for="' + itemId + '">' + itemName + '</label>'
-                );
-
+                }
+            },
+            onError => {
+                console.log(onError);
             }
-        });
+        );
     });
 
     /* ---------------------------------------------- /*
@@ -375,21 +392,25 @@ $(function () {
 
 $(document).on('submit', '#ajaxLogin', function (e) {
     e.preventDefault();
-    var formData = $(this).serialize();
-    var url = $(this).attr('action');
+    const formData = $(this).serialize();
+    const url = $(this).attr('action');
+
+
+    http(url, 'POST').then(
+        data => {
+            if (data.auth === true) {
+                window.location.href = '/cabinet';
+            }
+        }
+    );
 
     $.post(url, formData)
         .done(function (data) {
             if (data.auth === true) {
-                $.get('/login/ajax')
-                    .done(function (data) {
-                        window.location.href = '/cabinet';
-                    })
-                    .fail(function (data) {
-                    });
+                window.location.href = '/cabinet';
             }
         })
-        .fail(function (data) {
+        .fail(function () {
             $('#emailError').html('Неверная пара логин/пароль');
         });
 
@@ -397,25 +418,19 @@ $(document).on('submit', '#ajaxLogin', function (e) {
 
 $(document).on('submit', '#ajaxRegistration', function (e) {
     e.preventDefault();
-    var formData = $(this).serialize();
-    var url = $(this).attr('action');
+    const formData = $(this).serialize();
+    const url = $(this).attr('action');
     $('.errorText').empty();
     $.post(url, formData)
         .done(function (data) {
             if (data.auth === true) {
-                $.get('/login/ajax')
-                    .done(function (data) {
-                        window.location.href = '/cabinet';
-                    })
-                    .fail(function (data) {
-                        //todo
-                    });
+                window.location.href = '/cabinet';
             }
         })
         .fail(function (data) {
-            var json = data.responseJSON;
+            const json = data.responseJSON;
             if (json.errors) {
-                for (var fieldName in json.errors) {
+                for (const fieldName in json.errors) {
                     if (json.errors.hasOwnProperty(fieldName)) {
                         if (json.errors[fieldName] instanceof Array) {
                             json.errors[fieldName].forEach(function (error) {
@@ -447,4 +462,31 @@ function getUrlParameter(needleParamName) {
         }
     }
     return result;
+}
+
+/**
+ * http transport
+ *
+ * @param url string
+ * @param method string
+ * @returns {Promise<>}
+ */
+function http(url = '', method = 'GET') {
+    return new Promise(function (resolve, reject) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.onload = function () {
+            if (this.status === 200) {
+                resolve(this.response);
+            } else {
+                const error = new Error(this.statusText);
+                error.code = this.status;
+                reject(error);
+            }
+        };
+        xhr.onerror = function () {
+            reject(new Error("Network Error"));
+        };
+        xhr.send();
+    });
 }
