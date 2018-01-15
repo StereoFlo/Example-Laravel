@@ -15,7 +15,7 @@ class SettingsTableSeeder extends Seeder
         $setting = null;
 
         $setting = new \RecycleArt\Models\Settings();
-        $setting->limitWorksForGallery = 'slogan';
+        $setting->setting_slug = 'limitWorksForGallery';
         $setting->setting_name = 'Количество работ на странице галлереи';
         $setting->setting_value = '30';
         $setting->save();
