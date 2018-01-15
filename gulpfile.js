@@ -39,6 +39,7 @@ gulp.task('scripts', function() {
     'static/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js',
     'static/libs/fotorama/fotorama.js',
     'static/libs/Tooltip/jquery.tooltip.js',
+    'static/libs/fileuploader/jquery.fileuploader.js',
   ])
   .pipe(concat('libs.min.js')) // Собираем их в кучу в новом файле libs.min.js
   .pipe(uglify()) // Сжимаем JS файл
