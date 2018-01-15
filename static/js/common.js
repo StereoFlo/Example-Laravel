@@ -51,9 +51,6 @@ $(function () {
                 $('#toReg').click(function () {
                     $('.forms form').toggle(600);
                 });
-            },
-            onError => {
-                // todo
             }
         );
 
@@ -64,10 +61,6 @@ $(function () {
                 $('#toLog').click(function () {
                     $('.forms form').toggle(600);
                 });
-            },
-            onError => {
-                console.log(onError);
-                //todo
             }
         );
 
@@ -345,21 +338,15 @@ $(function () {
 
             setUrl(parameters);
             setCheckboxes(parameters);
-
-            // this is need for post query with laravel
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.post('/gallery/works', parameters)
-                .done(function (data) {
-                    $('#galleryWorksAll').empty().append(data);
-                })
-                .fail(function (data) {
+            http('/gallery/works', parameters, 'POST').then(
+                response => {
+                    $('#galleryWorksAll').empty().append(response);
+                },
+                onError => {
                     $('#galleryWorksAll').empty().append('<p>Мы не смогли загрузить список работ. Возможно возникла ошибка сети</p>');
-                    console.log(data);
-                });
+                    console.log(onError);
+                }
+            );
         }
 
         /**
@@ -394,26 +381,17 @@ $(document).on('submit', '#ajaxLogin', function (e) {
     e.preventDefault();
     const formData = $(this).serialize();
     const url = $(this).attr('action');
-
-
-    http(url, 'POST').then(
+    http(url, formData, 'POST').then(
         data => {
-            if (data.auth === true) {
+            const json = JSON.parse(data);
+            if (json.auth === true) {
                 window.location.href = '/cabinet';
             }
+        },
+        onError => {
+            console.log(onError);
         }
     );
-
-    $.post(url, formData)
-        .done(function (data) {
-            if (data.auth === true) {
-                window.location.href = '/cabinet';
-            }
-        })
-        .fail(function () {
-            $('#emailError').html('Неверная пара логин/пароль');
-        });
-
 });
 
 $(document).on('submit', '#ajaxRegistration', function (e) {
@@ -448,7 +426,7 @@ $(document).on('submit', '#ajaxRegistration', function (e) {
 
 /**
  * parse parameter in url
- * @param needleParamName string
+ * @param {string} needleParamName
  * @returns {Array}
  */
 function getUrlParameter(needleParamName) {
@@ -467,14 +445,20 @@ function getUrlParameter(needleParamName) {
 /**
  * http transport
  *
- * @param url string
- * @param method string
+ * @param {string} url
+ * @param params mixed of request params
+ * @param {string} method
  * @returns {Promise<>}
  */
-function http(url = '', method = 'GET') {
+function http(url = '', params = '', method = 'GET') {
     return new Promise(function (resolve, reject) {
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', url, true);
+        xhr.open(method, url, true);
+        if (method === 'POST') {
+            xhr.setRequestHeader('X-CSRF-TOKEN', getCsrfToken());
+            xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        }
         xhr.onload = function () {
             if (this.status === 200) {
                 resolve(this.response);
@@ -487,6 +471,28 @@ function http(url = '', method = 'GET') {
         xhr.onerror = function () {
             reject(new Error("Network Error"));
         };
-        xhr.send();
+        if (params) {
+            if (params instanceof Object) {
+                xhr.send($.param(params));
+            } else {
+                xhr.send(params);
+            }
+        } else {
+            xhr.send();
+        }
     });
+}
+
+/**
+ * get csrf token
+ * @returns {(string | null) | string}
+ */
+function getCsrfToken() {
+    let meta = document.getElementsByTagName('meta');
+    for (let item of meta) {
+        if (item.getAttribute('name') === 'csrf-token') {
+            return item.getAttribute('content');
+        }
+    }
+    return null;
 }
