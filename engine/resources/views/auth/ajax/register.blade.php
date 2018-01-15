@@ -20,9 +20,9 @@
         </div>
 
         <div class="inputGroup{{ $errors->has('vkId') ? ' has-error' : '' }}">
-            <label for="vkId">VK ID:</label>
+            <label for="vkId">VK id:</label>
             <input id="vkId" class="registrationForm__vkId" type="text" name="vkId" value="{{ old('vkId') }}">
-            <i class="fa fa-envelope" aria-hidden="true"></i>
+            <i class="fa fa-vk" aria-hidden="true"></i>
             <span class="errorText">
                 @if ($errors->has('vkId'))
                     <strong>{{ $errors->first('vkId') }}</strong>
