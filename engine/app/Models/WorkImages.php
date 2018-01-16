@@ -91,6 +91,7 @@ class WorkImages extends Model
     }
 
     /**
+     * @deprecated
      * old native file upload
      *
      * @param UploadedFile[] $files
