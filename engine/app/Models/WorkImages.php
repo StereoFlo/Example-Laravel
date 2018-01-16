@@ -2,6 +2,7 @@
 
 namespace RecycleArt\Models;
 
+use FileUploader\Services\FileUploaderService;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -112,6 +113,37 @@ class WorkImages extends Model
             }
             $newImageName = $this->uploadImage($workId, $key, $file);
             $test = \sprintf(self::LINK_PATH, Auth::id(), $workId, $newImageName);
+            $work->link = $test;
+            $isSaved = $work->save();
+        }
+        return $isSaved;
+    }
+
+    /**
+     * dirty file upload
+     *
+     * @param $workId
+     *
+     * @return bool
+     */
+    public function addImagesWithFileUploader($workId)
+    {
+        $isSaved = false;
+        $path = \public_path(\sprintf(self::WORK_PATH, Auth::id(), $workId));
+        if (!File::isDirectory($path)) {
+            File::makeDirectory($path, 0777, true, true);
+        }
+        $uploader = new FileUploaderService('images', ['uploadDir' => $path . DIRECTORY_SEPARATOR]); //
+        $uploader->upload();
+
+        $files = $uploader->getFileList();
+        foreach ($files as $key => $file) {
+            $work = new self();
+            $work->workId = $workId;
+            if (0 === $key && !$this->hasDefault($workId)) {
+                $work->isDefault = true;
+            }
+            $test = \sprintf(self::LINK_PATH, Auth::id(), $workId, $file['name']);
             $work->link = $test;
             $isSaved = $work->save();
         }

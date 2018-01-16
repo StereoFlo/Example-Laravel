@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
-use Mockery\Exception;
 use RecycleArt\Models\Catalog;
 use RecycleArt\Models\CatalogRel;
 use RecycleArt\Models\Material;
@@ -82,7 +81,8 @@ class WorkController extends Controller
                 'description' => $request->post('description'),
                 'userId'      => Auth::id(),
             ]);
-            $workImages->addImages($request->file('images'), $workId);
+            //$workImages->addImages($request->file('images'), $workId);
+            $workImages->addImagesWithFileUploader($workId);
         }
         if (!empty($request->post('tags'))) {
             $tags->addTagsToWork($request->post('tags'), $workId);
