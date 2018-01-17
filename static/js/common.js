@@ -1,4 +1,4 @@
-$(function () {
+document.addEventListener('DOMContentLoaded', () => {
 
     /* ---------------------------------------------- /*
      * Header
@@ -19,18 +19,21 @@ $(function () {
      * Menu button
     /* ---------------------------------------------- */
 
-    $('.menu__btn').click(function (e) {
-        e.preventDefault();
-        const navSelector = $('.nav');
+    const menuButton = document.querySelector('.menu__btn');
+    if (menuButton) {
+        menuButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            const navSelector = $('.nav');
 
-        if (screen.width < 769) {
-            const headerHeight = $('header').innerHeight();
-            navSelector.css('top', headerHeight);
-            navSelector.slideToggle();
-        } else {
-            navSelector.toggleClass('opacity');
-        }
-    });
+            if (screen.width < 769) {
+                const headerHeight = $('header').innerHeight();
+                navSelector.css('top', headerHeight);
+                navSelector.slideToggle();
+            } else {
+                navSelector.toggleClass('opacity');
+            }
+        });
+    }
 
     /* ---------------------------------------------- /*
      * LogIn
