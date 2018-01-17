@@ -22,8 +22,9 @@ $(function () {
     $('.menu__btn').click(function (e) {
         e.preventDefault();
         const navSelector = $('.nav');
+        const windowWidth = window.innerWidth;
 
-        if (screen.width < 769) {
+        if (windowWidth < 769) {
             const headerHeight = $('header').innerHeight();
             navSelector.css('top', headerHeight);
             navSelector.slideToggle();
@@ -179,7 +180,7 @@ $(function () {
                 remove: '.fileuploader-action-remove'
             },
             onItemShow: function(item, listEl) {
-                var plusInput = listEl.find('.fileuploader-thumbnails-input');
+                const plusInput = listEl.find('.fileuploader-thumbnails-input');
 
                 plusInput.insertAfter(item.html);
 
@@ -192,7 +193,7 @@ $(function () {
             }
         },
         afterRender: function(listEl, parentEl, newInputEl, inputEl) {
-            var plusInput = listEl.find('.fileuploader-thumbnails-input'),
+            const plusInput = listEl.find('.fileuploader-thumbnails-input'),
                 api = $.fileuploader.getInstance(inputEl.get(0));
 
             plusInput.on('click', function() {
