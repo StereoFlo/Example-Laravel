@@ -7,12 +7,12 @@ $(function () {
     window.onscroll = getScrollPosition;
 
     function getScrollPosition() {
-        const header = document.getElementsByTagName('header');
+        const header = document.querySelector('header');
         if (window.pageYOffset > 200) {
-            header[0].classList.add('fixed');
+            header.classList.add('fixed');
             return;
         }
-        header[0].classList.remove('fixed');
+        header.classList.remove('fixed');
     }
 
     /* ---------------------------------------------- /*

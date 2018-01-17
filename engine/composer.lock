@@ -1264,12 +1264,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/StereoFlo/fileuploader.git",
-                "reference": "fd4c37c1d0e42a5d4ced9fc15d7f49d44a65547b"
+                "reference": "263e73b0b6aab0801a654184f7a0b3ec6d4a2b54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/StereoFlo/fileuploader/zipball/fd4c37c1d0e42a5d4ced9fc15d7f49d44a65547b",
-                "reference": "fd4c37c1d0e42a5d4ced9fc15d7f49d44a65547b",
+                "url": "https://api.github.com/repos/StereoFlo/fileuploader/zipball/263e73b0b6aab0801a654184f7a0b3ec6d4a2b54",
+                "reference": "263e73b0b6aab0801a654184f7a0b3ec6d4a2b54",
                 "shasum": ""
             },
             "type": "library",
@@ -1286,7 +1286,7 @@
                 }
             ],
             "description": "Image uploader",
-            "time": "2018-01-16T13:20:58+00:00"
+            "time": "2018-01-17T05:28:46+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
