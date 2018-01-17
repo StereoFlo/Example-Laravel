@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+$(function () {
 
     /* ---------------------------------------------- /*
      * Header
@@ -7,12 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
     window.onscroll = getScrollPosition;
 
     function getScrollPosition() {
-        const header = document.getElementsByTagName('header');
+        const header = document.querySelector('header');
         if (window.pageYOffset > 200) {
-            header[0].classList.add('fixed');
+            header.classList.add('fixed');
             return;
         }
-        header[0].classList.remove('fixed');
+        header.classList.remove('fixed');
     }
 
     /* ---------------------------------------------- /*
@@ -31,23 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
             navSelector.toggleClass('opacity');
         }
     });
-
-    // new
-    // const menuButton = document.querySelector('.menu__btn');
-    // if (menuButton) {
-    //     menuButton.addEventListener('click', (e) => {
-    //         e.preventDefault();
-    //         const navSelector = $('.nav');
-    //
-    //         if (screen.width < 769) {
-    //             const headerHeight = $('header').innerHeight();
-    //             navSelector.css('top', headerHeight);
-    //             navSelector.slideToggle();
-    //         } else {
-    //             navSelector.toggleClass('opacity');
-    //         }
-    //     });
-    // }
 
     /* ---------------------------------------------- /*
      * LogIn
