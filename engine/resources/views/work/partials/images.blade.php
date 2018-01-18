@@ -1,7 +1,22 @@
 <div class="inputGroup{{ $errors->has('images') ? ' has-error' : '' }}">
     <label for="images">@lang('work.photoOfNewWork') (16:9, jpeg):</label>
     <div class="filearea">
-        <input id="fotoInput" type="file" name="images[]" multiple {{ !empty($errors->has('images')) ? 'required' : null }}>
+        @if(!empty($work['images']))
+            <input id="fotoInput" type="file" name="images[]" multiple {{ !empty($errors->has('images')) ? 'required' : null }}
+                data-fileuploader-files=
+                '[
+                    @foreach($work['images'] as $image)
+                            {"name":"{{$image['id']}}",
+                            "size":1024,
+                            "type":"image\/jpeg\/png",
+                            "file":"{{ url($image['link'])}}"}
+                    @endforeach
+                ]'
+            >
+        @else
+            <input id="fotoInput" type="file" name="images[]" multiple {{ !empty($errors->has('images')) ? 'required' : null }}
+            >
+        @endif
     </div>
     <div class="fileareaPreview"></div>
     <span class="errorText">

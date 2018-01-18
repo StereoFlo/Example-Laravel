@@ -148,30 +148,6 @@ $(function () {
      * ImagesUploadPreview
     /* ---------------------------------------------- */
 
-    // const imagesPreview = function (input, placeToInsertImagePreview) {
-    //
-    //     if (input.files) {
-    //         const filesAmount = input.files.length;
-    //         for (let i = 0; i < filesAmount; i++) {
-    //             const reader = new FileReader();
-    //             reader.onload = function (event) {
-    //                 $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
-    //             };
-    //             reader.readAsDataURL(input.files[i]);
-    //         }
-    //     }
-    //
-    // };
-    //
-    // $('.filearea input').on('change', function () {
-    //
-    //     imagesPreview(this, 'div.fileareaPreview');
-    //
-    //     const filesCount = $(this)[0].files.length;
-    //     $(this).parent('.filearea').addClass('haveFile');
-    //     $(this).siblings('span').html("Добавлен " + filesCount + " файл(ов)");
-    // });
-
     $('#fotoInput').fileuploader({
         // Options will go here
         extensions: ['jpg', 'jpeg', 'png', 'gif', 'bmp'],
@@ -242,7 +218,7 @@ $(function () {
                 // example: '1:1'
                 // example: '16:9'
                 // you can also write your own
-                ratio: '16:9',
+                ratio: null,
                 minWidth: null,
                 minHeight: null,
                 showGrid: true
@@ -259,46 +235,14 @@ $(function () {
                 // callback will go here
             }
         },
-        /*
-        // while using upload option, please set
-        // startImageRenderer: false
-        // for a better effect
-        upload: {
-            url: './php/upload_file.php',
-            data: null,
-            type: 'POST',
-            enctype: 'multipart/form-data',
-            start: true,
-            synchron: true,
-            beforeSend: null,
-            onSuccess: function(data, item) {
-                setTimeout(function() {
-                    item.html.find('.progress-holder').hide();
-                    item.renderThumbnail();
-                }, 400);
-            },
-            onError: function(item) {
-                item.html.find('.progress-holder').hide();
-                item.html.find('.fileuploader-item-icon i').text('Failed!');
-            },
-            onProgress: function(data, item) {
-                var progressBar = item.html.find('.progress-holder');
-
-                if(progressBar.length > 0) {
-                    progressBar.show();
-                    progressBar.find('.fileuploader-progressbar .bar').width(data.percentage + "%");
-                }
-            }
-        },
-        dragDrop: {
-            container: '.fileuploader-thumbnails-input'
-        },
-        onRemove: function(item) {
-            $.post('php/upload_remove.php', {
-                file: item.name
-            });
-        },
-        */
+        // dragDrop: {
+        //     container: '.fileuploader-thumbnails-input'
+        // },
+        // onRemove: function(item) {
+        //     $.post('php/upload_remove.php', {
+        //         file: item.name
+        //     });
+        // },
         sorter: {
             selectorExclude: null,
             placeholder: '<li class="fileuploader-item fileuploader-sorter-placeholder"><div class="fileuploader-item-inner"></div></li>',
