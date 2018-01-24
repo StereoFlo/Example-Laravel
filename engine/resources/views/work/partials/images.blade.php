@@ -2,30 +2,34 @@
     <label for="images">@lang('work.photoOfNewWork') (16:9, jpeg):</label>
     <div class="filearea">
         @if(!empty($work['images']))
+            @php
+                $keys = array_keys($work['images']);
+            @endphp
             <input id="fotoInput" type="file" name="images[]" multiple {{ !empty($errors->has('images')) ? 'required' : null }}
                 data-fileuploader-files=
                 '[
-                    @foreach($work['images'] as $image)
-                            {"name":"{{$image['id']}}",
-                            "size":1024,
-                            "type":"image\/jpeg\/png",
-                            "file":"{{ url($image['link'])}}"}
+                    @foreach($work['images'] as $key => $image)
+                            {
+                                "name":"{{$image['id']}}",
+                                "size":1024,
+                                "type":"image\/jpeg",
+                                "file":"{{ url($image['link'])}}"
+                            } {{ end($keys) !== $key ? ',' : '' }}
                     @endforeach
                 ]'
             >
         @else
-            <input id="fotoInput" type="file" name="images[]" multiple {{ !empty($errors->has('images')) ? 'required' : null }}
-            >
+            <input id="fotoInput" type="file" name="images[]" multiple {{ !empty($errors->has('images')) ? 'required' : null }}>
         @endif
     </div>
-    <div class="fileareaPreview"></div>
+    <div class="fileareaPreview hidden"></div>
     <span class="errorText">
-                        @if ($errors->has('images'))
+        @if ($errors->has('images'))
             <strong>{{ $errors->first('images') }}</strong>
         @endif
-                    </span>
+    </span>
     @if(!empty($work['images']))
-        <div class="imageGroup">
+        <div class="imageGroup hidden">
             @foreach($work['images'] as $image)
                 @if($image['isDefault'])
                     <div class="image">

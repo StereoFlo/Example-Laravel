@@ -204,11 +204,12 @@ $(function () {
         // dragDrop: {
         //     container: '.fileuploader-thumbnails-input'
         // },
-        // onRemove: function(item) {
-        //     $.post('php/upload_remove.php', {
-        //         file: item.name
-        //     });
-        // },
+        onRemove: function(item) {
+            // $.post('php/upload_remove.php', {
+            //     file: item.name
+            // });
+            console.log('remove');
+        },
         sorter: {
             selectorExclude: null,
             placeholder: '<li class="fileuploader-item fileuploader-sorter-placeholder"><div class="fileuploader-item-inner"></div></li>',
