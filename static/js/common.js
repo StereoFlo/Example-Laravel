@@ -19,57 +19,91 @@ $(function () {
      * Menu button
     /* ---------------------------------------------- */
 
-    $('.menu__btn').click(function (e) {
-        e.preventDefault();
-        const navSelector = $('.nav');
-        const windowWidth = window.innerWidth;
+    const menuButton = document.querySelector('.menu__btn');
+    if (menuButton) {
+        menuButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            const navSelector = $('.nav');
+            const windowWidth = window.innerWidth;
 
-        if (windowWidth < 769) {
-            const headerHeight = $('header').innerHeight();
-            navSelector.css('top', headerHeight);
-            navSelector.slideToggle();
-        } else {
-            navSelector.toggleClass('opacity');
-        }
-    });
+            if (windowWidth < 769) {
+                const headerHeight = $('header').innerHeight();
+                navSelector.css('top', headerHeight);
+                navSelector.slideToggle();
+            } else {
+                navSelector.toggleClass('opacity');
+            }
+        });
+    }
 
     /* ---------------------------------------------- /*
      * LogIn
     /* ---------------------------------------------- */
 
-    $('.user__btn, .logIn__close').click(function (e) {
-        e.preventDefault();
-        $('.logIn .forms').empty();
-        $(document).keydown(function (e) {
-            if (e.keyCode === 27) {
-                $('.logIn').addClass('hidden');
-            }
+    const ajaxLoginClose = document.querySelector('.logIn__close');
+    if (ajaxLoginClose) {
+        ajaxLoginClose.addEventListener('click', () => {
+            const loginAjax = document.querySelector('.logIn');
+            loginAjax.classList.add('hidden');
         });
+    }
 
+    const ajaxLoginShow = document.querySelector('.user__btn');
+    if (ajaxLoginShow) {
+        ajaxLoginShow.addEventListener('click', (e) => {
+            e.preventDefault();
+            empty('.logIn .forms');
+            document.addEventListener('keydown', function(e) {
+                if (e.keyCode === 27) {
+                    document.querySelector('.logIn').classList.add('hidden');
+                }
+            });
+            showLoginForm();
+
+
+            document.querySelector('.logIn').classList.toggle('hidden');
+            document.body.classList.toggle('fixed');
+        });
+    }
+
+    /**
+     * get and show for for user register
+     */
+    function showRegisterForm() {
+        http('/register/ajax').then(
+            response => {
+                const forms = document.querySelector('.logIn .forms');
+                forms.appendChild(document.createElement('div')).innerHTML = response;
+                const switchToLogin = document.querySelector('#toLog');
+                if (switchToLogin) {
+                    switchToLogin.addEventListener('click', () => {
+                        empty('.logIn .forms');
+                        showLoginForm();
+                    });
+                }
+            }
+        );
+    }
+
+    /**
+     * get and show for for user login
+     */
+    function showLoginForm() {
         http('/login/ajax').then(
             response => {
-                $('.logIn .forms').append(response);
-                $('#toReg').click(function () {
-                    $('.forms form').toggle(600);
-                });
+                const forms = document.querySelector('.logIn .forms');
+                forms.appendChild(document.createElement('div')).innerHTML = response;
+
+                const switchToReg = document.querySelector('#toReg');
+                if (switchToReg) {
+                    switchToReg.addEventListener('click', () => {
+                        empty('.logIn .forms');
+                        showRegisterForm();
+                    });
+                }
             }
         );
-
-        http('/register/ajax').then(
-            onSuccess => {
-                $('.logIn .forms').append(onSuccess);
-                $('#ajaxRegistration').hide();
-                $('#toLog').click(function () {
-                    $('.forms form').toggle(600);
-                });
-            }
-        );
-
-        $('.logIn').toggleClass('hidden');
-        $('body').toggleClass('fixed');
-        $('#ajaxRegistration').hide();
-        $('#ajaxLogin').show();
-    });
+    }
 
     /* ---------------------------------------------- /*
      * Slogan and News on Welcome section
@@ -591,4 +625,18 @@ function getCsrfToken() {
         }
     }
     return null;
+}
+
+/**
+ * equivalent of jQuery.empty()
+ * @param selector
+ * @return {boolean}
+ */
+function empty(selector) {
+    let el = document.querySelector(selector);
+    if (el) {
+        el.innerHTML = '';
+        return true;
+    }
+    return false;
 }
