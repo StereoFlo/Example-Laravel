@@ -1,4 +1,7 @@
 <div class="inputGroup{{ $errors->has('images') ? ' has-error' : '' }}">
+    @if(isset($work['id']))
+        <div class="workId hidden" data-workId="{{$work['id']}}"></div>
+    @endif
     <label for="images">@lang('work.photoOfNewWork') (16:9, jpeg):</label>
     <div class="filearea">
         @if(!empty($work['images']))
@@ -11,7 +14,6 @@
                     @foreach($work['images'] as $key => $image)
                             {
                                 "name":"{{$image['id']}}",
-                                "id":"{{$image['id']}}",
                                 "size":1024,
                                 "type":"image\/jpeg",
                                 "file":"{{ url($image['link']) }}"

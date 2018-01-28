@@ -242,7 +242,20 @@ $(function () {
             // $.post('php/upload_remove.php', {
             //     file: item.name
             // });
-            console.log('remove');
+            //console.log(item);
+            const workId = document.querySelector('.workId.hidden').getAttribute('data-workId');
+            const imageId = item.name;
+            const url = '/cabinet/work/' + workId + '/edit/removeImage/' + imageId;
+            if (workId && url) {
+                http(url).then(
+                    response => {
+                        console.log('OK');
+                    },
+                    onError => {
+                        new Error('was an error (on delete image action): ' + onError.toString());
+                    }
+                );
+            }
         },
         sorter: {
             selectorExclude: null,
@@ -584,9 +597,9 @@ function http(url = '', params = '', method = 'GET') {
     return new Promise(function (resolve, reject) {
         const xhr = new XMLHttpRequest();
         xhr.open(method, url, true);
+        xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
         if (method === 'POST') {
             xhr.setRequestHeader('X-CSRF-TOKEN', getCsrfToken());
-            xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         }
         xhr.onload = function () {
