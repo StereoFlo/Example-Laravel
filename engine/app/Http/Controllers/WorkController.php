@@ -2,6 +2,7 @@
 
 namespace RecycleArt\Http\Controllers;
 
+use FileUploader\Services\FileUploaderService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -67,6 +68,19 @@ class WorkController extends Controller
     public function process(Request $request, Work $work, WorkImages $workImages, Tags $tags, CatalogRel $catalogRel, MaterialRel $materialRel)
     {
         $workId = $request->post('workId') ?: 0;
+        if (!empty($workId) && $request->post('fileuploader-list-images')) {
+            $filesArray = \json_decode($request->post('fileuploader-list-images'), true);
+            if (!empty($filesArray)) {
+                foreach ($filesArray as $file) {
+                    if (isset($file['editor'])) {
+                        $fileLink = \explode('/', $file['file']);
+                        $imageFile = \end($fileLink);
+                        $filePath = \public_path(\sprintf(self::WORK_PATH, Auth::id(), $workId)) . DIRECTORY_SEPARATOR . $imageFile;
+                        FileUploaderService::resize($filePath, null, null, null, (isset($file['editor']['crop']) ? $file['editor']['crop'] : null), 100, (isset($file['editor']['rotation']) ? $file['editor']['rotation'] : null));
+                    }
+                }
+            }
+        }
         if (!empty($request->file('images'))) {
             try {
                 $this->validate($request, [

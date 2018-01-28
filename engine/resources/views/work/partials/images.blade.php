@@ -11,9 +11,10 @@
                     @foreach($work['images'] as $key => $image)
                             {
                                 "name":"{{$image['id']}}",
+                                "id":"{{$image['id']}}",
                                 "size":1024,
                                 "type":"image\/jpeg",
-                                "file":"{{ url($image['link'])}}"
+                                "file":"{{ url($image['link']) }}"
                             } {{ end($keys) !== $key ? ',' : '' }}
                     @endforeach
                 ]'
