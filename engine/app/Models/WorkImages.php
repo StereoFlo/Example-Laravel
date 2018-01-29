@@ -146,8 +146,7 @@ class WorkImages extends Model
             if (0 === $key && !$this->hasDefault($workId)) {
                 $work->isDefault = true;
             }
-            $test = \sprintf(self::LINK_PATH, Auth::id(), $workId, $file['name']);
-            $work->link = $test;
+            $work->link = \sprintf(self::LINK_PATH, Auth::id(), $workId, $file['name']);
             $isSaved = $work->save();
         }
         return $isSaved;

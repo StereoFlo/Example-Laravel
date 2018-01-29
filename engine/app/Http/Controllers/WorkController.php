@@ -68,6 +68,7 @@ class WorkController extends Controller
     public function process(Request $request, Work $work, WorkImages $workImages, Tags $tags, CatalogRel $catalogRel, MaterialRel $materialRel)
     {
         $workId = $request->post('workId') ?: 0;
+        // todo make a method for code below
         if (!empty($workId) && $request->post('fileuploader-list-images')) {
             $filesArray = \json_decode($request->post('fileuploader-list-images'), true);
             if (!empty($filesArray)) {
@@ -76,7 +77,9 @@ class WorkController extends Controller
                         $fileLink = \explode('/', $file['file']);
                         $imageFile = \end($fileLink);
                         $filePath = \public_path(\sprintf(self::WORK_PATH, Auth::id(), $workId)) . DIRECTORY_SEPARATOR . $imageFile;
-                        FileUploaderService::resize($filePath, null, null, null, (isset($file['editor']['crop']) ? $file['editor']['crop'] : null), 100, (isset($file['editor']['rotation']) ? $file['editor']['rotation'] : null));
+                        if (\file_exists($filePath)) {
+                            FileUploaderService::resize($filePath, null, null, null, (isset($file['editor']['crop']) ? $file['editor']['crop'] : null), 75, (isset($file['editor']['rotation']) ? $file['editor']['rotation'] : null));
+                        }
                     }
                 }
             }
