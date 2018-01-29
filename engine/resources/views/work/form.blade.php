@@ -41,7 +41,9 @@
 
                 @include('work.partials.materials')
 
-                @include('work.partials.category')
+                @if (Auth::user()->isModerator())
+                    @include('work.partials.category')
+                @endif
 
                 @include('work.partials.images')
 

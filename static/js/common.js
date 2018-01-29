@@ -291,14 +291,7 @@ $(function () {
                 // callback will go here
             }
         },
-        // dragDrop: {
-        //     container: '.fileuploader-thumbnails-input'
-        // },
         onRemove: function(item) {
-            // $.post('php/upload_remove.php', {
-            //     file: item.name
-            // });
-            //console.log(item);
             const workId = document.querySelector('.workId.hidden').getAttribute('data-workId');
             const imageId = item.name;
             const url = '/cabinet/work/' + workId + '/edit/removeImage/' + imageId;
@@ -317,22 +310,6 @@ $(function () {
             selectorExclude: null,
             placeholder: '<li class="fileuploader-item fileuploader-sorter-placeholder"><div class="fileuploader-item-inner"></div></li>',
             scrollContainer: window,
-            // onSort: function(list, listEl, parentEl, newInputEl, inputEl) {
-            //     var api = $.fileuploader.getInstance(inputEl.get(0)),
-            //         fileList = api.getFileList(),
-            //         _list = [];
-            //
-            //     $.each(fileList, function(i, item) {
-            //         _list.push({
-            //             name: item.name,
-            //             index: item.index
-            //         });
-            //     });
-            //
-            //     $.post('php/ajax_sort_files.php', {
-            //         _list: JSON.stringify(_list)
-            //     });
-            // }
         },
         captions: {
             confirm: 'Ок',
