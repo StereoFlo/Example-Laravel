@@ -77,7 +77,9 @@ class WorkController extends Controller
                         $fileLink = \explode('/', $file['file']);
                         $imageFile = \end($fileLink);
                         $filePath = \public_path(\sprintf(self::WORK_PATH, Auth::id(), $workId)) . DIRECTORY_SEPARATOR . $imageFile;
-                        FileUploaderService::resize($filePath, null, null, null, (isset($file['editor']['crop']) ? $file['editor']['crop'] : null), 75, (isset($file['editor']['rotation']) ? $file['editor']['rotation'] : null));
+                        if (\file_exists($filePath)) {
+                            FileUploaderService::resize($filePath, null, null, null, (isset($file['editor']['crop']) ? $file['editor']['crop'] : null), 75, (isset($file['editor']['rotation']) ? $file['editor']['rotation'] : null));
+                        }
                     }
                 }
             }
