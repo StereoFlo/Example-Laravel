@@ -95,7 +95,9 @@
 
 <!-- Scripts -->
 {{--    <script src="{{ asset('js/app.js') }}"></script>--}}
-<script src="{{ url('static/js/libs.min.js') }}"></script>
-<script src="{{ url('static/js/common.js') }}"></script>
+<script src="{{ url('static/js/libs.min.js') }}" defer></script>
+<script src="{{ url('static/js/fileuploaderWork.js') }}" defer></script>
+<script src="{{ url('static/js/fileuploaderAvatar.js') }}" defer></script>
+<script src="{{ url('static/js/common.js') }}" defer></script>
 </body>
 </html>

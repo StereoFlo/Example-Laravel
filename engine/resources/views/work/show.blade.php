@@ -18,7 +18,7 @@
                          data-thumbwidth="110"
                          data-thumbheight="60"
                          data-width="100%"
-                         data-maxheight="400"
+                         data-maxheight="377"
                     >
                         @if (empty($work['images']))
                             <p>У этой работы нет изображений</p>
