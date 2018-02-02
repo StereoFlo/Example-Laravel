@@ -47,7 +47,7 @@ $('#fotoInput').fileuploader({
             // add sorter button to the item html
             item.html.find('.fileuploader-action-remove').before('<a class="fileuploader-action fileuploader-action-sort" title="Sort"><i></i></a>');
 
-            if(item.format == 'image') {
+            if(item.format === 'image') {
                 item.html.find('.fileuploader-item-icon').hide();
             }
         },
@@ -78,7 +78,7 @@ $('#fotoInput').fileuploader({
                             '</li>' : ''
                     ) +
                     '<li class="separator"></li>' +
-                    (data.format == 'image' && data.reader.src && data.editor ? '<li>' +
+                    (data.format === 'image' && data.reader.src && data.editor ? '<li>' +
                             '<a data-action="crop">' +
                             '<i></i>' +
                             '<span>${captions.crop}</span>' +
@@ -148,7 +148,7 @@ $('#fotoInput').fileuploader({
         if (workId && url) {
             http(url).then(
                 response => {
-                    console.log('OK');
+                    //todo make action if it will needed
                 },
                 onError => {
                     new Error('was an error (on delete image action): ' + onError.toString());
