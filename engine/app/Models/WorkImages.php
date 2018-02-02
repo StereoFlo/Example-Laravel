@@ -125,11 +125,11 @@ class WorkImages extends Model
     /**
      * dirty file upload
      *
-     * @param $workId
+     * @param int $workId
      *
      * @return bool
      */
-    public function addImagesWithFileUploader($workId)
+    public function addImagesWithFileUploader(int $workId)
     {
         $isSaved = false;
         $path = \public_path(\sprintf(self::WORK_PATH, Auth::id(), $workId));
