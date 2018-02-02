@@ -41,12 +41,12 @@ $('#avatarInput').fileuploader({
             retry: '.fileuploader-action-retry',
             remove: '.fileuploader-action-remove'
         },
-        onItemShow: function(item, listEl) {
+        onItemShow: function (item, listEl) {
             const plusInput = listEl.find('.fileuploader-thumbnails-input');
 
             plusInput.insertAfter(item.html);
 
-            if(item.format == 'image') {
+            if (item.format === 'image') {
                 item.html.find('.fileuploader-item-icon').hide();
             }
         },
@@ -74,7 +74,7 @@ $('#avatarInput').fileuploader({
                             '</li>' : ''
                     ) +
                     '<li class="separator"></li>' +
-                    (data.format == 'image' && data.reader.src && data.editor ? '<li>' +
+                    (data.format === 'image' && data.reader.src && data.editor ? '<li>' +
                             '<a data-action="crop">' +
                             '<i></i>' +
                             '<span>${captions.crop}</span>' +
@@ -104,11 +104,11 @@ $('#avatarInput').fileuploader({
             },
         },
     },
-    afterRender: function(listEl, parentEl, newInputEl, inputEl) {
+    afterRender: function (listEl, parentEl, newInputEl, inputEl) {
         const plusInput = listEl.find('.fileuploader-thumbnails-input'),
             api = $.fileuploader.getInstance(inputEl.get(0));
 
-        plusInput.on('click', function() {
+        plusInput.on('click', function () {
             api.open();
         });
     },
@@ -137,14 +137,13 @@ $('#avatarInput').fileuploader({
     //         // callback will go here
     //     }
     // },
-    onRemove: function(item) {
+    onRemove: function () {
         // const workId = document.querySelector('.workId.hidden').getAttribute('data-workId');
         // const imageId = item.name;
         const url = '/cabinet/profile/avatar/remove';
         if (url) {
             http(url).then(
                 response => {
-                    console.log('OK');
                 },
                 onError => {
                     new Error('was an error (on delete avatar action): ' + onError.toString());
