@@ -20,5 +20,11 @@ class SettingsTableSeeder extends Seeder
         $setting->setting_value = '30';
         $setting->save();
 
+        $setting = new \RecycleArt\Models\Settings();
+        $setting->setting_slug = 'generalPageBlock';
+        $setting->setting_name = '(на главной странице, перед новостями) разместить еще один текстовой блок';
+        $setting->setting_value = 'some content for users here...';
+        $setting->save();
+
   }
 }

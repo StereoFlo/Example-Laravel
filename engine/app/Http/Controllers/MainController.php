@@ -45,9 +45,10 @@ class MainController extends Controller
     public function index()
     {
         return view('main.index', [
-            'slogan' => $this->settings->getOneFromArray('slogan'),
-            'news'   => $this->news->getList(),
-            'works'  => $this->work->getListForHomepage($this->work->getPerPage()),
+            'slogan'           => $this->settings->getOneFromArray('slogan'),
+            'generalPageBlock' => $this->settings->getOneFromArray('generalPageBlock'),
+            'news'             => $this->news->getList(),
+            'works'            => $this->work->getListForHomepage($this->work->getPerPage()),
         ]);
     }
 }

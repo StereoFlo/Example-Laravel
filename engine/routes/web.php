@@ -118,4 +118,9 @@ Route::middleware('auth')->group(function () {
         ->where('imageId', '[0-9]+')
         ->name('imageDeleteFromWork');
     Route::get('/cabinet/work/{id}', 'WorkController@show')->where('id', '[0-9]+')->name('workShow');
+
+    Route::get('/work/set_default_image/{workId}/{imageId}', 'WorkController@setDefaultImage')
+        ->where('workId', '[0-9]+')
+        ->where('imageId', '[0-9]+')
+        ->name('setDefaultImage');
 });

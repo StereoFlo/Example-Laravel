@@ -265,6 +265,19 @@ class WorkController extends Controller
     }
 
     /**
+     * @param WorkImages $workImages
+     * @param int $workId
+     * @param int $imageId
+     * @return array
+     */
+    public function setDefaultImage(WorkImages $workImages, int $workId, int $imageId)
+    {
+        return [
+            'isSet' => (bool) $workImages->setDefault($workId, $imageId)
+        ];
+    }
+
+    /**
      * @param Work $work
      * @param int  $id
      *

@@ -171,6 +171,17 @@ class WorkImages extends Model
 
     /**
      * @param int $workId
+     * @param int $imageId
+     * @return bool
+     */
+    public function setDefault(int $workId, int $imageId): bool
+    {
+        return $this->where('workId', $workId)->update(['isDefault' => false]) &&
+            $this->where('workId', $workId)->where('id', $imageId)->update(['isDefault' => true]);
+    }
+
+    /**
+     * @param int $workId
      *
      * @return bool
      */
