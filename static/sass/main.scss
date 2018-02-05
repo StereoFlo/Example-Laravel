@@ -150,6 +150,11 @@ section {
   }
 }
 
+.muted {
+  font-size: .9em;
+  color: #ccd3d7;
+}
+
 /* slider */
 
 .fotorama__nav {
@@ -167,4 +172,54 @@ section {
   background: $white;
   border: 1px solid $border;
   border-radius: 2px;
+}
+
+.fileuploader-popup-preview .tools {
+  h5 {
+    text-align: center;
+  }
+  #setImageDefault {
+    i {
+      background-image: url('../images/check.svg');
+      display: inline-block;
+      width: 23px;
+      height: 23px;
+      margin-bottom: 2px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+  ul {
+    @include max-screen($break_xs) {
+      //text-align: center;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+  li {
+    @include max-screen($break_sm) {
+      margin-bottom: 15px;
+    }
+  }
+  li span {
+    @include max-screen($break_xs) {
+      font-size: 12px;
+    }
+  }
+  li.separator {
+    @include max-screen($break_sm) {
+      margin: 5px 15px 5px 0px;
+      padding: 0 10px;
+    }
+    @include max-screen($break_xs) {
+      display: none;
+    }
+  }
+}
+.fileuploader-theme-thumbnails .fileuploader-thumbnails-input, .fileuploader-theme-thumbnails .fileuploader-items-list .fileuploader-item {
+  @include max-screen($break_xs) {
+    width: 33%;
+  }
 }

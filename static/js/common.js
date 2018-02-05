@@ -202,6 +202,41 @@ $(function () {
     });
 
     /* ---------------------------------------------- /*
+     * Set Default image
+    /* ---------------------------------------------- */
+
+    if(!document.querySelector('.workId')) {
+        $('.filearea').on('click', '.fileuploader-action-popup', function () {
+            const imageDefaultBtn = document.querySelector('#setImageDefault');
+            const separator = document.querySelector('#forImageDefult');
+
+            separator.remove();
+            imageDefaultBtn.remove();
+        });
+
+    }
+
+    $('.filearea').on('click', '#setImageDefault', function (e) {
+        e.preventDefault();
+        const workId = document.querySelector('.workId').getAttribute('data-workId');
+        const imageId = document.querySelector('.imageId').getAttribute('data-imageId');
+        const imageUrl = document.querySelector('.node.image img').getAttribute('src');
+        const imageDefault = document.querySelector('.imageDefault img');
+        const url = '/work/set_default_image/'+ workId +'/'+ imageId;
+
+        http(url).then(
+            response => {
+                response = JSON.parse(response);
+                if (response.isSet === true) {
+                    alert('Изображение установленно в качестве обложки!');
+                    imageDefault.setAttribute('src', imageUrl);
+                }
+            }
+        );
+        return false;
+    });
+
+    /* ---------------------------------------------- /*
      * Categories
     /* ---------------------------------------------- */
 

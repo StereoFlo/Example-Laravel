@@ -59,15 +59,15 @@ $('#fotoInput').fileuploader({
                     '<div class="node ${format}">${reader.node}</div>' +
                     '<div class="tools">' +
                     '<ul>' +
-                    '<li>' +
-                    '<span>${captions.name}:</span>' +
+                    '<li class="imageName">' +
+                    '<span class="imageId" data-imageId="${name}">${captions.name}:</span>' +
                     '<h5>${name}</h5>' +
                     '</li>' +
-                    '<li>' +
-                    '<span>${captions.size}:</span>' +
-                    '<h5>${size2}</h5>' +
-                    '</li>' +
-                    (data.reader && data.reader.width ? '<li>' +
+                    // '<li class="imageSize">' +
+                    // '<span>${captions.size}:</span>' +
+                    // '<h5>${size}</h5>' +
+                    // '</li>' +
+                    (data.reader && data.reader.width ? '<li class="imagedimensions">' +
                             '<span>${captions.dimensions}:</span>' +
                             '<h5>${reader.width}x${reader.height}px</h5>' +
                             '</li>' : ''
@@ -77,14 +77,22 @@ $('#fotoInput').fileuploader({
                             '<h5>${reader.duration2}</h5>' +
                             '</li>' : ''
                     ) +
+                    '<li id="forImageDefult" class="separator"></li>' +
+                    '<li class="imageCheckDefault">' +
+                        '<a id="setImageDefault" href="#">' +
+                            '<i></i>' +
+                            '<span>Обложка</span>' +
+                        '</a>' +
+                    '</li>'+
                     '<li class="separator"></li>' +
-                    (data.format === 'image' && data.reader.src && data.editor ? '<li>' +
+                    (data.format === 'image' && data.reader.src && data.editor ?
+                            '<li class="imageCrop">' +
                             '<a data-action="crop">' +
                             '<i></i>' +
                             '<span>${captions.crop}</span>' +
                             '</a>' +
                             '</li>' +
-                            '<li>' +
+                            '<li class="imageRotate">' +
                             '<a data-action="rotate-cw">' +
                             '<i></i>' +
                             '<span>${captions.rotate}</span>' +
@@ -183,3 +191,4 @@ $('#fotoInput').fileuploader({
         }
     }
 });
+
