@@ -207,11 +207,11 @@ $(function () {
 
     if(!document.querySelector('.workId')) {
         $('.filearea').on('click', '.fileuploader-action-popup', function () {
-            const imageDefaultBtn = document.querySelector('#setImageDefault');
+            const imageDefaultItem = document.querySelector('.imageCheckDefault');
             const separator = document.querySelector('#forImageDefult');
 
             separator.remove();
-            imageDefaultBtn.remove();
+            imageDefaultItem.remove();
         });
 
     }
