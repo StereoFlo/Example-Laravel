@@ -205,7 +205,7 @@ class Work extends Model
      *
      * @return array
      */
-    public function getListRecentlyLiked(int $limit = 3): array
+    public function getListRecentlyLiked(int $limit = 4): array
     {
         $res = $this
             ->select('work.*', 'users.id as userId', 'users.name as userName', 'work_images.link')

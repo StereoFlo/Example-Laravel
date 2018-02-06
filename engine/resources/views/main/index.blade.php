@@ -16,10 +16,14 @@
                     </p>
                 </div>
 
+                <div class="callToUser">
+                    <p class="callToUser__item">
+                        {!! $generalPageBlock['setting_value'] !!}
+                    </p>
+                </div>
+
                 @if(!empty($news))
-
                     <div class="news">
-
                         @foreach($news as $item)
                             <a href="{{ route('news') }}">
                                 <div class="news__item">
@@ -29,9 +33,7 @@
                                 </div>
                             </a>
                         @endforeach
-
                     </div>
-
                 @endif
             </div>
         </div>
