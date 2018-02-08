@@ -64,15 +64,25 @@ class CabinetController extends Controller
      * @param Request $request
      * @param User    $user
      *
-     * @return int
+     * @return mixed
      */
     public function removeAvatar(Request $request, User $user)
     {
         if ($user->removeAvatar()) {
-            $request->session()->flash('updateResult', __('cabinet.AvatarSuccessRemoved'));
+            if (!$request->ajax()) {
+                $request->session()->flash('updateResult', __('cabinet.AvatarSuccessRemoved'));
+                return Redirect::to(route('profileForm'));
+            }
+            return [
+                'isDeleted' => true,
+            ];
+        }
+        if (!$request->ajax()) {
+            $request->session()->flash('updateResult', __('cabinet.AvatarErrorRemoved'));
             return Redirect::to(route('profileForm'));
         }
-        $request->session()->flash('updateResult', __('cabinet.AvatarErrorRemoved'));
-        return Redirect::to(route('profileForm'));
+        return [
+            'isDeleted' => false,
+        ];
     }
 }
