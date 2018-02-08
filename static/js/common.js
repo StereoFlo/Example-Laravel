@@ -212,8 +212,8 @@ $(function () {
             const imageDefaultItem = document.querySelector('.imageCheckDefault');
             const separator = document.querySelector('#forImageDefult');
 
-            separator.remove();
-            imageDefaultItem.remove();
+            separator.style.display = 'none';
+            imageDefaultItem.style.display = 'none';
         });
     }
 

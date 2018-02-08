@@ -114,6 +114,34 @@ $('#fotoInput').fileuploader({
                     '</div>' +
                     '</div>';
             },
+            onShow: function(item) {
+                item.popup.html.on('click', '[data-action="crop"]', function(e) {
+                    if (item.editor)
+                        item.editor.cropper();
+                }).on('click', '[data-action="rotate-cw"]', function(e) {
+                    if (item.editor)
+                        item.editor.rotate();
+                }).on('click', '[data-action="remove"]', function(e) {
+                    item.popup.close();
+                    item.remove();
+                }).on('click', '[data-action="cancel"]', function(e) {
+                    item.popup.close();
+                }).on('click', '[data-action="save"]', function(e) {
+                    if (item.editor)
+                        item.editor.save();
+                    if (item.popup.close)
+                        item.popup.close();
+                });
+
+                const div = item.image[0];
+                if(div.classList.contains('isNew')) {
+                    const imageDefaultItem = document.querySelector('.imageCheckDefault');
+                    const separator = document.querySelector('#forImageDefult');
+
+                    separator.style.display = 'none';
+                    imageDefaultItem.style.display = 'none';
+                }
+            },
         },
     },
     afterRender: function(listEl, parentEl, newInputEl, inputEl) {
@@ -123,6 +151,10 @@ $('#fotoInput').fileuploader({
         plusInput.on('click', function() {
             api.open();
         });
+    },
+    onSelect: function(item, listEl, parentEl, newInputEl, inputEl) {
+        item = item.image[0];
+        item.classList.add('isNew');
     },
     editor: {
         // editor cropper

@@ -2,11 +2,9 @@ $('#avatarInput').fileuploader({
     // Options will go here
     extensions: ['jpg', 'jpeg', 'png'],
     limit: 1,
-    itemPrepend: false,
     changeInput: ' ',
     theme: 'thumbnails',
     enableApi: true,
-    addMore: false,
     thumbnails: {
         box: '<div class="fileuploader-items">' +
         '<ul class="fileuploader-items-list">' +
@@ -112,6 +110,12 @@ $('#avatarInput').fileuploader({
             api.open();
         });
     },
+    afterSelect: function(listEl, parentEl, newInputEl, inputEl) {
+        const itemsList = listEl[0];
+        if (listEl.length > 0) {
+            itemsList.lastChild.style.display = 'none';
+        }
+    },
     // editor: {
     //     // editor cropper
     //     cropper: {
@@ -137,10 +141,10 @@ $('#avatarInput').fileuploader({
     //         // callback will go here
     //     }
     // },
-    onRemove: function () {
-        // const workId = document.querySelector('.workId.hidden').getAttribute('data-workId');
-        // const imageId = item.name;
+    onRemove: function (listEl) {
         const url = '/cabinet/profile/avatar/remove';
+        const input = document.querySelector('.fileuploader-thumbnails-input');
+        input.style.display = 'inline-block';
         if (url) {
             http(url).then(
                 response => {

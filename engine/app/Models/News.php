@@ -48,7 +48,7 @@ class News extends Model
      *
      * @return bool
      */
-    public function make(string $name, string $content): bool
+    public function make(string $name, string $content)
     {
         return self::create([
             'name'    => $name,
