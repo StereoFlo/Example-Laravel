@@ -60,13 +60,11 @@ class RegisterController extends Controller
         $rules = [
             'name'     => 'required|string|max:255',
             'email'    => 'required|string|email|max:255|unique:users',
-            'vkId'     => 'string|max:255',
             'password' => 'required|string|min:6|confirmed',
         ];
         $niceNames = [
             'name'     => 'Имя',
             'email'    => 'Email',
-            'vkId'     => 'Ваш ID во Вконтакте',
             'password' => 'Пароль',
         ];
         $this->validate($request, $rules, [], $niceNames);
