@@ -6,7 +6,6 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use RecycleArt\Http\Controllers\Controller;
 use RecycleArt\Models\RoleUser;
 use RecycleArt\Models\User;
