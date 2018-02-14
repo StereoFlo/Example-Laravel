@@ -71,6 +71,28 @@ class RegisterController extends Controller
     }
 
     /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param RoleUser                  $roleUser
+     *
+     * @param User                      $user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request, RoleUser $roleUser, User $user)
+    {
+        $this->validator($request);
+
+        $user = $this->create($user, $request->all());
+        event(new Registered($user));
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $roleUser, $user);
+    }
+
+    /**
      * Create a new user instance after a valid registration.
      *
      * @param User $user
@@ -81,25 +103,6 @@ class RegisterController extends Controller
     protected function create(User $user, array $data)
     {
         return $user->createUser($data);
-    }
-
-    /**
-     * Handle a registration request for the application.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param RoleUser                  $roleUser
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function register(Request $request, RoleUser $roleUser)
-    {
-        $this->validator($request);
-
-        event(new Registered($user = $this->create($request->all())));
-
-        $this->guard()->login($user);
-
-        return $this->registered($request, $roleUser, $user);
     }
 
     /**
