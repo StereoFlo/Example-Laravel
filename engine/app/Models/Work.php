@@ -46,6 +46,7 @@ class Work extends Model
             ->where('userId', $userId)
             ->where('isDefault', true)
             ->where('approved', true)
+            ->orderBy('id', 'desc')
             ->get();
         if (!$this->checkEmptyObject($works)) {
             return [];
@@ -231,6 +232,7 @@ class Work extends Model
             ->select('work.*', 'users.id as userId', 'users.name as userName', 'work_images.link')
             ->join('work_images', 'work.id', '=', 'work_images.workId')
             ->join('users', 'users.id', '=', 'work.userId')
+            ->orderBy('id', 'desc')
             ->get();
         if (!$this->checkEmptyObject($result)) {
             return [];
@@ -246,6 +248,7 @@ class Work extends Model
         $result = $this
             ->select('work.*', 'users.id as userId', 'users.name as userName')
             ->join('users', 'users.id', '=', 'work.userId')
+            ->orderBy('id', 'desc')
             ->get();
         if (!$this->checkEmptyObject($result)) {
             return [];
@@ -269,6 +272,7 @@ class Work extends Model
             ->take($this->perPage)
             ->where('work_images.isDefault', true)
             ->where('work.approved', true)
+            ->orderBy('id', 'desc')
             ->get();
         if (!$this->checkEmptyObject($result)) {
             return [];
