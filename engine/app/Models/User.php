@@ -315,6 +315,7 @@ class User extends Authenticatable
         $user           = Auth::user();
         $user->name     = $request->post('name');
         $user->email    = $request->post('email');
+        $user->vk_id    = $request->post('vkId');
         $user->location = $request->post('location');
         $user->phone    = $request->post('phone');
         $user->about    = $request->post('about');

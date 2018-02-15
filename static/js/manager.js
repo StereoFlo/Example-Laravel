@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('#content').summernote({
+    $('.form-group textarea').summernote({
         minHeight: 300,
         toolbar:[
             //[groupname,[list buttons]]

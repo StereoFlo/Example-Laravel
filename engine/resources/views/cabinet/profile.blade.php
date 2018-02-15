@@ -58,6 +58,16 @@
                 </span>
             </div>
 
+            <div class="inputGroup{{ $errors->has('vk_id') ? ' has-error' : '' }}">
+                <label for="vkId">VK ID:</label>
+                <input id="vkId" type="text" name="vkId" value="{{ Auth::user()->vk_id }}">
+                <span class="errorText">
+                    @if ($errors->has('vkId'))
+                        <strong>{{ $errors->first('vk_id') }}</strong>
+                    @endif
+                </span>
+            </div>
+
             <div class="inputGroup{{ $errors->has('about') ? ' has-error' : '' }}">
                 <label for="about">о себе:</label>
                 <textarea name="about" rows="8" cols="80">{{ Auth::user()->about }}</textarea>
