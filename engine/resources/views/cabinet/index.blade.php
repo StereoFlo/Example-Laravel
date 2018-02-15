@@ -26,6 +26,8 @@
                         <br>
                         <dt>Телефон:</dt><dd>{{ Auth::user()->phone }}</dd>
                         <br>
+                        <dt>VK ID:</dt><dd>{{ Auth::user()->vk_id }}</dd>
+                        <br>
                         <dt>О себе:</dt><dd>{{ Auth::user()->about }}</dd>
                     </dl>
                 </div>
