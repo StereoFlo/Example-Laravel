@@ -4,10 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-/**
- * Class CreateSlogansTable
- */
-class CreateSlogansTable extends Migration
+class ChangeUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,10 +13,8 @@ class CreateSlogansTable extends Migration
      */
     public function up()
     {
-        Schema::create('slogan', function (Blueprint $table) {
-            $table->increments('id');
-            $table->text('content');
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('vk_id')->nullable()->after('name');
         });
     }
 
@@ -30,6 +25,6 @@ class CreateSlogansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('slogan');
+        //
     }
 }

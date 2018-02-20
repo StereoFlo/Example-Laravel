@@ -33,7 +33,6 @@
   z-index: 10;
   @include max-screen($break_sm) {
     @include col-8();
-    //background: rgba($black, 0.7);
   }
   @include max-screen($break_xs) {
     @include col-12();
@@ -43,7 +42,7 @@
     height: auto;
   }
 }
-.news {
+.news, .callToUser, .slogan {
   color: $white;
   display: flex;
   flex-direction: column;
@@ -99,6 +98,11 @@
   }
   &__item {
     text-align: justify;
+  }
+}
+.callToUser {
+  &:hover {
+    cursor: default;
   }
 }
 .scrollDown {

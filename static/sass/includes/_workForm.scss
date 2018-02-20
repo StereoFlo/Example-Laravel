@@ -27,7 +27,7 @@
       font-size: 0.9em;
       color: $border;
       display: inline-block;
-      margin: 5px;
+      margin: 5px 5px 5px 0;
     }
     &__item {
       background: $white;
@@ -88,5 +88,20 @@
     &:checked + label {
       background-position: 0 -24px;
     }
+  }
+}
+
+.imageDefault {
+  text-align: center;
+  border: 1px solid $border;
+  border-radius: 2px;
+  width: fit-content;
+  margin: 10px auto 0;
+  padding: 20px 20px;
+  line-height: 1;
+  img {
+    max-width: 100%;
+    max-height: 250px;
+    border-radius: 4px;
   }
 }

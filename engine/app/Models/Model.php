@@ -60,6 +60,14 @@ class Model extends EModel
     }
 
     /**
+     * @return Settings
+     */
+    protected function getSettings(): Settings
+    {
+        return App::make('RecycleArt\Models\Settings');
+    }
+
+    /**
      * @return MaterialRel
      */
     protected function getMaterialRelation(): MaterialRel

@@ -19,6 +19,17 @@
             <span class="errorText" id="emailError"></span>
         </div>
 
+        <div class="inputGroup{{ $errors->has('vkId') ? ' has-error' : '' }}">
+            <label for="vkId">VK id:</label>
+            <input id="vkId" class="registrationForm__vkId" type="text" name="vkId" value="{{ old('vkId') }}">
+            <i class="fa fa-vk" aria-hidden="true"></i>
+            <span class="errorText">
+                @if ($errors->has('vkId'))
+                    <strong>{{ $errors->first('vkId') }}</strong>
+                @endif
+            </span>
+        </div>
+
         <div class="inputGroup">
             <label for="password">пароль:</label>
             <input id="password" class="registrationForm__pass" type="password" name="password" required>

@@ -2,6 +2,7 @@
 
 namespace RecycleArt\Models;
 
+use FileUploader\Services\FileUploaderService;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -90,6 +91,9 @@ class WorkImages extends Model
     }
 
     /**
+     * @deprecated
+     * old native file upload
+     *
      * @param UploadedFile[] $files
      * @param int $workId
      *
@@ -119,6 +123,40 @@ class WorkImages extends Model
     }
 
     /**
+     * dirty file upload
+     *
+     * @param int $workId
+     *
+     * @return bool
+     */
+    public function addImagesWithFileUploader(int $workId)
+    {
+        $isSaved = false;
+        $path = \public_path(\sprintf(self::WORK_PATH, Auth::id(), $workId));
+        if (!File::isDirectory($path)) {
+            File::makeDirectory($path, 0777, true, true);
+        }
+        $uploader = new FileUploaderService('images', ['uploadDir' => $path . DIRECTORY_SEPARATOR, 'editor' => [
+            'maxWidth'  => 1024,
+            'maxHeight' => 1024,
+            'quality'   => 75,
+        ]]); //
+        $uploader->upload();
+
+        $files = $uploader->getFileList();
+        foreach ($files as $key => $file) {
+            $work = new self();
+            $work->workId = $workId;
+            if (0 === $key && !$this->hasDefault($workId)) {
+                $work->isDefault = true;
+            }
+            $work->link = \sprintf(self::LINK_PATH, Auth::id(), $workId, $file['name']);
+            $isSaved = $work->save();
+        }
+        return $isSaved;
+    }
+
+    /**
      * @param int $workId
      *
      * @return array
@@ -133,6 +171,17 @@ class WorkImages extends Model
             return [];
         }
         return $defaultImage->toArray();
+    }
+
+    /**
+     * @param int $workId
+     * @param int $imageId
+     * @return bool
+     */
+    public function setDefault(int $workId, int $imageId): bool
+    {
+        return $this->where('workId', $workId)->update(['isDefault' => false]) &&
+            $this->where('workId', $workId)->where('id', $imageId)->update(['isDefault' => true]);
     }
 
     /**

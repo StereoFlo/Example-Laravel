@@ -1,6 +1,6 @@
 <div class="materials">
     @if(!empty($work['id']))
-        <p>Материалы работы:</p>
+        <label>Материалы работы:</label>
         <div class="inWork">
             @if(empty($work['materials']['inWork']))
                 <span>Вы не добавили свою работу не одного материала</span>
@@ -14,7 +14,7 @@
             @endif
         </div>
         <div class="notInWork">
-            <p>Все материалы:</p>
+            <label>Все материалы:</label>
             @if(empty($work['materials']['notInWork']))
                 <span class="empty">Все возможные материалы добавлены в работу</span>
                 <div class="inputGroup checkboxes"></div>
@@ -30,7 +30,7 @@
         </div>
     @else
         @if(!empty($materials))
-            <p>Материалы:</p>
+            <label>Материалы:</label>
             <div class="inputGroup checkboxes">
                 @foreach($materials as $material)
                     <input id="{{ $material['id'] }}" type="checkbox" name="materials[]" value="{{ $material['id'] }}">

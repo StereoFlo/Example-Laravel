@@ -125,7 +125,7 @@ class Catalog extends Model
     {
         /** @var Model $category */
         $category = self::find($categoryId);
-        if ($this->checkEmptyObject($category)) {
+        if (!$this->checkEmptyObject($category)) {
             return false;
         }
         $category->name = $data['name'];
@@ -142,6 +142,7 @@ class Catalog extends Model
      * @param int $categoryId
      *
      * @return bool
+     * @throws \Exception
      */
     public function removeCategory(int $categoryId)
     {

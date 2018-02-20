@@ -4,7 +4,7 @@
 
     <section class="workAdd">
         <div class="container">
-
+            <p>{{ session('addWorkResult') }}</p>
             @if(empty($work['id']))
                 <div class="sectionTitle">
                     <h2>@lang('work.new')</h2>
@@ -14,7 +14,6 @@
                     <h2>Редактирование работы</h2>
                 </div>
             @endif
-
             <form method="post" action="{{ route('workProcess') }}" enctype="multipart/form-data" class="form workAddForm">
                 {{ csrf_field() }}
 
@@ -42,7 +41,9 @@
 
                 @include('work.partials.materials')
 
-                @include('work.partials.category')
+                @if (Auth::user()->isModerator())
+                    @include('work.partials.category')
+                @endif
 
                 @include('work.partials.images')
 

@@ -2,6 +2,7 @@
 
 namespace RecycleArt\Http\Controllers;
 
+use FileUploader\Services\FileUploaderService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -67,13 +68,38 @@ class WorkController extends Controller
     public function process(Request $request, Work $work, WorkImages $workImages, Tags $tags, CatalogRel $catalogRel, MaterialRel $materialRel)
     {
         $workId = $request->post('workId') ?: 0;
-        $workId = $work->updateOrSave($workId, [
-            'workName'    => $request->post('workName'),
-            'description' => $request->post('description'),
-            'userId'      => Auth::id(),
-        ]);
+        // todo make a method for code below
+        if (!empty($workId) && $request->post('fileuploader-list-images')) {
+            $filesArray = \json_decode($request->post('fileuploader-list-images'), true);
+            if (!empty($filesArray)) {
+                foreach ($filesArray as $file) {
+                    if (isset($file['editor'])) {
+                        $fileLink = \explode('/', $file['file']);
+                        $imageFile = \end($fileLink);
+                        $filePath = \public_path(\sprintf(self::WORK_PATH, Auth::id(), $workId)) . DIRECTORY_SEPARATOR . $imageFile;
+                        if (\file_exists($filePath)) {
+                            FileUploaderService::resize($filePath, null, null, null, (isset($file['editor']['crop']) ? $file['editor']['crop'] : null), 75, (isset($file['editor']['rotation']) ? $file['editor']['rotation'] : null));
+                        }
+                    }
+                }
+            }
+        }
         if (!empty($request->file('images'))) {
-            $workImages->addImages($request->file('images'), $workId);
+            try {
+                $this->validate($request, [
+                    'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+                ]);
+            } catch (\Exception $exception) {
+                $request->session()->flash('addWorkResult', $exception->getMessage());
+                return Redirect::to(\route('workAdd'));
+            }
+            $workId = $work->updateOrSave($workId, [
+                'workName'    => $request->post('workName'),
+                'description' => $request->post('description'),
+                'userId'      => Auth::id(),
+            ]);
+            //$workImages->addImages($request->file('images'), $workId);
+            $workImages->addImagesWithFileUploader($workId);
         }
         if (!empty($request->post('tags'))) {
             $tags->addTagsToWork($request->post('tags'), $workId);
@@ -236,6 +262,19 @@ class WorkController extends Controller
         return \response()->json([
             'isRemoved' => $res
         ]);
+    }
+
+    /**
+     * @param WorkImages $workImages
+     * @param int $workId
+     * @param int $imageId
+     * @return array
+     */
+    public function setDefaultImage(WorkImages $workImages, int $workId, int $imageId)
+    {
+        return [
+            'isSet' => (bool) $workImages->setDefault($workId, $imageId)
+        ];
     }
 
     /**

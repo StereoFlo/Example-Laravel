@@ -18,7 +18,7 @@
                          data-thumbwidth="110"
                          data-thumbheight="60"
                          data-width="100%"
-                         data-maxheight="400"
+                         data-maxheight="377"
                     >
                         @if (empty($work['images']))
                             <p>У этой работы нет изображений</p>
@@ -79,7 +79,7 @@
             </div>
             <script type="text/javascript">VK.init({apiId: 6283406, onlyWidgets: true});</script>
             <script type="text/javascript">
-                VK.Widgets.Comments("work__comments", {limit: 20, attach: "*"}, {{$work['id']}});
+                VK.Widgets.Comments("work__comments", {limit: 20, autoPublish: 1, attach: "*"}, {{$work['id']}});
             </script>
         </div>
     </section>

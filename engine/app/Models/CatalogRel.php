@@ -37,6 +37,23 @@ class CatalogRel extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function relation()
+    {
+        return $this->hasMany(Catalog::class, 'id', 'catalog_id');
+    }
+
+    /**
+     * @param int $workId
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function getByWorkId(int $workId)
+    {
+        return $this->with('relation')->where('catalog_rel.work_id', $workId)->get();
+    }
+
+    /**
      * @param int|array $category
      * @param int   $workId
      *
@@ -85,7 +102,7 @@ class CatalogRel extends Model
      *
      * @return bool
      */
-    public function removeWorkCategory(int $workId): bool
+    public function removeWorkCategories(int $workId): bool
     {
         return (bool) $this->where('work_id', $workId)->delete();
     }

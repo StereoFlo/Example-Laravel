@@ -58,6 +58,16 @@
                 </span>
             </div>
 
+            <div class="inputGroup{{ $errors->has('vk_id') ? ' has-error' : '' }}">
+                <label for="vkId">VK ID:</label>
+                <input id="vkId" type="text" name="vkId" value="{{ Auth::user()->vk_id }}">
+                <span class="errorText">
+                    @if ($errors->has('vkId'))
+                        <strong>{{ $errors->first('vk_id') }}</strong>
+                    @endif
+                </span>
+            </div>
+
             <div class="inputGroup{{ $errors->has('about') ? ' has-error' : '' }}">
                 <label for="about">о себе:</label>
                 <textarea name="about" rows="8" cols="80">{{ Auth::user()->about }}</textarea>
@@ -86,15 +96,21 @@
                     @endif
                 </span>
             </div>
+            @if (!empty(Auth::user()->avatar))
+            <div class="userId hidden" data-userId="{{Auth::user()->id}}"></div>
 
-            @if (empty(Auth::user()->avatar))
             <div class="inputGroup{{ $errors->has('avatar') ? ' has-error' : '' }}">
                 <label for="avatar">фото (1:1, jpeg):</label>
                 <div class="filearea">
-                    <span>Перенесите файл сюда или нажмите на эту зону!</span>
-                    <input type="file" name="avatar" value="{{ old('avatar') }}">
+                    <input id="avatarInput" type="file" name="avatar" {{ !empty($errors->has('images')) ? 'required' : null }}
+                    data-fileuploader-files=
+                    '[{
+                        "name":"Avatar",
+                        "type":"image\/jpeg",
+                        "file":"{{ Auth::user()->avatar }}"
+                    }]'
+                    >
                 </div>
-                <div class="fileareaPreview"></div>
                 <span class="errorText">
                     @if ($errors->has('avatar'))
                         <strong>{{ $errors->first('avatar') }}</strong>
@@ -103,13 +119,11 @@
             </div>
             @else
                 <label for="">аватар:</label>
-                <div id="avatar" class="avatar">
-                    <img src="{{ Auth::user()->avatar }}">
-                    <a href="{{ route('removeAvatar') }} " class="del">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </a>
+                <div class="filearea">
+                    <input id="avatarInput" type="file" name="avatar" {{ !empty($errors->has('images')) ? 'required' : null }}>
                 </div>
             @endif
+
 
             <button type="submit" name="button" class="button">Обновить</button>
         </form>

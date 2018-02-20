@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+/**
+ * public routes
+ */
 Auth::routes();
 
 Route::get('/{index}', 'MainController@index')->where('index', '^(index\.html$|index\.jsp$|index\.php$)?');
@@ -25,6 +28,9 @@ Route::post('/gallery/works', 'GalleryController@getWorks')->name('galleryPublic
 
 Route::get('/pages/{slug}.html', 'StaticPageController@getPage')->where('slug', '[a-z]+');
 
+/**
+ * Admin routes
+ */
 Route::group(['middleware' => 'isAdmin'], function () {
     Route::get('/manager/user/list', 'Manager\\User@getList')->name('managerUserList');
     Route::get('/manager/user/{id}/remove', 'Manager\\User@removeUser')->where('id', '[0-9]+')->name('managerUserRemove');
@@ -42,13 +48,15 @@ Route::group(['middleware' => 'isAdmin'], function () {
         ->where('userId', '[0-9]+')
         ->where('roleId', '[0-9]+')
         ->name('userRoleRemoveManager');
+    Route::get('/manager/settings', 'Manager\\Settings@form')->name('managerSettingsForm');
+    Route::post('/manager/settings/process', 'Manager\\Settings@process')->name('managerSettingsProcess');
 });
 
+/**
+ * Moderator routes
+ */
 Route::group(['middleware' => 'isModerator'], function () {
     Route::get('/manager', 'Manager\\ManagerController@index')->name('managerIndex');
-
-    Route::get('/manager/slogan', 'Manager\\Slogan@form')->name('sloganForm');
-    Route::post('/manager/slogan/update', 'Manager\\Slogan@update')->name('sloganUpdate');
 
     Route::get('/manager/news', 'Manager\\News@getList')->name('newsList');
     Route::get('/manager/news/page/{id}', 'Manager\\News@getList')->where('id', '[0-9]+')->name('newsListPage');
@@ -110,4 +118,9 @@ Route::middleware('auth')->group(function () {
         ->where('imageId', '[0-9]+')
         ->name('imageDeleteFromWork');
     Route::get('/cabinet/work/{id}', 'WorkController@show')->where('id', '[0-9]+')->name('workShow');
+
+    Route::get('/work/set_default_image/{workId}/{imageId}', 'WorkController@setDefaultImage')
+        ->where('workId', '[0-9]+')
+        ->where('imageId', '[0-9]+')
+        ->name('setDefaultImage');
 });

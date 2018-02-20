@@ -4,78 +4,106 @@ $(function () {
      * Header
     /* ---------------------------------------------- */
 
-    var header = $('header');
-    var $window = $(window);
+    window.onscroll = getScrollPosition;
 
-    $window.scroll(function(){
-        if ( $window.scrollTop() > 200) {
-            header.addClass("fixed");
-        } else {
-            header.removeClass('fixed');
+    function getScrollPosition() {
+        const header = document.querySelector('header');
+        if (window.pageYOffset > 200) {
+            header.classList.add('fixed');
+            return;
         }
-    });
+        header.classList.remove('fixed');
+    }
 
     /* ---------------------------------------------- /*
      * Menu button
     /* ---------------------------------------------- */
 
-    $('.menu__btn').click(function (e) {
-        e.preventDefault();
-        var navSelector = $('.nav');
-        var windowWidth = $window.width();
+    const menuButton = document.querySelector('.menu__btn');
+    if (menuButton) {
+        menuButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            const navSelector = $('.nav');
+            const windowWidth = window.innerWidth;
 
-        if (windowWidth < 769) {
-            var headerHeight = $('header').innerHeight();
-            navSelector.css('top', headerHeight);
-            navSelector.slideToggle();
-        }
-        else {
-            navSelector.toggleClass('opacity');
-        }
-
-    });
+            if (windowWidth < 769) {
+                const headerHeight = $('header').innerHeight();
+                navSelector.css('top', headerHeight);
+                navSelector.slideToggle();
+            } else {
+                navSelector.toggleClass('opacity');
+            }
+        });
+    }
 
     /* ---------------------------------------------- /*
      * LogIn
     /* ---------------------------------------------- */
 
-    $('.user__btn, .logIn__close').click(function (e) {
-        e.preventDefault();
-        $('.logIn .forms').empty();
-        $(document).keydown(function(e) {
-            if( e.keyCode === 27 ) {
-                $('.logIn').addClass('hidden');
-            }
+    const ajaxLoginClose = document.querySelector('.logIn__close');
+    if (ajaxLoginClose) {
+        ajaxLoginClose.addEventListener('click', () => {
+            const loginAjax = document.querySelector('.logIn');
+            loginAjax.classList.add('hidden');
         });
+    }
 
-        $.get('/login/ajax')
-            .done(function (data) {
-                $('.logIn .forms').append(data);
-                $('#toReg').click(function () {
-                    $('.forms form').toggle(600);
-                });
-            })
-            .fail(function (data) {
-                //todo
+    const ajaxLoginShow = document.querySelector('.user__btn');
+    if (ajaxLoginShow) {
+        ajaxLoginShow.addEventListener('click', (e) => {
+            e.preventDefault();
+            empty('.logIn .forms');
+            document.addEventListener('keydown', function(e) {
+                if (e.keyCode === 27) {
+                    document.querySelector('.logIn').classList.add('hidden');
+                }
             });
+            showLoginForm();
 
-        $.get('/register/ajax')
-            .done(function (data) {
-                $('.logIn .forms').append(data);
-                $('#ajaxRegistration').hide();
-                $('#toLog').click(function () {
-                    $('.forms form').toggle(600);
-                });
-            })
-            .fail(function (data) {
-                //todo
-            });
 
-        $('.logIn').toggleClass('hidden');
-        $('body').toggleClass('fixed');
-        $('#ajaxRegistration').hide();
-        $('#ajaxLogin').show();
-    });
+            document.querySelector('.logIn').classList.toggle('hidden');
+            document.body.classList.toggle('fixed');
+        });
+    }
+
+    /**
+     * get and show for for user register
+     */
+    function showRegisterForm() {
+        http('/register/ajax').then(
+            response => {
+                const forms = document.querySelector('.logIn .forms');
+                forms.appendChild(document.createElement('div')).innerHTML = response;
+                const switchToLogin = document.querySelector('#toLog');
+                if (switchToLogin) {
+                    switchToLogin.addEventListener('click', () => {
+                        empty('.logIn .forms');
+                        showLoginForm();
+                    });
+                }
+            }
+        );
+    }
+
+    /**
+     * get and show for for user login
+     */
+    function showLoginForm() {
+        http('/login/ajax').then(
+            response => {
+                const forms = document.querySelector('.logIn .forms');
+                forms.appendChild(document.createElement('div')).innerHTML = response;
+
+                const switchToReg = document.querySelector('#toReg');
+                if (switchToReg) {
+                    switchToReg.addEventListener('click', () => {
+                        empty('.logIn .forms');
+                        showRegisterForm();
+                    });
+                }
+            }
+        );
+    }
 
     /* ---------------------------------------------- /*
      * Slogan and News on Welcome section
@@ -84,13 +112,15 @@ $(function () {
     $('.slogan').hide();
     $(".sloganShow").hover(
         function () {
-            $(this).siblings('.news, .slogan').stop();
+            $(this).siblings('.news, .slogan, .callToUser').stop();
+            $(this).siblings('.callToUser').slideUp(600);
             $(this).siblings('.news').slideUp(600);
             $(this).siblings('.slogan').slideDown(600);
         }
         ,
         function () {
-            $(this).siblings(".news, .slogan").stop();
+            $(this).siblings(".news, .slogan, .callToUser").stop();
+            $(this).siblings(".callToUser").slideDown();
             $(this).siblings(".news").slideDown();
             $(this).siblings(".slogan").slideUp();
         }
@@ -111,59 +141,14 @@ $(function () {
     /* ---------------------------------------------- */
 
     $('.work__circle').tooltip({
-        position:'top',
+        position: 'top',
         backgroundColor: '#E83B3A',
         offset: 1
     });
 
     /* ---------------------------------------------- /*
-     * ImagesUploadPreview
-    /* ---------------------------------------------- */
-
-    var imagesPreview = function(input, placeToInsertImagePreview) {
-
-        if (input.files) {
-            var filesAmount = input.files.length;
-            for (i = 0; i < filesAmount; i++) {
-                var reader = new FileReader();
-                reader.onload = function(event) {
-                    $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
-                };
-                reader.readAsDataURL(input.files[i]);
-            }
-        }
-
-    };
-
-    $('.filearea input').on('change', function() {
-
-        imagesPreview(this, 'div.fileareaPreview');
-
-        var filesCount = $(this)[0].files.length;
-        $(this).parent('.filearea').addClass('haveFile');
-        $(this).siblings('span').html("Добавлен " + filesCount + " файл(ов)");
-    });
-
-    /* ---------------------------------------------- /*
      * Elements delete
     /* ---------------------------------------------- */
-
-        $('.workImgDel').click(function (event) {
-            event.preventDefault();
-            var url = $(this).attr('href');
-            var element = $(this).parent('.image');
-
-            $.get(url)
-                .done(function (data) {
-                    if (data.isDeleted === true) {
-                        element.remove();
-                    }
-                })
-                .fail(function (data) {
-                    console.log(data);
-                });
-        });
-
 
     // $('[id^=tag_]').click(function (event) {
     //     event.preventDefault();
@@ -201,93 +186,141 @@ $(function () {
 
     $('#setLike').click(function (e) {
         e.preventDefault();
-        var url = $(this).attr('href');
-        var likeSel = $('#likesCount');
-        $.get(url)
-            .done(function (data) {
-                if (data.isLiked === true) {
-                    var currentVal = parseInt(likeSel.text());
+        const url = $(this).attr('href');
+        const likeSel = $('#likesCount');
+
+        http(url).then(
+            response => {
+                response = JSON.parse(response);
+                if (response.isLiked === true) {
+                    const currentVal = parseInt(likeSel.text());
                     likeSel.empty();
                     likeSel.append(currentVal + 1);
                     $('.work__likes').addClass('work__likes_checked');
                 }
-            })
-            .fail(function (data) {
-                //todo
-            });
+            }
+        );
         return false;
     });
 
     /* ---------------------------------------------- /*
-     * Categories, Materials
+     * Set Default image
+    /* ---------------------------------------------- */
+
+    if(!document.querySelector('.workId')) {
+        $('.filearea').on('click', '.fileuploader-action-popup', function () {
+            const imageDefaultItem = document.querySelector('.imageCheckDefault');
+            const separator = document.querySelector('#forImageDefult');
+
+            separator.style.display = 'none';
+            imageDefaultItem.style.display = 'none';
+        });
+    }
+
+    $('.filearea').on('click', '#setImageDefault', function (e) {
+        e.preventDefault();
+        const workId = document.querySelector('.workId').getAttribute('data-workId');
+        const imageId = document.querySelector('.imageId').getAttribute('data-imageId');
+        const imageUrl = document.querySelector('.node.image img').getAttribute('src');
+        const imageDefault = document.querySelector('.imageDefault img');
+        const url = '/work/set_default_image/'+ workId +'/'+ imageId;
+
+        http(url).then(
+            response => {
+                response = JSON.parse(response);
+                if (response.isSet === true) {
+                    alert('Изображение установленно в качестве обложки!');
+                    imageDefault.setAttribute('src', imageUrl);
+                }
+            }
+        );
+        return false;
+    });
+
+    /* ---------------------------------------------- /*
+     * Categories
     /* ---------------------------------------------- */
 
     $('[id^=dcid_]').click(function (e) {
         e.preventDefault();
-        var itemId = $(this).attr('id').split('_')[1];
-        var itemName = $(this).find('span').html();
-        var $position = $(this).parent().siblings('.notInWork').find('.inputGroup');
-        var $message = $(this).parent().siblings('.notInWork').find('.empty');
-        var $delLink = $(this);
+        const itemId = $(this).attr('id').split('_')[1];
+        const itemName = $(this).find('span').html();
+        const $position = $(this).parent().siblings('.notInWork').find('.inputGroup');
+        const $message = $(this).parent().siblings('.notInWork').find('.empty');
+        const $delLink = $(this);
 
-        $.get($(this).attr('href'), function (response) {
-            if (response.isRemoved) {
-                $delLink.remove();
-                $message.remove();
+        http($(this).attr('href')).then(
+            response => {
+                const json = JSON.parse(response);
+                if (json.isRemoved) {
+                    $delLink.remove();
+                    $message.remove();
 
-                $position.append(
-                    '<input id="'+ itemId +'" type="checkbox" name="categories[]" value="'+ itemId +'">' +
-                    '<label for="'+ itemId +'">'+ itemName +'</label>'
-                );
+                    $position.append(
+                        '<input id="' + itemId + '" type="checkbox" name="categories[]" value="' + itemId + '">' +
+                        '<label for="' + itemId + '">' + itemName + '</label>'
+                    );
 
+                }
+            },
+            onError => {
+                console.log(onError);
             }
-        });
+        );
     });
 
+    /**
+     * Materials
+     */
     $('[id^=dmid_]').click(function (e) {
         e.preventDefault();
-        var itemId = $(this).attr('id').split('_')[1];
-        var itemName = $(this).find('span').html();
-        var $position = $(this).parent().siblings('.notInWork').find('.inputGroup');
-        var $message = $(this).parent().siblings('.notInWork').find('.empty');
-        var $delLink = $(this);
+        const itemId = $(this).attr('id').split('_')[1];
+        const itemName = $(this).find('span').html();
+        const $position = $(this).parent().siblings('.notInWork').find('.inputGroup');
+        const $message = $(this).parent().siblings('.notInWork').find('.empty');
+        const $delLink = $(this);
 
-        $.get($(this).attr('href'), function (response) {
-            if (response.isRemoved) {
-                $delLink.remove();
-                $message.remove();
+        http($(this).attr('href')).then(
+            response => {
+                const json = JSON.parse(response);
+                if (json.isRemoved) {
+                    $delLink.remove();
+                    $message.remove();
+                    $position.append(
+                        '<input id="' + itemId + '" type="checkbox" name="materials[]" value="' + itemId + '">' +
+                        '<label for="' + itemId + '">' + itemName + '</label>'
+                    );
 
-                $position.append(
-                    '<input id="'+ itemId +'" type="checkbox" name="materials[]" value="'+ itemId +'">' +
-                    '<label for="'+ itemId +'">'+ itemName +'</label>'
-                );
-
+                }
+            },
+            onError => {
+                console.log(onError);
             }
-        });
+        );
     });
 
     /* ---------------------------------------------- /*
      * Gallery
     /* ---------------------------------------------- */
 
-    if(window.location.href.indexOf("/gallery") >= 0) {
-        var page = getUrlParameter('page').length ? getUrlParameter('page')[0] : 0;
+    if (window.location.href.indexOf("/gallery") >= 0) {
+        const page = getUrlParameter('page').length ? getUrlParameter('page')[0] : 0;
         getWorks(getUrlParameter('categories[]'), page);
 
         $('[id^=cid_]').click(function () {
-            var catIds = getCheckCategories();
+            const catIds = getCheckCategories();
             getWorks(catIds, 0);
         });
 
         $(document).on('click', '#workNext', function () {
-                var pageId = $(this).attr('data-page');
-                var catIds = getCheckCategories();
-                getWorks(catIds, pageId);
+            const pageId = $(this).attr('data-page');
+            const catIds = getCheckCategories();
+            getWorks(catIds, pageId);
         });
 
         $(document).on('click', '#workPrevious', function () {
-            var pageId = $(this).attr('data-page');
-            var catIds = getCheckCategories();
+            const pageId = $(this).attr('data-page');
+            const catIds = getCheckCategories();
             getWorks(catIds, pageId);
         });
 
@@ -296,13 +329,13 @@ $(function () {
          * @returns {Array}
          */
         function getCheckCategories() {
-            var catIds = [];
-            var checks = $('[id^=cid_]');
-            for (var i = 0; i < checks.length; i++) {
+            const catIds = [];
+            const checks = $('[id^=cid_]');
+            for (let i = 0; i < checks.length; i++) {
                 if (checks[i].id === undefined) {
                     continue;
                 }
-                var catId = $('#' + checks[i].id + ':checked').attr('data-id');
+                const catId = $('#' + checks[i].id + ':checked').attr('data-id');
                 if (catId === undefined) {
                     continue;
                 }
@@ -319,7 +352,7 @@ $(function () {
          * @return void
          */
         function getWorks(catIds, pageId) {
-            var parameters = {};
+            let parameters = {};
             if (catIds.length > 0) {
                 parameters.categories = catIds;
             }
@@ -331,21 +364,15 @@ $(function () {
 
             setUrl(parameters);
             setCheckboxes(parameters);
-
-            // this is need for post query
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.post('/gallery/works', parameters)
-                .done(function (data) {
-                    $('#galleryWorksAll').empty().append(data);
-                })
-                .fail(function (data) {
+            http('/gallery/works', parameters, 'POST').then(
+                response => {
+                    $('#galleryWorksAll').empty().append(response);
+                },
+                onError => {
                     $('#galleryWorksAll').empty().append('<p>Мы не смогли загрузить список работ. Возможно возникла ошибка сети</p>');
-                    console.log(data);
-                });
+                    console.log(onError);
+                }
+            );
         }
 
         /**
@@ -361,11 +388,11 @@ $(function () {
          * @param parameters
          */
         function setCheckboxes(parameters) {
-           if (parameters.categories && parameters.categories.length > 0) {
-               for (var cat of parameters.categories) {
-                   $('#cid_' + cat).prop('checked', true);
-               }
-           }
+            if (parameters.categories && parameters.categories.length > 0) {
+                for (const cat of parameters.categories) {
+                    $('#cid_' + cat).prop('checked', true);
+                }
+            }
         }
 
     }
@@ -378,47 +405,36 @@ $(function () {
 
 $(document).on('submit', '#ajaxLogin', function (e) {
     e.preventDefault();
-    var formData = $(this).serialize();
-    var url = $(this).attr('action');
-
-    $.post(url, formData)
-        .done(function (data) {
-            if (data.auth === true) {
-                $.get('/login/ajax')
-                    .done(function (data) {
-                        window.location.href = '/cabinet';
-                    })
-                    .fail(function (data) {
-                    });
+    const formData = $(this).serialize();
+    const url = $(this).attr('action');
+    http(url, formData, 'POST').then(
+        data => {
+            const json = JSON.parse(data);
+            if (json.auth === true) {
+                window.location.href = '/cabinet';
             }
-        })
-        .fail(function (data) {
-            $('#emailError').html('Неверная пара логин/пароль');
-        });
-
+        },
+        onError => {
+            console.log(onError);
+        }
+    );
 });
 
 $(document).on('submit', '#ajaxRegistration', function (e) {
     e.preventDefault();
-    var formData = $(this).serialize();
-    var url = $(this).attr('action');
+    const formData = $(this).serialize();
+    const url = $(this).attr('action');
     $('.errorText').empty();
     $.post(url, formData)
         .done(function (data) {
             if (data.auth === true) {
-                $.get('/login/ajax')
-                    .done(function (data) {
-                        window.location.href = '/cabinet';
-                    })
-                    .fail(function (data) {
-                        //todo
-                    });
+                window.location.href = '/cabinet';
             }
         })
         .fail(function (data) {
-            var json = data.responseJSON;
+            const json = data.responseJSON;
             if (json.errors) {
-                for (var fieldName in json.errors) {
+                for (const fieldName in json.errors) {
                     if (json.errors.hasOwnProperty(fieldName)) {
                         if (json.errors[fieldName] instanceof Array) {
                             json.errors[fieldName].forEach(function (error) {
@@ -436,18 +452,87 @@ $(document).on('submit', '#ajaxRegistration', function (e) {
 
 /**
  * parse parameter in url
- * @param needleParamName string
+ * @param {string} needleParamName
  * @returns {Array}
  */
 function getUrlParameter(needleParamName) {
-    var url = decodeURIComponent(window.location.search.substring(1));
-    var result =[];
-    var allVars = url.split('&');
-    for (var i = 0; i < allVars.length; i++) {
-        var param = allVars[i].split('=');
+    const url = decodeURIComponent(window.location.search.substring(1));
+    const result = [];
+    const allVars = url.split('&');
+    for (let i = 0; i < allVars.length; i++) {
+        const param = allVars[i].split('=');
         if (param[0] === needleParamName) {
             result.push(param[1]);
         }
     }
     return result;
+}
+
+/**
+ * http transport
+ *
+ * @param {string} url
+ * @param params mixed of request params
+ * @param {string} method
+ * @returns {Promise<>}
+ */
+function http(url = '', params = '', method = 'GET') {
+    return new Promise(function (resolve, reject) {
+        const xhr = new XMLHttpRequest();
+        xhr.open(method, url, true);
+        xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+        if (method === 'POST') {
+            xhr.setRequestHeader('X-CSRF-TOKEN', getCsrfToken());
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        }
+        xhr.onload = function () {
+            if (this.status === 200) {
+                resolve(this.response);
+            } else {
+                const error = new Error(this.statusText);
+                error.code = this.status;
+                reject(error);
+            }
+        };
+        xhr.onerror = function () {
+            reject(new Error("Network Error"));
+        };
+        if (params) {
+            if (params instanceof Object) {
+                xhr.send($.param(params));
+            } else {
+                xhr.send(params);
+            }
+        } else {
+            xhr.send();
+        }
+    });
+}
+
+/**
+ * get csrf token
+ * @returns {(string | null) | string}
+ */
+function getCsrfToken() {
+    let meta = document.getElementsByTagName('meta');
+    for (let item of meta) {
+        if (item.getAttribute('name') === 'csrf-token') {
+            return item.getAttribute('content');
+        }
+    }
+    return null;
+}
+
+/**
+ * equivalent of jQuery.empty()
+ * @param selector
+ * @return {boolean}
+ */
+function empty(selector) {
+    let el = document.querySelector(selector);
+    if (el) {
+        el.innerHTML = '';
+        return true;
+    }
+    return false;
 }

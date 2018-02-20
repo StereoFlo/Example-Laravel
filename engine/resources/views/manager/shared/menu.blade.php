@@ -14,8 +14,8 @@
         <a href="{{ route('managerUserList') }}" class="list-group-item">
             <i class="fa fa-comment-o"></i> Пользователи <span class="badge">{{ $userCount }}</span>
         </a>
-        <a href="{{ route('sloganForm') }}" class="list-group-item">
-            <i class="fa fa-comment-o"></i> Слоган
+        <a href="{{ route('managerSettingsForm') }}" class="list-group-item">
+            <i class="fa fa-comment-o"></i> Слоган\Призыв
         </a>
         <a href="{{ route('managerMaterialList') }}" class="list-group-item">
             <i class="fa fa-comment-o"></i> Инструменты

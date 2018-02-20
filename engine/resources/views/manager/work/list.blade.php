@@ -35,7 +35,8 @@
                                         </td>
                                         <td>
                                             <a href="{{ route('workShow', ['id' => $work['id']]) }}">Открыть</a> |
-{{--                                            <a href="{{ route('managerWorkRemove', ['цщклШв' => $work['id']]) }}">Удалить</a>--}}
+                                            <a href="{{ route('workEdit', ['id' => $work['id']]) }}">Изменить</a> |
+                                            <a href="{{ route('managerWorkRemove', ['workId' => $work['id']]) }}">Удалить</a>
                                         </td>
                                     </tr>
                                 @endforeach

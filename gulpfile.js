@@ -39,6 +39,7 @@ gulp.task('scripts', function() {
     'static/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js',
     'static/libs/fotorama/fotorama.js',
     'static/libs/Tooltip/jquery.tooltip.js',
+    'static/libs/fileuploader/jquery.fileuploader.js',
   ])
   .pipe(concat('libs.min.js')) // Собираем их в кучу в новом файле libs.min.js
   .pipe(uglify()) // Сжимаем JS файл
@@ -62,7 +63,7 @@ gulp.task('css-libs', ['sass'], function() {
   .pipe(gulp.dest('static/css')); // Выгружаем в папку static/css
 });
 
-gulp.task('watch', ['sass', 'scripts'], function() {
+gulp.task('watch', ['sass'], function() {
   gulp.watch('static/sass/**/*.scss', ['sass']); // Наблюдение за sass файлами в папке sass
   // gulp.watch('static/js/**/*.js', ['myScripts']);   // Наблюдение за JS файлами в папке js
   // gulp.watch('static/*.html', browserSync.reload);

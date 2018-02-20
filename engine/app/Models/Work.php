@@ -14,6 +14,10 @@ class Work extends Model
     protected $table = 'work';
 
     /**
+     * Work constructor.
+     */
+
+    /**
      * @param $userId
      *
      * @return array
@@ -42,6 +46,7 @@ class Work extends Model
             ->where('userId', $userId)
             ->where('isDefault', true)
             ->where('approved', true)
+            ->orderBy('work.id', 'desc')
             ->get();
         if (!$this->checkEmptyObject($works)) {
             return [];
@@ -103,7 +108,7 @@ class Work extends Model
     {
         $this->getMaterialRelation()->removeWork($workId);
         $this->getTagsRelation()->deleteByWork($workId);
-        $this->getCatalogRelation()->removeWorkCategory($workId);
+        $this->getCatalogRelation()->removeWorkCategories($workId);
         $this->getWorkImages()->removeAllImages($workId);
         $this->where('id', $workId)->delete();
         return true;
@@ -201,7 +206,7 @@ class Work extends Model
      *
      * @return array
      */
-    public function getListRecentlyLiked(int $limit = 3): array
+    public function getListRecentlyLiked(int $limit = 4): array
     {
         $res = $this
             ->select('work.*', 'users.id as userId', 'users.name as userName', 'work_images.link')
@@ -227,6 +232,7 @@ class Work extends Model
             ->select('work.*', 'users.id as userId', 'users.name as userName', 'work_images.link')
             ->join('work_images', 'work.id', '=', 'work_images.workId')
             ->join('users', 'users.id', '=', 'work.userId')
+            ->orderBy('work.id', 'desc')
             ->get();
         if (!$this->checkEmptyObject($result)) {
             return [];
@@ -242,6 +248,7 @@ class Work extends Model
         $result = $this
             ->select('work.*', 'users.id as userId', 'users.name as userName')
             ->join('users', 'users.id', '=', 'work.userId')
+            ->orderBy('work.id', 'desc')
             ->get();
         if (!$this->checkEmptyObject($result)) {
             return [];
@@ -256,6 +263,8 @@ class Work extends Model
      */
     public function getListForGallery(int $offset = 0): array
     {
+        $settings = $this->getSettings()->getOneFromArray('limitWorksForGallery');
+        $this->perPage = empty($settings['setting_value']) ? 30 : $settings['setting_value'];
         $result = $this
             ->join('work_images', 'work.id', '=', 'work_images.workId')
             ->join('users', 'users.id', '=', 'work.userId')
@@ -263,6 +272,7 @@ class Work extends Model
             ->take($this->perPage)
             ->where('work_images.isDefault', true)
             ->where('work.approved', true)
+            ->orderBy('work.id', 'desc')
             ->get();
         if (!$this->checkEmptyObject($result)) {
             return [];
@@ -275,6 +285,8 @@ class Work extends Model
      */
     public function getCountForGallery(): int
     {
+        $settings = $this->getSettings()->getOneFromArray('limitWorksForGallery');
+        $this->perPage = empty($settings['setting_value']) ? 30 : $settings['setting_value'];
         $result = $this
             ->select('work.*', 'users.id as userId', 'users.name as userName', 'work_images.link')
             ->join('work_images', 'work.id', '=', 'work_images.workId')
