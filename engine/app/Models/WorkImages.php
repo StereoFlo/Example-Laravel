@@ -136,7 +136,11 @@ class WorkImages extends Model
         if (!File::isDirectory($path)) {
             File::makeDirectory($path, 0777, true, true);
         }
-        $uploader = new FileUploaderService('images', ['uploadDir' => $path . DIRECTORY_SEPARATOR]); //
+        $uploader = new FileUploaderService('images', ['uploadDir' => $path . DIRECTORY_SEPARATOR, 'editor' => [
+            'maxWidth'  => 1024,
+            'maxHeight' => 1024,
+            'quality'   => 75,
+        ]]); //
         $uploader->upload();
 
         $files = $uploader->getFileList();
