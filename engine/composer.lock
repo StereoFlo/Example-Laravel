@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "89c08c11aeb29357f451b944ec9e99d6",
+    "content-hash": "2dcfd8e96ff858ce013ccd7b153a69e0",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1286,6 +1286,38 @@
             ],
             "description": "Image uploader",
             "time": "2018-01-29T07:14:07+00:00"
+        },
+        {
+            "name": "stereoflo/image-resize",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/StereoFlo/image-resize.git",
+                "reference": "582b86165c4e23f1b2998f15e16676b2df871c24"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/StereoFlo/image-resize/zipball/582b86165c4e23f1b2998f15e16676b2df871c24",
+                "reference": "582b86165c4e23f1b2998f15e16676b2df871c24",
+                "shasum": ""
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "ImageResize\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stereoflo",
+                    "email": "stereoflo@stereoflo.ru"
+                }
+            ],
+            "time": "2018-02-21T15:17:12+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3940,7 +3972,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "stereoflo/fileuploader": 20
+        "stereoflo/fileuploader": 20,
+        "stereoflo/image-resize": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
