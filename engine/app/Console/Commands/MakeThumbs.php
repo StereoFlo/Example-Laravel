@@ -50,16 +50,18 @@ class MakeThumbs extends Command
             return 'nothing todo';
         }
         foreach ($images as $image) {
-            list(, $userId, , $workId, $imageName) = explode('/', $image['link']);
-            $thumbPath = \str_replace('engine/public/', '', \public_path(\sprintf(WorkImages::THUMB_PATH, $userId, $workId)));
-            $origPath = \str_replace('engine/public/', '', \public_path(\sprintf(WorkImages::LINK_PATH, $userId, $workId, $imageName)));
-            print  $thumbPath . PHP_EOL;
-            if (!\file_exists($thumbPath . '/' . $imageName)) {
-                if (!File::isDirectory($thumbPath)) {
-                    File::makeDirectory($thumbPath . '/thumb', 0777, true, true);
-                }
-                $this->makeThumb($origPath, $thumbPath . '/thumb/' . $imageName);
-            }
+            $linkData = explode('/', $image['link']);
+            print_r($linkData);
+            break;
+//            $thumbPath = \str_replace('engine/public/', '', \public_path(\sprintf(WorkImages::THUMB_PATH, $linkData[1], $linkData[3])));
+//            $origPath = \str_replace('engine/public/', '', \public_path(\sprintf(WorkImages::LINK_PATH, $linkData[1], $linkData[3], $linkData[4])));
+//            print  $thumbPath . PHP_EOL;
+//            if (!\file_exists($thumbPath . '/' . $linkData[4])) {
+//                if (!File::isDirectory($thumbPath)) {
+//                    File::makeDirectory($thumbPath . '/thumb', 0777, true, true);
+//                }
+//                $this->makeThumb($origPath, $thumbPath . '/thumb/' . $linkData[4]);
+//            }
         }
         return 'OK!' . PHP_EOL;
     }
