@@ -12,7 +12,7 @@
                         </div>
                     </div>
                 </div>
-                @if(!isset($work['thumb']))
+                @if(empty($work['thumb']))
                     <img src="{{ url($work['link']) }}" alt="">
                 @else
                     <img src="{{ url($work['thumb']) }}" alt="">
