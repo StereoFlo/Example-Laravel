@@ -56,7 +56,7 @@ MAIL_ENCRYPTION=null
 ### English version
 
 
-#### About 
+#### About the project
 It's a real project for people interesting for the recycle art
 
 #### Regards
@@ -64,11 +64,11 @@ It's a real project for people interesting for the recycle art
 
 #### How to install
 
-1) **git clone ...** for clone a repo
+1) **git clone ...** clone a repo
 2) **cd engine** go to framework folder
-3) **php composer.phar install** for download a composer dependencies
-4) Set up a database for project. Make a database, user, password, etc...
-5) make a file **.env** in a current folder and put the content is contained below (WARNING! This file for local use only!):
+3) **php composer.phar install** download a composer dependencies
+4) Set up a database for project. Create a database with user and password...
+5) Create a file **.env** in a current folder and put the content is contained below (WARNING! This file for local use only!):
 
 ``` bash
 APP_NAME=Recycle
@@ -104,7 +104,7 @@ MAIL_PASSWORD=b6609845739bbd
 MAIL_ENCRYPTION=null
 ```
 
-6) run installation for migrations **php artisan migrate:install** && then run refresh for migrations with a sample data (--seed) **php artisan migrate:refresh --seed**
-7) then run the command **php artisan key:generate** for make an unique key for you project
+6) run migrations **php artisan migrate:install** && then do refresh for migrations with a sample data (--seed) **php artisan migrate:refresh --seed**
+7) then run the command **php artisan key:generate** it makes an unique key for project
 8) project are ready to use! log in into an admin section with credentials admin@recycle.lan:admin and set up the rest options
 9) enjoy!
