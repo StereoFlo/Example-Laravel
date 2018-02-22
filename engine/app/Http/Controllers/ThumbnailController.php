@@ -2,7 +2,7 @@
 
 namespace RecycleArt\Http\Controllers;
 
-use Illuminate\Support\Facades\File;
+use Illuminate\Filesystem\Filesystem;
 use ImageResize\Image;
 
 /**
@@ -14,12 +14,15 @@ class ThumbnailController extends Controller
     const THUMB_PATH = 'uploads/%d/work/%d/thumb';
 
     /**
+     * @param Filesystem $filesystem
      * @param string $image
-     * @return bool|Image|string
+     * @return bool
      * @throws \Exception
      */
-    public function get(string $image)
+    public function get(Filesystem $filesystem, string $image): bool
     {
+        $userId = $workId = $imageName = null;
+
         try {
             list(, $userId, , $workId, $imageName) = \explode('/', $image);
         } catch (\Exception $exception) {
@@ -29,21 +32,44 @@ class ThumbnailController extends Controller
             abort(404, 'something is wrong');
         }
         $originalImagePath = \public_path(\sprintf(WorkController::WORK_PATH, $userId, $workId) . '/' . $imageName);
-        $thumbnailPath = \public_path(\sprintf(self::THUMB_PATH, $userId, $workId) . '/' . $imageName);
+        $thumbnailPath = \public_path($this->getThumbPath($userId, $workId) . '/' . $imageName);
 
         if (!\file_exists($thumbnailPath)) {
             $image = Image::create($originalImagePath);
             $image->resizeToWidth(450);
-            if (!File::isDirectory(\public_path(\sprintf(self::THUMB_PATH, $userId, $workId)))) {
-                File::makeDirectory(\public_path(\sprintf(self::THUMB_PATH, $userId, $workId)), 0777, true, true);
+            if (!$filesystem->isDirectory($this->getThumbPath($userId, $workId))) {
+                $filesystem->makeDirectory($this->getThumbPath($userId, $workId), 0777, true, true);
             }
             $image->save($thumbnailPath, 50);
-            $image->send();
+            $this->sendFileToBrowser($thumbnailPath);
             return true;
         }
 
-        $image = Image::create($thumbnailPath);
-        $image->send();
+        $this->sendFileToBrowser($thumbnailPath);
         return true;
+    }
+
+    /**
+     * @param $thumbnailPath
+     * @return self
+     * @throws \Exception
+     */
+    private function sendFileToBrowser($thumbnailPath): self
+    {
+        $image = Image::create($thumbnailPath);
+        \header('Content-Type: ' . $image->getImageInfo()->getMimeType());
+        \header('Content-Length: ' . \filesize($thumbnailPath));
+        \readfile($thumbnailPath);
+        return $this;
+    }
+
+    /**
+     * @param int $userId
+     * @param $workId
+     * @return string
+     */
+    private function getThumbPath(int $userId, $workId): string
+    {
+        return \public_path(\sprintf(self::THUMB_PATH, $userId, $workId));
     }
 }
