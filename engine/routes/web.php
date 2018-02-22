@@ -28,6 +28,8 @@ Route::post('/gallery/works', 'GalleryController@getWorks')->name('galleryPublic
 
 Route::get('/pages/{slug}.html', 'StaticPageController@getPage')->where('slug', '[a-z]+');
 
+Route::get('/thumb/{image}', 'ThumbnailController@get')->where('image', '.*')->name('thumbnail');;
+
 /**
  * Admin routes
  */
@@ -37,8 +39,8 @@ Route::group(['middleware' => 'isAdmin'], function () {
     Route::get('/manager/pages', 'Manager\\StaticPage@getList')->name('managerPageList');
     Route::get('/manager/pages/new', 'Manager\\StaticPage@makeNew')->name('managerPageNew');
     Route::post('/manager/pages/process', 'Manager\\StaticPage@process')->name('managerPageProcess');
-    Route::get('/manager/pages/{slug}/delete', 'Manager\\StaticPage@remove')->where('slug', '[a-z]+')->name('managerPageDelete');
-    Route::get('/manager/pages/{slug}/edit', 'Manager\\StaticPage@update')->where('slug', '[a-z]+')->name('managerPageEdit');
+    Route::get('/manager/pages/{slug}/delete', 'Manager\\StaticPage@remove')->where('slug', '[a-zA-Z0-9]+')->name('managerPageDelete');
+    Route::get('/manager/pages/{slug}/edit', 'Manager\\StaticPage@update')->where('slug', '[a-zA-Z0-9]+')->name('managerPageEdit');
     Route::get('/manager/user/show/{userId}', 'Manager\\User@show')->where('userId', '[0-9]+')->name('managerUserShow');
     Route::get('/manager/user/role/add/{userId}/{roleId}', 'Manager\\User@addRole')
         ->where('userId', '[0-9]+')

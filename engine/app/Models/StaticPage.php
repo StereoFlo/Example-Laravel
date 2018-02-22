@@ -56,13 +56,17 @@ class StaticPage extends Model
         $slug    = $request->post('slug', false);
         $name    = $request->post('name', false);
         $content = $request->post('content', false);
+        $oldSlug = $request->post('id', false);
 
         if (empty($slug)) {
             return false;
         }
-        $page = self::find($slug);
+        $page = self::find($oldSlug);
         if (!$this->checkEmptyObject($page)) {
             $page = new self();
+            $page->slug = $slug;
+        }
+        if ($oldSlug !== $slug) {
             $page->slug = $slug;
         }
         if ($name) {

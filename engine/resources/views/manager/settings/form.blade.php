@@ -6,7 +6,7 @@
             @include('manager.shared.menu')
             <div class="col-md-8 col-md-offset-0">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Настройки сайта</div>
+                    <div class="panel-heading">Слоган\Призыв</div>
                     <div class="panel-body">
                         <form class="form-horizontal" method="POST" action="{{ route('managerSettingsProcess') }}">
                             {{ csrf_field() }}
@@ -28,14 +28,14 @@
                                         </div>
                                     </div>
                                 @endif
-                                {{--@if(isset($setting['setting_slug']) && $setting['setting_slug'] === 'limitWorksForGallery')--}}
-                                    {{--<div class="form-group">--}}
-                                        {{--<label for="limitWorksForGallery" class="col-md-4 control-label">Количество работ на странице галлереи</label>--}}
-                                        {{--<div class="col-md-6">--}}
-                                            {{--<input id="limitWorksForGallery" type="text" class="form-control" name="limitWorksForGallery" value="{{ $setting['setting_value'] }}" required autofocus>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--@endif--}}
+                                @if(isset($setting['setting_slug']) && $setting['setting_slug'] === 'limitWorksForGallery')
+                                    <div class="form-group">
+                                        <label for="limitWorksForGallery" class="col-md-3 control-label">Количество работ на странице галлереи</label>
+                                        <div class="col-md-9 col-lg-8">
+                                            <input id="limitWorksForGallery" type="text" class="form-control" name="limitWorksForGallery" value="{{ $setting['setting_value'] }}" required autofocus>
+                                        </div>
+                                    </div>
+                                @endif
                             @endforeach
                             <div class="form-group">
                                 <div class="col-md-9 col-md-offset-3">

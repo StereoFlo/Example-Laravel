@@ -59,15 +59,19 @@
   @include max-screen($break_xs) {
     @include col-12();
   }
-  a {
-    text-decoration: none;
-  }
-  &:hover {
-    cursor: pointer;
-  }
   &__item {
+    margin-bottom: 10px;
   }
   &__name {
+    color: $white;
+    &:hover {
+      text-decoration: none;
+    }
+    &:visited {
+      color: $white;
+    }
+  }
+  &__name h4 {
     color: $white;
     margin: 0;
     @include max-screen($break_xs) {
@@ -78,10 +82,19 @@
     font-size: 13px;
     color: $link;
   }
-  &__text, p {
+  &__text p {
     text-align: justify;
     color: $link;
-    margin: 8px 0 0;
+    margin: 0 0 5px;
+  }
+  &__text a {
+    color: #0089ef;
+    &:hover {
+      text-decoration: none;
+    }
+    &:visited {
+      color: #0089ef;
+    }
   }
 }
 .slogan {
