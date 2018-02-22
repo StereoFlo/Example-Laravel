@@ -32,7 +32,7 @@ class ThumbnailController extends Controller
             abort(404, 'something is wrong');
         }
         $originalImagePath = \public_path(\sprintf(WorkController::WORK_PATH, $userId, $workId) . '/' . $imageName);
-        $thumbnailPath = \public_path($this->getThumbPath($userId, $workId) . '/' . $imageName);
+        $thumbnailPath = $this->getThumbPath($userId, $workId) . '/' . $imageName;
 
         if (!\file_exists($thumbnailPath)) {
             $image = Image::create($originalImagePath);
