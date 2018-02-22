@@ -38,7 +38,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{ var_dump($work) }}
                                     @if(empty($work['thumb']))
                                         <img src="{{ url($work['link']) }}" alt="is not a thumb">
                                     @else

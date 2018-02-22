@@ -209,7 +209,7 @@ class Work extends Model
     public function getListRecentlyLiked(int $limit = 4): array
     {
         $res = $this
-            ->select('work.*', 'users.id as userId', 'users.name as userName', 'work_images.link')
+            ->select('work.*', 'users.id as userId', 'users.name as userName', 'work_images.link', 'work_images.thumb')
             ->join('work_images', 'work.id', '=', 'work_images.workId')
             ->join('users', 'users.id', '=', 'work.userId')
             ->orderBy('likes', 'DESC')
@@ -229,7 +229,7 @@ class Work extends Model
     public function getList(): array
     {
         $result = $this
-            ->select('work.*', 'users.id as userId', 'users.name as userName', 'work_images.link')
+            ->select('work.*', 'users.id as userId', 'users.name as userName', 'work_images.link', 'work_images.thumb')
             ->join('work_images', 'work.id', '=', 'work_images.workId')
             ->join('users', 'users.id', '=', 'work.userId')
             ->orderBy('work.id', 'desc')
