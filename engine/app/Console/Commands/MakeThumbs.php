@@ -59,9 +59,9 @@ class MakeThumbs extends Command
             print  $thumbPath . PHP_EOL;
             if (!\file_exists($thumbPath . '/' . $linkData[4])) {
                 if (!File::isDirectory($thumbPath)) {
-                    File::makeDirectory($thumbPath . '/thumb', 0777, true, true);
+                    File::makeDirectory($thumbPath, 0777, true, true);
                 }
-                $this->makeThumb($origPath, $thumbPath . '/thumb/' . $linkData[4]);
+                $this->makeThumb($origPath, $thumbPath . '/' . $linkData[4]);
             }
         }
         return 'OK!' . PHP_EOL;
