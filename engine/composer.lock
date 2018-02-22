@@ -1293,12 +1293,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/StereoFlo/image-resize.git",
-                "reference": "582b86165c4e23f1b2998f15e16676b2df871c24"
+                "reference": "01df68b07e85960a4f08fe8d09b55fde06129de4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/StereoFlo/image-resize/zipball/582b86165c4e23f1b2998f15e16676b2df871c24",
-                "reference": "582b86165c4e23f1b2998f15e16676b2df871c24",
+                "url": "https://api.github.com/repos/StereoFlo/image-resize/zipball/01df68b07e85960a4f08fe8d09b55fde06129de4",
+                "reference": "01df68b07e85960a4f08fe8d09b55fde06129de4",
                 "shasum": ""
             },
             "type": "project",
@@ -1317,7 +1317,7 @@
                     "email": "stereoflo@stereoflo.ru"
                 }
             ],
-            "time": "2018-02-21T15:17:12+00:00"
+            "time": "2018-02-21T15:26:13+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

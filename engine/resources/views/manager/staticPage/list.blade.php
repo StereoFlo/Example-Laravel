@@ -22,8 +22,8 @@
                                     <tr>
                                         <td>{{ $page['slug'] }}</td>
                                         <td>{{ $page['name'] }}</td>
-                                        <td><a href="{{ route('managerPageEdit', ['id' => $page['slug']]) }}">Изменить</a> | <a
-                                                    href="{{ route('managerPageDelete', ['id' => $page['slug']]) }}">Удалить</a></td>
+                                        <td><a href="{{ route('managerPageEdit', ['id' => $page['slug']]) }}">Изменить</a> |
+                                            <a href="{{ route('managerPageDelete', ['id' => $page['slug']]) }}">Удалить</a></td>
                                     </tr>
                                 @endforeach
                             </table>
