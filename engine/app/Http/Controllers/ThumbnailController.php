@@ -41,11 +41,11 @@ class ThumbnailController extends Controller
                 $filesystem->makeDirectory($this->getThumbPath($userId, $workId), 0777, true, true);
             }
             $image->save($thumbnailPath, 50);
-            $this->sendFileToBrowser($thumbnailPath);
+            $this->outputToBrowser($thumbnailPath);
             return true;
         }
 
-        $this->sendFileToBrowser($thumbnailPath);
+        $this->outputToBrowser($thumbnailPath);
         return true;
     }
 
@@ -54,7 +54,7 @@ class ThumbnailController extends Controller
      * @return self
      * @throws \Exception
      */
-    private function sendFileToBrowser($thumbnailPath): self
+    private function outputToBrowser($thumbnailPath): self
     {
         $image = Image::create($thumbnailPath);
         \header('Content-Type: ' . $image->getImageInfo()->getMimeType());
