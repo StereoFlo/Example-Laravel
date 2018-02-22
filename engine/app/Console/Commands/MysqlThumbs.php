@@ -49,9 +49,9 @@ class MysqlThumbs extends Command
             }
             $thumbPath = \str_replace('engine/public/', '', \public_path(\sprintf(WorkImages::THUMB_PATH, $linkData[1], $linkData[3])));
             print $thumbPath . '/' . $linkData[4] . PHP_EOL;
-            if (empty($image['thumb']) && \file_exists($thumbPath . '/' . $linkData[4])) {
+            if (!empty($image['thumb']) && \file_exists($thumbPath . '/' . $linkData[4])) {
                 $image = WorkImages::find($image['id']);
-                $image->thumb = $thumbPath . '/' . $linkData[4];
+                $image->thumb = \sprintf(WorkImages::LINK_PATH, $linkData[1], $linkData[3], $linkData[4]);
                 $image->save();
                 print 'Updated' . PHP_EOL;
             }
