@@ -12,7 +12,11 @@
                         </div>
                     </div>
                 </div>
-                <img src="{{ url($work['link']) }}" alt="">
+                @if(!isset($work['thumb']))
+                    <img src="{{ url($work['link']) }}" alt="">
+                @else
+                    <img src="{{ url($work['thumb']) }}" alt="">
+                @endif
             </a>
         @endforeach
     @endif

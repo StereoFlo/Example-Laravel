@@ -56,14 +56,15 @@ class WorkController extends Controller
     /**
      * Process for add/edit work
      *
-     * @param Request     $request
-     * @param Work        $work
-     * @param WorkImages  $workImages
-     * @param Tags        $tags
-     * @param CatalogRel  $catalogRel
+     * @param Request $request
+     * @param Work $work
+     * @param WorkImages $workImages
+     * @param Tags $tags
+     * @param CatalogRel $catalogRel
      * @param MaterialRel $materialRel
      *
      * @return mixed
+     * @throws \Exception
      */
     public function process(Request $request, Work $work, WorkImages $workImages, Tags $tags, CatalogRel $catalogRel, MaterialRel $materialRel)
     {

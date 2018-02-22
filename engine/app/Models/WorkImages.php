@@ -6,6 +6,7 @@ use FileUploader\Services\FileUploaderService;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use ImageResize\Image;
 
 /**
  * Class WorkImages
@@ -15,6 +16,7 @@ class WorkImages extends Model
 {
     const WORK_PATH = 'uploads/%d/work/%d';
     const LINK_PATH = 'uploads/%d/work/%d/%s';
+    const THUMB_PATH = 'uploads/%d/work/%d/thumb';
 
     /**
      * @var string
@@ -29,6 +31,14 @@ class WorkImages extends Model
     public function removeByWorkId(int $workId): bool
     {
         return $this->where('workId', $workId)->delete();
+    }
+
+    /**
+     * @return array
+     */
+    public function getList()
+    {
+        return self::all()->toArray();
     }
 
     /**
@@ -128,6 +138,7 @@ class WorkImages extends Model
      * @param int $workId
      *
      * @return bool
+     * @throws \Exception
      */
     public function addImagesWithFileUploader(int $workId)
     {
@@ -135,6 +146,7 @@ class WorkImages extends Model
         $path = \public_path(\sprintf(self::WORK_PATH, Auth::id(), $workId));
         if (!File::isDirectory($path)) {
             File::makeDirectory($path, 0777, true, true);
+            File::makeDirectory($path . '/thumb', 0777, true, true);
         }
         $uploader = new FileUploaderService('images', ['uploadDir' => $path . DIRECTORY_SEPARATOR, 'editor' => [
             'maxWidth'  => 1024,
@@ -151,9 +163,26 @@ class WorkImages extends Model
                 $work->isDefault = true;
             }
             $work->link = \sprintf(self::LINK_PATH, Auth::id(), $workId, $file['name']);
+
+            $this->makeThumb(\public_path($file['file']), \public_path(\sprintf(self::THUMB_PATH, Auth::id(), $workId)) . '/' . $file['name']);
+            $work->thumb = \sprintf(self::THUMB_PATH, Auth::id(), $workId) . '/' . $file['name'];
+
             $isSaved = $work->save();
         }
         return $isSaved;
+    }
+
+    /**
+     * @param string $originalFilePath
+     * @param string $thumbFilePath
+     * @return bool
+     * @throws \Exception
+     */
+    private function makeThumb(string $originalFilePath, string $thumbFilePath): bool
+    {
+        return Image::create($originalFilePath)
+            ->resizeToWidth(430)
+            ->save( $thumbFilePath, 50);
     }
 
     /**

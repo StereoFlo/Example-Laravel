@@ -28,7 +28,6 @@ Route::post('/gallery/works', 'GalleryController@getWorks')->name('galleryPublic
 
 Route::get('/pages/{slug}.html', 'StaticPageController@getPage')->where('slug', '[a-z]+');
 
-Route::get('/thumb/{image}', 'ThumbnailController@get')->where('image', '.*')->name('thumbnail');;
 
 /**
  * Admin routes
