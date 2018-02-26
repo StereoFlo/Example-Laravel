@@ -133,6 +133,7 @@ class WorkImages extends Model
     }
 
     /**
+     * todo make it shorter and less
      * dirty file upload
      *
      * @param int $workId
