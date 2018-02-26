@@ -48,7 +48,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <img src="{{ url($work['link']) }}" alt="">
+                            @if(empty($work['thumb']))
+                                <img src="{{ url($work['link']) }}" alt="is not a thumb">
+                            @else
+                                <img src="{{ url($work['thumb']) }}" alt="this is a thumb">
+                            @endif
                         </a>
                      @endforeach
                 @endif
