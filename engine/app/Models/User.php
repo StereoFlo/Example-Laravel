@@ -33,6 +33,7 @@ class User extends Authenticatable
         'phone',
         'about',
         'avatar',
+        'vk_id'
     ];
 
     /**

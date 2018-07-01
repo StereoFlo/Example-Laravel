@@ -21,6 +21,8 @@
                         <br>
                         <dt>Телефон:</dt><dd>{{ $author['phone'] }}</dd>
                         <br>
+                        <dt>VK ID:</dt><dd>{{ $author['vk_id'] }}</dd>
+                        <br>
                         <dt>О себе:</dt><dd>{{ $author['about'] }}</dd>
                     </dl>
                 </div>
