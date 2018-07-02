@@ -43,10 +43,15 @@ class Work extends ManagerController
      */
     public function getList(Request $request)
     {
-        $limit = $request->query->getInt('limit', 10);
+        $limit = $request->query->getInt('limit', $this->work->getPerPage());
         $offset = $request->query->getInt('page', 0);
 
-        return \view('manager.work.list', ['works' => $this->work->getListForManager($limit, $offset), 'count' => $this->work->countListForManager()]);
+        return \view('manager.work.list', [
+            'works'       => $this->work->getListForManager($limit, $offset),
+            'workCount'   => $this->work->countListForManager(),
+            'currentPage' => $offset,
+            'parPage'     => $this->work->getPerPage(),
+        ]);
     }
 
     /**
