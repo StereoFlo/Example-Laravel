@@ -252,7 +252,7 @@ class Work extends Model
             ->select('work.*', 'users.id as userId', 'users.name as userName')
             ->join('users', 'users.id', '=', 'work.userId')
             ->orderBy('work.id', 'desc')
-            ->skip($offset)
+            ->offset($offset)
             ->limit($limit)
             ->get();
         if (!$this->checkEmptyObject($result)) {
