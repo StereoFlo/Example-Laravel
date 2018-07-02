@@ -241,19 +241,39 @@ class Work extends Model
     }
 
     /**
+     * @param int $limit
+     * @param int $offset
+     *
      * @return array
      */
-    public function getListForManager(): array
+    public function getListForManager(int $limit = 10, int $offset = 0): array
     {
         $result = $this
             ->select('work.*', 'users.id as userId', 'users.name as userName')
             ->join('users', 'users.id', '=', 'work.userId')
             ->orderBy('work.id', 'desc')
+            ->skip($offset)
+            ->limit($limit)
             ->get();
         if (!$this->checkEmptyObject($result)) {
             return [];
         }
         return $result->toArray();
+    }
+
+    /**
+     * @return int
+     */
+    public function countListForManager(): int
+    {
+        $result = $this
+            ->select('work.*', 'users.id as userId', 'users.name as userName')
+            ->join('users', 'users.id', '=', 'work.userId')
+            ->get();
+        if (!$this->checkEmptyObject($result)) {
+            return 0;
+        }
+        return \count($result->toArray());
     }
 
     /**

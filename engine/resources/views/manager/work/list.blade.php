@@ -43,6 +43,24 @@
                             </table>
                         @endif
                     </div>
+                    @if($count > 0)
+                    <ul class="pagination">
+                        @if (request()->get('page') === 0)
+                            <li class="disabled"><a href="{{ route('workListManager') }}">Первая</a></li>
+                            <li><a href="{{ route('workListManager') . '/?page=' . (request()->query->getInt('page') + 1) }}">{{ request()->query->getInt('page') + 1 }}</a></li>
+                        @else
+                            <li><a href="{{ route('workListManager') }}">Первая</a></li>
+                            <li><a href="{{ route('workListManager') . '/?page=' . (request()->query->getInt('page') + 1) }}">{{ request()->query->getInt('page') + 1 }}</a></li>
+                        @endif
+                        @if ($count < request()->get('page'))
+                            <li><a href="{{ route('workListManager') . '/?page=' . (request()->query->getInt('page') - 1) }}">{{ request()->query->getInt('page') - 1 }}</a></li>
+                            <li><a href="{{ route('workListManager') . '/?page=' . $count }}">Последняя</a></li>
+                        @else
+                            <li><a href="{{ route('workListManager') . '/?page=' . (request()->query->getInt('page') - 1) }}">{{ request()->query->getInt('page') - 1 }}</a></li>
+                            <li class="disabled"><a href="{{ route('workListManager') }}">Последняя</a></li>
+                        @endif
+                    </ul>
+                    @endif
                 </div>
             </div>
         </div>
