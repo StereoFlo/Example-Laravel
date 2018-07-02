@@ -3,7 +3,6 @@
 namespace RecycleArt\Http\Controllers\Manager;
 
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -30,7 +29,7 @@ class Work extends ManagerController
      *
      * @param \RecycleArt\Models\Work $work
      */
-    public function __construct(\RecycleArt\Models\Work $work)
+    public function __construct(WorkModel $work)
     {
         $this->work = $work;
         parent::__construct();

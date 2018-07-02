@@ -43,7 +43,7 @@
                             </table>
                         @endif
                     </div>
-                    @if($count > 0)
+                    @if($workCount > 0)
                         <div class="pagination">
                             @if($currentPage > 0)
                                 <a href="{{ route('workListManager') . '?page=' . ($currentPage - 1) }}" class="previous">
@@ -56,6 +56,7 @@
                                     &raquo;
                                 </a>
                             @endif
+                        </div>
                     @endif
                 </div>
             </div>
