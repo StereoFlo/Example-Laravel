@@ -36,18 +36,16 @@ class Work extends ManagerController
     }
 
     /**
-     * @param Request $request
+     * @param int $page
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getList(Request $request)
+    public function getList(int $page = 0)
     {
-        $offset = (int) $request->get('page', 0);
-
         return \view('manager.work.list', [
-            'works'       => $this->work->getListForManager($this->work->getPerPage(), $offset),
+            'works'       => $this->work->getListForManager($this->work->getPerPage(), $page),
             'workCount'   => $this->work->countListForManager(),
-            'currentPage' => $offset,
+            'currentPage' => $page,
             'parPage'     => $this->work->getPerPage(),
         ]);
     }
