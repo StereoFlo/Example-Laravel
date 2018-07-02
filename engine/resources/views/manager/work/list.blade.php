@@ -46,13 +46,13 @@
                     @if($workCount > 0)
                         <div class="pagination">
                             @if($currentPage > 0)
-                                <a href="{{ route('workListManager', ['page' => $currentPage - 1])}}" class="previous">
+                                <a href="{{ route('workListManagerPage', ['page' => $currentPage - 1])}}" class="previous">
                                     &laquo;
                                 </a>
                             @endif
                             <a class="active">{{ $currentPage + 1 }}</a>
                             @if(($workCount / $parPage) > 1 && ($workCount / $parPage) > $currentPage + 1 )
-                                <a href="{{ route('workListManager', ['page' => $currentPage - 1]) }}" class="next">
+                                <a href="{{ route('workListManagerPage', ['page' => $currentPage - 1]) }}" class="next">
                                     &raquo;
                                 </a>
                             @endif

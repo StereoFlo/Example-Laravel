@@ -66,7 +66,8 @@ Route::group(['middleware' => 'isModerator'], function () {
     Route::get('/manager/news/{id}/update', 'Manager\\News@update')->where('id', '[0-9]+')->name('newsUpdate');
     Route::post('/manager/news/process', 'Manager\\News@process')->name('newsProcess');
 
-    Route::get('/manager/work/list/{pageId}', 'Manager\\Work@getList')->where('id', '[0-9]+')->name('workListManager');
+    Route::get('/manager/work/list', 'Manager\\Work@getList')->name('workListManager');
+    Route::get('/manager/work/list/{pageId}', 'Manager\\Work@getList')->where('id', '[0-9]+')->name('workListManagerPage');
     Route::get('/manager/work/list/unapproved', 'Manager\\Work@getListUnapproved')->name('workListUnapprovedManager');
     Route::get('/manager/work/list/approved', 'Manager\\Work@getListApproved')->name('workListManagerApproved');
     Route::get('/manager/work/list/author/{id}', 'Manager\\Work@getListByAuthor')->where('id', '[0-9]+')->name('workListAuthorManager');
