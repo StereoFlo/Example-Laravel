@@ -28,7 +28,7 @@ const router = new VueRouter({
         },
         {
             path: '/manager2/catalog/new',
-            name: 'catalogForm',
+            name: 'catalogFormNew',
             component: CatalogForm,
         },
     ],

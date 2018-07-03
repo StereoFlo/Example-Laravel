@@ -3,7 +3,8 @@
 namespace RecycleArt\Http\Controllers\Manager\Api;
 
 use Illuminate\Http\JsonResponse;
-use Illuminate\Routing\Controller;
+use Illuminate\Http\Request;
+use RecycleArt\Http\Controllers\Controller;
 use RecycleArt\Models\Catalog as CatalogModel;
 
 /**
@@ -12,6 +13,7 @@ use RecycleArt\Models\Catalog as CatalogModel;
  */
 class Catalog extends Controller
 {
+
     /**
      * @param CatalogModel $catalog
      *
@@ -21,5 +23,37 @@ class Catalog extends Controller
     {
         $list = $catalog->getList();
         return new JsonResponse($list);
+    }
+
+    /**
+     * @param CatalogModel $catalog
+     * @param Request      $request
+     *
+     * @return JsonResponse
+     */
+    public function process(CatalogModel $catalog, Request $request): JsonResponse
+    {
+        $this->validate($request, [
+            'name'        => 'required|string',
+            'description' => 'string',
+        ]);
+
+        $id = $request->post('id', 0);
+        $name = $request->post('name');
+        $description = $request->post('description');
+
+        if (empty($id)) {
+            $catalog->addCategory($name, $description);
+            return new JsonResponse([
+                'success' => true
+            ]);
+        }
+        $catalog->updateCategory($id, [
+            'name' => $name,
+            'description' => $description
+        ]);
+        return new JsonResponse([
+            'success' => true
+        ]);
     }
 }

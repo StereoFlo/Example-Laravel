@@ -1,6 +1,11 @@
 <div class="col-md-8 col-md-offset-0">
     <div class="panel panel-default">
-        <div class="panel-heading">Категории (<a href="#">Добавить</a>)</div>
+        <div class="panel-heading">
+            Категории (
+            <router-link :to="{ name: 'catalogFormNew' }">
+                Добавить
+            </router-link>)
+        </div>
         <div class="panel-body">
             <div v-if="categories">
                 <table class="table table-hover table-responsive">

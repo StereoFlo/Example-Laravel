@@ -2,18 +2,19 @@
     <div class="panel panel-default">
         <div class="panel-heading">Добавление категории</div>
         <div class="panel-body">
-            <form :onsubmit="submit" class="form-horizontal" method="POST">
+            <form @submit.prevent="submit(form)" class="form-horizontal" method="POST">
                 <div class="form-group">
                     <label for="name" class="col-md-4 control-label">Название</label>
                     <div class="col-md-6">
-                        <input class="input" type="text" placeholder="Text input" id="name">
+                        <input class="input" type="text"  id="name" v-model="form.name">
+                        <p v-if="nameError">Имя является обязательным параметром</p>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="description">Описание</label>
                     <div class="col-md-6">
-                        <textarea id="description" class="form-control" name="description"></textarea>
+                        <textarea id="description" class="form-control" name="description" v-model="form.description"></textarea>
                     </div>
                 </div>
                 <input type="hidden" name="id" value="1">

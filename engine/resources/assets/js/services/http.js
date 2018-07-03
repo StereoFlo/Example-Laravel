@@ -6,7 +6,18 @@ export default {
             xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
             xhr.setRequestHeader("Authorization", "Bearer " + document.getElementById('token').getAttribute('data-token'));
             if (method === 'POST') {
-                xhr.setRequestHeader('X-CSRF-TOKEN', getCsrfToken());
+
+                const csrfToken = () => {
+                    let meta = document.getElementsByTagName('meta');
+                    for (let item of meta) {
+                        if (item.getAttribute('name') === 'csrf-token') {
+                            return item.getAttribute('content');
+                        }
+                    }
+                    return null;
+                };
+
+                xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken());
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             }
             xhr.onload = function () {
