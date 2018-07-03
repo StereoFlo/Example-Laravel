@@ -1,5 +1,9 @@
 <template>
-    <p>This is the homepage</p>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <strong>Раздел администратора</strong>
+        </div>
+    </div>
 </template>
 
 <script>

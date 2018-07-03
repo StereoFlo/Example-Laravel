@@ -11,12 +11,12 @@ const router = new VueRouter({
     mode: 'history',
     routes: [
         {
-            path: '/',
+            path: '/manager2/',
             name: 'home',
             component: Home
         },
         {
-            path: '/catalog',
+            path: '/manager2/catalog',
             name: 'catalog',
             component: Catalog,
         },

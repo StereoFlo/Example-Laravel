@@ -13,7 +13,7 @@ let mix = require('laravel-mix');
 
 //mix.js('engine/resources/assets/js/app.js', 'public/js').sass('engine/resources/assets/sass/app.scss', 'public/css');
 mix.js([
-    'static/js/common.js',
+    //'static/js/common.js',
     'engine/resources/assets/js/app.js',
     //'static/js/manager.js',
     //'static/js/fileuploaderAvatar.js',
