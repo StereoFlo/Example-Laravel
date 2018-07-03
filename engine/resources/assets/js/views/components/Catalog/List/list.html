@@ -1,0 +1,25 @@
+<div class="col-md-8 col-md-offset-0">
+    <div class="panel panel-default">
+        <div class="panel-heading">Категории (<a href="#">Добавить</a>)</div>
+        <div class="panel-body">
+            <div v-if="categories">
+                <table class="table table-hover table-responsive">
+                    <tr>
+                        <td>ID</td>
+                        <td>Название</td>
+                        <td>Действия</td>
+                    </tr>
+                    <tr v-for="category in categories">
+                        <td>{{ category.id }}</td>
+                        <td>{{ category.name }}</td>
+                        <td>
+                            <a href="#">Изменить</a> |
+                            <a href="#">Удалить</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <p v-if="!categories.length">Категорий пока нет</p>
+        </div>
+    </div>
+</div>

@@ -20,6 +20,6 @@ class Catalog extends Controller
     public function getList(CatalogModel $catalog): JsonResponse
     {
         $list = $catalog->getList();
-        return new JsonResponse(['categories' => $list]);
+        return new JsonResponse($list);
     }
 }
