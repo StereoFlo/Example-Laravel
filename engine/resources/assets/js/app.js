@@ -4,7 +4,8 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 
 import App from './views/components/App/App'
-import Catalog from './views/components/Catalog/List/List'
+import CatalogList from './views/components/Catalog/List/List'
+import CatalogForm from './views/components/Catalog/Form/index'
 import Home from './views/components/Home/Home';
 
 const router = new VueRouter({
@@ -18,7 +19,17 @@ const router = new VueRouter({
         {
             path: '/manager2/catalog',
             name: 'catalog',
-            component: Catalog,
+            component: CatalogList,
+        },
+        {
+            path: '/manager2/catalog/edit/:categoryId',
+            name: 'catalogFormEdit',
+            component: CatalogForm,
+        },
+        {
+            path: '/manager2/catalog/new',
+            name: 'catalogForm',
+            component: CatalogForm,
         },
     ],
 });

@@ -495,12 +495,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__views_components_App_App___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__views_components_App_App__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_components_Catalog_List_List__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_components_Catalog_List_List___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__views_components_Catalog_List_List__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__views_components_Home_Home__ = __webpack_require__(68);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__views_components_Home_Home___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__views_components_Home_Home__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__views_components_Catalog_Form_index__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__views_components_Catalog_Form_index___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__views_components_Catalog_Form_index__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_components_Home_Home__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_components_Home_Home___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__views_components_Home_Home__);
 
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
+
 
 
 
@@ -511,11 +514,19 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     routes: [{
         path: '/manager2/',
         name: 'home',
-        component: __WEBPACK_IMPORTED_MODULE_4__views_components_Home_Home___default.a
+        component: __WEBPACK_IMPORTED_MODULE_5__views_components_Home_Home___default.a
     }, {
         path: '/manager2/catalog',
         name: 'catalog',
         component: __WEBPACK_IMPORTED_MODULE_3__views_components_Catalog_List_List___default.a
+    }, {
+        path: '/manager2/catalog/edit/:categoryId',
+        name: 'catalogFormEdit',
+        component: __WEBPACK_IMPORTED_MODULE_4__views_components_Catalog_Form_index___default.a
+    }, {
+        path: '/manager2/catalog/new',
+        name: 'catalogForm',
+        component: __WEBPACK_IMPORTED_MODULE_4__views_components_Catalog_Form_index___default.a
     }]
 });
 
@@ -16104,6 +16115,180 @@ if (hadRuntime) {
   (function() { return this })() || Function("return this")()
 );
 
+
+/***/ }),
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(8)
+/* script */
+var __vue_script__ = __webpack_require__(78)
+/* template */
+var __vue_template__ = __webpack_require__(79)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "engine/resources/assets/js/views/components/Catalog/Form/index.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5a78f4dc", Component.options)
+  } else {
+    hotAPI.reload("data-v-5a78f4dc", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 78 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            form: {
+                name: '',
+                description: ''
+            }
+        };
+    },
+
+    methods: {
+        submit: function submit(submitEvent) {
+            console.log(submitEvent);
+        }
+    }
+});
+
+/***/ }),
+/* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "col-md-8 col-md-offset-0" }, [
+    _c("div", { staticClass: "panel panel-default" }, [
+      _c("div", { staticClass: "panel-heading" }, [
+        _vm._v("Добавление категории")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "panel-body" }, [
+        _c(
+          "form",
+          {
+            staticClass: "form-horizontal",
+            attrs: { onsubmit: _vm.submit, method: "POST" }
+          },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _c("input", { attrs: { type: "hidden", name: "id", value: "1" } }),
+            _vm._v(" "),
+            _vm._m(2)
+          ]
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c(
+        "label",
+        { staticClass: "col-md-4 control-label", attrs: { for: "name" } },
+        [_vm._v("Название")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-6" }, [
+        _c("input", {
+          staticClass: "input",
+          attrs: { type: "text", placeholder: "Text input", id: "name" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-md-4 control-label",
+          attrs: { for: "description" }
+        },
+        [_vm._v("Описание")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-6" }, [
+        _c("textarea", {
+          staticClass: "form-control",
+          attrs: { id: "description", name: "description" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "col-md-8 col-md-offset-4" }, [
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          [_vm._v("\n                            OK\n                        ")]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5a78f4dc", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
