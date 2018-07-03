@@ -87,8 +87,9 @@
     <div id="token" data-token="{{ \Illuminate\Support\Facades\Auth::user()->api_token }}"></div>
 </div>
 
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 <script src="{{ asset('/static/js/bundle.js') }}"></script>
 </body>
 </html>

@@ -15,11 +15,11 @@
                         </span>
                     </span>
                     <router-link :to="{ name: 'home' }" class="list-group-item">
-                        <i class="fa fa-comment-o"></i> Главная <span class="badge">0</span>
+                        <i class="fa fa-comment-o"></i> Главная
                     </router-link>
-                    <a href="#" class="list-group-item">
-                        <i class="fa fa-comment-o"></i> Слоган/Призыв
-                    </a>
+                    <router-link :to="{ name: 'slogan' }" class="list-group-item">
+                        <i class="fa fa-comment-o"></i> Слоган
+                    </router-link>
                     <a href="#" class="list-group-item">
                         <i class="fa fa-comment-o"></i> Инструменты
                     </a>
