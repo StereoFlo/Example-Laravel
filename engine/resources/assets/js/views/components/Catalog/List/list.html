@@ -19,12 +19,12 @@
                         <td>{{ category.name }}</td>
                         <td>
                             <a href="#">Изменить</a> |
-                            <a href="#">Удалить</a>
+                            <a @click.prevent="deleteCategory(category.id)" href="#">Удалить</a>
                         </td>
                     </tr>
                 </table>
             </div>
-            <p v-if="!categories.length">Категорий пока нет</p>
+            <p v-if="!categories">Категорий пока нет</p>
         </div>
     </div>
 </div>

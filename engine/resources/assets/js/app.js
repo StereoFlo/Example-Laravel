@@ -6,6 +6,7 @@ Vue.use(VueRouter);
 import App from './views/components/App/App'
 import CatalogList from './views/components/Catalog/List/List'
 import CatalogForm from './views/components/Catalog/Form/index'
+import RemoveCategory from './views/components/Catalog/Remove/index'
 import Home from './views/components/Home/Home';
 
 const router = new VueRouter({
@@ -25,6 +26,11 @@ const router = new VueRouter({
             path: '/manager2/catalog/edit/:categoryId',
             name: 'catalogFormEdit',
             component: CatalogForm,
+        },
+        {
+            path: '/manager2/catalog/remove/:categoryId',
+            name: 'categoryRemove',
+            component: RemoveCategory,
         },
         {
             path: '/manager2/catalog/new',

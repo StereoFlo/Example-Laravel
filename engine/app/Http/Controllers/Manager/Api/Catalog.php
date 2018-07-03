@@ -56,4 +56,19 @@ class Catalog extends Controller
             'success' => true
         ]);
     }
+
+    /**
+     * @param CatalogModel $catalog
+     * @param int $id
+     *
+     * @return mixed
+     * @throws \Exception
+     */
+    public function remove(CatalogModel $catalog, int $id)
+    {
+        $catalog->removeCategory($id);
+        return new JsonResponse([
+            'success' => true
+        ]);
+    }
 }
