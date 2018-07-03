@@ -31,4 +31,12 @@ class ManagerController extends Controller
     {
         return \view('manager.shared.index');
     }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function manager2()
+    {
+        return \view('manager2.index');
+    }
 }

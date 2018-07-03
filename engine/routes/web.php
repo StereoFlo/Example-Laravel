@@ -58,6 +58,8 @@ Route::group(['middleware' => 'isAdmin'], function () {
  */
 Route::group(['middleware' => 'isModerator'], function () {
     Route::get('/manager', 'Manager\\ManagerController@index')->name('managerIndex');
+    Route::get('/manager2/{any}', 'Manager\\ManagerController@manager2')->where('any', '.*');
+    Route::get('/manager2', 'Manager\\ManagerController@manager2');
 
     Route::get('/manager/news', 'Manager\\News@getList')->name('newsList');
     Route::get('/manager/news/page/{id}', 'Manager\\News@getList')->where('id', '[0-9]+')->name('newsListPage');
