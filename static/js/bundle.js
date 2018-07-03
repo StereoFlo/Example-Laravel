@@ -14696,7 +14696,7 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
-    http: function http() {
+    transport: function transport() {
         var url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
         var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
         var method = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'GET';
@@ -14732,37 +14732,6 @@ module.exports = function listToStyles (parentId, list) {
                 xhr.send();
             }
         });
-    },
-    getCsrfToken: function getCsrfToken() {
-        var meta = document.getElementsByTagName('meta');
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-            for (var _iterator = meta[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                var item = _step.value;
-
-                if (item.getAttribute('name') === 'csrf-token') {
-                    return item.getAttribute('content');
-                }
-            }
-        } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion && _iterator.return) {
-                    _iterator.return();
-                }
-            } finally {
-                if (_didIteratorError) {
-                    throw _iteratorError;
-                }
-            }
-        }
-
-        return null;
     }
 });
 
@@ -15104,13 +15073,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                         switch (_context.prev = _context.next) {
                             case 0:
                                 _context.next = 2;
-                                return __WEBPACK_IMPORTED_MODULE_1__services_http__["a" /* default */].http('/api/manager/catalog/list');
+                                return __WEBPACK_IMPORTED_MODULE_1__services_http__["a" /* default */].transport('/api/manager/catalog/list');
 
                             case 2:
                                 this.categories = _context.sent;
 
                             case 3:
-                            case 'end':
+                            case "end":
                                 return _context.stop();
                         }
                     }

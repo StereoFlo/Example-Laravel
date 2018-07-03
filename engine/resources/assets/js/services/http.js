@@ -1,5 +1,5 @@
 export default {
-    http(url = '', params = '', method = 'GET') {
+    transport(url = '', params = '', method = 'GET') {
         return new Promise(function (resolve, reject) {
             const xhr = new XMLHttpRequest();
             xhr.open(method, url, true);
@@ -31,15 +31,5 @@ export default {
                 xhr.send();
             }
         });
-    },
-
-    getCsrfToken() {
-        let meta = document.getElementsByTagName('meta');
-        for (let item of meta) {
-            if (item.getAttribute('name') === 'csrf-token') {
-                return item.getAttribute('content');
-            }
-        }
-        return null;
     }
 }

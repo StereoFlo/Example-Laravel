@@ -1,7 +1,7 @@
 <template src="./list.html"></template>
 
 <script>
-    import http from '../../../../services/http'
+    import http from "../../../../services/http";
     export default {
         data() {
             return {
@@ -13,7 +13,7 @@
         },
         methods: {
             async getCategories() {
-                this.categories = await http.http('/api/manager/catalog/list');
+                this.categories = await http.transport('/api/manager/catalog/list');
             }
         },
         name: "Catalog"
