@@ -33,7 +33,8 @@ class User extends Authenticatable
         'phone',
         'about',
         'avatar',
-        'vk_id'
+        'vk_id',
+        'api_token',
     ];
 
     /**
@@ -287,6 +288,7 @@ class User extends Authenticatable
             'vk_id'    => $data['vkId'],
             'email'    => $data['email'],
             'password' => \bcrypt($data['password']),
+            'api_token' => \str_random(60),
         ]);
     }
 
@@ -337,6 +339,16 @@ class User extends Authenticatable
         $user = self::findOrFail($id);
         return $this->where('id', $user->id)->delete() && Model::getModel()->getRoleRelation()->disableAllRole($user->id);
 
+    }
+
+    /**
+     * @param string $token
+     *
+     * @return mixed
+     */
+    public function getByToken(string $token)
+    {
+        return $this->where('api_token', $token)->get();
     }
 
     /**
