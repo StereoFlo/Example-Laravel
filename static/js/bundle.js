@@ -16445,7 +16445,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     },
     data: function data() {
         return {
-            settings: []
+            settings: [],
+            generalPageBlock: {},
+            slogan: {},
+            limitWorksForGallery: {}
         };
     },
     created: function created() {
@@ -16462,8 +16465,39 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                         switch (_context.prev = _context.next) {
                             case 0:
                                 __WEBPACK_IMPORTED_MODULE_2__services_http__["a" /* default */].transport('/api/manager/settings/list').then(function (response) {
-                                    console.log(response);
                                     _this.settings = response;
+                                    var _iteratorNormalCompletion = true;
+                                    var _didIteratorError = false;
+                                    var _iteratorError = undefined;
+
+                                    try {
+                                        for (var _iterator = response[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                                            var item = _step.value;
+
+                                            if (item.setting_slug === 'limitWorksForGallery') {
+                                                _this.limitWorksForGallery = item;
+                                            }
+                                            if (item.setting_slug === 'generalPageBlock') {
+                                                _this.generalPageBlock = item;
+                                            }
+                                            if (item.setting_slug === 'slogan') {
+                                                _this.slogan = item;
+                                            }
+                                        }
+                                    } catch (err) {
+                                        _didIteratorError = true;
+                                        _iteratorError = err;
+                                    } finally {
+                                        try {
+                                            if (!_iteratorNormalCompletion && _iterator.return) {
+                                                _iterator.return();
+                                            }
+                                        } finally {
+                                            if (_didIteratorError) {
+                                                throw _iteratorError;
+                                            }
+                                        }
+                                    }
                                 });
 
                             case 1:
@@ -16510,19 +16544,49 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "form-group" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-md-3 control-label",
-                  attrs: { for: "slogan" }
-                },
-                [_vm._v("Слоган")]
-              ),
+              _c("label", { staticClass: "col-md-3 control-label" }, [
+                _vm._v("Слоган")
+              ]),
               _vm._v(" "),
               _c(
                 "div",
                 { staticClass: "col-md-9 col-lg-8" },
-                [_c("vue-editor", { attrs: { id: "slogan", name: "slogan" } })],
+                [
+                  _c("vue-editor", {
+                    attrs: { id: "slogan", name: "slogan" },
+                    model: {
+                      value: _vm.slogan.setting_value,
+                      callback: function($$v) {
+                        _vm.$set(_vm.slogan, "setting_value", $$v)
+                      },
+                      expression: "slogan.setting_value"
+                    }
+                  })
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { staticClass: "col-md-3 control-label" }, [
+                _vm._v("Призыв к пользователю")
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col-md-9 col-lg-8" },
+                [
+                  _c("vue-editor", {
+                    attrs: { id: "generalPageBlock", name: "generalPageBlock" },
+                    model: {
+                      value: _vm.generalPageBlock.setting_value,
+                      callback: function($$v) {
+                        _vm.$set(_vm.generalPageBlock, "setting_value", $$v)
+                      },
+                      expression: "generalPageBlock.setting_value"
+                    }
+                  })
+                ],
                 1
               )
             ]),
@@ -16532,26 +16596,47 @@ var render = function() {
                 "label",
                 {
                   staticClass: "col-md-3 control-label",
-                  attrs: { for: "generalPageBlock" }
+                  attrs: { for: "limitWorksForGallery" }
                 },
-                [_vm._v("Призыв к пользователю")]
+                [_vm._v("Количество работ на странице галлереи")]
               ),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col-md-9 col-lg-8" },
-                [
-                  _c("vue-editor", {
-                    attrs: { id: "generalPageBlock", name: "generalPageBlock" }
-                  })
-                ],
-                1
-              )
+              _c("div", { staticClass: "col-md-9 col-lg-8" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.limitWorksForGallery.setting_value,
+                      expression: "limitWorksForGallery.setting_value"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "limitWorksForGallery",
+                    type: "text",
+                    name: "limitWorksForGallery",
+                    required: "",
+                    autofocus: ""
+                  },
+                  domProps: { value: _vm.limitWorksForGallery.setting_value },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.limitWorksForGallery,
+                        "setting_value",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
+              ])
             ]),
             _vm._v(" "),
-            _vm._m(0),
-            _vm._v(" "),
-            _vm._m(1)
+            _vm._m(0)
           ]
         )
       ])
@@ -16559,35 +16644,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c(
-        "label",
-        {
-          staticClass: "col-md-3 control-label",
-          attrs: { for: "limitWorksForGallery" }
-        },
-        [_vm._v("Количество работ на странице галлереи")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-9 col-lg-8" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            id: "limitWorksForGallery",
-            type: "text",
-            name: "limitWorksForGallery",
-            value: "",
-            required: "",
-            autofocus: ""
-          }
-        })
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

@@ -4,21 +4,21 @@
         <div class="panel-body">
             <form class="form-horizontal" method="POST" action="#">
                 <div class="form-group">
-                    <label for="slogan" class="col-md-3 control-label">Слоган</label>
+                    <label class="col-md-3 control-label">Слоган</label>
                     <div class="col-md-9 col-lg-8">
-                        <vue-editor id="slogan" name="slogan"></vue-editor>
+                        <vue-editor id="slogan" name="slogan" v-model="slogan.setting_value"></vue-editor>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="generalPageBlock" class="col-md-3 control-label">Призыв к пользователю</label>
+                    <label class="col-md-3 control-label">Призыв к пользователю</label>
                     <div class="col-md-9 col-lg-8">
-                        <vue-editor id="generalPageBlock" name="generalPageBlock"></vue-editor>
+                        <vue-editor id="generalPageBlock" name="generalPageBlock" v-model="generalPageBlock.setting_value"></vue-editor>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="limitWorksForGallery" class="col-md-3 control-label">Количество работ на странице галлереи</label>
                     <div class="col-md-9 col-lg-8">
-                        <input id="limitWorksForGallery" type="text" class="form-control" name="limitWorksForGallery" value="" required autofocus>
+                        <input id="limitWorksForGallery" type="text" class="form-control" name="limitWorksForGallery" v-model="limitWorksForGallery.setting_value" required autofocus>
                     </div>
                 </div>
                 <div class="form-group">

@@ -9,7 +9,10 @@
         },
         data() {
             return {
-                settings: []
+                settings: [],
+                generalPageBlock: {},
+                slogan: {},
+                limitWorksForGallery: {},
             }
         },
         created() {
@@ -18,8 +21,19 @@
         methods: {
             async getSettings() {
                 http.transport('/api/manager/settings/list').then(response => {
-                    console.log(response);
                     this.settings = response;
+                    for (const item of response) {
+                        if (item.setting_slug === 'limitWorksForGallery') {
+                            this.limitWorksForGallery = item;
+                        }
+                        if (item.setting_slug === 'generalPageBlock') {
+                            this.generalPageBlock = item;
+                        }
+                        if (item.setting_slug === 'slogan') {
+                            this.slogan = item;
+                        }
+                    }
+
                 })
             }
         }
