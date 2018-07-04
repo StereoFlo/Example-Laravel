@@ -49,7 +49,6 @@ class News extends Controller
         $name    = $request->input('name');
         $content = $request->input('content');
         if (empty($id)) {
-            $news->make($name, $content);
             return JsonResponse::create([
                 'success' => $news->make($name, $content)
             ]);
