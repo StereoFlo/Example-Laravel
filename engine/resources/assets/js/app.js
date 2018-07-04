@@ -12,6 +12,8 @@ import Material from './views/components/Material/List/index';
 import MaterialForm from './views/components/Material/Create/index';
 import PagesList from './views/components/Pages/List/index';
 import PagesForm from './views/components/Pages/Form/index';
+import NewsList from './views/components/News/List/index';
+import NewsForm from './views/components/News/Form/index';
 
 const router = new VueRouter({
     mode: 'history',
@@ -60,6 +62,16 @@ const router = new VueRouter({
             path: '/manager2/pages/form',
             name: 'pagesForm',
             component: PagesForm,
+        },
+        {
+            path: '/manager2/news',
+            name: 'newsList',
+            component: NewsList,
+        },
+        {
+            path: '/manager2/news/form',
+            name: 'newsForm',
+            component: NewsForm,
         },
     ],
 });

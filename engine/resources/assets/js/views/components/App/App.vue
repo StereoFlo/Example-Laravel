@@ -29,9 +29,9 @@
                     <router-link :to="{ name: 'catalog' }" class="list-group-item">
                         <i class="fa fa-comment-o"></i> Категории
                     </router-link>
-                    <a href="#" class="list-group-item">
-                        <i class="fa fa-comment-o"></i> Новости <span class="badge">0</span>
-                    </a>
+                    <router-link :to="{ name: 'newsList' }" class="list-group-item">
+                        <i class="fa fa-comment-o"></i> Новости
+                    </router-link>
                     <a href="#" class="list-group-item">
                         <i class="fa fa-comment-o"></i> Работы <span class="badge">0</span>
                     </a>

@@ -19,5 +19,10 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::get('/manager/pages/list', 'Manager\\Api\\StaticPage@getList');
         Route::get('/manager/pages/{slug}/delete', 'Manager\\Api\\StaticPage@remove')->where('slug', '[a-zA-Z0-9]+');
         Route::post('/manager/pages/process', 'Manager\\Api\\StaticPage@process');
+
+        Route::get('/manager/news/list', 'Manager\\Api\\News@getList');
+        Route::get('/manager/news/list/{id}', 'Manager\\Api\\News@getList')->where('id', '[0-9]+');
+        Route::get('/manager/news/{id}/delete', 'Manager\\Api\\News@delete')->where('id', '[0-9]+');
+        Route::post('/manager/news/process', 'Manager\\Api\\News@process');
     });
 });
