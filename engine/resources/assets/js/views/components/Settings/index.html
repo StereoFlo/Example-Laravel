@@ -1,0 +1,34 @@
+<div class="col-md-8 col-md-offset-0">
+    <div class="panel panel-default">
+        <div class="panel-heading">Слоган\Призыв</div>
+        <div class="panel-body">
+            <form class="form-horizontal" method="POST" action="#">
+                <div class="form-group">
+                    <label for="slogan" class="col-md-3 control-label">Слоган</label>
+                    <div class="col-md-9 col-lg-8">
+                        <vue-editor id="slogan" name="slogan"></vue-editor>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="generalPageBlock" class="col-md-3 control-label">Призыв к пользователю</label>
+                    <div class="col-md-9 col-lg-8">
+                        <vue-editor id="generalPageBlock" name="generalPageBlock"></vue-editor>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="limitWorksForGallery" class="col-md-3 control-label">Количество работ на странице галлереи</label>
+                    <div class="col-md-9 col-lg-8">
+                        <input id="limitWorksForGallery" type="text" class="form-control" name="limitWorksForGallery" value="" required autofocus>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-9 col-md-offset-3">
+                        <button type="submit" class="btn btn-primary">
+                            OK
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

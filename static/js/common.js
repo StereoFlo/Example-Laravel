@@ -106,7 +106,7 @@ $(function () {
     }
 
     /* ---------------------------------------------- /*
-     * Slogan and News on Welcome section
+     * Settings and News on Welcome section
     /* ---------------------------------------------- */
 
     $('.slogan').hide();

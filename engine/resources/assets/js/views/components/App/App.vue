@@ -17,8 +17,8 @@
                     <router-link :to="{ name: 'home' }" class="list-group-item">
                         <i class="fa fa-comment-o"></i> Главная
                     </router-link>
-                    <router-link :to="{ name: 'slogan' }" class="list-group-item">
-                        <i class="fa fa-comment-o"></i> Слоган
+                    <router-link :to="{ name: 'settings' }" class="list-group-item">
+                        <i class="fa fa-comment-o"></i> Настройки
                     </router-link>
                     <a href="#" class="list-group-item">
                         <i class="fa fa-comment-o"></i> Инструменты

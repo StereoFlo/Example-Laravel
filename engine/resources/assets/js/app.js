@@ -7,7 +7,7 @@ import App from './views/components/App/App'
 import CatalogList from './views/components/Catalog/List/List'
 import CatalogForm from './views/components/Catalog/Form/index'
 import Home from './views/components/Home/Home';
-import Slogan from './views/components/Slogan/index';
+import Slogan from './views/components/Settings/index';
 
 const router = new VueRouter({
     mode: 'history',
@@ -33,8 +33,8 @@ const router = new VueRouter({
             component: CatalogForm,
         },
         {
-            path: '/manager2/slogan',
-            name: 'slogan',
+            path: '/manager2/settings',
+            name: 'settings',
             component: Slogan,
         },
     ],
