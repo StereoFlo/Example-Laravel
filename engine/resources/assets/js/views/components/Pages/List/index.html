@@ -1,0 +1,29 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Страницы (
+        <router-link :to="{ name: 'pagesForm' }">
+            Добавить
+        </router-link>
+        )
+    </div>
+    <div class="panel-body">
+        <div v-if="pages">
+            <table class="table table-hover table-responsive">
+                <tr>
+                    <td>ID</td>
+                    <td>Название</td>
+                    <td>Действия</td>
+                </tr>
+                <tr v-for="page in pages">
+                    <td>{{ page.slug }}</td>
+                    <td>{{ page.name }}</td>
+                    <td>
+                        <a href="#">Изменить</a> |
+                        <a @click.prevent='deletePage(page.slug)' href="#">Удалить</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <p v-if="!pages">Категорий пока нет</p>
+    </div>
+</div>

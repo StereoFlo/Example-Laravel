@@ -16,7 +16,11 @@ export default {
                     }
                     return null;
                 };
+
                 xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken());
+                if (!(params instanceof FormData)) {
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                }
             }
             xhr.onload = function () {
                 if (this.status === 200) {

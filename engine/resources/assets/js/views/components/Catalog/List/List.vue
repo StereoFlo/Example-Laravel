@@ -28,4 +28,4 @@
         },
         name: "Catalog"
     }
-</script>
+</script>œ
