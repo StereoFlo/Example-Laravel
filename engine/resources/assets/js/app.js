@@ -10,6 +10,7 @@ import Home from './views/components/Home/Home';
 import Slogan from './views/components/Settings/index';
 import Material from './views/components/Material/List/index';
 import MaterialForm from './views/components/Material/Create/index';
+import PagesList from './views/components/Pages/List/index';
 
 const router = new VueRouter({
     mode: 'history',
@@ -48,6 +49,11 @@ const router = new VueRouter({
             path: '/manager2/materials/add',
             name: 'materialsAdd',
             component: MaterialForm,
+        },
+        {
+            path: '/manager2/pages',
+            name: 'pagesList',
+            component: PagesList,
         },
     ],
 });
