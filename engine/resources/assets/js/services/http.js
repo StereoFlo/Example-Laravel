@@ -16,9 +16,7 @@ export default {
                     }
                     return null;
                 };
-
                 xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken());
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             }
             xhr.onload = function () {
                 if (this.status === 200) {
@@ -33,7 +31,10 @@ export default {
                 reject(new Error("Network Error"));
             };
             if (params) {
-                if (params instanceof Object) {
+                if (params instanceof FormData) {
+                    xhr.send(params);
+                }
+                else if (params instanceof Object) {
                     xhr.send($.param(params));
                 } else {
                     xhr.send(params);

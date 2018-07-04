@@ -9,6 +9,7 @@ import CatalogForm from './views/components/Catalog/Form/index'
 import Home from './views/components/Home/Home';
 import Slogan from './views/components/Settings/index';
 import Material from './views/components/Material/List/index';
+import MaterialForm from './views/components/Material/Create/index';
 
 const router = new VueRouter({
     mode: 'history',
@@ -42,6 +43,11 @@ const router = new VueRouter({
             path: '/manager2/materials',
             name: 'materials',
             component: Material,
+        },
+        {
+            path: '/manager2/materials/add',
+            name: 'materialsAdd',
+            component: MaterialForm,
         },
     ],
 });
