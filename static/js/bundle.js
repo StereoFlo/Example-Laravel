@@ -17011,13 +17011,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.form.file = event.target.files[0];
         },
         submit: function submit(form) {
+            var _this = this;
+
             var formData = new FormData();
             formData.append('name', form.name);
             formData.append('description', form.desc);
             formData.append('file', form.file);
 
             __WEBPACK_IMPORTED_MODULE_1__services_http__["a" /* default */].transport('/api/manager/material/process', formData, 'POST').then(function (response) {
-                console.log(response);
+                _this.$router.push('../materials');
             });
         }
     }
