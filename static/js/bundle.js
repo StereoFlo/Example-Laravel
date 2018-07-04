@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -281,21 +281,28 @@ module.exports = g;
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(4);
+module.exports = __webpack_require__(16);
 
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(5);
+
+
+/***/ }),
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__views_components_App_App__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__views_components_App_App__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__views_components_App_App___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__views_components_App_App__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_components_Catalog_List_List__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_components_Catalog_List_List__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_components_Catalog_List_List___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__views_components_Catalog_List_List__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__views_components_Catalog_Form_index__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__views_components_Catalog_Form_index___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__views_components_Catalog_Form_index__);
@@ -346,7 +353,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 });
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11309,10 +11316,10 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(6).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(7).setImmediate))
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
@@ -11368,7 +11375,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(7);
+__webpack_require__(8);
 // On some exotic environments, it's not clear which object `setimmediate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -11382,7 +11389,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -11572,10 +11579,10 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(9)))
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -11765,7 +11772,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14395,15 +14402,15 @@ if (inBrowser && window.Vue) {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(11)
+var __vue_script__ = __webpack_require__(12)
 /* template */
-var __vue_template__ = __webpack_require__(12)
+var __vue_template__ = __webpack_require__(13)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -14442,7 +14449,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14497,7 +14504,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -14651,13 +14658,13 @@ if (false) {
 }
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(14)
+var __vue_script__ = __webpack_require__(15)
 /* template */
 var __vue_template__ = __webpack_require__(18)
 /* template functional */
@@ -14698,12 +14705,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_http__ = __webpack_require__(2);
 
@@ -14785,13 +14792,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     },
     name: "Catalog"
 });
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(16);
-
 
 /***/ }),
 /* 16 */
@@ -16425,12 +16425,14 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue2_editor__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue2_editor___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue2_editor__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_http__ = __webpack_require__(2);
 
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
@@ -16446,9 +16448,11 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     data: function data() {
         return {
             settings: [],
-            generalPageBlock: {},
-            slogan: {},
-            limitWorksForGallery: {}
+            form: {
+                generalPageBlock: {},
+                slogan: {},
+                limitWorksForGallery: {}
+            }
         };
     },
     created: function created() {
@@ -16475,13 +16479,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                             var item = _step.value;
 
                                             if (item.setting_slug === 'limitWorksForGallery') {
-                                                _this.limitWorksForGallery = item;
+                                                _this.form.limitWorksForGallery = item;
                                             }
                                             if (item.setting_slug === 'generalPageBlock') {
-                                                _this.generalPageBlock = item;
+                                                _this.form.generalPageBlock = item;
                                             }
                                             if (item.setting_slug === 'slogan') {
-                                                _this.slogan = item;
+                                                _this.form.slogan = item;
                                             }
                                         }
                                     } catch (err) {
@@ -16513,7 +16517,12 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             }
 
             return getSettings;
-        }()
+        }(),
+        submit: function submit(e) {
+            var _http$transport;
+
+            __WEBPACK_IMPORTED_MODULE_2__services_http__["a" /* default */].transport('/api/manager/settings/process', (_http$transport = {}, _defineProperty(_http$transport, e.generalPageBlock.setting_slug, e.generalPageBlock.setting_value), _defineProperty(_http$transport, e.limitWorksForGallery.setting_slug, e.limitWorksForGallery.setting_value), _defineProperty(_http$transport, e.slogan.setting_slug, e.slogan.setting_value), _http$transport), 'POST');
+        }
     }
 });
 
@@ -16540,7 +16549,12 @@ var render = function() {
           "form",
           {
             staticClass: "form-horizontal",
-            attrs: { method: "POST", action: "#" }
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                _vm.submit(_vm.form)
+              }
+            }
           },
           [
             _c("div", { staticClass: "form-group" }, [
@@ -16555,11 +16569,11 @@ var render = function() {
                   _c("vue-editor", {
                     attrs: { id: "slogan", name: "slogan" },
                     model: {
-                      value: _vm.slogan.setting_value,
+                      value: _vm.form.slogan.setting_value,
                       callback: function($$v) {
-                        _vm.$set(_vm.slogan, "setting_value", $$v)
+                        _vm.$set(_vm.form.slogan, "setting_value", $$v)
                       },
-                      expression: "slogan.setting_value"
+                      expression: "form.slogan.setting_value"
                     }
                   })
                 ],
@@ -16579,11 +16593,15 @@ var render = function() {
                   _c("vue-editor", {
                     attrs: { id: "generalPageBlock", name: "generalPageBlock" },
                     model: {
-                      value: _vm.generalPageBlock.setting_value,
+                      value: _vm.form.generalPageBlock.setting_value,
                       callback: function($$v) {
-                        _vm.$set(_vm.generalPageBlock, "setting_value", $$v)
+                        _vm.$set(
+                          _vm.form.generalPageBlock,
+                          "setting_value",
+                          $$v
+                        )
                       },
-                      expression: "generalPageBlock.setting_value"
+                      expression: "form.generalPageBlock.setting_value"
                     }
                   })
                 ],
@@ -16607,8 +16625,8 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.limitWorksForGallery.setting_value,
-                      expression: "limitWorksForGallery.setting_value"
+                      value: _vm.form.limitWorksForGallery.setting_value,
+                      expression: "form.limitWorksForGallery.setting_value"
                     }
                   ],
                   staticClass: "form-control",
@@ -16619,14 +16637,16 @@ var render = function() {
                     required: "",
                     autofocus: ""
                   },
-                  domProps: { value: _vm.limitWorksForGallery.setting_value },
+                  domProps: {
+                    value: _vm.form.limitWorksForGallery.setting_value
+                  },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
                       _vm.$set(
-                        _vm.limitWorksForGallery,
+                        _vm.form.limitWorksForGallery,
                         "setting_value",
                         $event.target.value
                       )

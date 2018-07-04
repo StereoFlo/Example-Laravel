@@ -10,9 +10,11 @@
         data() {
             return {
                 settings: [],
-                generalPageBlock: {},
-                slogan: {},
-                limitWorksForGallery: {},
+                form: {
+                    generalPageBlock: {},
+                    slogan: {},
+                    limitWorksForGallery: {},
+                }
             }
         },
         created() {
@@ -24,17 +26,24 @@
                     this.settings = response;
                     for (const item of response) {
                         if (item.setting_slug === 'limitWorksForGallery') {
-                            this.limitWorksForGallery = item;
+                            this.form.limitWorksForGallery = item;
                         }
                         if (item.setting_slug === 'generalPageBlock') {
-                            this.generalPageBlock = item;
+                            this.form.generalPageBlock = item;
                         }
                         if (item.setting_slug === 'slogan') {
-                            this.slogan = item;
+                            this.form.slogan = item;
                         }
                     }
 
                 })
+            },
+            submit(e) {
+                http.transport('/api/manager/settings/process', {
+                    [e.generalPageBlock.setting_slug]: e.generalPageBlock.setting_value,
+                    [e.limitWorksForGallery.setting_slug]: e.limitWorksForGallery.setting_value,
+                    [e.slogan.setting_slug]: e.slogan.setting_value,
+                }, 'POST')
             }
         }
     }
