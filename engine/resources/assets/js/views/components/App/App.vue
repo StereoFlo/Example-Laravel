@@ -32,9 +32,9 @@
                     <router-link :to="{ name: 'newsList' }" class="list-group-item">
                         <i class="fa fa-comment-o"></i> Новости
                     </router-link>
-                    <a href="#" class="list-group-item">
-                        <i class="fa fa-comment-o"></i> Работы <span class="badge">0</span>
-                    </a>
+                    <router-link :to="{ name: 'workList' }" class="list-group-item">
+                        <i class="fa fa-comment-o"></i> Работы
+                    </router-link>
                 </div>
             </div>
             <div class="col-md-8 col-md-offset-0">

@@ -8,24 +8,27 @@
             )
         </div>
         <div class="panel-body">
-            <div v-if="newsList">
+            <div v-if="workList">
                 <table class="table table-hover table-responsive">
                     <tr>
                         <td>ID</td>
                         <td>Название</td>
+                        <td>Автор</td>
                         <td>Действия</td>
                     </tr>
-                    <tr v-for="news in newsList">
-                        <td>{{ news.id }}</td>
-                        <td>{{ news.name }}</td>
+                    <tr v-for="work in workList">
+                        <td>{{ work.id }}</td>
+                        <td>{{ work.workName }}</td>
+                        <td>{{ work.userName }}</td>
                         <td>
-                            <a href="#">Изменить</a> |
-                            <a @click.prevent="deleteNews(news.id)" href="#">Удалить</a>
+                            <a :href="'/cabinet/work/' + work.id">Открыть</a> |
+                            <a :href="'/cabinet/work/' + work.id + '/edit'">Изменить</a> |
+                            <a @click.prevent="deleteWork(news.id)" href="#">Удалить</a>
                         </td>
                     </tr>
                 </table>
             </div>
-            <p v-if="!newsList">Новостей пока нет</p>
+            <p v-if="!workList">Новостей пока нет</p>
         </div>
     </div>
 </template>
@@ -40,18 +43,18 @@
             }
         },
         created() {
-            this.getNews();
+            this.getWorks();
         },
         methods: {
-            async getNews() {
-                http.transport('/api/manager/news/list').then(response => {
-                    this.newsList = response;
+            async getWorks() {
+                http.transport('/api/manager/work/list').then(response => {
+                    this.workList = response;
                 });
             },
-            deleteNews(id) {
-                http.transport('/api/manager/news/' + id + '/delete').then(response => {
+            deleteWork(id) {
+                http.transport('/api/manager/work/' + id + '/delete').then(response => {
                     if (response.success) {
-                        this.getNews();
+                        this.getWorks();
                     }
                 })
             }
