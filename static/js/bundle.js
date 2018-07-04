@@ -16779,7 +16779,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 });
 
                             case 1:
-                            case "end":
+                            case 'end':
                                 return _context.stop();
                         }
                     }
@@ -16791,6 +16791,34 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             }
 
             return getMaterials;
+        }(),
+        removeMaterial: function () {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(id) {
+                var _this2 = this;
+
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                __WEBPACK_IMPORTED_MODULE_1__services_http__["a" /* default */].transport('/api/manager/material/' + id + '/remove').then(function (response) {
+                                    if (response.success) {
+                                        _this2.getMaterials();
+                                    }
+                                });
+
+                            case 1:
+                            case 'end':
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this);
+            }));
+
+            function removeMaterial(_x) {
+                return _ref2.apply(this, arguments);
+            }
+
+            return removeMaterial;
         }()
     }
 });
@@ -16832,7 +16860,23 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(material.url))]),
                     _vm._v(" "),
-                    _vm._m(1, true)
+                    _c("td", [
+                      _c("a", { attrs: { href: "#" } }, [_vm._v("Изменить")]),
+                      _vm._v(" |\n                        "),
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              _vm.removeMaterial(material.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Удалить")]
+                      )
+                    ])
                   ])
                 })
               ],
@@ -16856,16 +16900,6 @@ var staticRenderFns = [
       _c("td", [_vm._v("Название")]),
       _vm._v(" "),
       _c("td", [_vm._v("Действия")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("a", { attrs: { href: "#" } }, [_vm._v("Изменить")]),
-      _vm._v(" |\n                        "),
-      _c("a", { attrs: { href: "#" } }, [_vm._v("Удалить")])
     ])
   }
 ]

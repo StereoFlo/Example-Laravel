@@ -17,6 +17,13 @@
                 http.transport('/api/manager/material/list').then(response => {
                     this.materials = response;
                 })
+            },
+            async removeMaterial(id) {
+                http.transport('/api/manager/material/'+ id +'/remove').then(response => {
+                    if (response.success) {
+                        this.getMaterials();
+                    }
+                })
             }
         }
     }

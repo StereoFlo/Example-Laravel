@@ -19,7 +19,7 @@
                     <td>{{ material.url }}</td>
                     <td>
                         <a href="#">Изменить</a> |
-                        <a href="#">Удалить</a>
+                        <a @click.prevent="removeMaterial(material.id)" href="#">Удалить</a>
                     </td>
                 </tr>
             </table>

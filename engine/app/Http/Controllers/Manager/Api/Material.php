@@ -31,7 +31,7 @@ class Material extends Controller
      *
      * @return mixed
      */
-    public function process(Request $request, MaterialModel $material)
+    public function process(Request $request, MaterialModel $material): JsonResponse
     {
         $id          = $request->post('id', false);
         $name        = $request->post('name', false);
@@ -47,6 +47,20 @@ class Material extends Controller
         $url = $url . $newImageName;
 
         $material->makeNew($id, $name, $url, $description);
+        return new JsonResponse([
+            'success' => true
+        ]);
+    }
+
+    /**
+     * @param MaterialModel $material
+     * @param int           $id
+     *
+     * @return JsonResponse
+     */
+    public function remove(MaterialModel $material, int $id): JsonResponse
+    {
+        $material->removeBy($id);
         return new JsonResponse([
             'success' => true
         ]);
