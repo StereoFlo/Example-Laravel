@@ -1,34 +1,33 @@
-<div class="col-md-8 col-md-offset-0">
-    <div class="panel panel-default">
-        <div class="panel-heading">Слоган\Призыв</div>
-        <div class="panel-body">
-            <form class="form-horizontal" @submit.prevent="submit(form)">
-                <div class="form-group">
-                    <label class="col-md-3 control-label">Слоган</label>
-                    <div class="col-md-9 col-lg-8">
-                        <vue-editor id="slogan" name="slogan" v-model="form.slogan.setting_value"></vue-editor>
-                    </div>
+<div class="panel panel-default">
+    <div class="panel-heading">Слоган\Призыв</div>
+    <div class="panel-body">
+        <form class="form-horizontal" @submit.prevent="submit(form)">
+            <div class="form-group">
+                <label class="col-md-3 control-label">Слоган</label>
+                <div class="col-md-9 col-lg-8">
+                    <vue-editor id="slogan" name="slogan" v-model="form.slogan.setting_value"></vue-editor>
                 </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label">Призыв к пользователю</label>
-                    <div class="col-md-9 col-lg-8">
-                        <vue-editor id="generalPageBlock" name="generalPageBlock" v-model="form.generalPageBlock.setting_value"></vue-editor>
-                    </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">Призыв к пользователю</label>
+                <div class="col-md-9 col-lg-8">
+                    <vue-editor id="generalPageBlock" name="generalPageBlock" v-model="form.generalPageBlock.setting_value"></vue-editor>
                 </div>
-                <div class="form-group">
-                    <label for="limitWorksForGallery" class="col-md-3 control-label">Количество работ на странице галлереи</label>
-                    <div class="col-md-9 col-lg-8">
-                        <input id="limitWorksForGallery" type="text" class="form-control" name="limitWorksForGallery" v-model="form.limitWorksForGallery.setting_value" required autofocus>
-                    </div>
+            </div>
+            <div class="form-group">
+                <label for="limitWorksForGallery" class="col-md-3 control-label">Количество работ на странице галлереи</label>
+                <div class="col-md-9 col-lg-8">
+                    <input id="limitWorksForGallery" type="text" class="form-control" name="limitWorksForGallery"
+                           v-model="form.limitWorksForGallery.setting_value" required autofocus>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-9 col-md-offset-3">
-                        <button type="submit" class="btn btn-primary">
-                            OK
-                        </button>
-                    </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-9 col-md-offset-3">
+                    <button type="submit" class="btn btn-primary">
+                        OK
+                    </button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </div>

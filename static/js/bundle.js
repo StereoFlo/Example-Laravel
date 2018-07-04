@@ -310,10 +310,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_components_Home_Home___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__views_components_Home_Home__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_components_Settings_index__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_components_Settings_index___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__views_components_Settings_index__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__views_components_Material_List_index__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__views_components_Material_List_index___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__views_components_Material_List_index__);
 
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
+
 
 
 
@@ -343,6 +346,10 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         path: '/manager2/settings',
         name: 'settings',
         component: __WEBPACK_IMPORTED_MODULE_6__views_components_Settings_index___default.a
+    }, {
+        path: '/manager2/materials',
+        name: 'materials',
+        component: __WEBPACK_IMPORTED_MODULE_7__views_components_Material_List_index___default.a
     }]
 });
 
@@ -14546,9 +14553,19 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _vm._m(2),
+            _c(
+              "router-link",
+              {
+                staticClass: "list-group-item",
+                attrs: { to: { name: "materials" } }
+              },
+              [
+                _c("i", { staticClass: "fa fa-comment-o" }),
+                _vm._v(" Материалы\n                ")
+              ]
+            ),
             _vm._v(" "),
-            _vm._m(3),
+            _vm._m(2),
             _vm._v(" "),
             _c(
               "router-link",
@@ -14562,9 +14579,9 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _vm._m(4),
+            _vm._m(3),
             _vm._v(" "),
-            _vm._m(5)
+            _vm._m(4)
           ],
           1
         )
@@ -14608,15 +14625,6 @@ var staticRenderFns = [
         )
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "list-group-item", attrs: { href: "#" } }, [
-      _c("i", { staticClass: "fa fa-comment-o" }),
-      _vm._v(" Инструменты\n                ")
-    ])
   },
   function() {
     var _vm = this
@@ -15575,63 +15583,61 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-md-8 col-md-offset-0" }, [
-    _c("div", { staticClass: "panel panel-default" }, [
-      _c(
-        "div",
-        { staticClass: "panel-heading" },
-        [
-          _vm._v("\n            Категории (\n            "),
-          _c("router-link", { attrs: { to: { name: "catalogFormNew" } } }, [
-            _vm._v("\n                Добавить\n            ")
-          ]),
-          _vm._v(")\n        ")
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "panel-body" }, [
-        _vm.categories
-          ? _c("div", [
-              _c(
-                "table",
-                { staticClass: "table table-hover table-responsive" },
-                [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _vm._l(_vm.categories, function(category) {
-                    return _c("tr", [
-                      _c("td", [_vm._v(_vm._s(category.id))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(category.name))]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c("a", { attrs: { href: "#" } }, [_vm._v("Изменить")]),
-                        _vm._v(" |\n                            "),
-                        _c(
-                          "a",
-                          {
-                            attrs: { href: "#" },
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                _vm.deleteCategory(category.id)
-                              }
+  return _c("div", { staticClass: "panel panel-default" }, [
+    _c(
+      "div",
+      { staticClass: "panel-heading" },
+      [
+        _vm._v("\n        Категории (\n        "),
+        _c("router-link", { attrs: { to: { name: "catalogFormNew" } } }, [
+          _vm._v("\n            Добавить\n        ")
+        ]),
+        _vm._v("\n        )\n    ")
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "panel-body" }, [
+      _vm.categories
+        ? _c("div", [
+            _c(
+              "table",
+              { staticClass: "table table-hover table-responsive" },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _vm._l(_vm.categories, function(category) {
+                  return _c("tr", [
+                    _c("td", [_vm._v(_vm._s(category.id))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(category.name))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("a", { attrs: { href: "#" } }, [_vm._v("Изменить")]),
+                      _vm._v(" |\n                        "),
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              _vm.deleteCategory(category.id)
                             }
-                          },
-                          [_vm._v("Удалить")]
-                        )
-                      ])
+                          }
+                        },
+                        [_vm._v("Удалить")]
+                      )
                     ])
-                  })
-                ],
-                2
-              )
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        !_vm.categories ? _c("p", [_vm._v("Категорий пока нет")]) : _vm._e()
-      ])
+                  ])
+                })
+              ],
+              2
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.categories ? _c("p", [_vm._v("Категорий пока нет")]) : _vm._e()
     ])
   ])
 }
@@ -15760,106 +15766,101 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-md-8 col-md-offset-0" }, [
-    _c("div", { staticClass: "panel panel-default" }, [
-      _c("div", { staticClass: "panel-heading" }, [
-        _vm._v("Добавление категории")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "panel-body" }, [
-        _c(
-          "form",
-          {
-            staticClass: "form-horizontal",
-            attrs: { method: "POST" },
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                _vm.submit(_vm.form)
-              }
+  return _c("div", { staticClass: "panel panel-default" }, [
+    _c("div", { staticClass: "panel-heading" }, [
+      _vm._v("Добавление категории")
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "panel-body" }, [
+      _c(
+        "form",
+        {
+          staticClass: "form-horizontal",
+          attrs: { method: "POST" },
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              _vm.submit(_vm.form)
             }
-          },
-          [
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-md-4 control-label",
-                  attrs: { for: "name" }
-                },
-                [_vm._v("Название")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-6" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.name,
-                      expression: "form.name"
-                    }
-                  ],
-                  staticClass: "input",
-                  attrs: { type: "text", id: "name" },
-                  domProps: { value: _vm.form.name },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "name", $event.target.value)
-                    }
+          }
+        },
+        [
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "label",
+              { staticClass: "col-md-4 control-label", attrs: { for: "name" } },
+              [_vm._v("Название")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.name,
+                    expression: "form.name"
                   }
-                }),
-                _vm._v(" "),
-                _vm.nameError
-                  ? _c("p", [_vm._v("Имя является обязательным параметром")])
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-md-4 control-label",
-                  attrs: { for: "description" }
-                },
-                [_vm._v("Описание")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-6" }, [
-                _c("textarea", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.description,
-                      expression: "form.description"
+                ],
+                staticClass: "input",
+                attrs: { type: "text", id: "name" },
+                domProps: { value: _vm.form.name },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
                     }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "description", name: "description" },
-                  domProps: { value: _vm.form.description },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "description", $event.target.value)
-                    }
+                    _vm.$set(_vm.form, "name", $event.target.value)
                   }
-                })
-              ])
-            ]),
+                }
+              }),
+              _vm._v(" "),
+              _vm.nameError
+                ? _c("p", [_vm._v("Имя является обязательным параметром")])
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "label",
+              {
+                staticClass: "col-md-4 control-label",
+                attrs: { for: "description" }
+              },
+              [_vm._v("Описание")]
+            ),
             _vm._v(" "),
-            _c("input", { attrs: { type: "hidden", name: "id", value: "1" } }),
-            _vm._v(" "),
-            _vm._m(0)
-          ]
-        )
-      ])
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.description,
+                    expression: "form.description"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "description", name: "description" },
+                domProps: { value: _vm.form.description },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "description", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("input", { attrs: { type: "hidden", name: "id", value: "1" } }),
+          _vm._v(" "),
+          _vm._m(0)
+        ]
+      )
     ])
   ])
 }
@@ -15873,7 +15874,7 @@ var staticRenderFns = [
         _c(
           "button",
           { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-          [_vm._v("\n                            OK\n                        ")]
+          [_vm._v("\n                        OK\n                    ")]
         )
       ])
     ])
@@ -16540,126 +16541,120 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-md-8 col-md-offset-0" }, [
-    _c("div", { staticClass: "panel panel-default" }, [
-      _c("div", { staticClass: "panel-heading" }, [_vm._v("Слоган\\Призыв")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "panel-body" }, [
-        _c(
-          "form",
-          {
-            staticClass: "form-horizontal",
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                _vm.submit(_vm.form)
-              }
+  return _c("div", { staticClass: "panel panel-default" }, [
+    _c("div", { staticClass: "panel-heading" }, [_vm._v("Слоган\\Призыв")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "panel-body" }, [
+      _c(
+        "form",
+        {
+          staticClass: "form-horizontal",
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              _vm.submit(_vm.form)
             }
-          },
-          [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { staticClass: "col-md-3 control-label" }, [
-                _vm._v("Слоган")
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col-md-9 col-lg-8" },
-                [
-                  _c("vue-editor", {
-                    attrs: { id: "slogan", name: "slogan" },
-                    model: {
-                      value: _vm.form.slogan.setting_value,
-                      callback: function($$v) {
-                        _vm.$set(_vm.form.slogan, "setting_value", $$v)
-                      },
-                      expression: "form.slogan.setting_value"
-                    }
-                  })
-                ],
-                1
-              )
+          }
+        },
+        [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { staticClass: "col-md-3 control-label" }, [
+              _vm._v("Слоган")
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { staticClass: "col-md-3 control-label" }, [
-                _vm._v("Призыв к пользователю")
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col-md-9 col-lg-8" },
-                [
-                  _c("vue-editor", {
-                    attrs: { id: "generalPageBlock", name: "generalPageBlock" },
-                    model: {
-                      value: _vm.form.generalPageBlock.setting_value,
-                      callback: function($$v) {
-                        _vm.$set(
-                          _vm.form.generalPageBlock,
-                          "setting_value",
-                          $$v
-                        )
-                      },
-                      expression: "form.generalPageBlock.setting_value"
-                    }
-                  })
-                ],
-                1
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-md-3 control-label",
-                  attrs: { for: "limitWorksForGallery" }
-                },
-                [_vm._v("Количество работ на странице галлереи")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-9 col-lg-8" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.limitWorksForGallery.setting_value,
-                      expression: "form.limitWorksForGallery.setting_value"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    id: "limitWorksForGallery",
-                    type: "text",
-                    name: "limitWorksForGallery",
-                    required: "",
-                    autofocus: ""
-                  },
-                  domProps: {
-                    value: _vm.form.limitWorksForGallery.setting_value
-                  },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.form.limitWorksForGallery,
-                        "setting_value",
-                        $event.target.value
-                      )
-                    }
+            _c(
+              "div",
+              { staticClass: "col-md-9 col-lg-8" },
+              [
+                _c("vue-editor", {
+                  attrs: { id: "slogan", name: "slogan" },
+                  model: {
+                    value: _vm.form.slogan.setting_value,
+                    callback: function($$v) {
+                      _vm.$set(_vm.form.slogan, "setting_value", $$v)
+                    },
+                    expression: "form.slogan.setting_value"
                   }
                 })
-              ])
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { staticClass: "col-md-3 control-label" }, [
+              _vm._v("Призыв к пользователю")
             ]),
             _vm._v(" "),
-            _vm._m(0)
-          ]
-        )
-      ])
+            _c(
+              "div",
+              { staticClass: "col-md-9 col-lg-8" },
+              [
+                _c("vue-editor", {
+                  attrs: { id: "generalPageBlock", name: "generalPageBlock" },
+                  model: {
+                    value: _vm.form.generalPageBlock.setting_value,
+                    callback: function($$v) {
+                      _vm.$set(_vm.form.generalPageBlock, "setting_value", $$v)
+                    },
+                    expression: "form.generalPageBlock.setting_value"
+                  }
+                })
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "label",
+              {
+                staticClass: "col-md-3 control-label",
+                attrs: { for: "limitWorksForGallery" }
+              },
+              [_vm._v("Количество работ на странице галлереи")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-9 col-lg-8" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.limitWorksForGallery.setting_value,
+                    expression: "form.limitWorksForGallery.setting_value"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  id: "limitWorksForGallery",
+                  type: "text",
+                  name: "limitWorksForGallery",
+                  required: "",
+                  autofocus: ""
+                },
+                domProps: {
+                  value: _vm.form.limitWorksForGallery.setting_value
+                },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.form.limitWorksForGallery,
+                      "setting_value",
+                      $event.target.value
+                    )
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._m(0)
+        ]
+      )
     ])
   ])
 }
@@ -16673,7 +16668,7 @@ var staticRenderFns = [
         _c(
           "button",
           { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-          [_vm._v("\n                            OK\n                        ")]
+          [_vm._v("\n                        OK\n                    ")]
         )
       ])
     ])
@@ -16685,6 +16680,194 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-2122b04a", module.exports)
+  }
+}
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(35)
+/* template */
+var __vue_template__ = __webpack_require__(36)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "engine/resources/assets/js/views/components/Material/List/index.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-d5ccc3f8", Component.options)
+  } else {
+    hotAPI.reload("data-v-d5ccc3f8", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 35 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_http__ = __webpack_require__(2);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            materials: []
+        };
+    },
+    created: function created() {
+        this.getMaterials();
+    },
+
+    methods: {
+        getMaterials: function () {
+            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+                var _this = this;
+
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                __WEBPACK_IMPORTED_MODULE_1__services_http__["a" /* default */].transport('/api/manager/material/list').then(function (response) {
+                                    _this.materials = response;
+                                });
+
+                            case 1:
+                            case "end":
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this);
+            }));
+
+            function getMaterials() {
+                return _ref.apply(this, arguments);
+            }
+
+            return getMaterials;
+        }()
+    }
+});
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "panel panel-default" }, [
+    _c(
+      "div",
+      { staticClass: "panel-heading" },
+      [
+        _vm._v("\n        Категории (\n        "),
+        _c("router-link", { attrs: { to: { name: "catalogFormNew" } } }, [
+          _vm._v("\n            Добавить\n        ")
+        ]),
+        _vm._v("\n        )\n    ")
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "panel-body" }, [
+      _vm.materials
+        ? _c("div", [
+            _c(
+              "table",
+              { staticClass: "table table-hover table-responsive" },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _vm._l(_vm.materials, function(material) {
+                  return _c("tr", [
+                    _c("td", [_vm._v(_vm._s(material.id))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(material.url))]),
+                    _vm._v(" "),
+                    _vm._m(1, true)
+                  ])
+                })
+              ],
+              2
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.materials ? _c("p", [_vm._v("Категорий пока нет")]) : _vm._e()
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", [_vm._v("ID")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("Название")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("Действия")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("a", { attrs: { href: "#" } }, [_vm._v("Изменить")]),
+      _vm._v(" |\n                        "),
+      _c("a", { attrs: { href: "#" } }, [_vm._v("Удалить")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-d5ccc3f8", module.exports)
   }
 }
 

@@ -20,9 +20,9 @@
                     <router-link :to="{ name: 'settings' }" class="list-group-item">
                         <i class="fa fa-comment-o"></i> Настройки
                     </router-link>
-                    <a href="#" class="list-group-item">
-                        <i class="fa fa-comment-o"></i> Инструменты
-                    </a>
+                    <router-link :to="{ name: 'materials' }" class="list-group-item">
+                        <i class="fa fa-comment-o"></i> Материалы
+                    </router-link>
                     <a href="#" class="list-group-item">
                         <i class="fa fa-comment-o"></i> Страницы
                     </a>

@@ -7,23 +7,23 @@
         )
     </div>
     <div class="panel-body">
-        <div v-if="categories">
+        <div v-if="materials">
             <table class="table table-hover table-responsive">
                 <tr>
                     <td>ID</td>
                     <td>Название</td>
                     <td>Действия</td>
                 </tr>
-                <tr v-for="category in categories">
-                    <td>{{ category.id }}</td>
-                    <td>{{ category.name }}</td>
+                <tr v-for="material in materials">
+                    <td>{{ material.id }}</td>
+                    <td>{{ material.url }}</td>
                     <td>
                         <a href="#">Изменить</a> |
-                        <a @click.prevent="deleteCategory(category.id)" href="#">Удалить</a>
+                        <a href="#">Удалить</a>
                     </td>
                 </tr>
             </table>
         </div>
-        <p v-if="!categories">Категорий пока нет</p>
+        <p v-if="!materials">Категорий пока нет</p>
     </div>
 </div>
