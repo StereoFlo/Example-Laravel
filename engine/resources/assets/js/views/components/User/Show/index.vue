@@ -32,7 +32,10 @@
                         <td>{{ work.id }}</td>
                         <td>{{ work.workName }}</td>
                         <td>{{ work.userName }}</td>
-                        <td><input type="checkbox" v-model="work.approved" @change="toggleApprove(work.id)"/></td>
+                        <td>
+                            <span v-if="work.approved">Да</span>
+                            <span v-if="!work.approved">Нет</span>
+                        </td>
                         <td>
                             <a :href="'/cabinet/work/' + work.id">Открыть</a> |
                             <a :href="'/cabinet/work/' + work.id + '/edit'">Изменить</a> |
