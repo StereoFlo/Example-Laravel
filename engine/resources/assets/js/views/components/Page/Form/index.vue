@@ -25,7 +25,7 @@
             submit(form) {
                 http.transport('/api/manager/pages/process', form, 'POST').then(response => {
                     if (response.success) {
-                        this.$router.push('../pages')
+                        this.$router.push({ name: 'pagesList' })
                     }
                 });
             },

@@ -27,7 +27,9 @@
                 formData.append('file', form.file);
 
                 http.transport('/api/manager/material/process', formData, 'POST').then(response => {
-                    this.$router.push('../materials');
+                    if (response.success) {
+                        this.$router.push({ name: 'materials' });
+                    }
                 });
             }
         }

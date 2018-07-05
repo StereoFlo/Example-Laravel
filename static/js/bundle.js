@@ -12306,11 +12306,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "span",
-      { staticClass: "list-group-item", attrs: { href: "#" } },
-      [_c("h4", [_vm._v("Меню админа")])]
-    )
+    return _c("span", { staticClass: "list-group-item" }, [
+      _c("h4", [_vm._v("Меню админа")])
+    ])
   }
 ]
 render._withStripped = true
@@ -16269,7 +16267,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             var response = __WEBPACK_IMPORTED_MODULE_1__services_http__["a" /* default */].transport('/api/manager/catalog/process', this.form, 'POST');
             response.then(function (response) {
                 if (response.success) {
-                    _this2.$router.push('../catalog');
+                    _this2.$router.push({ name: 'catalog' });
                 }
             }, function (error) {
                 console.log(error);
@@ -17285,7 +17283,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             formData.append('file', form.file);
 
             __WEBPACK_IMPORTED_MODULE_1__services_http__["a" /* default */].transport('/api/manager/material/process', formData, 'POST').then(function (response) {
-                _this.$router.push('../materials');
+                if (response.success) {
+                    _this.$router.push({ name: 'materials' });
+                }
             });
         }
     }
@@ -17759,7 +17759,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
             __WEBPACK_IMPORTED_MODULE_2__services_http__["a" /* default */].transport('/api/manager/pages/process', form, 'POST').then(function (response) {
                 if (response.success) {
-                    _this.$router.push('../pages');
+                    _this.$router.push({ name: 'pagesList' });
                 }
             });
         },
@@ -18418,7 +18418,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
             __WEBPACK_IMPORTED_MODULE_2__services_http__["a" /* default */].transport('/api/manager/news/process', form, 'POST').then(function (response) {
                 if (response.success) {
-                    _this.$router.push('../news');
+                    _this.$router.push({ name: 'newsList' });
                 }
             });
         },
@@ -19410,7 +19410,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                             case 0:
                                 __WEBPACK_IMPORTED_MODULE_1__services_http__["a" /* default */].transport('/api/manager/user/' + userId + '/remove').then(function (response) {
                                     if (response.success) {
-                                        _this4.$router.push('../user');
+                                        _this4.$router.push({ name: 'userList' });
                                     }
                                 });
 

@@ -67,7 +67,7 @@
             async removeUser(userId) {
                 http.transport('/api/manager/user/' + userId + '/remove').then(response => {
                     if (response.success) {
-                        this.$router.push('../user')
+                        this.$router.push({ name: 'userList' })
                     }
                 });
             }

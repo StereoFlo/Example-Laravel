@@ -8,7 +8,7 @@
                     <span class="icon-bar"></span>
                 </div>
                 <div class="list-group">
-                    <span href="#" class="list-group-item">
+                    <span class="list-group-item">
                         <h4>Меню админа</h4>
                     </span>
                     <router-link :to="{ name: 'home' }" class="list-group-item">

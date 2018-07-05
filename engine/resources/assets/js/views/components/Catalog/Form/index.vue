@@ -76,7 +76,7 @@
                 const response = http.transport('/api/manager/catalog/process', this.form, 'POST');
                 response.then((response) => {
                     if (response.success) {
-                        this.$router.push('../catalog')
+                        this.$router.push({name: 'catalog'})
                     }
                 }, error => {
                     console.log(error);

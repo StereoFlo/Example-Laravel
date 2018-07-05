@@ -55,7 +55,7 @@
             submit(form) {
                 http.transport('/api/manager/news/process', form, 'POST').then(response => {
                     if (response.success) {
-                        this.$router.push('../news');
+                        this.$router.push({ name: 'newsList' });
                     }
                 });
             },
