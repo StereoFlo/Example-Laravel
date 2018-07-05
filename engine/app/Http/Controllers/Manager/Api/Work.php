@@ -58,4 +58,17 @@ class Work extends Controller
             'success' => true
         ]);
     }
+
+    /**
+     * @param \RecycleArt\Models\Work $work
+     * @param int                     $workId
+     *
+     * @return JsonResponse
+     */
+    public function approve(\RecycleArt\Models\Work $work, int $workId): JsonResponse
+    {
+        return JsonResponse::create([
+            'success' => $work->toggleApprove($workId)
+        ]);
+    }
 }
