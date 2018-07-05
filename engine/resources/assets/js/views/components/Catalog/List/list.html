@@ -18,7 +18,10 @@
                     <td>{{ category.id }}</td>
                     <td>{{ category.name }}</td>
                     <td>
-                        <a href="#">Изменить</a> |
+                        <router-link :to="{ name: 'catalogFormEdit', params: {categoryId: category.id} }">
+                            Изменить
+                        </router-link>
+                        |
                         <a @click.prevent="deleteCategory(category.id)" href="#">Удалить</a>
                     </td>
                 </tr>

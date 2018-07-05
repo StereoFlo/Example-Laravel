@@ -27,6 +27,17 @@ class Catalog extends Controller
 
     /**
      * @param CatalogModel $catalog
+     * @param int          $categoryId
+     *
+     * @return JsonResponse
+     */
+    public function show(CatalogModel $catalog, int $categoryId)
+    {
+        return JsonResponse::create($catalog->getById($categoryId));
+    }
+
+    /**
+     * @param CatalogModel $catalog
      * @param Request      $request
      *
      * @return JsonResponse

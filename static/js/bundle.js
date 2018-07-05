@@ -369,11 +369,11 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         name: 'catalog',
         component: __WEBPACK_IMPORTED_MODULE_3__views_components_Catalog_List_List___default.a
     }, {
-        path: '/manager2/catalog/edit/:categoryId',
+        path: '/manager2/catalog/form/:categoryId',
         name: 'catalogFormEdit',
         component: __WEBPACK_IMPORTED_MODULE_4__views_components_Catalog_Form_index___default.a
     }, {
-        path: '/manager2/catalog/new',
+        path: '/manager2/catalog/form',
         name: 'catalogFormNew',
         component: __WEBPACK_IMPORTED_MODULE_4__views_components_Catalog_Form_index___default.a
     }, {
@@ -15694,23 +15694,44 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(category.name))]),
                     _vm._v(" "),
-                    _c("td", [
-                      _c("a", { attrs: { href: "#" } }, [_vm._v("Изменить")]),
-                      _vm._v(" |\n                        "),
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              _vm.deleteCategory(category.id)
+                    _c(
+                      "td",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            attrs: {
+                              to: {
+                                name: "catalogFormEdit",
+                                params: { categoryId: category.id }
+                              }
                             }
-                          }
-                        },
-                        [_vm._v("Удалить")]
-                      )
-                    ])
+                          },
+                          [
+                            _vm._v(
+                              "\n                            Изменить\n                        "
+                            )
+                          ]
+                        ),
+                        _vm._v(
+                          "\n                        | \n                        "
+                        ),
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.deleteCategory(category.id)
+                              }
+                            }
+                          },
+                          [_vm._v("Удалить")]
+                        )
+                      ],
+                      1
+                    )
                   ])
                 })
               ],
@@ -15755,7 +15776,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(21)
 /* template */
-var __vue_template__ = __webpack_require__(22)
+var __vue_template__ = __webpack_require__(112)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -15799,26 +15820,105 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_http__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_http__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue2_editor__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue2_editor___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue2_editor__);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        VueEditor: __WEBPACK_IMPORTED_MODULE_2_vue2_editor__["VueEditor"]
+    },
     data: function data() {
         return {
+            categoryId: this.$route.params.categoryId || null,
+            category: {},
             nameError: '',
             form: {
+                id: '',
                 name: '',
                 description: ''
+
             }
         };
     },
+    created: function created() {
+        this.getCategory();
+    },
 
     methods: {
+        getCategory: function () {
+            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+                var _this = this;
+
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                if (this.categoryId) {
+                                    __WEBPACK_IMPORTED_MODULE_1__services_http__["a" /* default */].transport('/api/manager/catalog/' + this.categoryId).then(function (response) {
+                                        _this.form.name = response.name;
+                                        _this.form.description = response.description;
+                                        _this.form.id = response.id;
+                                    });
+                                }
+
+                            case 1:
+                            case 'end':
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this);
+            }));
+
+            function getCategory() {
+                return _ref.apply(this, arguments);
+            }
+
+            return getCategory;
+        }(),
         submit: function submit(form) {
-            var _this = this;
+            var _this2 = this;
 
             var name = form.name;
             var description = form.description;
@@ -15828,10 +15928,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return;
             }
 
-            var response = __WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].transport('/api/manager/catalog/process', { name: name, description: description }, 'POST');
+            var response = __WEBPACK_IMPORTED_MODULE_1__services_http__["a" /* default */].transport('/api/manager/catalog/process', this.form, 'POST');
             response.then(function (response) {
                 if (response.success) {
-                    _this.$router.push('../catalog');
+                    _this2.$router.push('../catalog');
                 }
             }, function (error) {
                 console.log(error);
@@ -15841,137 +15941,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "panel panel-default" }, [
-    _c("div", { staticClass: "panel-heading" }, [
-      _vm._v("Добавление категории")
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "panel-body" }, [
-      _c(
-        "form",
-        {
-          staticClass: "form-horizontal",
-          attrs: { method: "POST" },
-          on: {
-            submit: function($event) {
-              $event.preventDefault()
-              _vm.submit(_vm.form)
-            }
-          }
-        },
-        [
-          _c("div", { staticClass: "form-group" }, [
-            _c(
-              "label",
-              { staticClass: "col-md-4 control-label", attrs: { for: "name" } },
-              [_vm._v("Название")]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-6" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.form.name,
-                    expression: "form.name"
-                  }
-                ],
-                staticClass: "input",
-                attrs: { type: "text", id: "name" },
-                domProps: { value: _vm.form.name },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.form, "name", $event.target.value)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _vm.nameError
-                ? _c("p", [_vm._v("Имя является обязательным параметром")])
-                : _vm._e()
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c(
-              "label",
-              {
-                staticClass: "col-md-4 control-label",
-                attrs: { for: "description" }
-              },
-              [_vm._v("Описание")]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-6" }, [
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.form.description,
-                    expression: "form.description"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { id: "description", name: "description" },
-                domProps: { value: _vm.form.description },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.form, "description", $event.target.value)
-                  }
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("input", { attrs: { type: "hidden", name: "id", value: "1" } }),
-          _vm._v(" "),
-          _vm._m(0)
-        ]
-      )
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "col-md-8 col-md-offset-4" }, [
-        _c(
-          "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-          [_vm._v("\n                        OK\n                    ")]
-        )
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-5a78f4dc", module.exports)
-  }
-}
-
-/***/ }),
+/* 22 */,
 /* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19176,6 +19146,147 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-43f85802", module.exports)
+  }
+}
+
+/***/ }),
+/* 112 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "panel panel-default" }, [
+    _c("div", { staticClass: "panel-heading" }, [
+      _vm._v("Добавление категории")
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "panel-body" }, [
+      _c(
+        "form",
+        {
+          staticClass: "form-horizontal",
+          attrs: { method: "POST" },
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              _vm.submit(_vm.form)
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "label",
+              { staticClass: "col-md-4 control-label", attrs: { for: "name" } },
+              [_vm._v("Название")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.name,
+                    expression: "form.name"
+                  }
+                ],
+                staticClass: "input",
+                attrs: { type: "text", id: "name" },
+                domProps: { value: _vm.form.name },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "name", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.nameError
+                ? _c("p", [_vm._v("Имя является обязательным параметром")])
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { staticClass: "col-md-4 control-label" }, [
+              _vm._v("Описание")
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-md-6" },
+              [
+                _c("vue-editor", {
+                  attrs: { id: "description", name: "description" },
+                  model: {
+                    value: _vm.form.description,
+                    callback: function($$v) {
+                      _vm.$set(_vm.form, "description", $$v)
+                    },
+                    expression: "form.description"
+                  }
+                })
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _vm.form.id
+            ? _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.id,
+                    expression: "form.id"
+                  }
+                ],
+                attrs: { type: "hidden", name: "id" },
+                domProps: { value: _vm.form.id },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "id", $event.target.value)
+                  }
+                }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm._m(0)
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "col-md-8 col-md-offset-4" }, [
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          [_vm._v("\n                        OK\n                    ")]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5a78f4dc", module.exports)
   }
 }
 

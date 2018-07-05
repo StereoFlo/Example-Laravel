@@ -32,12 +32,12 @@ const router = new VueRouter({
             component: CatalogList,
         },
         {
-            path: '/manager2/catalog/edit/:categoryId',
+            path: '/manager2/catalog/form/:categoryId',
             name: 'catalogFormEdit',
             component: CatalogForm,
         },
         {
-            path: '/manager2/catalog/new',
+            path: '/manager2/catalog/form',
             name: 'catalogFormNew',
             component: CatalogForm,
         },
