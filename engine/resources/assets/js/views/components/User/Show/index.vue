@@ -1,31 +1,48 @@
 <template>
     <div class="panel panel-default">
-        <div class="panel-heading">Просмотр пользователя {{ user.user.name }}</div>
+        <div class="panel-heading">Просмотр пользователя {{ user.name }}</div>
         <div class="panel-body">
             <p>
                 Включенеые роли:
             </p>
-            <ul v-for="role in user.userRoles">
-                <li v-if="user.userRoles.length > 1">{{ role.name }} (<a @click.prevent="removeRole(user.user.id, role.id)" href="#">Выключить</a>) </li>
+            <ul v-for="role in userRoles">
+                <li v-if="userRoles.length > 1">{{ role.name }} (<a @click.prevent="removeRole(user.id, role.id)" href="#">Выключить</a>) </li>
                 <li v-else>{{ role.name }}</li>
             </ul>
             <p>
                 Выключенеые роли:
             </p>
-            <ul v-for="role in user.roles">
-                <li>{{ role.name }} (<a @click.prevent="addRole(user.user.id, role.id)" href="#">Включить</a>)</li>
+            <ul v-for="role in roles">
+                <li>{{ role.name }} (<a @click.prevent="addRole(user.id, role.id)" href="#">Включить</a>)</li>
             </ul>
-            <p v-if="!user.works.length">У пользователя нет работ</p>
-            <div v-if="user.works.length">
+            <p v-if="!works.length">У пользователя нет работ</p>
+            <div v-else>
                 <p>
-                    Работы пользователя ({{user.works.length}})
+                    Работы пользователя ({{works.length}})
                 </p>
-                <ul v-for="work in user.works">
-                    <li>{{ work.workName }}</li>
-                </ul>
+                <table class="table table-hover table-responsive">
+                    <tr>
+                        <td>ID</td>
+                        <td>Название</td>
+                        <td>Автор</td>
+                        <td>Проверена</td>
+                        <td>Действия</td>
+                    </tr>
+                    <tr v-for="work in works">
+                        <td>{{ work.id }}</td>
+                        <td>{{ work.workName }}</td>
+                        <td>{{ work.userName }}</td>
+                        <td><input type="checkbox" v-model="work.approved" @change="toggleApprove(work.id)"/></td>
+                        <td>
+                            <a :href="'/cabinet/work/' + work.id">Открыть</a> |
+                            <a :href="'/cabinet/work/' + work.id + '/edit'">Изменить</a> |
+                            <a @click.prevent="deleteWork(news.id)" href="#">Удалить</a>
+                        </td>
+                    </tr>
+                </table>
             </div>
             <p>Действия:</p>
-            <a @click.prevent="removeUser(user.user.id)" href="">Удалить</a>
+            <a @click.prevent="removeUser(user.id)" href="">Удалить</a>
             <i>Внимание! Удаление пользователя приведет к удалению всех его работ и прочего.</i>
         </div>
     </div>
@@ -39,15 +56,21 @@
             return {
                 userId: this.$route.params.userId || null,
                 user: {},
+                works: [],
+                userRoles: [],
+                roles: [],
             }
         },
         created() {
             this.getUser();
         },
         methods: {
-            async getUser() {
+            getUser() {
                 http.transport('/api/manager/user/' + this.userId).then(response => {
-                    this.user = response;
+                    this.user = response.user;
+                    this.works = response.works;
+                    this.userRoles = response.userRoles;
+                    this.roles = response.roles;
                 });
             },
             async removeRole(userId, roleId) {
