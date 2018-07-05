@@ -24,14 +24,12 @@
                     <tr>
                         <td>ID</td>
                         <td>Название</td>
-                        <td>Автор</td>
                         <td>Проверена</td>
                         <td>Действия</td>
                     </tr>
                     <tr v-for="work in works">
                         <td>{{ work.id }}</td>
                         <td>{{ work.workName }}</td>
-                        <td>{{ work.userName }}</td>
                         <td>
                             <span v-if="work.approved">Да</span>
                             <span v-if="!work.approved">Нет</span>
