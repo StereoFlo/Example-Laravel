@@ -35,5 +35,12 @@ Route::group(['middleware' => 'auth:api'], function () {
 
         Route::get('/manager/user/list', 'Manager\\Api\\User@getList');
         Route::get('/manager/user/{userId}', 'Manager\\Api\\User@show')->where('userId', '[0-9]+');
+        Route::get('/manager/user/role/add/{userId}/{roleId}', 'Manager\\Api\\User@addRole')
+            ->where('userId', '[0-9]+')
+            ->where('roleId', '[0-9]+');
+        Route::get('/manager/user/role/remove/{userId}/{roleId}', 'Manager\\Api\\User@removeRole')
+            ->where('userId', '[0-9]+')
+            ->where('roleId', '[0-9]+');
+        Route::get('/manager/user/{id}/remove', 'Manager\\User@removeUser')->where('id', '[0-9]+');
     });
 });

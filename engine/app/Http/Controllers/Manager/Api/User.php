@@ -5,6 +5,7 @@ namespace RecycleArt\Http\Controllers\Manager\Api;
 use Illuminate\Http\JsonResponse;
 use RecycleArt\Http\Controllers\Controller;
 use RecycleArt\Models\Role;
+use RecycleArt\Models\RoleUser;
 use RecycleArt\Models\User as UserModel;
 
 /**
@@ -47,5 +48,52 @@ class User extends Controller
         $works = $work->getListByUserId($user->id);
 
         return JsonResponse::create(['user' => $user->toArray(), 'userRoles' => $userRoles, 'roles'=> $roles, 'works' => $works]);
+    }
+
+    /**
+     * @param RoleUser $roleUser
+     * @param int      $userId
+     * @param int      $roleId
+     *
+     * @return JsonResponse
+     */
+    public function addRole(RoleUser $roleUser, int $userId, int $roleId)
+    {
+        return JsonResponse::create([
+            'success' => $roleUser->enableRole($userId, $roleId)
+        ]);
+    }
+
+    /**
+     * @param RoleUser $roleUser
+     * @param int      $userId
+     * @param int      $roleId
+     *
+     * @return JsonResponse
+     */
+    public function removeRole(RoleUser $roleUser, int $userId, int $roleId)
+    {
+        return JsonResponse::create([
+            'success' => $roleUser->disableRole($userId, $roleId)
+        ]);
+    }
+
+    /**
+     * @param UserModel $user
+     * @param Work      $work
+     * @param int       $id
+     *
+     * @return
+     */
+    public function removeUser(UserModel $user, Work $work, int $id)
+    {
+        $userToRemove = $user->findOrFail($id);
+        $works = $work->getListByUserId($userToRemove->id);
+        foreach ($works as $workItem) {
+            $work->removeById($workItem['id']);
+        }
+        return JsonResponse::create([
+            'success' => $user->removeUser($id)
+        ]);
     }
 }
