@@ -25,6 +25,17 @@ class StaticPage
 
     /**
      * @param StaticPageModel $staticPage
+     * @param string          $pageId
+     *
+     * @return JsonResponse
+     */
+    public function show(StaticPageModel $staticPage, string $pageId): JsonResponse
+    {
+        return JsonResponse::create($staticPage->getBy($pageId));
+    }
+
+    /**
+     * @param StaticPageModel $staticPage
      * @param string          $slug
      *
      * @return mixed

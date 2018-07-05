@@ -18,7 +18,10 @@
                     <td>{{ page.slug }}</td>
                     <td>{{ page.name }}</td>
                     <td>
-                        <a href="#">Изменить</a> |
+                        <router-link :to="{ name: 'pagesFormEdit', params: {pageId: page.slug} }">
+                            Изменить
+                        </router-link>
+                         |
                         <a @click.prevent='deletePage(page.slug)' href="#">Удалить</a>
                     </td>
                 </tr>

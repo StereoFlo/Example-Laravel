@@ -62,6 +62,11 @@ const router = new VueRouter({
             component: PagesList,
         },
         {
+            path: '/manager2/pages/form/:pageId',
+            name: 'pagesFormEdit',
+            component: PagesForm,
+        },
+        {
             path: '/manager2/pages/form',
             name: 'pagesForm',
             component: PagesForm,

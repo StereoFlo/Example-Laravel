@@ -18,6 +18,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::get('/manager/material/{id}/remove', 'Manager\\Api\\Material@remove')->where('id', '[0-9]+');
 
         Route::get('/manager/pages/list', 'Manager\\Api\\StaticPage@getList');
+        Route::get('/manager/pages/{pageId}', 'Manager\\Api\\StaticPage@show')->where('pageId', '[a-zA-Z0-9]+');
         Route::get('/manager/pages/{slug}/delete', 'Manager\\Api\\StaticPage@remove')->where('slug', '[a-zA-Z0-9]+');
         Route::post('/manager/pages/process', 'Manager\\Api\\StaticPage@process');
 
