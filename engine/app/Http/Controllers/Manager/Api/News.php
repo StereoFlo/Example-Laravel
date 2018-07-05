@@ -26,6 +26,17 @@ class News extends Controller
 
     /**
      * @param \RecycleArt\Models\News $news
+     * @param int                     $pageId
+     *
+     * @return JsonResponse
+     */
+    public function show(\RecycleArt\Models\News $news, int $pageId): JsonResponse
+    {
+        return JsonResponse::create($news->getById($pageId));
+    }
+
+    /**
+     * @param \RecycleArt\Models\News $news
      * @param int                     $id
      *
      * @return mixed
@@ -53,7 +64,6 @@ class News extends Controller
                 'success' => $news->make($name, $content)
             ]);
         }
-        $news->updateById($id, $name, $content);
         return JsonResponse::create([
             'success' => $news->updateById($id, $name, $content)
         ]);

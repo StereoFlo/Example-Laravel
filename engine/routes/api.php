@@ -24,6 +24,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
         Route::get('/manager/news/list', 'Manager\\Api\\News@getList');
         Route::get('/manager/news/list/{id}', 'Manager\\Api\\News@getList')->where('id', '[0-9]+');
+        Route::get('/manager/news/{newsId}', 'Manager\\Api\\News@show')->where('newsId', '[0-9]+');
         Route::get('/manager/news/{id}/delete', 'Manager\\Api\\News@delete')->where('id', '[0-9]+');
         Route::post('/manager/news/process', 'Manager\\Api\\News@process');
 

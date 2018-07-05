@@ -16,6 +16,9 @@
                         <vue-editor id="content" name="content" v-model="form.content" ></vue-editor>
                     </div>
                 </div>
+                <div v-if="form.id">
+                    <input type="hidden" name="id" v-model="form.id"/>
+                </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-4">
                         <button type="submit" class="btn btn-primary">
@@ -37,11 +40,16 @@
         },
         data() {
             return {
+                newsId: this.$route.params.newsId || null,
                 form: {
                     name: '',
-                    content: ''
+                    content: '',
+                    id: '',
                 }
             }
+        },
+        created() {
+            this.getNews();
         },
         methods: {
             submit(form) {
@@ -50,6 +58,15 @@
                         this.$router.push('../news');
                     }
                 });
+            },
+            async getNews() {
+                if (this.newsId) {
+                    http.transport('/api/manager/news/' + this.newsId).then(response => {
+                        this.form.name = response.name;
+                        this.form.content = response.content;
+                        this.form.id = response.id;
+                    });
+                }
             }
         }
     }

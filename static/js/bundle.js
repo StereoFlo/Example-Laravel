@@ -719,6 +719,10 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         name: 'newsForm',
         component: __WEBPACK_IMPORTED_MODULE_12__views_components_News_Form_index___default.a
     }, {
+        path: '/manager2/news/form/:newsId',
+        name: 'newsFormEdit',
+        component: __WEBPACK_IMPORTED_MODULE_12__views_components_News_Form_index___default.a
+    }, {
         path: '/manager2/work',
         name: 'workList',
         component: __WEBPACK_IMPORTED_MODULE_13__views_components_Work_List_index___default.a
@@ -17935,7 +17939,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -17985,13 +17989,15 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            workList: []
+            newsList: []
         };
     },
     created: function created() {
@@ -18074,23 +18080,42 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(news.name))]),
                     _vm._v(" "),
-                    _c("td", [
-                      _c("a", { attrs: { href: "#" } }, [_vm._v("Изменить")]),
-                      _vm._v(" |\n                        "),
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              _vm.deleteNews(news.id)
+                    _c(
+                      "td",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            attrs: {
+                              to: {
+                                name: "newsFormEdit",
+                                params: { newsId: news.id }
+                              }
                             }
-                          }
-                        },
-                        [_vm._v("Удалить")]
-                      )
-                    ])
+                          },
+                          [
+                            _vm._v(
+                              "\n                            Изменить\n                        "
+                            )
+                          ]
+                        ),
+                        _vm._v(" |\n                        "),
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.deleteNews(news.id)
+                              }
+                            }
+                          },
+                          [_vm._v("Удалить")]
+                        )
+                      ],
+                      1
+                    )
                   ])
                 })
               ],
@@ -18212,7 +18237,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -18223,9 +18248,18 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_editor__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_editor___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue2_editor__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_http__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue2_editor__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue2_editor___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue2_editor__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_http__ = __webpack_require__(1);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+//
+//
+//
 //
 //
 //
@@ -18261,27 +18295,62 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: {
-        VueEditor: __WEBPACK_IMPORTED_MODULE_0_vue2_editor__["VueEditor"]
+        VueEditor: __WEBPACK_IMPORTED_MODULE_1_vue2_editor__["VueEditor"]
     },
     data: function data() {
         return {
+            newsId: this.$route.params.newsId || null,
             form: {
                 name: '',
-                content: ''
+                content: '',
+                id: ''
             }
         };
+    },
+    created: function created() {
+        this.getNews();
     },
 
     methods: {
         submit: function submit(form) {
             var _this = this;
 
-            __WEBPACK_IMPORTED_MODULE_1__services_http__["a" /* default */].transport('/api/manager/news/process', form, 'POST').then(function (response) {
+            __WEBPACK_IMPORTED_MODULE_2__services_http__["a" /* default */].transport('/api/manager/news/process', form, 'POST').then(function (response) {
                 if (response.success) {
                     _this.$router.push('../news');
                 }
             });
-        }
+        },
+        getNews: function () {
+            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+                var _this2 = this;
+
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                if (this.newsId) {
+                                    __WEBPACK_IMPORTED_MODULE_2__services_http__["a" /* default */].transport('/api/manager/news/' + this.newsId).then(function (response) {
+                                        _this2.form.name = response.name;
+                                        _this2.form.content = response.content;
+                                        _this2.form.id = response.id;
+                                    });
+                                }
+
+                            case 1:
+                            case 'end':
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this);
+            }));
+
+            function getNews() {
+                return _ref.apply(this, arguments);
+            }
+
+            return getNews;
+        }()
     }
 });
 
@@ -18370,6 +18439,31 @@ var render = function() {
               1
             )
           ]),
+          _vm._v(" "),
+          _vm.form.id
+            ? _c("div", [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.id,
+                      expression: "form.id"
+                    }
+                  ],
+                  attrs: { type: "hidden", name: "id" },
+                  domProps: { value: _vm.form.id },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "id", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            : _vm._e(),
           _vm._v(" "),
           _vm._m(0)
         ]

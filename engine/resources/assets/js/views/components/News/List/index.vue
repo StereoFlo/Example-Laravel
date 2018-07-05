@@ -19,7 +19,9 @@
                         <td>{{ news.id }}</td>
                         <td>{{ news.name }}</td>
                         <td>
-                            <a href="#">Изменить</a> |
+                            <router-link :to="{ name: 'newsFormEdit', params: {newsId: news.id} }">
+                                Изменить
+                            </router-link> |
                             <a @click.prevent="deleteNews(news.id)" href="#">Удалить</a>
                         </td>
                     </tr>
@@ -36,7 +38,7 @@
     export default {
         data() {
             return {
-                workList: []
+                newsList: []
             }
         },
         created() {

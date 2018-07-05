@@ -82,6 +82,11 @@ const router = new VueRouter({
             component: NewsForm,
         },
         {
+            path: '/manager2/news/form/:newsId',
+            name: 'newsFormEdit',
+            component: NewsForm,
+        },
+        {
             path: '/manager2/work',
             name: 'workList',
             component: WorkList,
