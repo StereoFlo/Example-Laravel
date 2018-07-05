@@ -17,6 +17,9 @@
                     <router-link :to="{ name: 'home' }" class="list-group-item">
                         <i class="fa fa-comment-o"></i> Главная
                     </router-link>
+                    <router-link :to="{ name: 'userList' }" class="list-group-item">
+                        <i class="fa fa-comment-o"></i> Пользователи
+                    </router-link>
                     <router-link :to="{ name: 'settings' }" class="list-group-item">
                         <i class="fa fa-comment-o"></i> Настройки
                     </router-link>

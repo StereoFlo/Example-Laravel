@@ -1,0 +1,63 @@
+<template>
+    <div class="panel panel-default">
+        <div class="panel-heading">Просмотр пользователя {{ user.name }}</div>
+        <div class="panel-body">
+            <p>
+                Включенеые роли:<br>
+            <ul>
+                <!--@foreach($userRoles as $userRole)-->
+                <!--@if(count($userRoles) > 1)-->
+                <!--<li>{{$userRole['name']}} (<a href="{{ route('userRoleRemoveManager',  ['userId' => $user['id'], 'roleId' => $userRole['id']]) }}">Выключить</a>)</li>-->
+                <!--@else-->
+                <!--<li>{{$userRole['name']}}</li>-->
+                <!--@endif-->
+                <!--@endforeach-->
+            </ul>
+            </p>
+            <p>
+                Выключенеые роли:<br>
+            <ul>
+                <!--@foreach($roles as $role)-->
+                <!--<li>{{$role['name']}} (<a href="{{ route('userRoleAddManager',  ['userId' => $user['id'], 'roleId' => $role['id']]) }}">Включить</a>)</li>-->
+                <!--@endforeach-->
+            </ul>
+            </p>
+            <!--<p>Работы пользователя</p>-->
+            <!--@if(empty($works))-->
+            <!--У пользователя нет пока работ-->
+            <!--@else-->
+            <!--<p>Все {{ count($works) }} || <a href="{{ route('workListManager') }}">Не проверенные</a> {{ $workCount }}</p>-->
+            <!--@endif-->
+            <!--<p>Действия:</p>-->
+            <!--<a href="{{ route('managerUserRemove', ['id' => $user['id']]) }}">Удалить</a>.-->
+            <!--<i>Внимание! Удаление пользователя приведет к удалению всех его работ и прочего.</i>-->
+        </div>
+    </div>
+</template>
+
+<script>
+    import http from "../../../../services/http";
+
+    export default {
+        data() {
+            return {
+                userId: this.$route.params.userId || null,
+                user: {},
+            }
+        },
+        created() {
+            this.getUser();
+        },
+        methods: {
+            async getUser() {
+                http.transport('/api/manager/user/' + this.userId).then(response => {
+                    this.user = response;
+                });
+            }
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>

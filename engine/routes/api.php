@@ -32,5 +32,8 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::get('/manager/work/list/{pageId}', 'Manager\\Api\\Work@getList')->where('id', '[0-9]+');
         Route::get('/manager/work/approve/{workId}', 'Manager\\Api\\Work@approve')->where('workId', '[0-9]+');
         Route::get('/manager/work/{workId}/delete', 'Manager\\Api\\Work@remove')->where('workId', '[0-9]+');
+
+        Route::get('/manager/user/list', 'Manager\\Api\\User@getList');
+        Route::get('/manager/user/{userId}', 'Manager\\Api\\User@show')->where('userId', '[0-9]+');
     });
 });

@@ -10,11 +10,13 @@ import Home from './views/components/Home/Home';
 import Slogan from './views/components/Settings/index';
 import Material from './views/components/Material/List/index';
 import MaterialForm from './views/components/Material/Create/index';
-import PagesList from './views/components/Pages/List/index';
-import PagesForm from './views/components/Pages/Form/index';
+import PagesList from './views/components/Page/List/index';
+import PagesForm from './views/components/Page/Form/index';
 import NewsList from './views/components/News/List/index';
 import NewsForm from './views/components/News/Form/index';
-import WorkList from './views/components/Works/List/index';
+import WorkList from './views/components/Work/List/index';
+import UserList from './views/components/User/List/index';
+import UserShow from './views/components/User/Show/index';
 
 const router = new VueRouter({
     mode: 'history',
@@ -78,6 +80,16 @@ const router = new VueRouter({
             path: '/manager2/work',
             name: 'workList',
             component: WorkList,
+        },
+        {
+            path: '/manager2/user',
+            name: 'userList',
+            component: UserList,
+        },
+        {
+            path: '/manager2/user/:userId',
+            name: 'userShow',
+            component: UserShow,
         },
     ],
 });
