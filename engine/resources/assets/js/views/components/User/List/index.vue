@@ -39,6 +39,7 @@
             }
         },
         created() {
+            console.log(this.$store.getters.count);
             this.getUsers();
         },
         methods: {

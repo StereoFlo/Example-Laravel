@@ -1,11 +1,7 @@
 <template>
     <div class="panel panel-default">
         <div class="panel-heading">
-            Категории (
-            <router-link :to="{ name: 'newsForm' }">
-                Добавить
-            </router-link>
-            )
+            Работы
         </div>
         <div class="panel-body">
             <div v-if="workList">

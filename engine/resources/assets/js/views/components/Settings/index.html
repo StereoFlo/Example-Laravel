@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-    <div class="panel-heading">Слоган\Призыв</div>
+    <div class="panel-heading">Настройки</div>
     <div class="panel-body">
         <form class="form-horizontal" @submit.prevent="submit(form)">
             <div class="form-group">
@@ -18,7 +18,7 @@
                 <label for="limitWorksForGallery" class="col-md-3 control-label">Количество работ на странице галлереи</label>
                 <div class="col-md-9 col-lg-8">
                     <input id="limitWorksForGallery" type="text" class="form-control" name="limitWorksForGallery"
-                           v-model="form.limitWorksForGallery.setting_value" required autofocus>
+                           v-model="form.limitWorksForGallery.setting_value" required>
                 </div>
             </div>
             <div class="form-group">

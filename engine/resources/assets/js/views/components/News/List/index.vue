@@ -1,7 +1,7 @@
 <template>
     <div class="panel panel-default">
         <div class="panel-heading">
-            Категории (
+            Новости (
             <router-link :to="{ name: 'newsForm' }">
                 Добавить
             </router-link>

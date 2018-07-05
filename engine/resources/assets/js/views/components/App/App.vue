@@ -8,11 +8,8 @@
                     <span class="icon-bar"></span>
                 </div>
                 <div class="list-group">
-                    <span href="#" class="list-group-item active">
-                        Меню админа
-                        <span class="pull-right" id="slide-submenu">
-                            <i class="fa fa-times"></i>
-                        </span>
+                    <span href="#" class="list-group-item">
+                        <h4>Меню админа</h4>
                     </span>
                     <router-link :to="{ name: 'home' }" class="list-group-item">
                         <i class="fa fa-comment-o"></i> Главная
@@ -48,5 +45,9 @@
 
 </template>
 <script>
-    export default {}
+    export default {
+        created() {
+            this.$store.dispatch('addCount', 1);
+        }
+    }
 </script>
