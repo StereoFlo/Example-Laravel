@@ -98,6 +98,11 @@ const router = new VueRouter({
                     component: WorkList,
                 },
                 {
+                    path: 'work/:page',
+                    name: 'workPagination',
+                    component: WorkList,
+                },
+                {
                     path: 'user',
                     name: 'userList',
                     component: UserList,

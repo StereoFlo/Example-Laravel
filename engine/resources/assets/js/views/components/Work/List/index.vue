@@ -40,6 +40,26 @@
                 workList: []
             }
         },
+        computed: {
+            totalPages: function () {
+                return Math.floor(this.total / this.limit)
+            },
+            showLess: function () {
+                return (this.total / this.limit) > 1 && (this.total / this.limit) > this.currentPage + 1;
+            },
+            showMore: function () {
+                return this.currentPage > 0;
+            },
+            showCurrentPage: function () {
+                return this.currentPage + 1;
+            },
+            nextPage: function () {
+                return this.currentPage + 1;
+            },
+            prevPage: function () {
+                return this.currentPage - 1;
+            }
+        },
         created() {
             this.getWorks();
         },
