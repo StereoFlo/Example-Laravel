@@ -8,7 +8,7 @@
             )
         </div>
         <div class="panel-body">
-            <div v-if="newsList">
+            <div v-if="newsList.length">
                 <table class="table table-hover table-responsive">
                     <tr>
                         <td>ID</td>
@@ -27,7 +27,7 @@
                     </tr>
                 </table>
             </div>
-            <p v-if="!newsList">Новостей пока нет</p>
+            <p v-if="!newsList.length">Новостей пока нет</p>
         </div>
     </div>
 </template>
