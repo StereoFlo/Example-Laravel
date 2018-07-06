@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => 'isModerator'], function () {
+    Route::get('/manager/catalog/list', 'Manager\\Api\\Catalog@getList');
 });
