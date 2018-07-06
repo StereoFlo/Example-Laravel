@@ -9,15 +9,15 @@
                     <tr>
                         <td>ID</td>
                         <td>Название</td>
-                        <td>Автор</td>
                         <td>Проверена</td>
                         <td>Действия</td>
                     </tr>
                     <tr v-for="work in workList">
                         <td>{{ work.id }}</td>
                         <td>{{ work.workName }}</td>
-                        <td>{{ work.userName }}</td>
-                        <td><input type="checkbox" v-model="work.approved" @change="toggleApprove(work.id)"/></td>
+                        <td>
+                            <input type="checkbox" v-model="work.approved" @change="toggleApprove(work.id)"/>
+                        </td>
                         <td>
                             <a :href="'/cabinet/work/' + work.id">Открыть</a> |
                             <a :href="'/cabinet/work/' + work.id + '/edit'">Изменить</a> |
