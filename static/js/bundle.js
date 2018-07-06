@@ -18783,7 +18783,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             return this.currentPage + 1;
         },
         prevPage: function prevPage() {
-            return this.currentPage + 1;
+            return this.currentPage - 1;
         }
     },
     created: function created() {

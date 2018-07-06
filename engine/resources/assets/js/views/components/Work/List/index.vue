@@ -25,6 +25,19 @@
                         </td>
                     </tr>
                 </table>
+                <div class="pagination">
+                    <div v-if="showMore">
+                        <router-link :to="{ name: 'workPagination', params: {page: prevPage} }">
+                            &laquo;
+                        </router-link>
+                    </div>
+                    <a class="active">{{ showCurrentPage }}</a> из {{ totalPages }}
+                    <div v-if="showLess">
+                        <router-link :to="{ name: 'workPagination', params: {page: nextPage} }">
+                            &raquo;
+                        </router-link>
+                    </div>
+                </div>
             </div>
             <p v-if="!workList.length">Работ пока нет</p>
         </div>
@@ -37,7 +50,10 @@
     export default {
         data() {
             return {
-                workList: []
+                currentPage: this.$route.params.page || 0,
+                workList: [],
+                total: 0,
+                limit: 0
             }
         },
         computed: {
@@ -65,8 +81,10 @@
         },
         methods: {
             async getWorks() {
-                http.transport('/api/manager/work/list').then(response => {
-                    this.workList = response;
+                http.transport('/api/manager/work/list/' + this.currentPage).then(response => {
+                    this.workList = response.items;
+                    this.total = response.total;
+                    this.limit = response.limit;
                 });
             },
             deleteWork(id) {
