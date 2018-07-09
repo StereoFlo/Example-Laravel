@@ -12440,6 +12440,10 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
             name: 'workList',
             component: __WEBPACK_IMPORTED_MODULE_13__views_components_Work_List_index___default.a
         }, {
+            path: 'work/:page',
+            name: 'workPagination',
+            component: __WEBPACK_IMPORTED_MODULE_13__views_components_Work_List_index___default.a
+        }, {
             path: 'user',
             name: 'userList',
             component: __WEBPACK_IMPORTED_MODULE_14__views_components_User_List_index___default.a
@@ -18685,7 +18689,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -18736,14 +18740,51 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            workList: []
+            currentPage: this.$route.params.page || 0,
+            workList: [],
+            total: 0,
+            limit: 0
         };
+    },
+
+    computed: {
+        totalPages: function totalPages() {
+            return Math.floor(this.total / this.limit);
+        },
+        showLess: function showLess() {
+            return this.total / this.limit > 1 && this.total / this.limit > this.currentPage + 1;
+        },
+        showMore: function showMore() {
+            return this.currentPage > 0;
+        },
+        showCurrentPage: function showCurrentPage() {
+            return this.currentPage + 1;
+        },
+        nextPage: function nextPage() {
+            return this.currentPage + 1;
+        },
+        prevPage: function prevPage() {
+            return this.currentPage - 1;
+        }
     },
     created: function created() {
         this.getWorks();
@@ -18758,8 +18799,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
-                                __WEBPACK_IMPORTED_MODULE_1__services_http__["a" /* default */].transport('/api/manager/work/list').then(function (response) {
-                                    _this.workList = response;
+                                __WEBPACK_IMPORTED_MODULE_1__services_http__["a" /* default */].transport('/api/manager/work/list/' + this.currentPage).then(function (response) {
+                                    _this.workList = response.items;
+                                    _this.total = response.total;
+                                    _this.limit = response.limit;
                                 });
 
                             case 1:
@@ -18824,8 +18867,6 @@ var render = function() {
                     _c("td", [_vm._v(_vm._s(work.id))]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(work.workName))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(work.userName))]),
                     _vm._v(" "),
                     _c("td", [
                       _c("input", {
@@ -18912,13 +18953,65 @@ var render = function() {
                 })
               ],
               2
-            )
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "pagination" }, [
+              _vm.showMore
+                ? _c(
+                    "div",
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          attrs: {
+                            to: {
+                              name: "workPagination",
+                              params: { page: _vm.prevPage }
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        «\n                    "
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c("a", { staticClass: "active" }, [
+                _vm._v(_vm._s(_vm.showCurrentPage))
+              ]),
+              _vm._v(" из " + _vm._s(_vm.totalPages) + "\n                "),
+              _vm.showLess
+                ? _c(
+                    "div",
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          attrs: {
+                            to: {
+                              name: "workPagination",
+                              params: { page: _vm.nextPage }
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        »\n                    "
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e()
+            ])
           ])
-        : _vm._e(),
-      _vm._v(" "),
-      !_vm.workList && !_vm.workList.length
-        ? _c("p", [_vm._v("Работ пока нет")])
-        : _vm._e()
+        : _c("p", [_vm._v("Работ пока нет")])
     ])
   ])
 }
@@ -18931,8 +19024,6 @@ var staticRenderFns = [
       _c("td", [_vm._v("ID")]),
       _vm._v(" "),
       _c("td", [_vm._v("Название")]),
-      _vm._v(" "),
-      _c("td", [_vm._v("Автор")]),
       _vm._v(" "),
       _c("td", [_vm._v("Проверена")]),
       _vm._v(" "),

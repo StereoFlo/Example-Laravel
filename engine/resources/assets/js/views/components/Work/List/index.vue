@@ -39,7 +39,7 @@
                     </div>
                 </div>
             </div>
-            <p v-if="!workList && !workList.length">Работ пока нет</p>
+            <p v-else>Работ пока нет</p>
         </div>
     </div>
 </template>
