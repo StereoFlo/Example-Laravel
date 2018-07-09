@@ -4,7 +4,7 @@
             Работы
         </div>
         <div class="panel-body">
-            <div v-if="workList.length">
+            <div v-if="workList && workList.length > 0">
                 <table class="table table-hover table-responsive">
                     <tr>
                         <td>ID</td>
@@ -26,7 +26,7 @@
                     </tr>
                 </table>
             </div>
-            <p v-if="!workList.length">Работ пока нет</p>
+            <p v-if="!workList && !workList.length">Работ пока нет</p>
         </div>
     </div>
 </template>
