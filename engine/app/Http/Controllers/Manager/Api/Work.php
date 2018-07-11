@@ -27,8 +27,8 @@ class Work extends Controller
      */
     public function getList(\RecycleArt\Models\Work $work, Request $request, int $page = 0)
     {
-        $limit = $request->request->getInt('limit', 15);
-        $offset = $request->request->getInt('offset');
+        $limit = $request->query->getInt('limit', 15);
+        $offset = $request->query->getInt('offset');
 
         return JsonResponse::create([
             'total' => $work::all()->count(),
