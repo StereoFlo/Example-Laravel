@@ -27,7 +27,14 @@ class Work extends Controller
      */
     public function getList(\RecycleArt\Models\Work $work, Request $request, int $page = 0)
     {
-        return JsonResponse::create($work->getListForManager($work->getPerPage(), $page));
+        $limit = $request->request->getInt('limit', 15);
+        $offset = $request->request->getInt('offset');
+
+        return JsonResponse::create([
+            'total' => $work::all()->count(),
+            'limit' => $limit,
+            'items' => $work->getListForManager($limit, $offset),
+        ]);
     }
 
     /**
