@@ -50,8 +50,6 @@
 </template>
 
 <script>
-    import http from "../../../../services/http";
-
     export default {
         data() {
             return {
@@ -67,30 +65,30 @@
         },
         methods: {
             getUser() {
-                http.transport('/api/manager/user/' + this.userId).then(response => {
-                    this.user = response.user;
-                    this.works = response.works;
-                    this.userRoles = response.userRoles;
-                    this.roles = response.roles;
+                this.$http.get('/api/manager/user/' + this.userId).then(response => {
+                    this.user = response.body.user;
+                    this.works = response.body.works;
+                    this.userRoles = response.body.userRoles;
+                    this.roles = response.body.roles;
                 });
             },
             async removeRole(userId, roleId) {
-                http.transport('/api/manager/user/role/remove/' + userId + '/' + roleId).then(response => {
-                    if (response.success) {
+                this.$http.get('/api/manager/user/role/remove/' + userId + '/' + roleId).then(response => {
+                    if (response.ok) {
                         this.getUser();
                     }
                 });
             },
             async addRole(userId, roleId) {
-                http.transport('/api/manager/user/role/add/' + userId + '/' + roleId).then(response => {
-                    if (response.success) {
+                this.$http.get('/api/manager/user/role/add/' + userId + '/' + roleId).then(response => {
+                    if (response.ok) {
                         this.getUser();
                     }
                 });
             },
             async removeUser(userId) {
-                http.transport('/api/manager/user/' + userId + '/remove').then(response => {
-                    if (response.success) {
+                this.$http.get('/api/manager/user/' + userId + '/remove').then(response => {
+                    if (response.ok) {
                         this.$router.push({ name: 'userList' })
                     }
                 });

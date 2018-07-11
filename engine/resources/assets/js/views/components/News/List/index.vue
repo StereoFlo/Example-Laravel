@@ -33,8 +33,6 @@
 </template>
 
 <script>
-    import http from "../../../../services/http";
-
     export default {
         data() {
             return {
@@ -46,13 +44,13 @@
         },
         methods: {
             async getNews() {
-                http.transport('/api/manager/news/list').then(response => {
-                    this.newsList = response;
+                this.$http.get('/api/manager/news/list').then(response => {
+                    this.newsList = response.body;
                 });
             },
             deleteNews(id) {
-                http.transport('/api/manager/news/' + id + '/delete').then(response => {
-                    if (response.success) {
+                this.$http.get('/api/manager/news/' + id + '/delete').then(response => {
+                    if (response.ok) {
                         this.getNews();
                     }
                 })

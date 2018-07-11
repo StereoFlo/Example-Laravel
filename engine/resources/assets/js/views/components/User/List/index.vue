@@ -29,8 +29,6 @@
 </template>
 
 <script>
-    import http from "../../../../services/http";
-
     export default {
         name: "index",
         data() {
@@ -39,13 +37,12 @@
             }
         },
         created() {
-            console.log(this.$store.getters.count);
             this.getUsers();
         },
         methods: {
             async getUsers() {
-                http.transport('/api/manager/user/list').then(response => {
-                    this.userList = response;
+                this.$http.get('/api/manager/user/list').then(response => {
+                    this.userList = response.body;
                 });
             }
         }

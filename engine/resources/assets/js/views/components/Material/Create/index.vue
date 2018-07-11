@@ -2,7 +2,7 @@
 
 <script>
     import { VueEditor } from 'vue2-editor'
-    import http from "../../../../services/http";
+
     export default {
         components: {
             VueEditor
@@ -26,8 +26,8 @@
                 formData.append('description', form.desc);
                 formData.append('file', form.file);
 
-                http.transport('/api/manager/material/process', formData, 'POST').then(response => {
-                    if (response.success) {
+                this.$http.post('/api/manager/material/process', formData).then(response => {
+                    if (response.ok) {
                         this.$router.push({ name: 'materials' });
                     }
                 });

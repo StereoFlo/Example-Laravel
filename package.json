@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "vue-pagination-btns": "^1.0.5",
+    "vue-resource": "^1.5.1",
     "vue2-editor": "^2.5.0"
   }
 }

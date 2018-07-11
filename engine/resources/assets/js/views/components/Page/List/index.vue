@@ -1,7 +1,6 @@
 <template src="./index.html"></template>
 
 <script>
-    import http from "../../../../services/http";
 
     export default {
         name: "index",
@@ -15,13 +14,13 @@
         },
         methods: {
             async getPages() {
-                http.transport('/api/manager/pages/list').then(response => {
-                    this.pages = response;
+                this.$http.get('/api/manager/pages/list').then(response => {
+                    this.pages = response.body;
                 });
             },
             async deletePage(slug) {
-                http.transport('/api/manager/pages/' + slug + '/delete').then(response => {
-                    if (response.success) {
+                this.$http.get('/api/manager/pages/' + slug + '/delete').then(response => {
+                    if (response.ok) {
                         this.getPages();
                     }
                 });

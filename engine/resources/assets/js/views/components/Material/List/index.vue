@@ -1,8 +1,6 @@
 <template src="./index.html"></template>
 
 <script>
-    import http from "../../../../services/http";
-
     export default {
         data() {
             return {
@@ -14,13 +12,13 @@
         },
         methods: {
             async getMaterials() {
-                http.transport('/api/manager/material/list').then(response => {
-                    this.materials = response;
+                this.$http.get('/api/manager/material/list').then(response => {
+                    this.materials = response.body;
                 })
             },
             async removeMaterial(id) {
-                http.transport('/api/manager/material/'+ id +'/remove').then(response => {
-                    if (response.success) {
+                this.$http.get('/api/manager/material/'+ id +'/remove').then(response => {
+                    if (response.ok) {
                         this.getMaterials();
                     }
                 })

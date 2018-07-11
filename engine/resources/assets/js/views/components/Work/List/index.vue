@@ -33,13 +33,15 @@
 </template>
 
 <script>
-    import http from "../../../../services/http";
     import pgn from 'vue-pagination-btns';
 
     export default {
         mixins: [pgn],
         data() {
             return {
+                pgnSets: {
+                    limit: 15,
+                },
                 currentPage: this.$route.params.page || 0,
                 workList: [],
                 total: 0,
@@ -47,26 +49,27 @@
             }
         },
         created() {
-            this.getWorks();
+            this.getWorks(this.pgnSets);
         },
         methods: {
-            async getWorks(params) {
-                http.transport('/api/manager/work/list/', params).then(response => {
-                    this.workList = response.items;
-                    this.pgnSets.total = response.total;
-                    this.pgnSets.limit = response.limit;
+            async getWorks(params = this.pgnSets) {
+                this.$http.get('/api/manager/work/list/', {params: params}).then(response => {
+                    console.log(response);
+                    this.workList = response.body.items;
+                    this.pgnSets.total = response.body.total;
+                    this.pgnSets.limit = response.body.limit;
                 });
             },
             deleteWork(id) {
-                http.transport('/api/manager/work/' + id + '/delete').then(response => {
-                    if (response.success) {
+                this.$http.get('/api/manager/work/' + id + '/delete').then(response => {
+                    if (response.ok) {
                         this.getWorks();
                     }
                 })
             },
             toggleApprove(id) {
-                http.transport('/api/manager/work/approve/' + id).then(response => {
-                    if (response.success) {
+                this.$http.get('/api/manager/work/approve/' + id).then(response => {
+                    if (response.ok) {
                         this.getWorks();
                     }
                 })

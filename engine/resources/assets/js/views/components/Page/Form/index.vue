@@ -2,7 +2,7 @@
 
 <script>
     import {VueEditor} from 'vue2-editor'
-    import http from "../../../../services/http";
+
     export default {
         components: {
             VueEditor
@@ -23,7 +23,7 @@
         },
         methods: {
             submit(form) {
-                http.transport('/api/manager/pages/process', form, 'POST').then(response => {
+                this.$http.post('/api/manager/pages/process', form).then(response => {
                     if (response.success) {
                         this.$router.push({ name: 'pagesList' })
                     }
@@ -31,11 +31,11 @@
             },
             async getPage() {
                 if (this.pageId) {
-                    http.transport('/api/manager/pages/' + this.pageId).then(response => {
-                        this.form.slug = response.slug;
-                        this.form.name = response.name;
-                        this.form.content = response.content;
-                        this.form.id = response.slug;
+                    this.$http.get('/api/manager/pages/' + this.pageId).then(response => {
+                        this.form.slug = response.body.slug;
+                        this.form.name = response.body.name;
+                        this.form.content = response.body.content;
+                        this.form.id = response.body.slug;
                     });
                 }
             }

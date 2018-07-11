@@ -31,8 +31,7 @@
 </template>
 
 <script>
-    import http from "../../../../services/http";
-    import { VueEditor } from 'vue2-editor';
+    import {VueEditor} from 'vue2-editor';
 
     export default {
         components: {
@@ -57,25 +56,21 @@
         methods: {
             async getCategory() {
                 if (this.categoryId) {
-                    http.transport('/api/manager/catalog/' + this.categoryId).then(response => {
-                        this.form.name = response.name;
-                        this.form.description = response.description;
-                        this.form.id = response.id;
+                    this.$http.get('/api/manager/catalog/' + this.categoryId).then(response => {
+                        this.form.name = response.body.name;
+                        this.form.description = response.body.description;
+                        this.form.id = response.body.id;
                     });
                 }
             },
             submit(form) {
-                const name = form.name;
-                const description = form.description;
-
-                if (!name) {
+                if (!form.name) {
                     this.nameError = 'Имя является обязательным параметром!';
                     return;
                 }
 
-                const response = http.transport('/api/manager/catalog/process', this.form, 'POST');
-                response.then((response) => {
-                    if (response.success) {
+                this.$http.post('/api/manager/catalog/process', form).then((response) => {
+                    if (response.ok) {
                         this.$router.push({name: 'catalog'})
                     }
                 }, error => {

@@ -1,7 +1,6 @@
 <template src="./list.html"></template>
 
 <script>
-    import http from "../../../../services/http";
     export default {
         data() {
             return {
@@ -13,12 +12,13 @@
         },
         methods: {
             async getCategories() {
-                this.categories = await http.transport('/api/manager/catalog/list');
+                this.$http.get('/api/manager/catalog/list').then(response => {
+                    this.categories = response.body;
+                });
             },
             async deleteCategory(id) {
-                console.log(id);
-                http.transport('/api/manager/catalog/'+ id +'/remove').then(response => {
-                    if (response.success) {
+                this.$http.get('/api/manager/catalog/'+ id +'/remove').then(response => {
+                    if (response.ok) {
                         this.getCategories();
                     }
                 }, error => {

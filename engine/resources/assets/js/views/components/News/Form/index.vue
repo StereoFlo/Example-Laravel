@@ -33,7 +33,6 @@
 
 <script>
     import { VueEditor } from 'vue2-editor'
-    import http from "../../../../services/http";
     export default {
         components: {
             VueEditor
@@ -53,18 +52,18 @@
         },
         methods: {
             submit(form) {
-                http.transport('/api/manager/news/process', form, 'POST').then(response => {
-                    if (response.success) {
+                this.$http.post('/api/manager/news/process', form).then(response => {
+                    if (response.ok) {
                         this.$router.push({ name: 'newsList' });
                     }
                 });
             },
             async getNews() {
                 if (this.newsId) {
-                    http.transport('/api/manager/news/' + this.newsId).then(response => {
-                        this.form.name = response.name;
-                        this.form.content = response.content;
-                        this.form.id = response.id;
+                    this.$http.get('/api/manager/news/' + this.newsId).then(response => {
+                        this.form.name = response.body.name;
+                        this.form.content = response.body.content;
+                        this.form.id = response.body.id;
                     });
                 }
             }

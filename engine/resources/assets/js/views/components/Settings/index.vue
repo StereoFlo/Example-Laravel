@@ -2,7 +2,7 @@
 
 <script>
     import { VueEditor } from 'vue2-editor'
-    import http from "../../../services/http";
+
     export default {
         components: {
             VueEditor
@@ -22,9 +22,9 @@
         },
         methods: {
             async getSettings() {
-                http.transport('/api/manager/settings/list').then(response => {
-                    this.settings = response;
-                    for (const item of response) {
+                this.$http.get('/api/manager/settings/list').then(response => {
+                    this.settings = response.body;
+                    for (const item of response.body) {
                         if (item.setting_slug === 'limitWorksForGallery') {
                             this.form.limitWorksForGallery = item;
                         }
@@ -39,11 +39,11 @@
                 })
             },
             submit(e) {
-                http.transport('/api/manager/settings/process', {
+                this.$http.post('/api/manager/settings/process', {
                     [e.generalPageBlock.setting_slug]: e.generalPageBlock.setting_value,
                     [e.limitWorksForGallery.setting_slug]: e.limitWorksForGallery.setting_value,
                     [e.slogan.setting_slug]: e.slogan.setting_value,
-                }, 'POST')
+                })
             }
         }
     }
