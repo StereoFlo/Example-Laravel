@@ -25,19 +25,7 @@
                         </td>
                     </tr>
                 </table>
-                <div class="pagination">
-                    <div v-if="showMore">
-                        <router-link :to="{ name: 'workPagination', params: {page: prevPage} }">
-                            &laquo;
-                        </router-link>
-                    </div>
-                    <a class="active">{{ showCurrentPage }}</a> из {{ totalPages }}
-                    <div v-if="showLess">
-                        <router-link :to="{ name: 'workPagination', params: {page: nextPage} }">
-                            &raquo;
-                        </router-link>
-                    </div>
-                </div>
+                <pgn-btns :pgn-sets="pgnSets" :action="getWorks"></pgn-btns>
             </div>
             <p v-if="!workList.length">Работ пока нет</p>
         </div>
@@ -46,8 +34,10 @@
 
 <script>
     import http from "../../../../services/http";
+    import pgn from 'vue-pagination-btns';
 
     export default {
+        mixins: [pgn],
         data() {
             return {
                 currentPage: this.$route.params.page || 0,
@@ -56,35 +46,15 @@
                 limit: 0
             }
         },
-        computed: {
-            totalPages: function () {
-                return Math.floor(this.total / this.limit)
-            },
-            showLess: function () {
-                return (this.total / this.limit) > 1 && (this.total / this.limit) > this.currentPage + 1;
-            },
-            showMore: function () {
-                return this.currentPage > 0;
-            },
-            showCurrentPage: function () {
-                return this.currentPage + 1;
-            },
-            nextPage: function () {
-                return this.currentPage + 1;
-            },
-            prevPage: function () {
-                return this.currentPage - 1;
-            }
-        },
         created() {
             this.getWorks();
         },
         methods: {
-            async getWorks() {
-                http.transport('/api/manager/work/list/' + this.currentPage).then(response => {
+            async getWorks(params) {
+                http.transport('/api/manager/work/list/', params).then(response => {
                     this.workList = response.items;
-                    this.total = response.total;
-                    this.limit = response.limit;
+                    this.pgnSets.total = response.total;
+                    this.pgnSets.limit = response.limit;
                 });
             },
             deleteWork(id) {

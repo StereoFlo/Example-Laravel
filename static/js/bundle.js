@@ -185,11 +185,14 @@ module.exports = function normalizeComponent (
 
         return new Promise(function (resolve, reject) {
             var xhr = new XMLHttpRequest();
-            xhr.open(method, url, true);
+            if (method === 'GET' && params) {
+                xhr.open(method, url + '?' + $.param(params), true);
+            } else {
+                xhr.open(method, url, true);
+            }
             xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
             xhr.setRequestHeader("Authorization", "Bearer " + document.getElementById('token').getAttribute('data-token'));
             if (method === 'POST') {
-
                 var csrfToken = function csrfToken() {
                     var meta = document.getElementsByTagName('meta');
                     var _iteratorNormalCompletion = true;
@@ -18689,7 +18692,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -18703,6 +18706,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_http__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_pagination_btns__ = __webpack_require__(75);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -18741,22 +18745,12 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_2_vue_pagination_btns__["a" /* default */]],
     data: function data() {
         return {
             currentPage: this.$route.params.page || 0,
@@ -18765,44 +18759,23 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             limit: 0
         };
     },
-
-    computed: {
-        totalPages: function totalPages() {
-            return Math.floor(this.total / this.limit);
-        },
-        showLess: function showLess() {
-            return this.total / this.limit > 1 && this.total / this.limit > this.currentPage + 1;
-        },
-        showMore: function showMore() {
-            return this.currentPage > 0;
-        },
-        showCurrentPage: function showCurrentPage() {
-            return this.currentPage + 1;
-        },
-        nextPage: function nextPage() {
-            return this.currentPage + 1;
-        },
-        prevPage: function prevPage() {
-            return this.currentPage - 1;
-        }
-    },
     created: function created() {
         this.getWorks();
     },
 
     methods: {
         getWorks: function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(params) {
                 var _this = this;
 
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
-                                __WEBPACK_IMPORTED_MODULE_1__services_http__["a" /* default */].transport('/api/manager/work/list/' + this.currentPage).then(function (response) {
+                                __WEBPACK_IMPORTED_MODULE_1__services_http__["a" /* default */].transport('/api/manager/work/list/', params).then(function (response) {
                                     _this.workList = response.items;
-                                    _this.total = response.total;
-                                    _this.limit = response.limit;
+                                    _this.pgnSets.total = response.total;
+                                    _this.pgnSets.limit = response.limit;
                                 });
 
                             case 1:
@@ -18813,7 +18786,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 }, _callee, this);
             }));
 
-            function getWorks() {
+            function getWorks(_x) {
                 return _ref.apply(this, arguments);
             }
 
@@ -18855,162 +18828,118 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "panel-body" }, [
       _vm.workList.length
-        ? _c("div", [
-            _c(
-              "table",
-              { staticClass: "table table-hover table-responsive" },
-              [
-                _vm._m(0),
-                _vm._v(" "),
-                _vm._l(_vm.workList, function(work) {
-                  return _c("tr", [
-                    _c("td", [_vm._v(_vm._s(work.id))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(work.workName))]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: work.approved,
-                            expression: "work.approved"
-                          }
-                        ],
-                        attrs: { type: "checkbox" },
-                        domProps: {
-                          checked: Array.isArray(work.approved)
-                            ? _vm._i(work.approved, null) > -1
-                            : work.approved
-                        },
-                        on: {
-                          change: [
-                            function($event) {
-                              var $$a = work.approved,
-                                $$el = $event.target,
-                                $$c = $$el.checked ? true : false
-                              if (Array.isArray($$a)) {
-                                var $$v = null,
-                                  $$i = _vm._i($$a, $$v)
-                                if ($$el.checked) {
-                                  $$i < 0 &&
-                                    _vm.$set(
-                                      work,
-                                      "approved",
-                                      $$a.concat([$$v])
-                                    )
-                                } else {
-                                  $$i > -1 &&
-                                    _vm.$set(
-                                      work,
-                                      "approved",
-                                      $$a
-                                        .slice(0, $$i)
-                                        .concat($$a.slice($$i + 1))
-                                    )
-                                }
-                              } else {
-                                _vm.$set(work, "approved", $$c)
-                              }
-                            },
-                            function($event) {
-                              _vm.toggleApprove(work.id)
+        ? _c(
+            "div",
+            [
+              _c(
+                "table",
+                { staticClass: "table table-hover table-responsive" },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _vm._l(_vm.workList, function(work) {
+                    return _c("tr", [
+                      _c("td", [_vm._v(_vm._s(work.id))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(work.workName))]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: work.approved,
+                              expression: "work.approved"
                             }
-                          ]
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c("a", { attrs: { href: "/cabinet/work/" + work.id } }, [
-                        _vm._v("Открыть")
-                      ]),
-                      _vm._v(" |\n                        "),
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "/cabinet/work/" + work.id + "/edit" }
-                        },
-                        [_vm._v("Изменить")]
-                      ),
-                      _vm._v(" |\n                        "),
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "#" },
+                          ],
+                          attrs: { type: "checkbox" },
+                          domProps: {
+                            checked: Array.isArray(work.approved)
+                              ? _vm._i(work.approved, null) > -1
+                              : work.approved
+                          },
                           on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              _vm.deleteWork(_vm.news.id)
-                            }
+                            change: [
+                              function($event) {
+                                var $$a = work.approved,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      _vm.$set(
+                                        work,
+                                        "approved",
+                                        $$a.concat([$$v])
+                                      )
+                                  } else {
+                                    $$i > -1 &&
+                                      _vm.$set(
+                                        work,
+                                        "approved",
+                                        $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1))
+                                      )
+                                  }
+                                } else {
+                                  _vm.$set(work, "approved", $$c)
+                                }
+                              },
+                              function($event) {
+                                _vm.toggleApprove(work.id)
+                              }
+                            ]
                           }
-                        },
-                        [_vm._v("Удалить")]
-                      )
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "a",
+                          { attrs: { href: "/cabinet/work/" + work.id } },
+                          [_vm._v("Открыть")]
+                        ),
+                        _vm._v(" |\n                        "),
+                        _c(
+                          "a",
+                          {
+                            attrs: {
+                              href: "/cabinet/work/" + work.id + "/edit"
+                            }
+                          },
+                          [_vm._v("Изменить")]
+                        ),
+                        _vm._v(" |\n                        "),
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.deleteWork(_vm.news.id)
+                              }
+                            }
+                          },
+                          [_vm._v("Удалить")]
+                        )
+                      ])
                     ])
-                  ])
-                })
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "pagination" }, [
-              _vm.showMore
-                ? _c(
-                    "div",
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          attrs: {
-                            to: {
-                              name: "workPagination",
-                              params: { page: _vm.prevPage }
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        «\n                    "
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                : _vm._e(),
+                  })
+                ],
+                2
+              ),
               _vm._v(" "),
-              _c("a", { staticClass: "active" }, [
-                _vm._v(_vm._s(_vm.showCurrentPage))
-              ]),
-              _vm._v(" из " + _vm._s(_vm.totalPages) + "\n                "),
-              _vm.showLess
-                ? _c(
-                    "div",
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          attrs: {
-                            to: {
-                              name: "workPagination",
-                              params: { page: _vm.nextPage }
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        »\n                    "
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                : _vm._e()
-            ])
-          ])
+              _c("pgn-btns", {
+                attrs: { "pgn-sets": _vm.pgnSets, action: _vm.getWorks }
+              })
+            ],
+            1
+          )
         : _vm._e(),
       _vm._v(" "),
       !_vm.workList.length ? _c("p", [_vm._v("Работ пока нет")]) : _vm._e()
@@ -20701,6 +20630,373 @@ var index_esm = {
 
 /* harmony default export */ __webpack_exports__["a"] = (index_esm);
 
+
+/***/ }),
+/* 75 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_pgn_btns__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_pgn_btns___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_pgn_btns__);
+
+
+function pgnSetsFactory() {
+    return {
+        limit: 5,
+        offset: 0,
+        total: 0
+    }
+}
+
+const pgn = {
+    components: {
+        pgnBtns: __WEBPACK_IMPORTED_MODULE_0__components_pgn_btns___default.a
+    },
+    data() {
+        return {
+            pgnSets: pgnSetsFactory()
+        }
+    }
+}
+/* harmony default export */ __webpack_exports__["a"] = (pgn);
+
+/***/ }),
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(77)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(79)
+/* template */
+var __vue_template__ = __webpack_require__(80)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "node_modules/vue-pagination-btns/components/pgn-btns.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-78242ffa", Component.options)
+  } else {
+    hotAPI.reload("data-v-78242ffa", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(78);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(5)("18c1dff6", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../css-loader/index.js!../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-78242ffa\",\"scoped\":false,\"hasInlineConfig\":true}!../../vue-loader/lib/selector.js?type=styles&index=0!./pgn-btns.vue", function() {
+     var newContent = require("!!../../css-loader/index.js!../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-78242ffa\",\"scoped\":false,\"hasInlineConfig\":true}!../../vue-loader/lib/selector.js?type=styles&index=0!./pgn-btns.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.pgn-hidden {\n  visibility: hidden !important;\n}\n.pagination {\n  text-align: center;\n  display: -webkit-flex;\n  display: -moz-flex;\n  display: -ms-flex;\n  display: -o-flex;\n  display: flex;\n  justify-content: center;\n}\n.pagination .btn {\n  border-radius: 50%;\n  min-width: 45px;\n  min-height: 45px;\n  font-size: 1.5em;\n  margin: 0 3px;\n  border: none;\n  color: #a3a6b2;\n}\n.pagination .btn-primary {\n  color: #fff\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 79 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+function clone(obj) {
+  return JSON.parse(JSON.stringify(obj));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    inactiveClassName: {
+      type: String,
+      default: 'btn btn-light'
+    },
+    activeClassName: {
+      type: String,
+      default: 'btn btn-primary'
+    },
+    pgnSets: {
+      type: Object,
+      default: function _default() {
+        return { limit: 5, offset: 0 };
+      }
+    },
+    action: {
+      type: Function,
+      default: function _default() {}
+    }
+  },
+  computed: {
+    hasNext: function hasNext() {
+      return this.pgnSets.offset + this.pgnSets.limit < this.pgnSets.total;
+    },
+    hasPrev: function hasPrev() {
+      return this.pgnSets.offset !== 0;
+    },
+    totalPages: function totalPages() {
+      return Math.ceil(this.pgnSets.total / this.pgnSets.limit);
+    },
+    pagesCount: function pagesCount() {
+      return this.totalPages && this.totalPages > 5 ? 5 : this.totalPages;
+    },
+    pages: function pages() {
+      var res = new Array(this.pagesCount);
+      for (var i = res.length - 1; i >= 0; i--) {
+        var offset = void 0;
+        if (this.pgnSets.offset >= this.pgnSets.limit * 2 && this.pgnSets.total >= this.pgnSets.offset + this.pgnSets.limit * 2) {
+          // start
+          offset = this.pgnSets.offset + this.pgnSets.limit * (i - 2);
+        } else if (this.pgnSets.total <= this.pgnSets.offset + this.pgnSets.limit * 2) {
+          // end
+          offset = this.pgnSets.limit * (this.totalPages + (i - this.pagesCount));
+        } else {
+          // middle
+          offset = this.pgnSets.limit * i;
+        }
+
+        res[i] = {
+          limit: this.pgnSets.limit,
+          offset: offset
+        };
+      }
+      return res;
+    }
+  },
+  methods: {
+    handlePageChange: function handlePageChange(_ref) {
+      var limit = _ref.limit,
+          offset = _ref.offset;
+
+      this.pgnSets.limit = limit;
+      this.pgnSets.offset = offset;
+      this.action({ limit: limit, offset: offset });
+    },
+    goToPage: function goToPage(page) {
+      if (this.pgnSets.offset !== page.offset) this.handlePageChange(page);
+    },
+    prevPage: function prevPage() {
+      var _clone = clone(this.pgnSets),
+          limit = _clone.limit,
+          offset = _clone.offset;
+
+      if (this.pgnSets.offset <= this.pgnSets.limit) {
+        offset = 0;
+      } else {
+        offset = this.pgnSets.offset - this.pgnSets.limit;
+      }
+      this.handlePageChange({ limit: limit, offset: offset });
+    },
+    nextPage: function nextPage() {
+      var _clone2 = clone(this.pgnSets),
+          limit = _clone2.limit,
+          offset = _clone2.offset;
+
+      if (this.pgnSets.offset < this.pgnSets.total) {
+        offset = this.pgnSets.offset + this.pgnSets.limit;
+      }
+      this.handlePageChange({ limit: limit, offset: offset });
+    }
+  }
+});
+
+/***/ }),
+/* 80 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.pgnSets && _vm.pages && _vm.pages.length > 1
+    ? _c(
+        "div",
+        { staticClass: "pagination" },
+        [
+          _c(
+            "button",
+            {
+              class:
+                _vm.inactiveClassName + (!_vm.hasPrev ? " pgn-hidden" : ""),
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  _vm.goToPage({ limit: _vm.pgnSets.limit, offset: 0 })
+                }
+              }
+            },
+            [_vm._v("\n    «\n  ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              class:
+                _vm.inactiveClassName + (!_vm.hasPrev ? " pgn-hidden" : ""),
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  _vm.prevPage()
+                }
+              }
+            },
+            [_vm._v("\n    ‹\n  ")]
+          ),
+          _vm._v(" "),
+          _vm._l(_vm.pages, function(page) {
+            return _vm.pgnSets.total > page.offset ||
+              _vm.pgnSets.offset == page.offset
+              ? _c(
+                  "button",
+                  {
+                    class:
+                      _vm.pgnSets.offset == page.offset
+                        ? _vm.activeClassName
+                        : _vm.inactiveClassName,
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.goToPage(page)
+                      }
+                    }
+                  },
+                  [_vm._v(_vm._s(page.offset / page.limit + 1))]
+                )
+              : _vm._e()
+          }),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              class:
+                _vm.inactiveClassName + (!_vm.hasNext ? " pgn-hidden" : ""),
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  _vm.nextPage()
+                }
+              }
+            },
+            [_vm._v("\n    ›\n  ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              class:
+                _vm.inactiveClassName + (!_vm.hasNext ? " pgn-hidden" : ""),
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  _vm.goToPage({
+                    limit: _vm.pgnSets.limit,
+                    offset: _vm.pgnSets.limit * (_vm.totalPages - 1)
+                  })
+                }
+              }
+            },
+            [_vm._v("\n    »\n  ")]
+          )
+        ],
+        2
+      )
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-78242ffa", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

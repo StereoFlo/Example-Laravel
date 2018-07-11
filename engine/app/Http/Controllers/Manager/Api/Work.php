@@ -20,11 +20,12 @@ class Work extends Controller
 {
     /**
      * @param \RecycleArt\Models\Work $work
+     * @param Request                 $request
      * @param int                     $page
      *
      * @return JsonResponse
      */
-    public function getList(\RecycleArt\Models\Work $work, int $page = 0)
+    public function getList(\RecycleArt\Models\Work $work, Request $request, int $page = 0)
     {
         return JsonResponse::create($work->getListForManager($work->getPerPage(), $page));
     }

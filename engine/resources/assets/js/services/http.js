@@ -2,11 +2,14 @@ export default {
     transport(url = '', params = '', method = 'GET') {
         return new Promise(function (resolve, reject) {
             const xhr = new XMLHttpRequest();
-            xhr.open(method, url, true);
+            if (method === 'GET' && params) {
+                xhr.open(method, url + '?' + $.param(params), true);
+            } else {
+                xhr.open(method, url, true);
+            }
             xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
             xhr.setRequestHeader("Authorization", "Bearer " + document.getElementById('token').getAttribute('data-token'));
             if (method === 'POST') {
-
                 const csrfToken = () => {
                     let meta = document.getElementsByTagName('meta');
                     for (let item of meta) {
