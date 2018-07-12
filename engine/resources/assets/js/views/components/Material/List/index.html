@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Материалы |
+        <router-link :to="{ name: 'materialsAdd' }">
+            Добавить
+        </router-link>
+
+    </div>
+    <div class="panel-body">
+        <div v-if="materials.length">
+            <table class="table table-hover table-responsive">
+                <tr>
+                    <td>ID</td>
+                    <td>Название</td>
+                    <td>Действия</td>
+                </tr>
+                <tr v-for="material in materials">
+                    <td>{{ material.id }}</td>
+                    <td>{{ material.url }}</td>
+                    <td>
+                        <a @click.prevent="removeMaterial(material.id)" href="#">Удалить</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <p v-if="!materials.length">Материалов пока нет</p>
+    </div>
+</div>

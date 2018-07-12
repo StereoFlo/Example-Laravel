@@ -16,12 +16,12 @@ class ForceHttps
      */
     public function handle($request, Closure $next)
     {
-        if (!app()->environment('local')) {
-            Request::setTrustedProxies([$request->getClientIp()]);
-            if (!$request->isSecure()) {
-                return \redirect()->secure($request->getRequestUri());
-            }
-        }
+//        if (!app()->environment('local')) {
+//            Request::setTrustedProxies([$request->getClientIp()]);
+//            if (!$request->isSecure()) {
+//                return \redirect()->secure($request->getRequestUri());
+//            }
+//        }
 
         return $next($request);
     }
