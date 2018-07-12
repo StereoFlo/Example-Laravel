@@ -6,7 +6,6 @@ use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Facades\Redirect;
-use RecycleArt\Http\Controllers\Controller;
 use RecycleArt\Models\StaticPage as StaticPageModel;
 
 /**
