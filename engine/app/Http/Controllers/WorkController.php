@@ -3,6 +3,7 @@
 namespace RecycleArt\Http\Controllers;
 
 use FileUploader\Services\FileUploaderService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -122,7 +123,7 @@ class WorkController extends Controller
      * @param TagsRel    $tagsRel
      * @param int        $id
      *
-     * @return int
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function remove(Request $request, Work $work, WorkImages $workImages, TagsRel $tagsRel, int $id)
     {
@@ -260,7 +261,7 @@ class WorkController extends Controller
         }
 
         $res = (bool) $materialRel->removeFromWork($workId, $materialId);
-        return \response()->json([
+        return JsonResponse::create([
             'isRemoved' => $res
         ]);
     }
@@ -284,7 +285,7 @@ class WorkController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function setLike(Work $work, int $id)
+    public function setLike(Work $work, int $id): JsonResponse
     {
         if (\session()->has('work' . $id)) {
             return \response()->json([
@@ -293,7 +294,7 @@ class WorkController extends Controller
         }
         $work->where('id', $id)->increment('likes');
         \session(['work' . $id => true]);
-        return \response()->json([
+        return JsonResponse::create([
             'isLiked' => true,
         ]);
     }

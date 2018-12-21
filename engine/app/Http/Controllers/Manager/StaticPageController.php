@@ -15,6 +15,8 @@ use RecycleArt\Models\StaticPage as StaticPageModel;
 class StaticPageController extends ManagerController
 {
     /**
+     * @param StaticPageModel $staticPage
+     *
      * @return Factory|View
      */
     public function getList(StaticPageModel $staticPage)
@@ -35,7 +37,6 @@ class StaticPageController extends ManagerController
      * todo необходимо записывать в сессию результат сохранения/изменения
      *
      * @param Request         $request
-     *
      * @param StaticPageModel $staticPage
      *
      * @return mixed

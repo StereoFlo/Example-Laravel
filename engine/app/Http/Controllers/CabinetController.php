@@ -47,6 +47,7 @@ class CabinetController extends Controller
      * @param User    $user
      *
      * @return mixed
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function profileUpdate(Request $request, User $user)
     {

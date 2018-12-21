@@ -27,9 +27,9 @@ class WorkController extends Controller
      */
     public function getList(WorkModel $work, Request $request): JsonResponse
     {
-        $limit = $request->get('limit', 15);
+        $limit  = $request->get('limit', 15);
         $offset = $request->get('offset', 0);
-        $test = $request->get('test');
+        $test   = $request->get('test');
 
         return JsonResponse::create([
             'total' => $work::all()->count(),

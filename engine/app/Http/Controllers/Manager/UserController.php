@@ -33,6 +33,14 @@ class UserController extends ManagerController
         return \view('manager.user.list', ['users' => $users]);
     }
 
+    /**
+     * @param Role      $role
+     * @param Work      $work
+     * @param UserModel $user
+     * @param int       $userId
+     *
+     * @return array|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show(Role $role, Work $work, UserModel $user, int $userId)
     {
         $user = $user->find($userId);
@@ -55,7 +63,7 @@ class UserController extends ManagerController
      * @param int      $userId
      * @param int      $roleId
      *
-     * @return int
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function addRole(RoleUser $roleUser, int $userId, int $roleId)
     {
@@ -68,7 +76,7 @@ class UserController extends ManagerController
      * @param int      $userId
      * @param int      $roleId
      *
-     * @return int
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function removeRole(RoleUser $roleUser, int $userId, int $roleId)
     {
@@ -77,9 +85,11 @@ class UserController extends ManagerController
     }
 
     /**
-     * @param UserModel      $user
-     * @param WorkController $work
-     * @param int            $id
+     * @param UserModel $user
+     * @param Work      $work
+     * @param int       $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function removeUser(UserModel $user, Work $work, int $id)
     {

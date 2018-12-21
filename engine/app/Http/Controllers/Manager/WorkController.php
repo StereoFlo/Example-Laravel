@@ -6,7 +6,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use RecycleArt\Http\Controllers\WorkController;
+use RecycleArt\Http\Controllers\WorkController as WorkControllerParent;
 use RecycleArt\Models\CatalogRel;
 use RecycleArt\Models\TagsRel;
 use RecycleArt\Models\Work as WorkModel;
@@ -104,7 +104,7 @@ class WorkController extends ManagerController
         if (!$this->checkWork($work, $request, $id)) {
             abort(401);
         }
-        $workPath = \public_path(\sprintf(WorkController::WORK_PATH, Auth::id(), $id));
+        $workPath = \public_path(\sprintf(WorkControllerParent::WORK_PATH, Auth::id(), $id));
         $catalogRel->removeWorkCategories($id);
         $tagsRel->deleteByWork($id);
         $workImages->removeByWorkId($id);

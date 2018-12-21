@@ -35,8 +35,8 @@ class MainController extends Controller
     public function __construct(Settings $settings, News $news, Work $work)
     {
         $this->settings = $settings;
-        $this->news = $news;
-        $this->work = $work;
+        $this->news     = $news;
+        $this->work     = $work;
     }
 
     /**
