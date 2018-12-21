@@ -5,8 +5,8 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
-        "fideloper/proxy": "~3.3",
-        "laravel/framework": "5.5.*",
+        "fideloper/proxy": "~4",
+        "laravel/framework": "5.7.*",
         "laravel/tinker": "~1.0",
         "stereoflo/fileuploader": "dev-master",
         "stereoflo/image-resize": "dev-master"
