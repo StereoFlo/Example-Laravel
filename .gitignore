@@ -9,7 +9,7 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-.env
+engine/.env
 uploads
 engine/composer.lock
 engine/composer.phar

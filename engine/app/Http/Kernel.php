@@ -2,8 +2,27 @@
 
 namespace RecycleArt\Http;
 
-use App;
+use Illuminate\Auth\Middleware\Authenticate;
+use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
+use Illuminate\Auth\Middleware\Authorize;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode;
+use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
+use Illuminate\Foundation\Http\Middleware\ValidatePostSize;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Routing\Middleware\ThrottleRequests;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
+use RecycleArt\Http\Middleware\CheckRole;
+use RecycleArt\Http\Middleware\EncryptCookies;
+use RecycleArt\Http\Middleware\ForceHttps;
+use RecycleArt\Http\Middleware\IsAdmin;
+use RecycleArt\Http\Middleware\IsModerator;
+use RecycleArt\Http\Middleware\RedirectIfAuthenticated;
+use RecycleArt\Http\Middleware\TrimStrings;
+use RecycleArt\Http\Middleware\TrustProxies;
+use RecycleArt\Http\Middleware\VerifyCsrfToken;
 
 class Kernel extends HttpKernel
 {
@@ -15,12 +34,12 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
-        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
-        \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
-        \RecycleArt\Http\Middleware\TrimStrings::class,
-        \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \RecycleArt\Http\Middleware\TrustProxies::class,
-        \RecycleArt\Http\Middleware\ForceHttps::class,
+        CheckForMaintenanceMode::class,
+        ValidatePostSize::class,
+        TrimStrings::class,
+        ConvertEmptyStringsToNull::class,
+        TrustProxies::class,
+        ForceHttps::class,
     ];
 
     /**
@@ -30,13 +49,13 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \RecycleArt\Http\Middleware\EncryptCookies::class,
-            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-            \Illuminate\Session\Middleware\StartSession::class,
+            EncryptCookies::class,
+            AddQueuedCookiesToResponse::class,
+            StartSession::class,
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
-            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \RecycleArt\Http\Middleware\VerifyCsrfToken::class,
-            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            ShareErrorsFromSession::class,
+            VerifyCsrfToken::class,
+            SubstituteBindings::class,
         ],
 
         'api' => [
@@ -53,14 +72,14 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'checkRole'   => \RecycleArt\Http\Middleware\CheckRole::class,
-        'isAdmin'     => \RecycleArt\Http\Middleware\IsAdmin::class,
-        'isModerator' => \RecycleArt\Http\Middleware\IsModerator::class,
-        'auth'        => \Illuminate\Auth\Middleware\Authenticate::class,
-        'auth.basic'  => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'bindings'    => \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        'can'         => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest'       => \RecycleArt\Http\Middleware\RedirectIfAuthenticated::class,
-        'throttle'    => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'checkRole'   => CheckRole::class,
+        'isAdmin'     => IsAdmin::class,
+        'isModerator' => IsModerator::class,
+        'auth'        => Authenticate::class,
+        'auth.basic'  => AuthenticateWithBasicAuth::class,
+        'bindings'    => SubstituteBindings::class,
+        'can'         => Authorize::class,
+        'guest'       => RedirectIfAuthenticated::class,
+        'throttle'    => ThrottleRequests::class,
     ];
 }
