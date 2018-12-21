@@ -11,3 +11,5 @@ npm-debug.log
 yarn-error.log
 .env
 uploads
+engine/composer.lock
+engine/composer.phar
