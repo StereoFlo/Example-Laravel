@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 use RecycleArt\Models\StaticPage as StaticPageModel;
 
 /**
- * Class StaticPage
+ * Class StaticPageController
  * @package RecycleArt\Http\Controllers\Manager\Api
  */
-class StaticPage
+class StaticPageController
 {
     /**
      * @param StaticPageModel $staticPage
@@ -38,9 +38,9 @@ class StaticPage
      * @param StaticPageModel $staticPage
      * @param string          $slug
      *
-     * @return mixed
+     * @return JsonResponse
      */
-    public function remove(StaticPageModel $staticPage, string $slug)
+    public function remove(StaticPageModel $staticPage, string $slug): JsonResponse
     {
         $staticPage->removePage($slug);
         return JsonResponse::create([
@@ -54,9 +54,9 @@ class StaticPage
      * @param Request         $request
      * @param StaticPageModel $staticPage
      *
-     * @return mixed
+     * @return JsonResponse
      */
-    public function process(Request $request, StaticPageModel $staticPage)
+    public function process(Request $request, StaticPageModel $staticPage): JsonResponse
     {
         return JsonResponse::create([
             'success' => $staticPage->updateOrMake($request)

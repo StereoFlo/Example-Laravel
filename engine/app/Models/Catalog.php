@@ -3,7 +3,7 @@
 namespace RecycleArt\Models;
 
 /**
- * Class Catalog
+ * Class CatalogController
  * @package RecycleArt\Models
  */
 class Catalog extends Model

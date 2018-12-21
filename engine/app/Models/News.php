@@ -3,7 +3,7 @@
 namespace RecycleArt\Models;
 
 /**
- * Class News
+ * Class NewsController
  * @package RecycleArt\Models
  */
 class News extends Model

@@ -9,10 +9,10 @@ use RecycleArt\Http\Controllers\Controller;
 use RecycleArt\Models\News as NewsModel;
 
 /**
- * Class News
+ * Class NewsController
  * @package RecycleArt\Http\Controllers\Manager
  */
-class News extends ManagerController
+class NewsController extends ManagerController
 {
     const NEWS_PER_PAGE = 15;
 
@@ -22,7 +22,7 @@ class News extends ManagerController
     protected $newsModel;
 
     /**
-     * News constructor.
+     * NewsController constructor.
      *
      * @param NewsModel $news
      */

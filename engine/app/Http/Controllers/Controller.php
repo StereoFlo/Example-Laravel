@@ -17,6 +17,7 @@ use RecycleArt\Models\Work;
  */
 class Controller extends BaseController
 {
+    const MATERIAL_URL = '/uploads/materials/';
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     /**

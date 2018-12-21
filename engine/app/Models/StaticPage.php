@@ -5,7 +5,7 @@ namespace RecycleArt\Models;
 use Illuminate\Http\Request;
 
 /**
- * Class StaticPage
+ * Class StaticPageController
  * @package RecycleArt\Models
  */
 class StaticPage extends Model

@@ -8,10 +8,10 @@ use RecycleArt\Http\Controllers\Controller;
 use RecycleArt\Models\Settings as SettingsModel;
 
 /**
- * Class Settings
+ * Class SettingsController
  * @package RecycleArt\Http\Controllers\Manager\Api
  */
-class Settings extends Controller
+class SettingsController extends Controller
 {
     /**
      * @param SettingsModel $settings
@@ -20,7 +20,7 @@ class Settings extends Controller
      */
     public function getList(SettingsModel $settings): JsonResponse
     {
-        return new JsonResponse($settings->getAllArray());
+        return JsonResponse::create($settings->getAllArray());
     }
 
     /**
@@ -32,7 +32,7 @@ class Settings extends Controller
     public function process(Request $request, SettingsModel $settings): JsonResponse
     {
         $settings->store($request->all());
-        return new JsonResponse([
+        return JsonResponse::create([
            'success' => true
         ]);
     }

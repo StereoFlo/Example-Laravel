@@ -8,10 +8,10 @@ use RecycleArt\Http\Controllers\Controller;
 use RecycleArt\Models\Catalog as CatalogModel;
 
 /**
- * Class Catalog
+ * Class CatalogController
  * @package RecycleArt\Http\Controllers\Manager\Api
  */
-class Catalog extends Controller
+class CatalogController extends Controller
 {
 
     /**
@@ -22,7 +22,7 @@ class Catalog extends Controller
     public function getList(CatalogModel $catalog): JsonResponse
     {
         $list = $catalog->getList();
-        return new JsonResponse($list);
+        return JsonResponse::create($list);
     }
 
     /**
@@ -31,7 +31,7 @@ class Catalog extends Controller
      *
      * @return JsonResponse
      */
-    public function show(CatalogModel $catalog, int $categoryId)
+    public function show(CatalogModel $catalog, int $categoryId): JsonResponse
     {
         return JsonResponse::create($catalog->getById($categoryId));
     }
@@ -41,6 +41,7 @@ class Catalog extends Controller
      * @param Request      $request
      *
      * @return JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function process(CatalogModel $catalog, Request $request): JsonResponse
     {
@@ -63,7 +64,7 @@ class Catalog extends Controller
             'name' => $name,
             'description' => $description
         ]);
-        return new JsonResponse([
+        return JsonResponse::create([
             'success' => true
         ]);
     }
@@ -72,13 +73,13 @@ class Catalog extends Controller
      * @param CatalogModel $catalog
      * @param int $id
      *
-     * @return mixed
+     * @return JsonResponse
      * @throws \Exception
      */
-    public function remove(CatalogModel $catalog, int $id)
+    public function remove(CatalogModel $catalog, int $id): JsonResponse
     {
         $catalog->removeCategory($id);
-        return new JsonResponse([
+        return JsonResponse::create([
             'success' => true
         ]);
     }

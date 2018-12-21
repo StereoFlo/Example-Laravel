@@ -8,10 +8,10 @@ use RecycleArt\Http\Controllers\Controller;
 use RecycleArt\Models\Material as MaterialModel;
 
 /**
- * Class Material
+ * Class MaterialController
  * @package RecycleArt\Http\Controllers\Manager\Api
  */
-class Material extends Controller
+class MaterialController extends Controller
 {
     /**
      * @param MaterialModel $material
@@ -22,7 +22,7 @@ class Material extends Controller
     {
         $list = $material->getList();
 
-        return new JsonResponse($list);
+        return JsonResponse::create($list);
     }
 
     /**
@@ -40,14 +40,14 @@ class Material extends Controller
         if (!$id) {
             $id = \time();
         }
-        $url = '/uploads/materials/';
-        $path = \public_path($url);
+
+        $path = \public_path(self::MATERIAL_URL);
         $newImageName = $id . '.' . \strtolower($file->getClientOriginalExtension());
         $file->move($path, $newImageName);
-        $url = $url . $newImageName;
+        $url = self::MATERIAL_URL . $newImageName;
 
         $material->makeNew($id, $name, $url, $description);
-        return new JsonResponse([
+        return JsonResponse::create([
             'success' => true
         ]);
     }
@@ -61,7 +61,7 @@ class Material extends Controller
     public function remove(MaterialModel $material, int $id): JsonResponse
     {
         $material->removeBy($id);
-        return new JsonResponse([
+        return JsonResponse::create([
             'success' => true
         ]);
     }

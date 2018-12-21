@@ -2,15 +2,17 @@
 
 namespace RecycleArt\Http\Controllers\Manager;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\ValidationException;
 use RecycleArt\Models\Catalog as CatalogModel;
 
 /**
- * Class Catalog
+ * Class CatalogController
  * @package RecycleArt\Http\Controllers\Manager
  */
-class Catalog extends ManagerController
+class CatalogController extends ManagerController
 {
     /**
      * @param CatalogModel $catalog
@@ -41,6 +43,13 @@ class Catalog extends ManagerController
         return \view('manager.catalog.form', ['category' => $category]);
     }
 
+    /**
+     * @param CatalogModel $catalog
+     * @param Request      $request
+     *
+     * @return RedirectResponse
+     * @throws ValidationException
+     */
     public function process(CatalogModel $catalog, Request $request)
     {
         $this->validate($request, [
@@ -57,15 +66,15 @@ class Catalog extends ManagerController
             return Redirect::to(route('managerCatalogList'));
         }
         $catalog->updateCategory($id, [
-            'name' => $name,
-            'description' => $description
+            'name'        => $name,
+            'description' => $description,
         ]);
         return Redirect::to(route('managerCatalogList'));
     }
 
     /**
      * @param CatalogModel $catalog
-     * @param int $id
+     * @param int          $id
      *
      * @return mixed
      * @throws \Exception

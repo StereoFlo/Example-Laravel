@@ -26,6 +26,6 @@
                 })
             }
         },
-        name: "Catalog"
+        name: "CatalogController"
     }
 </script>œ

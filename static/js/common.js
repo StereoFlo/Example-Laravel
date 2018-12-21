@@ -106,7 +106,7 @@ $(function () {
     }
 
     /* ---------------------------------------------- /*
-     * Settings and News on Welcome section
+     * SettingsController and NewsController on Welcome section
     /* ---------------------------------------------- */
 
     $('.slogan').hide();

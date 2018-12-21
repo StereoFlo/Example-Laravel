@@ -3,7 +3,7 @@
 namespace RecycleArt\Models;
 
 /**
- * Class Work
+ * Class WorkController
  * @package RecycleArt\Models
  */
 class Work extends Model
@@ -14,7 +14,7 @@ class Work extends Model
     protected $table = 'work';
 
     /**
-     * Work constructor.
+     * WorkController constructor.
      */
 
     /**

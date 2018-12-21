@@ -13,10 +13,10 @@ use RecycleArt\Models\Work as WorkModel;
 use RecycleArt\Models\WorkImages;
 
 /**
- * Class Work
+ * Class WorkController
  * @package RecycleArt\Http\Controllers\Manager
  */
-class Work extends ManagerController
+class WorkController extends ManagerController
 {
 
     /**
@@ -25,7 +25,7 @@ class Work extends ManagerController
     protected $work;
 
     /**
-     * User constructor.
+     * UserController constructor.
      *
      * @param \RecycleArt\Models\Work $work
      */

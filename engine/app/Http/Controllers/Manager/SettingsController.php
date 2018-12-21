@@ -6,13 +6,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
 /**
- * Class Settings
+ * Class SettingsController
  * @package RecycleArt\Http\Controllers\Manager
  */
-class Settings extends ManagerController
+class SettingsController extends ManagerController
 {
     /**
-     * Settings constructor.
+     * SettingsController constructor.
      */
     public function __construct()
     {

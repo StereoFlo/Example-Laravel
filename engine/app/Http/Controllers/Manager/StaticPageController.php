@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Redirect;
 use RecycleArt\Models\StaticPage as StaticPageModel;
 
 /**
- * Class StaticPage
+ * Class StaticPageController
  * @package RecycleArt\Http\Controllers\Manager
  */
-class StaticPage extends ManagerController
+class StaticPageController extends ManagerController
 {
     /**
      * @return Factory|View

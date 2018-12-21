@@ -9,13 +9,13 @@ use RecycleArt\Models\User as UserModel;
 use RecycleArt\Models\Work;
 
 /**
- * Class User
+ * Class UserController
  * @package RecycleArt\Http\Controllers\Manager
  */
-class User extends ManagerController
+class UserController extends ManagerController
 {
     /**
-     * User constructor.
+     * UserController constructor.
      */
     public function __construct()
     {
@@ -37,7 +37,7 @@ class User extends ManagerController
     {
         $user = $user->find($userId);
         if (empty($user)) {
-            abort(404, 'User not found');
+            abort(404, 'UserController not found');
             return []; // stub
         }
         $userRoles = $user->roles->toArray();
@@ -77,9 +77,9 @@ class User extends ManagerController
     }
 
     /**
-     * @param UserModel $user
-     * @param Work      $work
-     * @param int       $id
+     * @param UserModel      $user
+     * @param WorkController $work
+     * @param int            $id
      */
     public function removeUser(UserModel $user, Work $work, int $id)
     {

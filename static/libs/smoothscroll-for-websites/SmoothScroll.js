@@ -33,7 +33,7 @@ var defaultOptions = {
     accelerationDelta : 50,  // 50
     accelerationMax   : 3,   // 3
 
-    // Keyboard Settings
+    // Keyboard SettingsController
     keyboardSupport   : true,  // option
     arrowScroll       : 50,    // [px]
 

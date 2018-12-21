@@ -5,7 +5,7 @@ namespace RecycleArt\Models;
 use Illuminate\Support\Facades\File;
 
 /**
- * Class Material
+ * Class MaterialController
  * @package RecycleArt\Models
  */
 class Material extends Model

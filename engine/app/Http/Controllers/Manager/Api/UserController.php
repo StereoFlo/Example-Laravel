@@ -7,12 +7,13 @@ use RecycleArt\Http\Controllers\Controller;
 use RecycleArt\Models\Role;
 use RecycleArt\Models\RoleUser;
 use RecycleArt\Models\User as UserModel;
+use RecycleArt\Models\Work;
 
 /**
- * Class User
+ * Class UserController
  * @package RecycleArt\Http\Controllers\Manager\Api
  */
-class User extends Controller
+class UserController extends Controller
 {
     /**
      * @param UserModel $user
@@ -33,7 +34,7 @@ class User extends Controller
      *
      * @return JsonResponse
      */
-    public function show(Role $role, \RecycleArt\Models\Work $work, UserModel $user, int $userId): JsonResponse
+    public function show(Role $role, Work $work, UserModel $user, int $userId): JsonResponse
     {
         $user = $user->find($userId);
         if (empty($user)) {
@@ -57,7 +58,7 @@ class User extends Controller
      *
      * @return JsonResponse
      */
-    public function addRole(RoleUser $roleUser, int $userId, int $roleId)
+    public function addRole(RoleUser $roleUser, int $userId, int $roleId): JsonResponse
     {
         return JsonResponse::create([
             'success' => $roleUser->enableRole($userId, $roleId)
@@ -71,7 +72,7 @@ class User extends Controller
      *
      * @return JsonResponse
      */
-    public function removeRole(RoleUser $roleUser, int $userId, int $roleId)
+    public function removeRole(RoleUser $roleUser, int $userId, int $roleId): JsonResponse
     {
         return JsonResponse::create([
             'success' => $roleUser->disableRole($userId, $roleId)
@@ -83,9 +84,9 @@ class User extends Controller
      * @param Work      $work
      * @param int       $id
      *
-     * @return
+     * @return JsonResponse
      */
-    public function removeUser(UserModel $user, Work $work, int $id)
+    public function removeUser(UserModel $user, Work $work, int $id): JsonResponse
     {
         $userToRemove = $user->findOrFail($id);
         $works = $work->getListByUserId($userToRemove->id);

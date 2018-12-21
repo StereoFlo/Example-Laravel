@@ -2,30 +2,30 @@
 
 namespace RecycleArt\Http\Controllers\Manager\Api;
 
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RecycleArt\Http\Controllers\Controller;
-use RecycleArt\Http\Controllers\WorkController;
+use RecycleArt\Http\Controllers\WorkController as WorkControllerParent;
 use RecycleArt\Models\CatalogRel;
 use RecycleArt\Models\TagsRel;
+use RecycleArt\Models\Work as WorkModel;
 use RecycleArt\Models\WorkImages;
-use Symfony\Component\Filesystem\Filesystem;
 
 /**
- * Class Work
+ * Class WorkController
  * @package RecycleArt\Http\Controllers\Manager\Api
  */
-class Work extends Controller
+class WorkController extends Controller
 {
     /**
-     * @param \RecycleArt\Models\Work $work
-     * @param Request                 $request
-     * @param int                     $page
+     * @param WorkModel $work
+     * @param Request   $request
      *
      * @return JsonResponse
      */
-    public function getList(\RecycleArt\Models\Work $work, Request $request, int $page = 0)
+    public function getList(WorkModel $work, Request $request): JsonResponse
     {
         $limit = $request->get('limit', 15);
         $offset = $request->get('offset', 0);
@@ -40,22 +40,22 @@ class Work extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param \RecycleArt\Models\Work $work
+     * @param Request    $request
+     * @param WorkModel  $work
      * @param WorkImages $workImages
      * @param CatalogRel $catalogRel
-     * @param TagsRel $tagsRel
+     * @param TagsRel    $tagsRel
      * @param Filesystem $filesystem
-     * @param int $id
+     * @param int        $id
      *
      * @return mixed
      */
-    public function remove(Request $request, \RecycleArt\Models\Work $work, WorkImages $workImages, CatalogRel $catalogRel,  TagsRel $tagsRel,Filesystem $filesystem, int $id)
+    public function remove(Request $request, WorkModel $work, WorkImages $workImages, CatalogRel $catalogRel, TagsRel $tagsRel, Filesystem $filesystem, int $id): JsonResponse
     {
         if (!$this->checkWork($work, $request, $id)) {
             abort(401);
         }
-        $workPath = \public_path(\sprintf(WorkController::WORK_PATH, Auth::id(), $id));
+        $workPath = \public_path(\sprintf(WorkControllerParent::WORK_PATH, Auth::id(), $id));
         $catalogRel->removeWorkCategories($id);
         $tagsRel->deleteByWork($id);
         $workImages->removeByWorkId($id);
@@ -65,20 +65,20 @@ class Work extends Controller
             \rmdir($workPath);
         }
         return JsonResponse::create([
-            'success' => true
+            'success' => true,
         ]);
     }
 
     /**
-     * @param \RecycleArt\Models\Work $work
-     * @param int                     $workId
+     * @param WorkModel $work
+     * @param int       $workId
      *
      * @return JsonResponse
      */
-    public function approve(\RecycleArt\Models\Work $work, int $workId): JsonResponse
+    public function approve(WorkModel $work, int $workId): JsonResponse
     {
         return JsonResponse::create([
-            'success' => $work->toggleApprove($workId)
+            'success' => $work->toggleApprove($workId),
         ]);
     }
 }

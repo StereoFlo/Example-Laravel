@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 use RecycleArt\Http\Controllers\Controller;
 
 /**
- * Class News
+ * Class NewsController
  * @package RecycleArt\Http\Controllers\Manager\Api
  */
-class News extends Controller
+class NewsController extends Controller
 {
     /**
      * @param \RecycleArt\Models\News $news
