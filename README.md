@@ -8,49 +8,19 @@
 
 #### Как установить систему
 
-1) **git clone ...** сливаем
-2) **cd engine** 
-3) **php composer.phar update**
-4) Настроить БД для нового проекта
-5) Настрокить файл **.env**:
+1. **git clone ...** сливаем
+2. **cd engine** 
+3. **php composer.phar update**
+4. Настроить БД для нового проекта
+5. Скопировать файл **.env**:
 
 ``` bash
-APP_NAME=Recycle
-APP_ENV=local
-APP_KEY=base64:uCBluamUo2CE/dtbPboTp7XFiBu9OGruUhnVRrlSmXc=
-APP_DEBUG=true
-APP_LOG_LEVEL=debug
-APP_URL=http://recycle.lan
-WEBMASTER_ADDRESS=fb@stereoflo.ru
-
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=recycle
-DB_USERNAME=recycle
-DB_PASSWORD=recycle
-
-BROADCAST_DRIVER=log
-CACHE_DRIVER=file
-SESSION_DRIVER=database
-SESSION_LIFETIME=120000
-QUEUE_DRIVER=sync
-
-REDIS_HOST=127.0.0.1
-REDIS_PASSWORD=null
-REDIS_PORT=6379
-
-MAIL_DRIVER=smtp
-MAIL_HOST=smtp.mailtrap.io
-MAIL_PORT=2525
-MAIL_USERNAME=0e25e654c2c73c
-MAIL_PASSWORD=b6609845739bbd
-MAIL_ENCRYPTION=null
+cp .env.dist .env
 ```
-
-6) запустить миграции **php artisan migrate:install** && **php artisan migrate:refresh --seed**
-7) запустить php artisan key:generate
-8) готово 
+6. Отредактировать его
+7. запустить миграции **php artisan migrate:install** && **php artisan migrate:refresh --seed**
+8. запустить php artisan key:generate
+9. готово 
 
 
 ### English version
@@ -68,43 +38,14 @@ It's a real project for people interesting for the recycle art
 2) **cd engine** go to framework folder
 3) **php composer.phar install** download a composer dependencies
 4) Set up a database for project. Create a database with user and password...
-5) Create a file **.env** in a current folder and put the content is contained below (WARNING! This file for local use only!):
+5) Copy a file **.env** in a current folder and put the content is contained below (WARNING! This file is for local use only!):
 
 ``` bash
-APP_NAME=Recycle
-APP_ENV=local
-APP_KEY=base64:uCBluamUo2CE/dtbPboTp7XFiBu9OGruUhnVRrlSmXc=
-APP_DEBUG=true
-APP_LOG_LEVEL=debug
-APP_URL=http://recycle.lan
-WEBMASTER_ADDRESS=fb@stereoflo.ru
-
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=recycle
-DB_USERNAME=recycle
-DB_PASSWORD=recycle
-
-BROADCAST_DRIVER=log
-CACHE_DRIVER=file
-SESSION_DRIVER=database
-SESSION_LIFETIME=120000
-QUEUE_DRIVER=sync
-
-REDIS_HOST=127.0.0.1
-REDIS_PASSWORD=null
-REDIS_PORT=6379
-
-MAIL_DRIVER=smtp
-MAIL_HOST=smtp.mailtrap.io
-MAIL_PORT=2525
-MAIL_USERNAME=0e25e654c2c73c
-MAIL_PASSWORD=b6609845739bbd
-MAIL_ENCRYPTION=null
+cp .env.dist .env
 ```
 
-6) run migrations **php artisan migrate:install** && then do refresh for migrations with a sample data (--seed) **php artisan migrate:refresh --seed**
-7) then run the command **php artisan key:generate** it makes an unique key for project
-8) project are ready to use! log in into an admin section with credentials admin@recycle.lan:admin and set up the rest options
-9) enjoy!
+6) change setting values in a .env file
+7) run migrations **php artisan migrate:install** && then do refresh for migrations with a sample data (--seed) **php artisan migrate:refresh --seed**
+8) then run the command **php artisan key:generate** it makes an unique key for project
+9) project are ready to use! log in into an admin section with credentials admin@recycle.lan:admin and set up the rest options
+10) enjoy!
